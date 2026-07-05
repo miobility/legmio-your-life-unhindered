@@ -1,62 +1,294 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
-import { Reveal } from "@/components/Reveal";
+import {
+  IconArrowRight, IconWeight, IconRuler, IconShield, IconFactory, IconAluminum,
+  IconInstagram, IconTiktok, IconLinkedin, IconChevron,
+} from "@/components/Icons";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "legmio — La béquille qui libère les mains" },
+      { name: "description", content: "legmio est la seule béquille ergonomique mains libres. Née de la recherche CNRS/Sorbonne Université. Commercialisation courant 2027." },
+      { property: "og:title", content: "legmio — La béquille qui libère les mains" },
+      { property: "og:description", content: "Des mains libres et une autonomie enfin retrouvée." },
+    ],
+  }),
   component: Landing,
 });
 
-const VIDEO_ID = "BywLrRTsp_8";
-
-function CTAButton({ children, size = "md" }: { children: React.ReactNode; size?: "md" | "lg" }) {
+// Placeholder card component — visual with descriptive label
+function Placeholder({ label, aspect = "aspect-[3/2]", dark = false }: { label: string; aspect?: string; dark?: boolean }) {
   return (
-    <a href="#pricing" className={`btn-dark btn-dark-hover ${size === "lg" ? "text-lg px-8 py-4" : ""}`}>
-      {children}
+    <div
+      className={`w-full ${aspect} flex items-center justify-center text-xs font-medium tracking-wide uppercase`}
+      style={{
+        background: dark
+          ? "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)"
+          : "linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%)",
+        color: dark ? "#666" : "#999",
+      }}
+    >
+      {label}
+    </div>
+  );
+}
+
+function CTA({ dark, children = "Je suis intéressé(e)" }: { dark?: boolean; children?: React.ReactNode }) {
+  const { t } = useLanguage();
+  const label = typeof children === "string" ? children : t("cta_interested");
+  return (
+    <a href="/#waitlist" className={dark ? "btn-light btn-light-hover" : "btn-dark btn-dark-hover"}>
+      {label} <IconArrowRight size={16} />
     </a>
   );
 }
 
-function SectionAlt({ children, alt = false, className = "", id }: { children: React.ReactNode; alt?: boolean; className?: string; id?: string }) {
+function Landing() {
+  const { t } = useLanguage();
   return (
-    <section id={id} style={{ backgroundColor: alt ? "#F5F5F5" : "#FFFFFF" }} className={`py-20 sm:py-28 px-4 sm:px-6 ${className}`}>
-      <div className="max-w-7xl mx-auto">{children}</div>
-    </section>
+    <div>
+      {/* SECTION 1 — HERO */}
+      <section style={{ backgroundColor: "#111111" }} className="px-4 sm:px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[55%_45%] gap-10 items-center">
+          <div className="rounded-2xl overflow-hidden bg-black">
+            <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "70vh" }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/wRDP3A0-4eU?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=wRDP3A0-4eU&modestbranding=1&playsinline=1"
+                title="legmio"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+          <div className="text-white space-y-6 fade-up">
+            <div className="text-xs tracking-[0.2em] uppercase" style={{ color: "rgba(255,255,255,0.6)" }}>
+              LA BÉQUILLE NOUVELLE GÉNÉRATION
+            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl leading-[1.05] text-white">
+              Des mains libres et une autonomie enfin retrouvée.
+            </h1>
+            <div className="pt-2"><CTA dark /></div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 2 — PROBLÈME */}
+      <section style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: "#111111" }}>
+            Tu connais déjà le problème. Tu le vis.
+          </h2>
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { img: "Épaules · Poignets · Mains", t: "Tes épaules, tes poignets, tes mains trinquent.", p: "L'outil censé t'aider te crée un handicap supplémentaire." },
+              { img: "Mains prises · Vie prise", t: "Tes mains sont prises. Ta vie ne l'est plus.", p: "Porter un verre, faire ses courses, ouvrir une porte — des gestes devenus négociations." },
+              { img: "Résignation", t: "Et tu t'y fais.", p: "5 ans, 10 ans, 40 ans en béquilles. Sans qu'on t'ait jamais proposé autre chose." },
+            ].map((c, i) => (
+              <div key={i} className="card-soft overflow-hidden">
+                <div style={{ filter: "grayscale(1)" }}><Placeholder label={c.img} /></div>
+                <div className="p-6">
+                  <h3 className="text-lg" style={{ color: "#111111" }}>{c.t}</h3>
+                  <p className="mt-3 text-sm" style={{ color: "#666666" }}>{c.p}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3 — ILS PARLENT DE NOUS */}
+      <section style={{ backgroundColor: "#111111" }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">Ils l'ont vu. Ils en parlent.</h2>
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
+            {["Le Parisien", "TF1", "France 2", "France 5"].map((m) => (
+              <div key={m} className="font-display font-bold text-2xl" style={{ color: "#FFFFFF", opacity: 0.85 }}>{m}</div>
+            ))}
+          </div>
+
+          <div className="mt-16 max-w-4xl mx-auto rounded-2xl overflow-hidden" style={{ backgroundColor: "#1a1a1a", border: "1px solid #2a2a2a" }}>
+            <div className="grid grid-cols-1 md:grid-cols-[45%_55%]">
+              <div className="bg-black">
+                <div className="relative w-full" style={{ aspectRatio: "9/16" }}>
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.instagram.com/reel/DX_Qqp9tbvg/embed/"
+                    title="legmio Instagram reel"
+                    allow="encrypted-media"
+                  />
+                </div>
+              </div>
+              <div className="p-8 flex flex-col justify-center text-white space-y-4">
+                <div className="flex gap-6 text-sm">
+                  <div><div className="text-2xl font-display font-bold">3.6M</div><div style={{ color: "#999" }}>vues</div></div>
+                  <div><div className="text-2xl font-display font-bold">120K</div><div style={{ color: "#999" }}>likes</div></div>
+                  <div><div className="text-2xl font-display font-bold">2 200</div><div style={{ color: "#999" }}>commentaires</div></div>
+                </div>
+                <blockquote className="text-xl font-display italic leading-snug">
+                  "Une invention qui va changer des vies."
+                </blockquote>
+                <div>
+                  <a href="https://www.instagram.com/reel/DX_Qqp9tbvg/" target="_blank" rel="noreferrer" className="btn-outline-light inline-flex text-sm px-5 py-2.5">
+                    Voir sur Instagram <IconArrowRight size={16} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4 — TÉMOIGNAGES */}
+      <section style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: "#111111" }}>Ils l'utilisent. Ils témoignent.</h2>
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { n: "Sophie", a: "34 ans", p: "Sclérose en plaques", b: "3 ans de béquilles", q: "Avant legmio, chaque sortie était une négociation. Le premier jour où j'ai pu rentrer des courses seule — j'ai pleuré. Ça paraît rien. C'est tout." },
+              { n: "Marc", a: "47 ans", p: "Post-opératoire hanche", b: "6 mois de rééducation", q: "Je pensais que six mois de béquilles c'était six mois à mettre ma vie entre parenthèses. Mes épaules ont tenu. Moi aussi." },
+              { n: "Camille", a: "28 ans", p: "Sarcome d'Ewing", b: "Béquilles au quotidien", q: "J'avais accepté que mes mains ne m'appartiendraient plus vraiment. legmio m'a prouvé que c'était faux." },
+            ].map((t, i) => (
+              <div key={i} className="card-soft p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-20 h-20 rounded-full flex items-center justify-center text-xl font-display font-bold" style={{ backgroundColor: "#F5F5F5", color: "#111" }}>{t.n[0]}</div>
+                  <div>
+                    <div className="font-bold" style={{ color: "#111" }}>{t.n}, {t.a}</div>
+                    <div className="text-sm" style={{ color: "#666" }}>{t.p}</div>
+                  </div>
+                </div>
+                <div className="mt-4 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: "#F5F5F5", color: "#111" }}>{t.b}</div>
+                <p className="mt-4 italic text-sm" style={{ color: "#333" }}>"{t.q}"</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 text-center"><CTA /></div>
+        </div>
+      </section>
+
+      {/* SECTION 5 — WALL OF LOVE */}
+      <section style={{ backgroundColor: "#111111" }} className="py-20 md:py-28 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">Ils attendent legmio. Tu te reconnais ?</h2>
+        </div>
+        <WallOfLove />
+        <div className="mt-12 text-center"><CTA dark /></div>
+      </section>
+
+      {/* SECTION 6 — USE CASES */}
+      <section style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              { img: "Handicap · Quotidien", t: "Handicap & quotidien long terme", s: "Pour ceux qui béquillent depuis des mois, des ans, des décennies.", p: "Porter, cuisiner, s'occuper de ses proches. Reprendre ce que tu avais arrêté de demander." },
+              { img: "Rééducation", t: "Post-opératoire & rééducation", s: "Pour ceux qui béquillent le temps d'une récupération.", p: "Quelques semaines suffisent pour que tes épaules morflent. legmio te laisse récupérer sans tout sacrifier." },
+              { img: "Emploi", t: "Maintien en emploi", s: "Pour ceux qui travaillent avec des béquilles.", p: "Rester mobile, autonome, productif. Prise en charge jusqu'à 90% via Agefiph ou FIPHFP." },
+              { img: "Vie parentale", t: "Vie parentale", s: "Pour ceux qui élèvent un enfant en béquilles.", p: "Porter son enfant. Le suivre. Être là." },
+            ].map((c, i) => (
+              <div key={i} className="card-soft overflow-hidden">
+                <Placeholder label={c.img} aspect="aspect-video" />
+                <div className="p-6">
+                  <h3 className="text-xl" style={{ color: "#111" }}>{c.t}</h3>
+                  <div className="mt-1 text-sm italic" style={{ color: "#666" }}>{c.s}</div>
+                  <p className="mt-3 text-sm" style={{ color: "#444" }}>{c.p}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 text-center"><CTA /></div>
+        </div>
+      </section>
+
+      {/* SECTION 7 — DESCRIPTION PRODUIT + SPECS */}
+      <section style={{ backgroundColor: "#111111" }} className="py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">legmio. Pensée jusqu'au dernier centimètre.</h2>
+          <ProductSlider />
+        </div>
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-5 gap-6 max-w-6xl mx-auto px-6 py-10" style={{ backgroundColor: "#FFFFFF" }}>
+          {[
+            { Icon: IconWeight, v: "850g", l: "Poids" },
+            { Icon: IconAluminum, v: "Aluminium", l: "Matériau" },
+            { Icon: IconRuler, v: "1m50–1m95", l: "Réglable" },
+            { Icon: IconShield, v: "130kg", l: "Charge max" },
+            { Icon: IconFactory, v: "France", l: "Assemblage" },
+          ].map(({ Icon, v, l }, i) => (
+            <div key={i} className="text-center" style={{ color: "#111" }}>
+              <div className="flex justify-center mb-2"><Icon size={28} /></div>
+              <div className="font-display font-bold text-xl">{v}</div>
+              <div className="text-xs uppercase tracking-wide mt-1" style={{ color: "#666" }}>{l}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 8 — CRÉDIBILITÉ */}
+      <section style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: "#111" }}>Née de la recherche. Reconnue sur le terrain.</h2>
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-14 gap-y-8" style={{ filter: "grayscale(1)", opacity: 0.75 }}>
+            {["CNRS", "Sorbonne Université", "SATT Lutech", "Bpifrance"].map((m) => (
+              <div key={m} className="font-display font-bold text-xl" style={{ color: "#111" }}>{m}</div>
+            ))}
+          </div>
+          <div className="mt-14 max-w-3xl mx-auto rounded-2xl p-8" style={{ backgroundColor: "#F5F5F5", borderLeft: "3px solid #111" }}>
+            <blockquote className="font-display italic text-xl md:text-2xl leading-snug" style={{ color: "#111" }}>
+              "Une béquille qui rend les mains au patient : une grande avancée !"
+            </blockquote>
+            <div className="mt-4 text-sm" style={{ color: "#666" }}>
+              Dr Pauline Coignard — Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER
+            </div>
+          </div>
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            {[
+              { v: "Médaille d'or", l: "Concours Lépine 2026" },
+              { v: "Prix de l'Impact", l: "Le Média Positif 2026" },
+              { v: "+6 médecins MPR", l: "validation terrain" },
+            ].map((s, i) => (
+              <div key={i}>
+                <div className="font-display font-bold text-2xl md:text-3xl" style={{ color: "#111" }}>{s.v}</div>
+                <div className="mt-2 text-sm" style={{ color: "#666" }}>{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 9 — ROADMAP */}
+      <section style={{ backgroundColor: "#111111" }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">Où en est-on ?</h2>
+          <Roadmap />
+        </div>
+      </section>
+
+      {/* SECTION 10 — LISTE D'ATTENTE */}
+      <section id="waitlist" style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-lg mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: "#111" }}>Suis l'actualité de legmio.</h2>
+          <form className="mt-8 space-y-3 text-left" onSubmit={(e) => e.preventDefault()}>
+            <input type="email" required placeholder="Adresse email" className="w-full px-5 py-3 rounded-full border outline-none focus:border-black" style={{ borderColor: "#EEEEEE", color: "#111" }} />
+            <input type="text" placeholder="Prénom" className="w-full px-5 py-3 rounded-full border outline-none focus:border-black" style={{ borderColor: "#EEEEEE", color: "#111" }} />
+            <button type="submit" className="btn-dark btn-dark-hover w-full">{t("cta_interested")} <IconArrowRight size={16} /></button>
+          </form>
+          <div className="mt-8 flex items-center justify-center gap-4" style={{ color: "#666" }}>
+            <a href="#" aria-label="Instagram" className="opacity-60 hover:opacity-100"><IconInstagram size={22} /></a>
+            <a href="#" aria-label="TikTok" className="opacity-60 hover:opacity-100"><IconTiktok size={22} /></a>
+            <a href="#" aria-label="LinkedIn" className="opacity-60 hover:opacity-100"><IconLinkedin size={22} /></a>
+          </div>
+          <p className="mt-10 text-xs" style={{ color: "#666" }}>
+            Professionnel de santé ou distributeur ? Contactez-nous — <a href="mailto:contact@legmio.com" className="underline">contact@legmio.com</a>
+          </p>
+        </div>
+      </section>
+    </div>
   );
 }
 
-function Landing() {
-  const { t, lang } = useLanguage();
-
-  const problemCards = lang === "fr" ? [
-    { icon: "💥", title: "Tes épaules, tes poignets, tes mains trinquent.", text: "L'outil censé t'aider te crée un handicap supplémentaire." },
-    { icon: "✋", title: "Tes mains sont prises. Ta vie ne l'est plus.", text: "Porter un verre, faire ses courses, ouvrir une porte — des gestes devenus négociations." },
-    { icon: "⏳", title: "Et tu t'y fais.", text: "5 ans, 10 ans, 40 ans en béquilles. Sans qu'on t'ait jamais proposé autre chose." },
-  ] : [
-    { icon: "💥", title: "Your shoulders, wrists and hands suffer.", text: "The tool meant to help you creates a new disability." },
-    { icon: "✋", title: "Your hands are taken. Your life doesn't have to be.", text: "Carrying a glass, doing groceries, opening a door — everyday acts become negotiations." },
-    { icon: "⏳", title: "And you get used to it.", text: "5, 10, 40 years on crutches. Without ever being offered anything else." },
-  ];
-
-  const media = ["Le Parisien", "TF1", "France 2", "France 5", "Faire Face"];
-
-  const mediaCards = [
-    { q: "Une invention qui va changer des vies.", src: "@compte1", views: "1.2M vues" },
-    { q: "Enfin une béquille qui libère les mains !", src: "@compte2", views: "850K vues" },
-    { q: "Révolutionnaire.", src: "@compte3", views: "2.4M vues" },
-  ];
-
-  const testimonials = lang === "fr" ? [
-    { name: "Sophie, 34 ans", profile: "Sclérose en plaques", badge: "3 ans de béquilles", quote: "Avant legmio, chaque sortie était une négociation. Le premier jour où j'ai pu rentrer des courses seule, sans sac à dos — j'ai pleuré. Ça paraît rien. C'est tout." },
-    { name: "Marc, 47 ans", profile: "Post-opératoire hanche", badge: "6 mois de rééducation", quote: "Je pensais que six mois de béquilles c'était six mois à mettre ma vie entre parenthèses. Mes épaules ont tenu. Moi aussi." },
-    { name: "Camille, 28 ans", profile: "Sarcome d'Ewing", badge: "Béquilles au quotidien", quote: "J'avais accepté que mes mains ne m'appartiendraient plus vraiment. legmio m'a prouvé que c'était faux. Ce n'est pas juste une béquille — c'est du temps de vie rendu." },
-  ] : [
-    { name: "Sophie, 34", profile: "Multiple sclerosis", badge: "3 years on crutches", quote: "Before legmio, every outing was a negotiation. The first day I could bring groceries home alone — I cried. It sounds like nothing. It's everything." },
-    { name: "Marc, 47", profile: "Post-op hip surgery", badge: "6 months rehab", quote: "I thought six months on crutches meant putting my life on pause. My shoulders held. So did I." },
-    { name: "Camille, 28", profile: "Ewing sarcoma", badge: "Daily crutch user", quote: "I had accepted that my hands weren't really mine. legmio proved me wrong. It's not just a crutch — it's life time given back." },
-  ];
-
-  const wall = [
+function WallOfLove() {
+  const quotes = [
     "C'est la béquille que j'attends depuis longtemps.",
     "J'ai hâte que ça soit commercialisé, on est des milliers à en avoir besoin !",
     "Une main de libre, un bonheur.",
@@ -64,426 +296,121 @@ function Landing() {
     "Votre invention est révolutionnaire et va changer la vie de beaucoup d'entre nous.",
     "J'utilise des béquilles depuis 20 ans... si le prix est convenable, je prends.",
     "Vos béquilles sont une révolution. On attend avec impatience.",
-    "C'est trop génial cette idée !!",
+    "Je marche sans béquilles parce que je ne peux rien faire d'autre si j'ai les béquilles !",
     "Voir votre invention remonte le moral.",
     "Elle a l'air de vraiment redonner de la liberté de mouvement.",
   ];
-
-  const useCases = lang === "fr" ? [
-    { icon: "🏠", title: "Handicap & quotidien long terme", sub: "Pour ceux qui béquillent depuis des mois, des ans, des décennies.", text: "Porter, cuisiner, s'occuper de ses proches. Reprendre ce que tu avais arrêté de demander." },
-    { icon: "🏥", title: "Post-opératoire & rééducation", sub: "Pour ceux qui béquillent le temps d'une récupération.", text: "Quelques semaines suffisent pour que tes épaules morfient. legmio te laisse récupérer sans tout sacrifier." },
-    { icon: "💼", title: "Maintien en emploi", sub: "Pour ceux qui travaillent avec des béquilles.", text: "Rester mobile, autonome, productif. Prise en charge jusqu'à 90% via Agefiph ou FIPHFP." },
-    { icon: "👶", title: "Vie parentale", sub: "Pour ceux qui élèvent un enfant en béquilles.", text: "Porter son enfant. Le suivre. Être là." },
-  ] : [
-    { icon: "🏠", title: "Long-term disability", sub: "For those who've been on crutches for months, years, decades.", text: "Carry, cook, care for loved ones. Get back what you'd stopped asking for." },
-    { icon: "🏥", title: "Post-op & rehab", sub: "For temporary recovery use.", text: "A few weeks is enough to wreck your shoulders. legmio lets you recover without sacrificing everything." },
-    { icon: "💼", title: "Staying in work", sub: "For those working on crutches.", text: "Stay mobile, independent, productive. Up to 90% covered via Agefiph or FIPHFP." },
-    { icon: "👶", title: "Parenting", sub: "For those raising kids on crutches.", text: "Carry your child. Follow them. Be there." },
-  ];
-
-  const components = lang === "fr" ? [
-    { title: "L'appui avant-bras", text: "Redistribue la charge. Protège tes poignets, tes épaules, tes nerfs." },
-    { title: "La poignée ergonomique", text: "Conçue pour la position naturelle du poignet. Réduit les contraintes, même sur de longues distances." },
-    { title: "Le système de réglage", text: "Deux points de réglage. Universelle de 1m50 à 1m95." },
-    { title: "L'embout interchangeable", text: "Tu le changes seul, sans outil. Intérieur, extérieur, usure — toujours la bonne accroche." },
-    { title: "La structure aluminium", text: "850g. Robuste. Légère. Conçue pour durer." },
-  ] : [
-    { title: "The forearm support", text: "Redistributes load. Protects wrists, shoulders, nerves." },
-    { title: "The ergonomic grip", text: "Designed for the wrist's natural position. Reduces strain even over long distances." },
-    { title: "The adjustment system", text: "Two adjustment points. Universal from 4'11 to 6'5." },
-    { title: "The swappable tip", text: "Change it alone, no tools. Indoor, outdoor, wear — always the right grip." },
-    { title: "Aluminum frame", text: "850g. Sturdy. Light. Built to last." },
-  ];
-
-  const roadmap = lang === "fr" ? [
-    { icon: "✅", text: "Prototype validé — utilisé en conditions réelles depuis plus d'un an", highlight: false },
-    { icon: "✅", text: "Brevet déposé — FR2411206 · Octobre 2024", highlight: false },
-    { icon: "🔄", text: "Certification CE Classe I — en cours · MDR 2017/745", highlight: false },
-    { icon: "🔄", text: "Industrialisation — DFM en cours · Assemblage France", highlight: false },
-    { icon: "🎯", text: "Commercialisation — 2027", highlight: true },
-  ] : [
-    { icon: "✅", text: "Validated prototype — in real-world use for over a year", highlight: false },
-    { icon: "✅", text: "Patent filed — FR2411206 · October 2024", highlight: false },
-    { icon: "🔄", text: "CE Class I certification — in progress · MDR 2017/745", highlight: false },
-    { icon: "🔄", text: "Industrialization — DFM in progress · Assembly in France", highlight: false },
-    { icon: "🎯", text: "Launch — 2027", highlight: true },
-  ];
-
-  const faqShort = lang === "fr" ? [
-    { q: "legmio est-elle réglable ?", a: "Oui. Deux points de réglage : poignée et appui coude. Universelle de 1m50 à 1m95." },
-    { q: "Faut-il de la force dans les mains ?", a: "Non. legmio ne nécessite pas de poigne — un simple appui du poignet suffit." },
-    { q: "Combien de temps pour s'adapter ?", a: "Environ 1 à 2 semaines, le temps que le corps intègre le nouveau schéma de marche." },
-    { q: "Quel est le prix ?", a: "150€ TTC, livraison incluse." },
-    { q: "Est-elle remboursée ?", a: "Partiellement sur prescription médicale (LPP). En contexte emploi, jusqu'à 90% via Agefiph ou FIPHFP." },
-    { q: "Quand sera-t-elle disponible ?", a: "Commercialisation prévue en 2027. Rejoins la liste d'attente pour être parmi les premiers." },
-  ] : [
-    { q: "Is legmio adjustable?", a: "Yes. Two adjustment points: handle and elbow rest. Universal from 4'11 to 6'5." },
-    { q: "Do you need hand strength?", a: "No. legmio needs no grip — a simple wrist support is enough." },
-    { q: "How long to adapt?", a: "About 1 to 2 weeks for the body to integrate the new walking pattern." },
-    { q: "What's the price?", a: "€150 incl. VAT, shipping included." },
-    { q: "Is it reimbursed?", a: "Partially with a prescription (LPP). In work context, up to 90% via Agefiph or FIPHFP." },
-    { q: "When will it be available?", a: "Launch planned for 2027. Join the waitlist to be among the first." },
-  ];
-
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [formOpen, setFormOpen] = useState(false);
-
+  const row1 = [...quotes, ...quotes];
+  const row2 = [...quotes.slice().reverse(), ...quotes.slice().reverse()];
+  const Card = ({ q }: { q: string }) => (
+    <div className="rounded-2xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: "#FFFFFF", color: "#111" }}>
+      <p className="italic text-sm">"{q}"</p>
+    </div>
+  );
   return (
-    <div>
-      {/* BLOC 1 — HERO */}
-      <section className="px-4 sm:px-6 pt-8 pb-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[55%_45%] gap-10 lg:gap-16 items-center">
-          <div className="order-1 w-full">
-            <div className="relative w-full max-w-[400px] mx-auto rounded-3xl overflow-hidden shadow-2xl" style={{ aspectRatio: "9/16" }}>
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=${VIDEO_ID}&modestbranding=1&playsinline=1`}
-                title="legmio"
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-              />
-            </div>
-          </div>
-          <div className="order-2">
-            <Reveal>
-              <div className="inline-block text-xs font-bold tracking-widest mb-6" style={{ color: "#111111" }}>{t("hero_label")}</div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-[#111111]">
-                {t("hero_title_1")}<br />{t("hero_title_2")}
-              </h1>
-              <p className="mt-6 text-xl sm:text-2xl" style={{ color: "#444444" }}>
-                {t("hero_sub_1")}<br /><span className="text-[#111111]">{t("hero_sub_2")}</span>
-              </p>
-              <div className="mt-8">
-                <CTAButton size="lg">{t("cta_arrow")}</CTAButton>
-                <p className="mt-4 text-sm" style={{ color: "#444444" }}>{t("hero_note")}</p>
-                <div className="mt-5 inline-block px-4 py-2 rounded-full text-sm border border-[#EEEEEE]" style={{ backgroundColor: "#F5F5F5" }}>
-                  {t("hero_badge")}
-                </div>
-              </div>
-            </Reveal>
-          </div>
+    <div className="mt-14 space-y-6 marquee-pause">
+      <div className="overflow-hidden">
+        <div className="flex gap-4 marquee-left" style={{ width: "max-content" }}>
+          {row1.map((q, i) => <Card key={`a${i}`} q={q} />)}
         </div>
-      </section>
-
-      {/* BLOC 2 — PROBLÈME */}
-      <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111] max-w-3xl mx-auto">{t("problem_title")}</h2></Reveal>
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {problemCards.map((c, i) => (
-            <Reveal key={i} delay={i * 100}>
-              <div className="p-8 rounded-2xl h-full border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
-                <div className="text-4xl mb-4">{c.icon}</div>
-                <h3 className="text-xl mb-3 text-[#111111]">{c.title}</h3>
-                <p style={{ color: "#444444" }}>{c.text}</p>
-              </div>
-            </Reveal>
-          ))}
+      </div>
+      <div className="overflow-hidden">
+        <div className="flex gap-4 marquee-right" style={{ width: "max-content" }}>
+          {row2.map((q, i) => <Card key={`b${i}`} q={q} />)}
         </div>
-        <Reveal><p className="mt-14 text-center italic text-lg" style={{ color: "#111111" }}>{t("problem_end")}</p></Reveal>
-      </SectionAlt>
-
-      {/* BLOC 3 — VIDÉO PRODUIT */}
-      <SectionAlt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("video_title")}</h2></Reveal>
-        <div className="mt-10 flex justify-center">
-          <div className="relative w-full max-w-[400px] rounded-3xl overflow-hidden shadow-2xl" style={{ aspectRatio: "9/16" }}>
-            <iframe
-              className="absolute inset-0 w-full h-full"
-              src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=${VIDEO_ID}&modestbranding=1&playsinline=1`}
-              title="legmio video"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-            />
-          </div>
-        </div>
-        <p className="mt-8 text-center" style={{ color: "#444444" }}>{t("video_sub")}</p>
-      </SectionAlt>
-
-      {/* BLOC 4 — ILS PARLENT DE NOUS */}
-      <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("media_title")}</h2></Reveal>
-        <div className="mt-10 flex flex-wrap justify-center items-center gap-6">
-          {media.map((m) => (
-            <div key={m} className="px-6 py-3 rounded-lg border border-[#EEEEEE] text-sm font-medium text-[#444444] grayscale">{m}</div>
-          ))}
-        </div>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {mediaCards.map((c, i) => (
-            <Reveal key={i} delay={i * 100}>
-              <div className="p-6 rounded-2xl border border-[#EEEEEE] h-full flex flex-col" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
-                <p className="italic text-[#111111]">"{c.q}"</p>
-                <p className="mt-4 text-sm" style={{ color: "#444444" }}>{c.src} · {c.views}</p>
-                <a href="#" className="mt-4 text-sm font-bold self-start" style={{ color: "#111111" }}>Voir →</a>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </SectionAlt>
-
-      {/* BLOC 5 — TÉMOIGNAGES */}
-      <SectionAlt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("testi_title")}</h2></Reveal>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((c, i) => (
-            <Reveal key={i} delay={i * 100}>
-              <div className="p-6 rounded-2xl border border-[#EEEEEE] h-full" style={{ backgroundColor: "#F5F5F5" }}>
-                <div className="w-16 h-16 rounded-full mx-auto" style={{ backgroundColor: "#FFFFFF", border: "1px solid #EEEEEE" }} />
-                <div className="mt-4 text-center">
-                  <div className="font-bold text-[#111111]">{c.name}</div>
-                  <div className="text-sm" style={{ color: "#444444" }}>{c.profile}</div>
-                  <div className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "#F5F5F5", color: "#111111" }}>{c.badge}</div>
-                </div>
-                <p className="mt-5 italic text-[#222222]">"{c.quote}"</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </SectionAlt>
-
-      {/* BLOC 6 — WALL OF LOVE */}
-      <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("wall_title")}</h2></Reveal>
-        <div className="mt-12 space-y-4 overflow-hidden">
-          {[wall, [...wall].reverse()].map((row, ri) => (
-            <div key={ri} className="flex gap-4 whitespace-nowrap" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
-              <div className={`flex gap-4 shrink-0 ${ri === 0 ? "marquee-left" : "marquee-right"}`} style={{ minWidth: "200%" }}>
-                {[...row, ...row].map((w, i) => (
-                  <div key={i} className="px-4 py-3 rounded-xl text-sm text-[#111111] shrink-0" style={{ backgroundColor: "#FFFFFF", border: "1px solid #111111", maxWidth: "360px", whiteSpace: "normal" }}>
-                    "{w}"
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-12 text-center"><CTAButton>{t("wall_cta")}</CTAButton></div>
-      </SectionAlt>
-
-      {/* BLOC 7 — USE CASES */}
-      <SectionAlt>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {useCases.map((c, i) => (
-            <Reveal key={i} delay={i * 80}>
-              <div className="p-8 rounded-2xl h-full border border-[#EEEEEE]" style={{ backgroundColor: "#F5F5F5" }}>
-                <div className="text-5xl mb-4">{c.icon}</div>
-                <h3 className="text-xl text-[#111111]">{c.title}</h3>
-                <p className="mt-2 italic text-sm" style={{ color: "#111111" }}>{c.sub}</p>
-                <p className="mt-4" style={{ color: "#444444" }}>{c.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <div className="mt-12 text-center">
-          <p className="mb-4 text-[#222222]">{t("usecase_cta")}</p>
-          <CTAButton>{t("cta_arrow")}</CTAButton>
-        </div>
-      </SectionAlt>
-
-      {/* BLOC 8 — DESCRIPTION PRODUIT + SPECS */}
-      <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("desc_title")}</h2></Reveal>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          {components.map((c, i) => (
-            <Reveal key={i} delay={i * 60}>
-              <div className="p-5 rounded-2xl h-full border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
-                <div className="aspect-square rounded-xl mb-4" style={{ backgroundColor: "#F5F5F5", border: "1px dashed #EEEEEE" }} />
-                <div className="text-xs font-bold mb-2" style={{ color: "#111111" }}>0{i + 1}</div>
-                <h3 className="text-base text-[#111111] font-display font-bold">{c.title}</h3>
-                <p className="mt-2 text-sm" style={{ color: "#444444" }}>{c.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <div className="mt-10 py-6 px-4 rounded-2xl flex flex-wrap justify-around items-center gap-4 text-sm text-[#111111]" style={{ backgroundColor: "#FFFFFF", border: "1px solid #EEEEEE" }}>
-          <span>⚖️ 850g</span>
-          <span>🔧 Aluminium</span>
-          <span>📏 1m50–1m95</span>
-          <span>💪 130kg</span>
-          <span>🇫🇷 Assemblage France</span>
-        </div>
-      </SectionAlt>
-
-      {/* BLOC 9 — CRÉDIBILITÉ */}
-      <SectionAlt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("cred_title")}</h2></Reveal>
-        <div className="mt-10 flex flex-wrap justify-center items-center gap-8">
-          {["CNRS", "Sorbonne Université", "SATT Lutech", "Bpifrance"].map((l) => (
-            <div key={l} className="text-[#666666] text-sm font-medium tracking-wider">{l}</div>
-          ))}
-        </div>
-        <Reveal>
-          <div className="mt-12 max-w-2xl mx-auto p-8 rounded-2xl text-center" style={{ backgroundColor: "#F5F5F5", border: "1px solid #111111" }}>
-            <p className="text-xl italic text-[#111111]">"{t("cred_quote")}"</p>
-            <p className="mt-6 font-bold text-[#111111]">{t("cred_author")}</p>
-            <p className="text-sm" style={{ color: "#444444" }}>{t("cred_author_sub")}</p>
-          </div>
-        </Reveal>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-          <div><div className="text-3xl mb-2">🥇</div><p className="text-[#111111]">Médaille d'or</p><p className="text-sm" style={{ color: "#444444" }}>Concours Lépine 2026</p></div>
-          <div><div className="text-3xl mb-2">🏆</div><p className="text-[#111111]">Prix de l'Impact</p><p className="text-sm" style={{ color: "#444444" }}>Le Média Positif 2026</p></div>
-          <div><div className="text-3xl mb-2">👨‍⚕️</div><p className="text-[#111111]">+6 médecins MPR</p><p className="text-sm" style={{ color: "#444444" }}>validation terrain</p></div>
-        </div>
-      </SectionAlt>
-
-      {/* BLOC 10 — ROADMAP */}
-      <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("roadmap_title")}</h2></Reveal>
-        <div className="mt-12 max-w-2xl mx-auto space-y-4">
-          {roadmap.map((r, i) => (
-            <Reveal key={i} delay={i * 80}>
-              <div className={`p-5 rounded-xl border flex items-center gap-4 ${r.highlight ? "" : "border-[#EEEEEE]"}`} style={{ backgroundColor: r.highlight ? "#F5F5F5" : "#FFFFFF", borderColor: r.highlight ? "#111111" : undefined }}>
-                <div className="text-2xl">{r.icon}</div>
-                <div className={r.highlight ? "text-xl font-bold font-display" : "text-[#111111]"} style={r.highlight ? { color: "#111111" } : {}}>
-                  {r.text}
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <p className="mt-10 text-center text-[#111111]">{t("roadmap_end_1")}<br /><span style={{ color: "#444444" }}>{t("roadmap_end_2")}</span></p>
-      </SectionAlt>
-
-      {/* BLOC 11 — PRIX */}
-      <SectionAlt id="pricing">
-        <Reveal>
-          <div className="text-center">
-            <div className="font-display font-bold text-6xl sm:text-7xl text-[#111111]">{t("price_ttc")}</div>
-            <p className="mt-2 text-lg" style={{ color: "#444444" }}>{t("price_ship")}</p>
-          </div>
-        </Reveal>
-        <div className="mt-12 max-w-2xl mx-auto space-y-3">
-          {[
-            { i: "💊", t: lang === "fr" ? "Prescription médicale → remboursement partiel Sécu (LPP)" : "Prescription → partial reimbursement (LPP)" },
-            { i: "🏥", t: lang === "fr" ? "Mutuelle → complément selon contrat" : "Private insurance → complement per plan" },
-            { i: "💼", t: lang === "fr" ? "Contexte emploi RQTH → jusqu'à 90% via Agefiph ou FIPHFP" : "RQTH work context → up to 90% via Agefiph/FIPHFP" },
-          ].map((r, i) => (
-            <div key={i} className="p-4 rounded-xl flex items-center gap-4 border border-[#EEEEEE]" style={{ backgroundColor: "#F5F5F5" }}>
-              <div className="text-2xl">{r.i}</div>
-              <div className="text-[#111111] text-sm sm:text-base">{r.t}</div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-12 text-center">
-          <button onClick={() => setFormOpen(true)} className="btn-dark btn-dark-hover text-lg px-8 py-4">{t("cta_arrow")}</button>
-          <p className="mt-4 text-sm" style={{ color: "#444444" }}>{t("hero_note")}</p>
-        </div>
-      </SectionAlt>
-
-      {/* BLOC 12 — FAQ RESUME */}
-      <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("faq_short_title")}</h2></Reveal>
-        <div className="mt-10 max-w-3xl mx-auto space-y-3">
-          {faqShort.map((f, i) => (
-            <div key={i} className="rounded-xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
-              <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex justify-between items-center p-5 text-left text-[#111111]">
-                <span className="font-medium">{f.q}</span>
-                <span className="text-xl shrink-0 ml-4" style={{ color: "#111111" }}>{openFaq === i ? "−" : "+"}</span>
-              </button>
-              {openFaq === i && <div className="px-5 pb-5" style={{ color: "#444444" }}>{f.a}</div>}
-            </div>
-          ))}
-        </div>
-        <div className="mt-8 text-center">
-          <a href="/faq" className="text-sm font-bold" style={{ color: "#111111" }}>{t("faq_all")}</a>
-        </div>
-      </SectionAlt>
-
-      {/* BLOC 13 — HISTOIRE */}
-      <SectionAlt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("story_title")}</h2></Reveal>
-        <div className="mt-10 max-w-[680px] mx-auto space-y-5 text-[#111111]" style={{ lineHeight: 1.8 }}>
-          <p>En 2020, j'ai subi une lourde opération pour retirer le cancer des os qui rongeait mon bassin. Elle fut un succès — et le début d'un nouveau parcours, à la fois difficile et joyeux.</p>
-          <p>La maladie m'a beaucoup pris. Mais elle m'a aussi appris à mesurer ce qui compte.</p>
-          <p>L'une des choses les plus dures : ne pas pouvoir porter mon fils quand il avait un ou deux ans. Je devais négocier pour qu'il me suive de son plein gré. Disons qu'il est coriace en négociation.</p>
-          <p>Peu à peu, le sentiment d'impuissance est devenu familier. Et il n'existait aucune solution adaptée.</p>
-          <p>Alors j'en ai inventé une.</p>
-          <p>En tant que roboticien, j'ai d'abord créé des prototypes motorisés. Puis j'ai réalisé qu'un dispositif passif pouvait suffire — et c'est là que les choses sont devenues vraiment intéressantes.</p>
-          <p>Après de nombreuses itérations : legmio. Une béquille qui libère la main.</p>
-          <p>Je l'utilise quotidiennement depuis plus d'un an. Je peux porter mon fils — même s'il a grandi — et sa petite sœur, arrivée entre-temps. Je fais les courses sans sac à dos. Je porte mon plateau à la cantine.</p>
-          <p>Le gain d'autonomie est énorme.</p>
-          <p className="text-xl font-display font-bold" style={{ color: "#111111" }}>Et f*ck cancer.</p>
-        </div>
-        <div className="mt-10 text-center">
-          <p className="font-bold text-[#111111]">{t("sig_name")}</p>
-          <p className="text-sm" style={{ color: "#444444" }}>{t("sig_role")}</p>
-        </div>
-      </SectionAlt>
-
-      {/* BLOC 14 — EQUIPE */}
-      <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("team_title")}</h2></Reveal>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          {[
-            { name: "Nicolas Perrin-Gilbert", role: "Co-fondateur & CEO", sub: "Chercheur CNRS · ISIR, Sorbonne Université · Robotique & biomécanique" },
-            { name: "Benjamin Rajjou", role: "Co-fondateur & CRO", sub: "Go-to-market · Partenariats · Stratégie commerciale" },
-          ].map((m, i) => (
-            <Reveal key={i} delay={i * 100}>
-              <div className="p-8 rounded-2xl text-center border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
-                <div className="w-24 h-24 rounded-full mx-auto" style={{ backgroundColor: "#F5F5F5", border: "1px solid #EEEEEE" }} />
-                <p className="mt-4 font-bold text-[#111111] text-lg">{m.name}</p>
-                <p className="text-sm" style={{ color: "#111111" }}>{m.role}</p>
-                <p className="mt-2 text-sm" style={{ color: "#444444" }}>{m.sub}</p>
-                <a href="#" className="inline-block mt-4 text-xs" style={{ color: "#444444" }}>in →</a>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </SectionAlt>
-
-      {/* BLOC 15 — CTA FINAL */}
-      <SectionAlt>
-        <Reveal>
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl sm:text-5xl text-[#111111] leading-tight">
-              {t("final_1")}<br />{t("final_2")}<br /><span style={{ color: "#111111" }}>{t("final_3")}</span>
-            </h2>
-            <div className="mt-10"><CTAButton size="lg">{t("cta_arrow")}</CTAButton></div>
-            <p className="mt-4 text-sm" style={{ color: "#444444" }}>{t("hero_note")}</p>
-            <div className="mt-8 flex justify-center gap-6 text-sm" style={{ color: "#444444" }}>
-              <a href="#" className="hover:text-[#111111]">Instagram</a>
-              <a href="#" className="hover:text-[#111111]">TikTok</a>
-              <a href="#" className="hover:text-[#111111]">LinkedIn</a>
-            </div>
-          </div>
-        </Reveal>
-      </SectionAlt>
-
-      {/* BLOC 16 — REVENDEURS */}
-      <section className="py-10 px-4" style={{ backgroundColor: "#FFFFFF" }}>
-        <p className="text-center text-sm" style={{ color: "#444444" }}>{t("reseller")}</p>
-      </section>
-
-      {/* BLOC 17 — NEWSLETTER */}
-      <SectionAlt alt>
-        <Reveal>
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl text-[#111111]">{t("news_title")}</h2>
-            <p className="mt-4" style={{ color: "#444444" }}>{t("news_sub")}</p>
-            <form onSubmit={(e) => { e.preventDefault(); alert(lang === "fr" ? "Merci ! On te tient au courant." : "Thanks! We'll keep you posted."); }} className="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-              <input type="email" required placeholder={t("news_placeholder")} className="flex-1 px-5 py-3 rounded-full border text-[#111111] placeholder:text-[#999999] outline-none" style={{ backgroundColor: "#FFFFFF", borderColor: "#EEEEEE" }} />
-              <button type="submit" className="btn-dark btn-dark-hover">{t("news_cta")}</button>
-            </form>
-            <p className="mt-4 text-xs" style={{ color: "#444444" }}>{t("news_spam")}</p>
-          </div>
-        </Reveal>
-      </SectionAlt>
-
-      {formOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ backgroundColor: "rgba(0,0,0,0.7)" }} onClick={() => setFormOpen(false)}>
-          <div onClick={(e) => e.stopPropagation()} className="max-w-lg w-full p-8 rounded-2xl" style={{ backgroundColor: "#F5F5F5", border: "1px solid #EEEEEE" }}>
-            <div className="flex justify-between items-start mb-4">
-              <h3 className="text-2xl text-[#111111]">{t("cta_interested")}</h3>
-              <button onClick={() => setFormOpen(false)} className="text-[#666666] text-2xl leading-none">×</button>
-            </div>
-            <p className="text-sm mb-6" style={{ color: "#444444" }}>
-              {lang === "fr" ? "Rejoins la liste d'attente. Aucun prélèvement maintenant." : "Join the waitlist. No payment now."}
-            </p>
-            <div id={lang === "fr" ? "HUBSPOT_FORM_ID_FR" : "HUBSPOT_FORM_ID_EN"} className="min-h-[300px] flex items-center justify-center text-sm rounded-xl border border-dashed border-[#EEEEEE]" style={{ color: "#444444" }}>
-              [Formulaire HubSpot — ID: {lang === "fr" ? "HUBSPOT_FORM_ID_FR" : "HUBSPOT_FORM_ID_EN"}]
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
+
+function ProductSlider() {
+  const slides = [
+    { t: "L'appui avant-bras", p: "Redistribue la charge. Protège tes poignets, tes épaules, tes nerfs." },
+    { t: "La poignée ergonomique", p: "Conçue pour la position naturelle du poignet. Confort longue durée garanti." },
+    { t: "Le système de réglage", p: "Deux points de réglage. Universelle de 1m50 à 1m95." },
+    { t: "L'embout interchangeable", p: "Sans outil. Intérieur, extérieur, usure — toujours la bonne accroche." },
+    { t: "La structure aluminium", p: "850g. Robuste. Légère. Conçue pour durer." },
+  ];
+  const [i, setI] = useState(0);
+  const s = slides[i];
+  return (
+    <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div className="rounded-2xl overflow-hidden">
+        <Placeholder label={s.t} dark aspect="aspect-square" />
+      </div>
+      <div className="text-white">
+        <h3 className="text-2xl md:text-3xl font-display font-bold">{s.t}</h3>
+        <p className="mt-4 text-lg" style={{ color: "rgba(255,255,255,0.8)" }}>{s.p}</p>
+        <div className="mt-8 flex gap-2">
+          {slides.map((_, k) => (
+            <button
+              key={k}
+              onClick={() => setI(k)}
+              aria-label={`Slide ${k + 1}`}
+              className="w-2.5 h-2.5 rounded-full transition"
+              style={{ backgroundColor: k === i ? "#FFFFFF" : "rgba(255,255,255,0.3)" }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Roadmap() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      if (!ref.current) return;
+      const r = ref.current.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const p = Math.max(0, Math.min(1, 1 - (r.top - vh * 0.4) / (vh * 0.5)));
+      setProgress(p);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const steps = ["Prototype validé", "Brevet déposé", "Certification CE", "Industrialisation", "2027"];
+  return (
+    <div ref={ref} className="mt-16">
+      {/* Desktop */}
+      <div className="hidden md:block relative">
+        <div className="absolute top-3 left-0 right-0 h-px" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
+        <div className="absolute top-3 left-0 h-px transition-all duration-500" style={{ backgroundColor: "#FFF", width: `${progress * 100}%` }} />
+        <div className="relative flex justify-between">
+          {steps.map((s, i) => {
+            const done = progress * (steps.length - 1) >= i;
+            const isLast = i === steps.length - 1;
+            return (
+              <div key={i} className="flex flex-col items-center gap-3 w-24 text-center">
+                <div
+                  className="rounded-full"
+                  style={{
+                    width: isLast ? 26 : 14, height: isLast ? 26 : 14,
+                    backgroundColor: isLast ? "#FFF" : done ? "#FFF" : "transparent",
+                    border: "2px solid #FFF",
+                  }}
+                />
+                <div className="text-xs text-white" style={{ opacity: done ? 1 : 0.6 }}>{s}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {/* Mobile */}
+      <div className="md:hidden space-y-4 relative">
+        {steps.map((s, i) => (
+          <div key={i} className="flex items-center gap-4">
+            <div className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: "#FFF" }} />
+            <div className="text-white text-sm">{s}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Suppress unused warning for IconChevron
+void IconChevron;

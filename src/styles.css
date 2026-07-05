@@ -29,13 +29,6 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --color-ink: #111111;
-  --color-ink-2: #F5F5F5;
-  --color-ink-deep: #000000;
-  --color-gold: #111111;
-  --color-text-muted: #444444;
-  --color-hairline: #EEEEEE;
-
   --font-display: "Syne", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }
@@ -53,7 +46,7 @@
   --secondary: #F5F5F5;
   --secondary-foreground: #111111;
   --muted: #F5F5F5;
-  --muted-foreground: #444444;
+  --muted-foreground: #666666;
   --accent: #111111;
   --accent-foreground: #FFFFFF;
   --destructive: oklch(0.577 0.245 27.325);
@@ -72,8 +65,7 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; color: #111111; }
-  p { color: #444444; }
+  h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; }
 }
 
 @utility btn-dark {
@@ -87,33 +79,62 @@
   padding: 0.875rem 1.75rem;
   border-radius: 50px;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 @utility btn-dark-hover {
   &:hover { background-color: #000000; transform: translateY(-1px); }
 }
-
-/* Legacy aliases so any leftover class still renders correctly */
-@utility btn-gold {
+@utility btn-light {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #111111;
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  color: #111111;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
   border-radius: 50px;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
-@utility btn-gold-hover {
-  &:hover { background-color: #000000; transform: translateY(-1px); }
+@utility btn-light-hover {
+  &:hover { background-color: #F5F5F5; transform: translateY(-1px); }
+}
+@utility btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #111111;
+  font-weight: 600;
+  padding: 0.875rem 1.75rem;
+  border-radius: 50px;
+  border: 1px solid #111111;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  &:hover { background-color: #111111; color: #FFFFFF; }
+}
+@utility btn-outline-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 0.875rem 1.75rem;
+  border-radius: 50px;
+  border: 1px solid #FFFFFF;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  &:hover { background-color: #FFFFFF; color: #111111; }
 }
 
 @utility card-soft {
   background-color: #FFFFFF;
-  border: 1px solid #EEEEEE;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
 @keyframes marquee-left {
@@ -128,15 +149,24 @@
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+@keyframes float-rotate {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
 
 @utility marquee-left { animation: marquee-left 40s linear infinite; }
 @utility marquee-right { animation: marquee-right 40s linear infinite; }
 @utility fade-up { animation: fade-up 0.7s ease-out both; }
+@utility float-rotate { animation: float-rotate 14s ease-in-out infinite; }
+
+.marquee-pause:hover .marquee-left,
+.marquee-pause:hover .marquee-right { animation-play-state: paused; }
 
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.in { opacity: 1; transform: translateY(0); }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-left, .marquee-right { animation: none; }
+  .marquee-left, .marquee-right, .float-rotate { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
