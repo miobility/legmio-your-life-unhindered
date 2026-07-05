@@ -11,7 +11,7 @@ const VIDEO_ID = "BywLrRTsp_8";
 
 function CTAButton({ children, size = "md" }: { children: React.ReactNode; size?: "md" | "lg" }) {
   return (
-    <a href="#pricing" className={`btn-gold btn-gold-hover ${size === "lg" ? "text-lg px-8 py-4" : ""}`}>
+    <a href="#pricing" className={`btn-dark btn-dark-hover ${size === "lg" ? "text-lg px-8 py-4" : ""}`}>
       {children}
     </a>
   );
@@ -19,7 +19,7 @@ function CTAButton({ children, size = "md" }: { children: React.ReactNode; size?
 
 function SectionAlt({ children, alt = false, className = "", id }: { children: React.ReactNode; alt?: boolean; className?: string; id?: string }) {
   return (
-    <section id={id} style={{ backgroundColor: alt ? "#12183A" : "#0D0D29" }} className={`py-20 sm:py-28 px-4 sm:px-6 ${className}`}>
+    <section id={id} style={{ backgroundColor: alt ? "#F5F5F5" : "#FFFFFF" }} className={`py-20 sm:py-28 px-4 sm:px-6 ${className}`}>
       <div className="max-w-7xl mx-auto">{children}</div>
     </section>
   );
@@ -146,17 +146,17 @@ function Landing() {
           </div>
           <div className="order-2">
             <Reveal>
-              <div className="inline-block text-xs font-bold tracking-widest mb-6" style={{ color: "#E8C170" }}>{t("hero_label")}</div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-white">
+              <div className="inline-block text-xs font-bold tracking-widest mb-6" style={{ color: "#111111" }}>{t("hero_label")}</div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-[#111111]">
                 {t("hero_title_1")}<br />{t("hero_title_2")}
               </h1>
-              <p className="mt-6 text-xl sm:text-2xl" style={{ color: "#A0A8C0" }}>
-                {t("hero_sub_1")}<br /><span className="text-white">{t("hero_sub_2")}</span>
+              <p className="mt-6 text-xl sm:text-2xl" style={{ color: "#444444" }}>
+                {t("hero_sub_1")}<br /><span className="text-[#111111]">{t("hero_sub_2")}</span>
               </p>
               <div className="mt-8">
                 <CTAButton size="lg">{t("cta_arrow")}</CTAButton>
-                <p className="mt-4 text-sm" style={{ color: "#A0A8C0" }}>{t("hero_note")}</p>
-                <div className="mt-5 inline-block px-4 py-2 rounded-full text-sm border border-white/10" style={{ backgroundColor: "rgba(232,193,112,0.08)" }}>
+                <p className="mt-4 text-sm" style={{ color: "#444444" }}>{t("hero_note")}</p>
+                <div className="mt-5 inline-block px-4 py-2 rounded-full text-sm border border-[#EEEEEE]" style={{ backgroundColor: "#F5F5F5" }}>
                   {t("hero_badge")}
                 </div>
               </div>
@@ -167,24 +167,24 @@ function Landing() {
 
       {/* BLOC 2 — PROBLÈME */}
       <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-white max-w-3xl mx-auto">{t("problem_title")}</h2></Reveal>
+        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111] max-w-3xl mx-auto">{t("problem_title")}</h2></Reveal>
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
           {problemCards.map((c, i) => (
             <Reveal key={i} delay={i * 100}>
-              <div className="p-8 rounded-2xl h-full border border-white/5" style={{ backgroundColor: "#0D0D29" }}>
+              <div className="p-8 rounded-2xl h-full border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
                 <div className="text-4xl mb-4">{c.icon}</div>
-                <h3 className="text-xl mb-3 text-white">{c.title}</h3>
-                <p style={{ color: "#A0A8C0" }}>{c.text}</p>
+                <h3 className="text-xl mb-3 text-[#111111]">{c.title}</h3>
+                <p style={{ color: "#444444" }}>{c.text}</p>
               </div>
             </Reveal>
           ))}
         </div>
-        <Reveal><p className="mt-14 text-center italic text-lg" style={{ color: "#E8C170" }}>{t("problem_end")}</p></Reveal>
+        <Reveal><p className="mt-14 text-center italic text-lg" style={{ color: "#111111" }}>{t("problem_end")}</p></Reveal>
       </SectionAlt>
 
       {/* BLOC 3 — VIDÉO PRODUIT */}
       <SectionAlt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-white">{t("video_title")}</h2></Reveal>
+        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("video_title")}</h2></Reveal>
         <div className="mt-10 flex justify-center">
           <div className="relative w-full max-w-[400px] rounded-3xl overflow-hidden shadow-2xl" style={{ aspectRatio: "9/16" }}>
             <iframe
@@ -196,24 +196,24 @@ function Landing() {
             />
           </div>
         </div>
-        <p className="mt-8 text-center" style={{ color: "#A0A8C0" }}>{t("video_sub")}</p>
+        <p className="mt-8 text-center" style={{ color: "#444444" }}>{t("video_sub")}</p>
       </SectionAlt>
 
       {/* BLOC 4 — ILS PARLENT DE NOUS */}
       <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-white">{t("media_title")}</h2></Reveal>
+        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("media_title")}</h2></Reveal>
         <div className="mt-10 flex flex-wrap justify-center items-center gap-6">
           {media.map((m) => (
-            <div key={m} className="px-6 py-3 rounded-lg border border-white/10 text-sm font-medium text-white/70 grayscale">{m}</div>
+            <div key={m} className="px-6 py-3 rounded-lg border border-[#EEEEEE] text-sm font-medium text-[#444444] grayscale">{m}</div>
           ))}
         </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
           {mediaCards.map((c, i) => (
             <Reveal key={i} delay={i * 100}>
-              <div className="p-6 rounded-2xl border border-white/5 h-full flex flex-col" style={{ backgroundColor: "#0D0D29" }}>
-                <p className="italic text-white/90">"{c.q}"</p>
-                <p className="mt-4 text-sm" style={{ color: "#A0A8C0" }}>{c.src} · {c.views}</p>
-                <a href="#" className="mt-4 text-sm font-bold self-start" style={{ color: "#E8C170" }}>Voir →</a>
+              <div className="p-6 rounded-2xl border border-[#EEEEEE] h-full flex flex-col" style={{ backgroundColor: "#FFFFFF" }}>
+                <p className="italic text-[#111111]">"{c.q}"</p>
+                <p className="mt-4 text-sm" style={{ color: "#444444" }}>{c.src} · {c.views}</p>
+                <a href="#" className="mt-4 text-sm font-bold self-start" style={{ color: "#111111" }}>Voir →</a>
               </div>
             </Reveal>
           ))}
@@ -222,18 +222,18 @@ function Landing() {
 
       {/* BLOC 5 — TÉMOIGNAGES */}
       <SectionAlt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-white">{t("testi_title")}</h2></Reveal>
+        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("testi_title")}</h2></Reveal>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((c, i) => (
             <Reveal key={i} delay={i * 100}>
-              <div className="p-6 rounded-2xl border border-white/5 h-full" style={{ backgroundColor: "#12183A" }}>
-                <div className="w-16 h-16 rounded-full mx-auto" style={{ backgroundColor: "#0D0D29", border: "1px solid rgba(232,193,112,0.3)" }} />
+              <div className="p-6 rounded-2xl border border-[#EEEEEE] h-full" style={{ backgroundColor: "#F5F5F5" }}>
+                <div className="w-16 h-16 rounded-full mx-auto" style={{ backgroundColor: "#FFFFFF", border: "1px solid #EEEEEE" }} />
                 <div className="mt-4 text-center">
-                  <div className="font-bold text-white">{c.name}</div>
-                  <div className="text-sm" style={{ color: "#A0A8C0" }}>{c.profile}</div>
-                  <div className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "rgba(232,193,112,0.15)", color: "#E8C170" }}>{c.badge}</div>
+                  <div className="font-bold text-[#111111]">{c.name}</div>
+                  <div className="text-sm" style={{ color: "#444444" }}>{c.profile}</div>
+                  <div className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "#F5F5F5", color: "#111111" }}>{c.badge}</div>
                 </div>
-                <p className="mt-5 italic text-white/85">"{c.quote}"</p>
+                <p className="mt-5 italic text-[#222222]">"{c.quote}"</p>
               </div>
             </Reveal>
           ))}
@@ -242,13 +242,13 @@ function Landing() {
 
       {/* BLOC 6 — WALL OF LOVE */}
       <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-white">{t("wall_title")}</h2></Reveal>
+        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("wall_title")}</h2></Reveal>
         <div className="mt-12 space-y-4 overflow-hidden">
           {[wall, [...wall].reverse()].map((row, ri) => (
             <div key={ri} className="flex gap-4 whitespace-nowrap" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
               <div className={`flex gap-4 shrink-0 ${ri === 0 ? "marquee-left" : "marquee-right"}`} style={{ minWidth: "200%" }}>
                 {[...row, ...row].map((w, i) => (
-                  <div key={i} className="px-4 py-3 rounded-xl text-sm text-white/90 shrink-0" style={{ backgroundColor: "#0D0D29", border: "1px solid #E8C170", maxWidth: "360px", whiteSpace: "normal" }}>
+                  <div key={i} className="px-4 py-3 rounded-xl text-sm text-[#111111] shrink-0" style={{ backgroundColor: "#FFFFFF", border: "1px solid #111111", maxWidth: "360px", whiteSpace: "normal" }}>
                     "{w}"
                   </div>
                 ))}
@@ -264,37 +264,37 @@ function Landing() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {useCases.map((c, i) => (
             <Reveal key={i} delay={i * 80}>
-              <div className="p-8 rounded-2xl h-full border border-white/5" style={{ backgroundColor: "#12183A" }}>
+              <div className="p-8 rounded-2xl h-full border border-[#EEEEEE]" style={{ backgroundColor: "#F5F5F5" }}>
                 <div className="text-5xl mb-4">{c.icon}</div>
-                <h3 className="text-xl text-white">{c.title}</h3>
-                <p className="mt-2 italic text-sm" style={{ color: "#E8C170" }}>{c.sub}</p>
-                <p className="mt-4" style={{ color: "#A0A8C0" }}>{c.text}</p>
+                <h3 className="text-xl text-[#111111]">{c.title}</h3>
+                <p className="mt-2 italic text-sm" style={{ color: "#111111" }}>{c.sub}</p>
+                <p className="mt-4" style={{ color: "#444444" }}>{c.text}</p>
               </div>
             </Reveal>
           ))}
         </div>
         <div className="mt-12 text-center">
-          <p className="mb-4 text-white/80">{t("usecase_cta")}</p>
+          <p className="mb-4 text-[#222222]">{t("usecase_cta")}</p>
           <CTAButton>{t("cta_arrow")}</CTAButton>
         </div>
       </SectionAlt>
 
       {/* BLOC 8 — DESCRIPTION PRODUIT + SPECS */}
       <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-white">{t("desc_title")}</h2></Reveal>
+        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("desc_title")}</h2></Reveal>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {components.map((c, i) => (
             <Reveal key={i} delay={i * 60}>
-              <div className="p-5 rounded-2xl h-full border border-white/5" style={{ backgroundColor: "#0D0D29" }}>
-                <div className="aspect-square rounded-xl mb-4" style={{ backgroundColor: "rgba(232,193,112,0.08)", border: "1px dashed rgba(232,193,112,0.3)" }} />
-                <div className="text-xs font-bold mb-2" style={{ color: "#E8C170" }}>0{i + 1}</div>
-                <h3 className="text-base text-white font-display font-bold">{c.title}</h3>
-                <p className="mt-2 text-sm" style={{ color: "#A0A8C0" }}>{c.text}</p>
+              <div className="p-5 rounded-2xl h-full border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
+                <div className="aspect-square rounded-xl mb-4" style={{ backgroundColor: "#F5F5F5", border: "1px dashed #EEEEEE" }} />
+                <div className="text-xs font-bold mb-2" style={{ color: "#111111" }}>0{i + 1}</div>
+                <h3 className="text-base text-[#111111] font-display font-bold">{c.title}</h3>
+                <p className="mt-2 text-sm" style={{ color: "#444444" }}>{c.text}</p>
               </div>
             </Reveal>
           ))}
         </div>
-        <div className="mt-10 py-6 px-4 rounded-2xl flex flex-wrap justify-around items-center gap-4 text-sm text-white/90" style={{ backgroundColor: "#0D0D29", border: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="mt-10 py-6 px-4 rounded-2xl flex flex-wrap justify-around items-center gap-4 text-sm text-[#111111]" style={{ backgroundColor: "#FFFFFF", border: "1px solid #EEEEEE" }}>
           <span>⚖️ 850g</span>
           <span>🔧 Aluminium</span>
           <span>📏 1m50–1m95</span>
@@ -305,50 +305,50 @@ function Landing() {
 
       {/* BLOC 9 — CRÉDIBILITÉ */}
       <SectionAlt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-white">{t("cred_title")}</h2></Reveal>
+        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("cred_title")}</h2></Reveal>
         <div className="mt-10 flex flex-wrap justify-center items-center gap-8">
           {["CNRS", "Sorbonne Université", "SATT Lutech", "Bpifrance"].map((l) => (
-            <div key={l} className="text-white/60 text-sm font-medium tracking-wider">{l}</div>
+            <div key={l} className="text-[#666666] text-sm font-medium tracking-wider">{l}</div>
           ))}
         </div>
         <Reveal>
-          <div className="mt-12 max-w-2xl mx-auto p-8 rounded-2xl text-center" style={{ backgroundColor: "#12183A", border: "1px solid #E8C170" }}>
-            <p className="text-xl italic text-white">"{t("cred_quote")}"</p>
-            <p className="mt-6 font-bold text-white">{t("cred_author")}</p>
-            <p className="text-sm" style={{ color: "#A0A8C0" }}>{t("cred_author_sub")}</p>
+          <div className="mt-12 max-w-2xl mx-auto p-8 rounded-2xl text-center" style={{ backgroundColor: "#F5F5F5", border: "1px solid #111111" }}>
+            <p className="text-xl italic text-[#111111]">"{t("cred_quote")}"</p>
+            <p className="mt-6 font-bold text-[#111111]">{t("cred_author")}</p>
+            <p className="text-sm" style={{ color: "#444444" }}>{t("cred_author_sub")}</p>
           </div>
         </Reveal>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-          <div><div className="text-3xl mb-2">🥇</div><p className="text-white">Médaille d'or</p><p className="text-sm" style={{ color: "#A0A8C0" }}>Concours Lépine 2026</p></div>
-          <div><div className="text-3xl mb-2">🏆</div><p className="text-white">Prix de l'Impact</p><p className="text-sm" style={{ color: "#A0A8C0" }}>Le Média Positif 2026</p></div>
-          <div><div className="text-3xl mb-2">👨‍⚕️</div><p className="text-white">+6 médecins MPR</p><p className="text-sm" style={{ color: "#A0A8C0" }}>validation terrain</p></div>
+          <div><div className="text-3xl mb-2">🥇</div><p className="text-[#111111]">Médaille d'or</p><p className="text-sm" style={{ color: "#444444" }}>Concours Lépine 2026</p></div>
+          <div><div className="text-3xl mb-2">🏆</div><p className="text-[#111111]">Prix de l'Impact</p><p className="text-sm" style={{ color: "#444444" }}>Le Média Positif 2026</p></div>
+          <div><div className="text-3xl mb-2">👨‍⚕️</div><p className="text-[#111111]">+6 médecins MPR</p><p className="text-sm" style={{ color: "#444444" }}>validation terrain</p></div>
         </div>
       </SectionAlt>
 
       {/* BLOC 10 — ROADMAP */}
       <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-white">{t("roadmap_title")}</h2></Reveal>
+        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("roadmap_title")}</h2></Reveal>
         <div className="mt-12 max-w-2xl mx-auto space-y-4">
           {roadmap.map((r, i) => (
             <Reveal key={i} delay={i * 80}>
-              <div className={`p-5 rounded-xl border flex items-center gap-4 ${r.highlight ? "" : "border-white/10"}`} style={{ backgroundColor: r.highlight ? "rgba(232,193,112,0.1)" : "#0D0D29", borderColor: r.highlight ? "#E8C170" : undefined }}>
+              <div className={`p-5 rounded-xl border flex items-center gap-4 ${r.highlight ? "" : "border-[#EEEEEE]"}`} style={{ backgroundColor: r.highlight ? "#F5F5F5" : "#FFFFFF", borderColor: r.highlight ? "#111111" : undefined }}>
                 <div className="text-2xl">{r.icon}</div>
-                <div className={r.highlight ? "text-xl font-bold font-display" : "text-white"} style={r.highlight ? { color: "#E8C170" } : {}}>
+                <div className={r.highlight ? "text-xl font-bold font-display" : "text-[#111111]"} style={r.highlight ? { color: "#111111" } : {}}>
                   {r.text}
                 </div>
               </div>
             </Reveal>
           ))}
         </div>
-        <p className="mt-10 text-center text-white/90">{t("roadmap_end_1")}<br /><span style={{ color: "#A0A8C0" }}>{t("roadmap_end_2")}</span></p>
+        <p className="mt-10 text-center text-[#111111]">{t("roadmap_end_1")}<br /><span style={{ color: "#444444" }}>{t("roadmap_end_2")}</span></p>
       </SectionAlt>
 
       {/* BLOC 11 — PRIX */}
       <SectionAlt id="pricing">
         <Reveal>
           <div className="text-center">
-            <div className="font-display font-bold text-6xl sm:text-7xl text-white">{t("price_ttc")}</div>
-            <p className="mt-2 text-lg" style={{ color: "#A0A8C0" }}>{t("price_ship")}</p>
+            <div className="font-display font-bold text-6xl sm:text-7xl text-[#111111]">{t("price_ttc")}</div>
+            <p className="mt-2 text-lg" style={{ color: "#444444" }}>{t("price_ship")}</p>
           </div>
         </Reveal>
         <div className="mt-12 max-w-2xl mx-auto space-y-3">
@@ -357,41 +357,41 @@ function Landing() {
             { i: "🏥", t: lang === "fr" ? "Mutuelle → complément selon contrat" : "Private insurance → complement per plan" },
             { i: "💼", t: lang === "fr" ? "Contexte emploi RQTH → jusqu'à 90% via Agefiph ou FIPHFP" : "RQTH work context → up to 90% via Agefiph/FIPHFP" },
           ].map((r, i) => (
-            <div key={i} className="p-4 rounded-xl flex items-center gap-4 border border-white/5" style={{ backgroundColor: "#12183A" }}>
+            <div key={i} className="p-4 rounded-xl flex items-center gap-4 border border-[#EEEEEE]" style={{ backgroundColor: "#F5F5F5" }}>
               <div className="text-2xl">{r.i}</div>
-              <div className="text-white/90 text-sm sm:text-base">{r.t}</div>
+              <div className="text-[#111111] text-sm sm:text-base">{r.t}</div>
             </div>
           ))}
         </div>
         <div className="mt-12 text-center">
-          <button onClick={() => setFormOpen(true)} className="btn-gold btn-gold-hover text-lg px-8 py-4">{t("cta_arrow")}</button>
-          <p className="mt-4 text-sm" style={{ color: "#A0A8C0" }}>{t("hero_note")}</p>
+          <button onClick={() => setFormOpen(true)} className="btn-dark btn-dark-hover text-lg px-8 py-4">{t("cta_arrow")}</button>
+          <p className="mt-4 text-sm" style={{ color: "#444444" }}>{t("hero_note")}</p>
         </div>
       </SectionAlt>
 
       {/* BLOC 12 — FAQ RESUME */}
       <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-white">{t("faq_short_title")}</h2></Reveal>
+        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("faq_short_title")}</h2></Reveal>
         <div className="mt-10 max-w-3xl mx-auto space-y-3">
           {faqShort.map((f, i) => (
-            <div key={i} className="rounded-xl border border-white/5" style={{ backgroundColor: "#0D0D29" }}>
-              <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex justify-between items-center p-5 text-left text-white">
+            <div key={i} className="rounded-xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
+              <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex justify-between items-center p-5 text-left text-[#111111]">
                 <span className="font-medium">{f.q}</span>
-                <span className="text-xl shrink-0 ml-4" style={{ color: "#E8C170" }}>{openFaq === i ? "−" : "+"}</span>
+                <span className="text-xl shrink-0 ml-4" style={{ color: "#111111" }}>{openFaq === i ? "−" : "+"}</span>
               </button>
-              {openFaq === i && <div className="px-5 pb-5" style={{ color: "#A0A8C0" }}>{f.a}</div>}
+              {openFaq === i && <div className="px-5 pb-5" style={{ color: "#444444" }}>{f.a}</div>}
             </div>
           ))}
         </div>
         <div className="mt-8 text-center">
-          <a href="/faq" className="text-sm font-bold" style={{ color: "#E8C170" }}>{t("faq_all")}</a>
+          <a href="/faq" className="text-sm font-bold" style={{ color: "#111111" }}>{t("faq_all")}</a>
         </div>
       </SectionAlt>
 
       {/* BLOC 13 — HISTOIRE */}
       <SectionAlt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-white">{t("story_title")}</h2></Reveal>
-        <div className="mt-10 max-w-[680px] mx-auto space-y-5 text-white/90" style={{ lineHeight: 1.8 }}>
+        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("story_title")}</h2></Reveal>
+        <div className="mt-10 max-w-[680px] mx-auto space-y-5 text-[#111111]" style={{ lineHeight: 1.8 }}>
           <p>En 2020, j'ai subi une lourde opération pour retirer le cancer des os qui rongeait mon bassin. Elle fut un succès — et le début d'un nouveau parcours, à la fois difficile et joyeux.</p>
           <p>La maladie m'a beaucoup pris. Mais elle m'a aussi appris à mesurer ce qui compte.</p>
           <p>L'une des choses les plus dures : ne pas pouvoir porter mon fils quand il avait un ou deux ans. Je devais négocier pour qu'il me suive de son plein gré. Disons qu'il est coriace en négociation.</p>
@@ -401,29 +401,29 @@ function Landing() {
           <p>Après de nombreuses itérations : legmio. Une béquille qui libère la main.</p>
           <p>Je l'utilise quotidiennement depuis plus d'un an. Je peux porter mon fils — même s'il a grandi — et sa petite sœur, arrivée entre-temps. Je fais les courses sans sac à dos. Je porte mon plateau à la cantine.</p>
           <p>Le gain d'autonomie est énorme.</p>
-          <p className="text-xl font-display font-bold" style={{ color: "#E8C170" }}>Et f*ck cancer.</p>
+          <p className="text-xl font-display font-bold" style={{ color: "#111111" }}>Et f*ck cancer.</p>
         </div>
         <div className="mt-10 text-center">
-          <p className="font-bold text-white">{t("sig_name")}</p>
-          <p className="text-sm" style={{ color: "#A0A8C0" }}>{t("sig_role")}</p>
+          <p className="font-bold text-[#111111]">{t("sig_name")}</p>
+          <p className="text-sm" style={{ color: "#444444" }}>{t("sig_role")}</p>
         </div>
       </SectionAlt>
 
       {/* BLOC 14 — EQUIPE */}
       <SectionAlt alt>
-        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-white">{t("team_title")}</h2></Reveal>
+        <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("team_title")}</h2></Reveal>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {[
             { name: "Nicolas Perrin-Gilbert", role: "Co-fondateur & CEO", sub: "Chercheur CNRS · ISIR, Sorbonne Université · Robotique & biomécanique" },
             { name: "Benjamin Rajjou", role: "Co-fondateur & CRO", sub: "Go-to-market · Partenariats · Stratégie commerciale" },
           ].map((m, i) => (
             <Reveal key={i} delay={i * 100}>
-              <div className="p-8 rounded-2xl text-center border border-white/5" style={{ backgroundColor: "#0D0D29" }}>
-                <div className="w-24 h-24 rounded-full mx-auto" style={{ backgroundColor: "rgba(232,193,112,0.15)", border: "1px solid rgba(232,193,112,0.3)" }} />
-                <p className="mt-4 font-bold text-white text-lg">{m.name}</p>
-                <p className="text-sm" style={{ color: "#E8C170" }}>{m.role}</p>
-                <p className="mt-2 text-sm" style={{ color: "#A0A8C0" }}>{m.sub}</p>
-                <a href="#" className="inline-block mt-4 text-xs" style={{ color: "#A0A8C0" }}>in →</a>
+              <div className="p-8 rounded-2xl text-center border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
+                <div className="w-24 h-24 rounded-full mx-auto" style={{ backgroundColor: "#F5F5F5", border: "1px solid #EEEEEE" }} />
+                <p className="mt-4 font-bold text-[#111111] text-lg">{m.name}</p>
+                <p className="text-sm" style={{ color: "#111111" }}>{m.role}</p>
+                <p className="mt-2 text-sm" style={{ color: "#444444" }}>{m.sub}</p>
+                <a href="#" className="inline-block mt-4 text-xs" style={{ color: "#444444" }}>in →</a>
               </div>
             </Reveal>
           ))}
@@ -434,51 +434,51 @@ function Landing() {
       <SectionAlt>
         <Reveal>
           <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl sm:text-5xl text-white leading-tight">
-              {t("final_1")}<br />{t("final_2")}<br /><span style={{ color: "#E8C170" }}>{t("final_3")}</span>
+            <h2 className="text-3xl sm:text-5xl text-[#111111] leading-tight">
+              {t("final_1")}<br />{t("final_2")}<br /><span style={{ color: "#111111" }}>{t("final_3")}</span>
             </h2>
             <div className="mt-10"><CTAButton size="lg">{t("cta_arrow")}</CTAButton></div>
-            <p className="mt-4 text-sm" style={{ color: "#A0A8C0" }}>{t("hero_note")}</p>
-            <div className="mt-8 flex justify-center gap-6 text-sm" style={{ color: "#A0A8C0" }}>
-              <a href="#" className="hover:text-white">Instagram</a>
-              <a href="#" className="hover:text-white">TikTok</a>
-              <a href="#" className="hover:text-white">LinkedIn</a>
+            <p className="mt-4 text-sm" style={{ color: "#444444" }}>{t("hero_note")}</p>
+            <div className="mt-8 flex justify-center gap-6 text-sm" style={{ color: "#444444" }}>
+              <a href="#" className="hover:text-[#111111]">Instagram</a>
+              <a href="#" className="hover:text-[#111111]">TikTok</a>
+              <a href="#" className="hover:text-[#111111]">LinkedIn</a>
             </div>
           </div>
         </Reveal>
       </SectionAlt>
 
       {/* BLOC 16 — REVENDEURS */}
-      <section className="py-10 px-4" style={{ backgroundColor: "#0D0D29" }}>
-        <p className="text-center text-sm" style={{ color: "#A0A8C0" }}>{t("reseller")}</p>
+      <section className="py-10 px-4" style={{ backgroundColor: "#FFFFFF" }}>
+        <p className="text-center text-sm" style={{ color: "#444444" }}>{t("reseller")}</p>
       </section>
 
       {/* BLOC 17 — NEWSLETTER */}
       <SectionAlt alt>
         <Reveal>
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl text-white">{t("news_title")}</h2>
-            <p className="mt-4" style={{ color: "#A0A8C0" }}>{t("news_sub")}</p>
+            <h2 className="text-3xl sm:text-4xl text-[#111111]">{t("news_title")}</h2>
+            <p className="mt-4" style={{ color: "#444444" }}>{t("news_sub")}</p>
             <form onSubmit={(e) => { e.preventDefault(); alert(lang === "fr" ? "Merci ! On te tient au courant." : "Thanks! We'll keep you posted."); }} className="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-              <input type="email" required placeholder={t("news_placeholder")} className="flex-1 px-5 py-3 rounded-full border text-white placeholder:text-white/40 outline-none" style={{ backgroundColor: "#0D0D29", borderColor: "rgba(255,255,255,0.1)" }} />
-              <button type="submit" className="btn-gold btn-gold-hover">{t("news_cta")}</button>
+              <input type="email" required placeholder={t("news_placeholder")} className="flex-1 px-5 py-3 rounded-full border text-[#111111] placeholder:text-[#999999] outline-none" style={{ backgroundColor: "#FFFFFF", borderColor: "#EEEEEE" }} />
+              <button type="submit" className="btn-dark btn-dark-hover">{t("news_cta")}</button>
             </form>
-            <p className="mt-4 text-xs" style={{ color: "#A0A8C0" }}>{t("news_spam")}</p>
+            <p className="mt-4 text-xs" style={{ color: "#444444" }}>{t("news_spam")}</p>
           </div>
         </Reveal>
       </SectionAlt>
 
       {formOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ backgroundColor: "rgba(0,0,0,0.7)" }} onClick={() => setFormOpen(false)}>
-          <div onClick={(e) => e.stopPropagation()} className="max-w-lg w-full p-8 rounded-2xl" style={{ backgroundColor: "#12183A", border: "1px solid rgba(232,193,112,0.3)" }}>
+          <div onClick={(e) => e.stopPropagation()} className="max-w-lg w-full p-8 rounded-2xl" style={{ backgroundColor: "#F5F5F5", border: "1px solid #EEEEEE" }}>
             <div className="flex justify-between items-start mb-4">
-              <h3 className="text-2xl text-white">{t("cta_interested")}</h3>
-              <button onClick={() => setFormOpen(false)} className="text-white/60 text-2xl leading-none">×</button>
+              <h3 className="text-2xl text-[#111111]">{t("cta_interested")}</h3>
+              <button onClick={() => setFormOpen(false)} className="text-[#666666] text-2xl leading-none">×</button>
             </div>
-            <p className="text-sm mb-6" style={{ color: "#A0A8C0" }}>
+            <p className="text-sm mb-6" style={{ color: "#444444" }}>
               {lang === "fr" ? "Rejoins la liste d'attente. Aucun prélèvement maintenant." : "Join the waitlist. No payment now."}
             </p>
-            <div id={lang === "fr" ? "HUBSPOT_FORM_ID_FR" : "HUBSPOT_FORM_ID_EN"} className="min-h-[300px] flex items-center justify-center text-sm rounded-xl border border-dashed border-white/10" style={{ color: "#A0A8C0" }}>
+            <div id={lang === "fr" ? "HUBSPOT_FORM_ID_FR" : "HUBSPOT_FORM_ID_EN"} className="min-h-[300px] flex items-center justify-center text-sm rounded-xl border border-dashed border-[#EEEEEE]" style={{ color: "#444444" }}>
               [Formulaire HubSpot — ID: {lang === "fr" ? "HUBSPOT_FORM_ID_FR" : "HUBSPOT_FORM_ID_EN"}]
             </div>
           </div>

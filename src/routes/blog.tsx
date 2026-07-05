@@ -22,20 +22,20 @@ function Blog() {
   return (
     <div>
       <section className="px-4 sm:px-6 py-16 text-center">
-        <h1 className="text-4xl sm:text-5xl text-white">Conseils & ressources</h1>
-        <p className="mt-4" style={{ color: "#A0A8C0" }}>Autonomie · Rééducation · Emploi & handicap · Vie quotidienne</p>
+        <h1 className="text-4xl sm:text-5xl text-[#111111]">Conseils & ressources</h1>
+        <p className="mt-4" style={{ color: "#444444" }}>Autonomie · Rééducation · Emploi & handicap · Vie quotidienne</p>
       </section>
       <section className="px-4 sm:px-6 pb-24">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           {articles.map((a, i) => (
-            <article key={i} className="rounded-2xl overflow-hidden border border-white/5 hover:border-white/10 transition" style={{ backgroundColor: "#12183A" }}>
-              <div className="aspect-video" style={{ backgroundColor: "rgba(232,193,112,0.08)" }} />
+            <article key={i} className="rounded-2xl overflow-hidden border border-[#EEEEEE] hover:border-[#EEEEEE] transition" style={{ backgroundColor: "#F5F5F5" }}>
+              <div className="aspect-video" style={{ backgroundColor: "#F5F5F5" }} />
               <div className="p-6">
-                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "rgba(232,193,112,0.15)", color: "#E8C170" }}>{a.cat}</span>
-                <h2 className="mt-4 text-lg text-white leading-snug">{a.title}</h2>
-                <div className="mt-4 flex items-center justify-between text-sm" style={{ color: "#A0A8C0" }}>
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "#F5F5F5", color: "#111111" }}>{a.cat}</span>
+                <h2 className="mt-4 text-lg text-[#111111] leading-snug">{a.title}</h2>
+                <div className="mt-4 flex items-center justify-between text-sm" style={{ color: "#444444" }}>
                   <span>{a.date}</span>
-                  <a href="#" className="font-bold" style={{ color: "#E8C170" }}>Lire →</a>
+                  <a href="#" className="font-bold" style={{ color: "#111111" }}>Lire →</a>
                 </div>
               </div>
             </article>

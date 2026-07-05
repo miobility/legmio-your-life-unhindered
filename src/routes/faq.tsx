@@ -94,24 +94,24 @@ function Faq() {
   return (
     <div>
       <section className="px-4 sm:px-6 py-16 text-center">
-        <h1 className="text-4xl sm:text-5xl text-white">Tout ce que tu veux savoir.</h1>
+        <h1 className="text-4xl sm:text-5xl text-[#111111]">Tout ce que tu veux savoir.</h1>
       </section>
       <section className="px-4 sm:px-6 pb-24">
         <div className="max-w-3xl mx-auto space-y-8">
           {themes.map((th, ti) => (
             <div key={ti}>
-              <h2 className="text-xl mb-4" style={{ color: "#E8C170" }}>{th.title}</h2>
+              <h2 className="text-xl mb-4" style={{ color: "#111111" }}>{th.title}</h2>
               <div className="space-y-2">
                 {th.items.map((it, ii) => {
                   const key = `${ti}-${ii}`;
                   const isOpen = open === key;
                   return (
-                    <div key={ii} className="rounded-xl border border-white/5" style={{ backgroundColor: "#0D0D29" }}>
-                      <button onClick={() => setOpen(isOpen ? null : key)} className="w-full flex justify-between items-center p-5 text-left text-white">
+                    <div key={ii} className="rounded-xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
+                      <button onClick={() => setOpen(isOpen ? null : key)} className="w-full flex justify-between items-center p-5 text-left text-[#111111]">
                         <span>{it.q}</span>
-                        <span className="text-xl shrink-0 ml-4" style={{ color: "#E8C170" }}>{isOpen ? "−" : "+"}</span>
+                        <span className="text-xl shrink-0 ml-4" style={{ color: "#111111" }}>{isOpen ? "−" : "+"}</span>
                       </button>
-                      {isOpen && <div className="px-5 pb-5" style={{ color: "#A0A8C0" }}>{it.a}</div>}
+                      {isOpen && <div className="px-5 pb-5" style={{ color: "#444444" }}>{it.a}</div>}
                     </div>
                   );
                 })}
