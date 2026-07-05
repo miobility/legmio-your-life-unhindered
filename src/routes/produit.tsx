@@ -37,27 +37,27 @@ function Produit() {
     <div>
       <section className="px-4 sm:px-6 py-16">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="aspect-square rounded-3xl" style={{ backgroundColor: "#12183A", border: "1px dashed rgba(232,193,112,0.3)" }} />
+          <div className="aspect-square rounded-3xl" style={{ backgroundColor: "#F5F5F5", border: "1px dashed #EEEEEE" }} />
           <Reveal>
-            <h1 className="text-4xl sm:text-5xl text-white">legmio.<br />Pensée jusqu'au dernier centimètre.</h1>
-            <p className="mt-6 text-lg" style={{ color: "#A0A8C0" }}>
+            <h1 className="text-4xl sm:text-5xl text-[#111111]">legmio.<br />Pensée jusqu'au dernier centimètre.</h1>
+            <p className="mt-6 text-lg" style={{ color: "#444444" }}>
               La seule béquille conçue pour durer. Née de la recherche CNRS/Sorbonne Université.
             </p>
-            <a href="/#pricing" className="btn-gold btn-gold-hover mt-8 inline-flex">Je suis intéressé →</a>
+            <a href="/#pricing" className="btn-dark btn-dark-hover mt-8 inline-flex">Je suis intéressé →</a>
           </Reveal>
         </div>
       </section>
 
-      <section className="px-4 sm:px-6 py-16" style={{ backgroundColor: "#12183A" }}>
+      <section className="px-4 sm:px-6 py-16" style={{ backgroundColor: "#F5F5F5" }}>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl text-white text-center">Spécifications</h2>
-          <div className="mt-10 rounded-2xl overflow-hidden border border-white/5">
+          <h2 className="text-3xl text-[#111111] text-center">Spécifications</h2>
+          <div className="mt-10 rounded-2xl overflow-hidden border border-[#EEEEEE]">
             <table className="w-full">
               <tbody>
                 {specs.map(([k, v], i) => (
-                  <tr key={i} style={{ backgroundColor: i % 2 ? "#0D0D29" : "#12183A" }}>
-                    <td className="p-4 text-white/70 text-sm">{k}</td>
-                    <td className="p-4 text-white font-medium">{v}</td>
+                  <tr key={i} style={{ backgroundColor: i % 2 ? "#FFFFFF" : "#F5F5F5" }}>
+                    <td className="p-4 text-[#444444] text-sm">{k}</td>
+                    <td className="p-4 text-[#111111] font-medium">{v}</td>
                   </tr>
                 ))}
               </tbody>
@@ -68,15 +68,15 @@ function Produit() {
 
       <section className="px-4 sm:px-6 py-16">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl text-white text-center">Composants</h2>
+          <h2 className="text-3xl text-[#111111] text-center">Composants</h2>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
             {composants.map((c, i) => (
               <Reveal key={i} delay={i * 60}>
-                <div className="p-6 rounded-2xl border border-white/5 flex gap-5" style={{ backgroundColor: "#12183A" }}>
-                  <div className="w-24 h-24 rounded-xl shrink-0" style={{ backgroundColor: "rgba(232,193,112,0.08)", border: "1px dashed rgba(232,193,112,0.3)" }} />
+                <div className="p-6 rounded-2xl border border-[#EEEEEE] flex gap-5" style={{ backgroundColor: "#F5F5F5" }}>
+                  <div className="w-24 h-24 rounded-xl shrink-0" style={{ backgroundColor: "#F5F5F5", border: "1px dashed #EEEEEE" }} />
                   <div>
-                    <h3 className="text-lg text-white">{c.t}</h3>
-                    <p className="mt-2 text-sm" style={{ color: "#A0A8C0" }}>{c.d}</p>
+                    <h3 className="text-lg text-[#111111]">{c.t}</h3>
+                    <p className="mt-2 text-sm" style={{ color: "#444444" }}>{c.d}</p>
                   </div>
                 </div>
               </Reveal>
@@ -85,20 +85,20 @@ function Produit() {
         </div>
       </section>
 
-      <section className="px-4 sm:px-6 py-16" style={{ backgroundColor: "#12183A" }}>
+      <section className="px-4 sm:px-6 py-16" style={{ backgroundColor: "#F5F5F5" }}>
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-6 rounded-2xl border border-white/5" style={{ backgroundColor: "#0D0D29" }}>
-            <h3 className="text-xl text-white">Compatibilité</h3>
-            <ul className="mt-4 space-y-2 text-sm" style={{ color: "#A0A8C0" }}>
+          <div className="p-6 rounded-2xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
+            <h3 className="text-xl text-[#111111]">Compatibilité</h3>
+            <ul className="mt-4 space-y-2 text-sm" style={{ color: "#444444" }}>
               <li>• Taille utilisateur : 1m50 à 1m95</li>
               <li>• Poids max : 130 kg</li>
               <li>• Post-op, handicap long terme, RQTH, parents actifs</li>
               <li>• Pas de contre-indication majeure — voir avec ton MPR</li>
             </ul>
           </div>
-          <div className="p-6 rounded-2xl border border-white/5" style={{ backgroundColor: "#0D0D29" }}>
-            <h3 className="text-xl text-white">Entretien</h3>
-            <ul className="mt-4 space-y-2 text-sm" style={{ color: "#A0A8C0" }}>
+          <div className="p-6 rounded-2xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
+            <h3 className="text-xl text-[#111111]">Entretien</h3>
+            <ul className="mt-4 space-y-2 text-sm" style={{ color: "#444444" }}>
               <li>• Nettoyage chiffon humide + savon doux</li>
               <li>• Embouts remplaçables sans outil</li>
               <li>• Poignée et appui remplaçables via SAV</li>
@@ -109,9 +109,9 @@ function Produit() {
       </section>
 
       <section className="px-4 sm:px-6 py-20 text-center">
-        <h2 className="text-3xl sm:text-4xl text-white">Rejoins la liste d'attente</h2>
-        <p className="mt-4" style={{ color: "#A0A8C0" }}>Commercialisation 2027 · Aucun prélèvement maintenant</p>
-        <a href="/#pricing" className="btn-gold btn-gold-hover mt-8 inline-flex text-lg px-8 py-4">Je suis intéressé →</a>
+        <h2 className="text-3xl sm:text-4xl text-[#111111]">Rejoins la liste d'attente</h2>
+        <p className="mt-4" style={{ color: "#444444" }}>Commercialisation 2027 · Aucun prélèvement maintenant</p>
+        <a href="/#pricing" className="btn-dark btn-dark-hover mt-8 inline-flex text-lg px-8 py-4">Je suis intéressé →</a>
       </section>
     </div>
   );
