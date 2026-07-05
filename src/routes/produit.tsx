@@ -87,7 +87,7 @@ function Produit() {
 
       <section className="px-4 sm:px-6 py-16" style={{ backgroundColor: "#F5F5F5" }}>
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-6 rounded-2xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
+          <div className="p-6 rounded-2xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
             <h3 className="text-xl text-[#111111]">Compatibilité</h3>
             <ul className="mt-4 space-y-2 text-sm" style={{ color: "#444444" }}>
               <li>• Taille utilisateur : 1m50 à 1m95</li>
@@ -96,7 +96,7 @@ function Produit() {
               <li>• Pas de contre-indication majeure — voir avec ton MPR</li>
             </ul>
           </div>
-          <div className="p-6 rounded-2xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
+          <div className="p-6 rounded-2xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
             <h3 className="text-xl text-[#111111]">Entretien</h3>
             <ul className="mt-4 space-y-2 text-sm" style={{ color: "#444444" }}>
               <li>• Nettoyage chiffon humide + savon doux</li>

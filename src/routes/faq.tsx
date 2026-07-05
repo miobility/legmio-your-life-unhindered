@@ -106,7 +106,7 @@ function Faq() {
                   const key = `${ti}-${ii}`;
                   const isOpen = open === key;
                   return (
-                    <div key={ii} className="rounded-xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
+                    <div key={ii} className="rounded-xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
                       <button onClick={() => setOpen(isOpen ? null : key)} className="w-full flex justify-between items-center p-5 text-left text-[#111111]">
                         <span>{it.q}</span>
                         <span className="text-xl shrink-0 ml-4" style={{ color: "#111111" }}>{isOpen ? "−" : "+"}</span>

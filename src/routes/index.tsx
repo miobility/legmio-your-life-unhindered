@@ -171,7 +171,7 @@ function Landing() {
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
           {problemCards.map((c, i) => (
             <Reveal key={i} delay={i * 100}>
-              <div className="p-8 rounded-2xl h-full border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
+              <div className="p-8 rounded-2xl h-full border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
                 <div className="text-4xl mb-4">{c.icon}</div>
                 <h3 className="text-xl mb-3 text-[#111111]">{c.title}</h3>
                 <p style={{ color: "#444444" }}>{c.text}</p>
@@ -210,7 +210,7 @@ function Landing() {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
           {mediaCards.map((c, i) => (
             <Reveal key={i} delay={i * 100}>
-              <div className="p-6 rounded-2xl border border-[#EEEEEE] h-full flex flex-col" style={{ backgroundColor: "#FFFFFF" }}>
+              <div className="p-6 rounded-2xl border border-[#EEEEEE] h-full flex flex-col" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
                 <p className="italic text-[#111111]">"{c.q}"</p>
                 <p className="mt-4 text-sm" style={{ color: "#444444" }}>{c.src} · {c.views}</p>
                 <a href="#" className="mt-4 text-sm font-bold self-start" style={{ color: "#111111" }}>Voir →</a>
@@ -285,7 +285,7 @@ function Landing() {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {components.map((c, i) => (
             <Reveal key={i} delay={i * 60}>
-              <div className="p-5 rounded-2xl h-full border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
+              <div className="p-5 rounded-2xl h-full border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
                 <div className="aspect-square rounded-xl mb-4" style={{ backgroundColor: "#F5F5F5", border: "1px dashed #EEEEEE" }} />
                 <div className="text-xs font-bold mb-2" style={{ color: "#111111" }}>0{i + 1}</div>
                 <h3 className="text-base text-[#111111] font-display font-bold">{c.title}</h3>
@@ -374,7 +374,7 @@ function Landing() {
         <Reveal><h2 className="text-3xl sm:text-4xl text-center text-[#111111]">{t("faq_short_title")}</h2></Reveal>
         <div className="mt-10 max-w-3xl mx-auto space-y-3">
           {faqShort.map((f, i) => (
-            <div key={i} className="rounded-xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
+            <div key={i} className="rounded-xl border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
               <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex justify-between items-center p-5 text-left text-[#111111]">
                 <span className="font-medium">{f.q}</span>
                 <span className="text-xl shrink-0 ml-4" style={{ color: "#111111" }}>{openFaq === i ? "−" : "+"}</span>
@@ -418,7 +418,7 @@ function Landing() {
             { name: "Benjamin Rajjou", role: "Co-fondateur & CRO", sub: "Go-to-market · Partenariats · Stratégie commerciale" },
           ].map((m, i) => (
             <Reveal key={i} delay={i * 100}>
-              <div className="p-8 rounded-2xl text-center border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF" }}>
+              <div className="p-8 rounded-2xl text-center border border-[#EEEEEE]" style={{ backgroundColor: "#FFFFFF", boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
                 <div className="w-24 h-24 rounded-full mx-auto" style={{ backgroundColor: "#F5F5F5", border: "1px solid #EEEEEE" }} />
                 <p className="mt-4 font-bold text-[#111111] text-lg">{m.name}</p>
                 <p className="text-sm" style={{ color: "#111111" }}>{m.role}</p>
