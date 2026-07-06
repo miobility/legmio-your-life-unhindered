@@ -99,15 +99,24 @@ function Landing() {
         </div>
       </section>
 
-      {/* SECTION 3 — ILS PARLENT DE NOUS */}
-      <section style={{ backgroundColor: "#111111" }} className="px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">Ils l'ont vu. Ils en parlent.</h2>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
-            {["Le Parisien", "TF1", "France 2", "France 5"].map((m) => (
-              <div key={m} className="font-display font-bold text-2xl" style={{ color: "#FFFFFF", opacity: 0.85 }}>{m}</div>
-            ))}
-          </div>
+{/* SECTION 3 — ILS PARLENT DE NOUS */}
+<section style={{ backgroundColor: "#111111" }} className="px-4 sm:px-6 py-20 md:py-28">
+  <div className="max-w-7xl mx-auto">
+    <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">Ils l'ont vu. Ils en parlent.</h2>
+    <div className="mt-12 flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
+      <div className="bg-white rounded-lg px-4 py-2">
+        <img src="/logoparisien.png" alt="Le Parisien" className="h-10 object-contain" />
+      </div>
+      <div className="bg-white rounded-lg px-4 py-2">
+        <img src="/logoTF1.png" alt="TF1" className="h-10 object-contain" />
+      </div>
+      <div className="bg-white rounded-lg px-4 py-2">
+        <img src="/logoFR2.jpg" alt="France 2" className="h-10 object-contain" />
+      </div>
+      <div className="bg-white rounded-lg px-4 py-2">
+        <img src="/logoFR5.svg" alt="France 5" className="h-10 object-contain" />
+      </div>
+    </div>
 
           <div className="mt-16 max-w-4xl mx-auto rounded-2xl overflow-hidden" style={{ backgroundColor: "#1a1a1a", border: "1px solid #2a2a2a" }}>
             <div className="grid grid-cols-1 md:grid-cols-[45%_55%]">
