@@ -144,7 +144,7 @@ function Landing() {
       {/* SECTION 4 — TÉMOIGNAGES */}
       <section style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: "#111111" }}>Ils l'utilisent. Ils témoignent.</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: "#111111" }}>Ils l'ont testé. Ils témoignent.</h2>
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { n: "Sophie", a: "34 ans", p: "Sclérose en plaques", b: "3 ans de béquilles", q: "Avant legmio, chaque sortie était une négociation. Le premier jour où j'ai pu rentrer des courses seule — j'ai pleuré. Ça paraît rien. C'est tout." },
@@ -171,7 +171,7 @@ function Landing() {
       {/* SECTION 5 — WALL OF LOVE */}
       <section style={{ backgroundColor: "#111111" }} className="py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">Ils attendent legmio. Tu te reconnais ?</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">Ils l'attendent avec impatience.&nbsp;<br />Tu te reconnais ?</h2>
         </div>
         <WallOfLove />
         <div className="mt-12 text-center"><CTA dark /></div>
@@ -227,7 +227,7 @@ function Landing() {
       {/* SECTION 8 — CRÉDIBILITÉ */}
       <section style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: "#111" }}>Née de la recherche. Reconnue sur le terrain.</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: "#111" }}>Née du terrain.&nbsp;<br />Récompensée par le terrain.</h2>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-x-14 gap-y-8" style={{ filter: "grayscale(1)", opacity: 0.75 }}>
             {["CNRS", "Sorbonne Université", "SATT Lutech", "Bpifrance"].map((m) => (
               <div key={m} className="font-display font-bold text-xl" style={{ color: "#111" }}>{m}</div>
@@ -235,7 +235,7 @@ function Landing() {
           </div>
           <div className="mt-14 max-w-3xl mx-auto rounded-2xl p-8" style={{ backgroundColor: "#F5F5F5", borderLeft: "3px solid #111" }}>
             <blockquote className="font-display italic text-xl md:text-2xl leading-snug" style={{ color: "#111" }}>
-              "Une béquille qui rend les mains au patient : une grande avancée !"
+              "Une béquille qui rend les mains libres : une grande avancée !"
             </blockquote>
             <div className="mt-4 text-sm" style={{ color: "#666" }}>
               Dr Pauline Coignard — Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER
