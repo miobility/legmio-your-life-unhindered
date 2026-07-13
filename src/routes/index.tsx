@@ -73,14 +73,14 @@ function Landing() {
               {tr("Tu connais déjà le problème. Tu le vis.", "You already know the problem. You live it.")}
             </h2>
           </Reveal>
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { img: "/probleme-poignet.jpg", t: tr("Tes épaules, tes poignets, tes mains trinquent.", "Your shoulders, wrists and hands take the hit."), p: tr("La béquille censée t'aider te crée un handicap supplémentaire.", "The crutch meant to help you creates an extra disability.") },
-              { img: "/probleme-mains.avif", t: tr("Tes mains sont prises.", "Your hands are taken."), p: tr("Porter un verre, faire ses courses, ouvrir une porte — des gestes devenus négociations.", "Carrying a glass, shopping, opening a door — every gesture becomes a negotiation.") },
-              { img: "/probleme-temps.jpg", t: tr("Et tu t'y fais.", "And you get used to it."), p: tr("5 ans, 10 ans, 40 ans en béquilles. Sans qu'on t'ait jamais proposé autre chose.", "5, 10, 40 years on crutches — with no one ever offering another way.") },
-            ].map((c, i) => (
-              <Reveal key={i} delay={i * 100}>
-                <div className="card-soft overflow-hidden h-full">
+          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
+            <AutoCarousel>
+              {[
+                { img: "/probleme-poignet.jpg", t: tr("Tes épaules, tes poignets, tes mains trinquent.", "Your shoulders, wrists and hands take the hit."), p: tr("La béquille censée t'aider te crée un handicap supplémentaire.", "The crutch meant to help you creates an extra disability.") },
+                { img: "/probleme-mains.avif", t: tr("Tes mains sont prises.", "Your hands are taken."), p: tr("Porter un verre, faire ses courses, ouvrir une porte — des gestes devenus négociations.", "Carrying a glass, shopping, opening a door — every gesture becomes a negotiation.") },
+                { img: "/probleme-temps.jpg", t: tr("Et tu t'y fais.", "And you get used to it."), p: tr("5 ans, 10 ans, 40 ans en béquilles. Sans qu'on t'ait jamais proposé autre chose.", "5, 10, 40 years on crutches — with no one ever offering another way.") },
+              ].map((c, i) => (
+                <div key={i} className="card-soft overflow-hidden w-[320px] md:w-[380px]">
                   <div className="aspect-[3/2] overflow-hidden" style={{ filter: "grayscale(1)" }}>
                     <img src={c.img} alt="" className="w-full h-full object-cover" loading="lazy" />
                   </div>
@@ -89,8 +89,8 @@ function Landing() {
                     <p className="mt-3 text-sm" style={{ color: "#666666" }}>{c.p}</p>
                   </div>
                 </div>
-              </Reveal>
-            ))}
+              ))}
+            </AutoCarousel>
           </div>
         </div>
       </section>
