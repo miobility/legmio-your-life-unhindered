@@ -15,15 +15,6 @@ export const Route = createFileRoute("/blog")({
   component: Blog,
 });
 
-function Placeholder({ label, aspect = "aspect-video" }: { label: string; aspect?: string }) {
-  return (
-    <div
-      className={`w-full ${aspect} flex items-center justify-center text-xs uppercase tracking-wide`}
-      style={{ background: "linear-gradient(135deg, #F5F5F5, #E8E8E8)", color: "#999" }}
-    >{label}</div>
-  );
-}
-
 const genesisFr = `En 2020, j'ai subi une lourde opération pour retirer le cancer des os qui rongeait mon bassin. Elle fut un succès — et le début d'un nouveau parcours, à la fois difficile et joyeux.
 
 La maladie m'a beaucoup pris. Mais elle m'a aussi appris à mesurer ce qui compte.
@@ -67,47 +58,6 @@ And f*ck cancer.`;
 function Blog() {
   const { tr, lang } = useLanguage();
   const [openGenesis, setOpenGenesis] = useState(false);
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
-
-  const articles = [
-    {
-      cat: tr("Comparatif", "Comparison"),
-      title: tr(
-        "legmio vs iWalk : quelle béquille mains libres choisir selon votre situation ?",
-        "legmio vs iWalk: which hands-free crutch fits your situation?"
-      ),
-      img: "legmio vs iWalk",
-      body: tr(
-        "Deux béquilles, une même promesse — les mains libres. Mais des réalités très différentes. L'iWalk est conçue exclusivement pour les blessures sous le genou. legmio part d'un principe différent — une béquille avant-bras repensée de fond en comble, pour tous ceux qui béquillent, quelle que soit la localisation ou la durée.",
-        "Two crutches, one promise — hands free. But very different realities. iWalk is designed exclusively for below-knee injuries. legmio takes a different approach — a fully redesigned forearm crutch for anyone on crutches, whatever the injury or duration."
-      ),
-    },
-    {
-      cat: tr("Comparatif", "Comparison"),
-      title: tr(
-        "Béquilles classiques, béquilles anglaises, iWalk, legmio : comment choisir ?",
-        "Classic crutches, forearm crutches, iWalk, legmio: how to choose?"
-      ),
-      img: "Comparatif complet",
-      body: tr(
-        "Tour d'horizon pour choisir la béquille adaptée à votre situation, entre béquilles axillaires, béquilles anglaises, iWalk et legmio.",
-        "A full overview to pick the right crutch — axillary crutches, forearm crutches, iWalk, and legmio."
-      ),
-    },
-    {
-      cat: tr("Autonomie", "Independence"),
-      title: tr("Comment choisir ses béquilles quand on béquille au quotidien", "How to choose crutches when you use them daily"),
-      img: "Autonomie · quotidien",
-      body: tr("Article à venir.", "Coming soon."),
-    },
-    {
-      cat: tr("Emploi & handicap", "Work & disability"),
-      title: tr("Béquilles et maintien en emploi : ce que vous pouvez demander à votre employeur", "Crutches and staying at work: what you can ask your employer"),
-      img: "Emploi & handicap",
-      body: tr("Article à venir.", "Coming soon."),
-    },
-  ];
-
   const genesisBody = lang === "en" ? genesisEn : genesisFr;
 
   return (
@@ -119,9 +69,11 @@ function Blog() {
 
       <section className="px-4 sm:px-6 py-16">
         <div className="max-w-6xl mx-auto">
-          <article className="card-soft overflow-hidden mb-10">
+          <article className="card-soft overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2">
-              <Placeholder label={tr("Nicolas — ISIR", "Nicolas — ISIR")} aspect="aspect-video md:aspect-auto md:h-full" />
+              <div className="aspect-video md:aspect-auto md:h-full overflow-hidden" style={{ backgroundColor: "#F5F5F5" }}>
+                <img src="/usecase-quotidien.png" alt={tr("Genèse", "Origin")} className="w-full h-full object-cover" />
+              </div>
               <div className="p-8">
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "#111", color: "#FFF" }}>{tr("Genèse", "Origin")}</span>
                 <h2 className="mt-4 text-2xl md:text-3xl font-display font-bold" style={{ color: "#111" }}>
@@ -146,27 +98,6 @@ function Blog() {
               </div>
             </div>
           </article>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {articles.map((a, i) => (
-              <article key={i} className="card-soft overflow-hidden flex flex-col">
-                <Placeholder label={a.img} />
-                <div className="p-6 flex-1 flex flex-col">
-                  <span className="inline-block self-start px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "#F5F5F5", color: "#111" }}>{a.cat}</span>
-                  <h3 className="mt-4 text-lg font-display font-bold leading-snug flex-1" style={{ color: "#111" }}>{a.title}</h3>
-                  <button onClick={() => setOpenIdx(openIdx === i ? null : i)} className="mt-4 self-start text-sm font-bold inline-flex items-center gap-1" style={{ color: "#111" }}>
-                    {openIdx === i ? tr("Réduire", "Collapse") : tr("Lire", "Read")}
-                    <span className={`transition-transform ${openIdx === i ? "rotate-180" : ""}`}><IconChevron size={16} /></span>
-                  </button>
-                  {openIdx === i && (
-                    <div className="mt-4 text-sm leading-relaxed" style={{ color: "#333" }}>
-                      <p>{a.body}</p>
-                    </div>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
     </div>
