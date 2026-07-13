@@ -3,6 +3,7 @@ import { useState } from "react";
 import { IconChevron, IconCheck, IconArrowRight, IconStar } from "@/components/Icons";
 import { useLanguage } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
+import { FeaturesCarousel } from "@/routes/index";
 
 export const Route = createFileRoute("/produit")({
   head: () => ({
