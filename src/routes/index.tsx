@@ -224,9 +224,11 @@ function Landing() {
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">{tr("Conçue pour durer.", "Built to last.")}</h2>
           </Reveal>
-          <FeaturesSelector />
+          <div className="mt-12">
+            <FeaturesCarousel dark />
+          </div>
         </div>
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-6 gap-4 max-w-6xl mx-auto px-6 py-10" style={{ backgroundColor: "#FFFFFF" }}>
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-6 gap-4 max-w-6xl mx-auto px-6 py-6">
           {[
             "850g",
             tr("Mains libres", "Hands free"),
@@ -235,7 +237,7 @@ function Landing() {
             tr("Embouts interchangeables", "Interchangeable tips"),
             tr("Assemblage France", "Assembled in France"),
           ].map((v, i) => (
-            <div key={i} className="text-center" style={{ color: "#111" }}>
+            <div key={i} className="text-center text-white">
               <div className="font-display font-bold text-lg">{v}</div>
             </div>
           ))}
