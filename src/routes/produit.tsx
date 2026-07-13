@@ -2,32 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { IconChevron, IconCheck, IconArrowRight, IconStar } from "@/components/Icons";
 import { useLanguage } from "@/lib/i18n";
+import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/produit")({
   head: () => ({
     meta: [
       { title: "legmio — Fiche produit" },
-      { name: "description", content: "legmio, la seule béquille ergonomique mains libres. 150€ TTC, livraison incluse. Conçue en France." },
+      { name: "description", content: "legmio, la seule béquille ergonomique mains libres. 150€ TTC (prix estimatif), livraison incluse. Conçue en France." },
       { property: "og:title", content: "legmio — Fiche produit" },
       { property: "og:description", content: "Pensée jusqu'au dernier centimètre." },
     ],
   }),
   component: Produit,
 });
-
-function Placeholder({ label, aspect = "aspect-square", dark = false }: { label: string; aspect?: string; dark?: boolean }) {
-  return (
-    <div
-      className={`w-full ${aspect} flex items-center justify-center text-xs font-medium tracking-wide uppercase`}
-      style={{
-        background: dark ? "linear-gradient(135deg, #1a1a1a, #2a2a2a)" : "linear-gradient(135deg, #F5F5F5, #E8E8E8)",
-        color: dark ? "#666" : "#999",
-      }}
-    >
-      {label}
-    </div>
-  );
-}
 
 function Accordion({ title, children, defaultOpen = false }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
@@ -42,18 +29,15 @@ function Accordion({ title, children, defaultOpen = false }: { title: string; ch
   );
 }
 
+function scrollTo(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 function Produit() {
-  const { t } = useLanguage();
-  const gallery = [
-    "legmio · face",
-    "Appui avant-bras",
-    "Poignée ergonomique",
-    "Système de réglage",
-    "Embout interchangeable",
-    "Lifestyle",
-    "Contenu du pack",
-  ];
+  const { tr, hubspotUrl } = useLanguage();
+  const gallery = ["/bequille.png", "/usecase-quotidien.png", "/usecase-reeducation.png", "/usecase-emploi.png", "/usecase-parental.png"];
   const [sel, setSel] = useState(0);
+  const [reviewOpen, setReviewOpen] = useState(false);
 
   return (
     <div>
@@ -61,117 +45,144 @@ function Produit() {
       <section style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
-            <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: "#F5F5F5" }}>
-              <Placeholder label={gallery[sel]} aspect="aspect-square" />
+            <div className="rounded-2xl overflow-hidden aspect-square" style={{ backgroundColor: "#F5F5F5" }}>
+              <img src={gallery[sel]} alt="" className="w-full h-full object-contain" />
             </div>
             <div className="mt-4 flex gap-3 overflow-x-auto">
               {gallery.map((g, i) => (
                 <button
                   key={i}
                   onClick={() => setSel(i)}
-                  className={`shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition`}
-                  style={{ borderColor: sel === i ? "#111" : "#EEEEEE" }}
-                  aria-label={g}
+                  className="shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition"
+                  style={{ borderColor: sel === i ? "#111" : "#EEEEEE", backgroundColor: "#F5F5F5" }}
+                  aria-label={`Image ${i + 1}`}
                 >
-                  <Placeholder label={`${i + 1}`} aspect="aspect-square" />
+                  <img src={g} alt="" className="w-full h-full object-contain" />
                 </button>
               ))}
             </div>
           </div>
 
           <div className="md:sticky md:top-32 md:self-start">
-            <h1 className="text-5xl md:text-6xl font-display font-bold" style={{ color: "#111" }}>legmio</h1>
+            <h1 className="text-4xl md:text-5xl font-display font-bold" style={{ color: "#111" }}>
+              {tr("La béquille legmio", "The legmio crutch")}
+            </h1>
             <div className="mt-3 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: "#F5F5F5", color: "#111" }}>
-              Dispositif médical CE Classe I (en cours)
+              {tr("Dispositif médical CE Classe I (en cours)", "CE Class I medical device (in progress)")}
             </div>
-            <div className="mt-3 flex items-center gap-2 text-sm" style={{ color: "#111" }}>
-              <div className="flex" style={{ color: "#111" }}>
+            <button
+              onClick={() => scrollTo("reviews")}
+              className="mt-3 flex items-center gap-2 text-sm hover:opacity-70"
+              style={{ color: "#111" }}
+            >
+              <div className="flex">
                 {[0, 1, 2, 3, 4].map((i) => <IconStar key={i} size={14} />)}
               </div>
-              <a href="#reviews" className="underline" style={{ color: "#666" }}>4.9/5 (12 avis)</a>
+              <span className="underline" style={{ color: "#666" }}>4.9/5 (12 {tr("avis", "reviews")})</span>
+            </button>
+            <div className="mt-6 flex items-baseline gap-3">
+              <div className="text-4xl font-display font-bold" style={{ color: "#111" }}>150€ TTC</div>
+              <div className="text-sm" style={{ color: "#666" }}>({tr("prix estimatif", "estimated price")})</div>
             </div>
-            <div className="mt-6 text-4xl font-display font-bold" style={{ color: "#111" }}>150€ TTC</div>
-            <div className="text-sm" style={{ color: "#666" }}>Livraison incluse</div>
+            <div className="text-sm" style={{ color: "#666" }}>{tr("Livraison incluse", "Free shipping")}</div>
             <p className="mt-6 text-base" style={{ color: "#333" }}>
-              La seule béquille ergonomique mains libres. Conçue pour durer — pas juste ta rééducation, ta vie.
+              {tr(
+                "La seule béquille ergonomique mains libres. Conçue pour durer — pas juste ta rééducation, ta vie.",
+                "The only hands-free ergonomic crutch. Built to last — not just your rehab, your life."
+              )}
             </p>
-            <a href="#features" className="mt-3 inline-block underline text-sm" style={{ color: "#111" }}>En savoir plus</a>
 
             <div className="mt-8">
-              <Accordion title="About" defaultOpen>
-                L'appui avant-bras redistribue la charge et libère complètement la main. Conçue par des roboticiens issus du CNRS et de l'ISIR Sorbonne Université.
+              <Accordion title={tr("À propos", "About")} defaultOpen>
+                {tr(
+                  "L'appui avant-bras redistribue la charge et libère complètement la main. Conçue par des roboticiens issus du CNRS et de l'ISIR Sorbonne Université.",
+                  "The forearm support redistributes the load and fully frees the hand. Designed by roboticists from CNRS and ISIR Sorbonne Université."
+                )}
               </Accordion>
-              <Accordion title="Taille">
-                Taille unique — réglable pour utilisateurs 1m50 à 1m95.<br />
-                <a href="#" className="underline">Guide des tailles</a>
+              <Accordion title={tr("Taille", "Size")}>
+                {tr("Taille unique — réglable pour utilisateurs 1m50 à 1m95.", "One size — adjustable for users from 1m50 to 1m95.")}
               </Accordion>
-              <Accordion title="Caractéristiques">
+              <Accordion title={tr("Caractéristiques", "Specs")}>
                 <ul className="space-y-2">
                   {[
-                    ["Poids", "850g"], ["Matériau", "Aluminium"], ["Hauteur réglable", "1m10 à 1m40"],
-                    ["Pour", "utilisateurs 1m50 à 1m95"], ["Charge max", "130kg"],
-                    ["Embouts", "interchangeables sans outil"], ["Assemblage", "France"],
-                    ["Brevet", "FR2411206"], ["Certification", "CE Classe I en cours · MDR 2017/745"],
+                    [tr("Poids", "Weight"), "850g"],
+                    [tr("Matériau", "Material"), tr("Aluminium", "Aluminum")],
+                    [tr("Hauteur réglable", "Adjustable height"), "1m10 – 1m40"],
+                    [tr("Pour", "For"), tr("utilisateurs 1m50 à 1m95", "users 1m50 to 1m95")],
+                    [tr("Charge max", "Max load"), "130kg"],
+                    [tr("Embouts", "Tips"), tr("interchangeables sans outil", "interchangeable, no tools")],
+                    [tr("Assemblage", "Assembly"), tr("France", "France")],
+                    [tr("Brevet", "Patent"), "FR2411206"],
+                    [tr("Certification", "Certification"), tr("CE Classe I en cours · MDR 2017/745", "CE Class I in progress · MDR 2017/745")],
                   ].map(([k, v]) => (
                     <li key={k} className="flex justify-between gap-4"><span style={{ color: "#666" }}>{k}</span><span style={{ color: "#111" }}>{v}</span></li>
                   ))}
                 </ul>
               </Accordion>
-              <Accordion title="Idéal pour">
+              <Accordion title={tr("Idéal pour", "Ideal for")}>
                 <ul className="space-y-2">
                   {[
-                    "Retrouver l'usage complet de ses mains au quotidien",
-                    "Réduire les douleurs aux épaules et aux poignets",
-                    "Maintenir son autonomie en famille, au travail, en déplacement",
-                    "Rééducation post-opératoire sans contrainte",
+                    tr("Retrouver l'usage complet de ses mains au quotidien", "Regain full use of your hands every day"),
+                    tr("Réduire les douleurs aux épaules et aux poignets", "Reduce shoulder and wrist pain"),
+                    tr("Maintenir son autonomie en famille, au travail, en déplacement", "Stay independent at home, at work, on the go"),
+                    tr("Rééducation post-opératoire sans contrainte", "Post-op rehab without strain"),
                   ].map((i) => (
                     <li key={i} className="flex gap-2"><IconCheck size={16} /> {i}</li>
                   ))}
                 </ul>
               </Accordion>
-              <Accordion title="Ce qui est inclus">
+              <Accordion title={tr("Ce qui est inclus", "What's included")}>
                 <ul className="space-y-1">
-                  <li>· 1 béquille legmio (droite ou gauche au choix)</li>
-                  <li>· 2 embouts (intérieur + extérieur)</li>
-                  <li>· Notice de montage</li>
-                  <li>· Garantie 2 ans</li>
+                  <li>· {tr("1 béquille legmio (droite ou gauche au choix)", "1 legmio crutch (right or left)")}</li>
+                  <li>· {tr("2 embouts (intérieur + extérieur)", "2 tips (indoor + outdoor)")}</li>
+                  <li>· {tr("Notice de montage", "Assembly guide")}</li>
+                  <li>· {tr("Garantie 2 ans", "2-year warranty")}</li>
                 </ul>
               </Accordion>
-              <Accordion title="Nettoyage">
-                Nettoyage à l'eau savonneuse avec un chiffon doux. Ne pas immerger. Sécher à l'air libre.
-              </Accordion>
-              <Accordion title="Remplacement des pièces">
-                Les embouts sont disponibles séparément. La mousse de l'appui avant-bras est remplaçable. Contacter contact@legmio.com pour commander des pièces.
-              </Accordion>
 
-              <a href="/#waitlist" className="btn-dark btn-dark-hover w-full mt-8">
-                {t("cta_interested")} <IconArrowRight size={16} />
+              <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover w-full mt-8">
+                {tr("Je suis intéressé(e)", "I'm interested")} <IconArrowRight size={16} />
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 2 — ANIMATION BÉQUILLE */}
+      {/* SECTION 2 — 3D ROTATION */}
       <section style={{ backgroundColor: "#111111" }} className="py-24 relative overflow-hidden">
-        <div className="max-w-3xl mx-auto flex items-center justify-center h-[420px] relative">
+        <div className="max-w-3xl mx-auto flex items-center justify-center h-[500px] relative">
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-96 h-96 rounded-full" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%)" }} />
+            <div className="w-[500px] h-[500px] rounded-full" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.10), transparent 70%)" }} />
           </div>
-          <div className="float-rotate relative">
-            <div
-              className="w-16 h-80 rounded-full"
-              style={{ background: "linear-gradient(180deg, #f0f0f0 0%, #a0a0a0 50%, #606060 100%)", boxShadow: "0 0 40px rgba(255,255,255,0.15)" }}
+          <div className="crutch-3d relative" style={{ perspective: "1000px" }}>
+            <img
+              src="/bequille.png"
+              alt="legmio"
+              style={{
+                height: "420px",
+                filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.5))",
+                animation: "crutch-spin 12s linear infinite, crutch-float 6s ease-in-out infinite",
+              }}
             />
           </div>
         </div>
+        <style>{`
+          @keyframes crutch-spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+          @keyframes crutch-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+          .crutch-3d img { animation: crutch-spin 12s linear infinite; }
+          @media (prefers-reduced-motion: reduce) {
+            .crutch-3d img { animation: none !important; }
+          }
+        `}</style>
       </section>
 
-      {/* SECTION 3 — FEATURES CARROUSEL */}
+      {/* SECTION 3 — FEATURES WHOOP-STYLE */}
       <section id="features" style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl" style={{ color: "#111" }}>Caractéristiques</h2>
-          <FeaturesCarousel />
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl" style={{ color: "#111" }}>{tr("Conçue pour durer.", "Built to last.")}</h2>
+          </Reveal>
+          <ProductFeatures />
         </div>
       </section>
 
@@ -180,33 +191,24 @@ function Produit() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl" style={{ color: "#111" }}>Avis clients</h2>
+              <h2 className="text-3xl md:text-4xl" style={{ color: "#111" }}>{tr("Avis clients", "Customer reviews")}</h2>
               <div className="mt-4 flex items-baseline gap-3">
                 <div className="text-5xl font-display font-bold" style={{ color: "#111" }}>4.9/5</div>
-                <div style={{ color: "#666" }}>(12 avis)</div>
-              </div>
-              <div className="mt-6 space-y-2 max-w-sm">
-                {[["5 étoiles", 92], ["4 étoiles", 8], ["3 étoiles", 0], ["2 étoiles", 0], ["1 étoile", 0]].map(([l, v]) => (
-                  <div key={l as string} className="flex items-center gap-3 text-sm" style={{ color: "#111" }}>
-                    <span className="w-16 shrink-0">{l}</span>
-                    <div className="flex-1 h-2 rounded-full" style={{ backgroundColor: "#DDDDDD" }}>
-                      <div className="h-full rounded-full" style={{ width: `${v}%`, backgroundColor: "#111" }} />
-                    </div>
-                    <span className="w-10 text-right" style={{ color: "#666" }}>{v}%</span>
-                  </div>
-                ))}
+                <div style={{ color: "#666" }}>(12 {tr("avis", "reviews")})</div>
               </div>
             </div>
-            <div className="text-right">
-              <button className="btn-outline-dark">Laisser un avis</button>
+            <div className="md:text-right">
+              <button onClick={() => setReviewOpen(true)} className="btn-outline-dark">
+                {tr("Laisser un avis", "Leave a review")}
+              </button>
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { t: "Ça change tout.", q: "Je béquille depuis 3 ans et je n'avais jamais imaginé pouvoir porter mon fils. Avec legmio c'est possible.", n: "Sophie", p: "Sclérose en plaques", d: "Mars 2026" },
-              { t: "Rééducation transformée.", q: "6 mois de rééducation post-opératoire. Mes épaules n'ont pas souffert. Indispensable.", n: "Marc", p: "Post-opératoire hanche", d: "Février 2026" },
-              { t: "Enfin une vraie solution.", q: "J'avais abandonné l'idée d'avoir les mains libres. legmio m'a prouvé que c'était possible.", n: "Camille", p: "Sarcome d'Ewing", d: "Janvier 2026" },
+              { img: "/sophie.jpg", t: tr("Ça change tout.", "It changes everything."), q: tr("Je béquille depuis 3 ans et je n'avais jamais imaginé pouvoir porter mon fils. Avec legmio c'est possible.", "3 years on crutches — I never thought I could carry my son. With legmio I can."), n: "Sophie", p: tr("Sclérose en plaques", "Multiple sclerosis"), d: tr("Mars 2026", "March 2026") },
+              { img: "/marc.jpg", t: tr("Rééducation transformée.", "Rehab transformed."), q: tr("6 mois de rééducation post-opératoire. Mes épaules n'ont pas souffert. Indispensable.", "6 months of post-op rehab. My shoulders were fine. Essential."), n: "Marc", p: tr("Post-opératoire hanche", "Post-op hip"), d: tr("Février 2026", "February 2026") },
+              { img: "/camille.jpg", t: tr("Enfin une vraie solution.", "Finally, a real solution."), q: tr("J'avais abandonné l'idée d'avoir les mains libres. legmio m'a prouvé que c'était possible.", "I'd given up on having free hands. legmio proved me wrong."), n: "Camille", p: tr("Sarcome d'Ewing", "Ewing sarcoma"), d: tr("Janvier 2026", "January 2026") },
             ].map((r, i) => (
               <div key={i} className="card-soft p-6">
                 <div className="flex gap-0.5" style={{ color: "#111" }}>
@@ -215,7 +217,7 @@ function Produit() {
                 <h3 className="mt-3 font-display font-bold text-lg" style={{ color: "#111" }}>{r.t}</h3>
                 <p className="mt-2 text-sm" style={{ color: "#333" }}>{r.q}</p>
                 <div className="mt-4 flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold" style={{ backgroundColor: "#EEE", color: "#111" }}>{r.n[0]}</div>
+                  <img src={r.img} alt={r.n} className="w-12 h-12 rounded-full object-cover" />
                   <div className="text-sm">
                     <div className="font-bold" style={{ color: "#111" }}>{r.n}</div>
                     <div style={{ color: "#666" }}>{r.p} · {r.d}</div>
@@ -224,9 +226,6 @@ function Produit() {
               </div>
             ))}
           </div>
-          <div className="mt-10 text-center">
-            <button className="btn-outline-dark">Voir tous les avis</button>
-          </div>
         </div>
       </section>
 
@@ -234,64 +233,114 @@ function Produit() {
       <section style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-baseline justify-between gap-4 mb-6">
-            <h2 className="text-3xl md:text-4xl" style={{ color: "#111" }}>Questions fréquentes</h2>
-            <a href="/faq" className="text-sm underline" style={{ color: "#111" }}>Voir toutes les questions</a>
+            <h2 className="text-3xl md:text-4xl" style={{ color: "#111" }}>{tr("Questions fréquentes", "Frequently asked questions")}</h2>
+            <a href="/faq" className="text-sm underline" style={{ color: "#111" }}>{tr("Voir toutes les questions", "See all questions")}</a>
           </div>
           <div>
             {[
-              ["legmio est-elle réglable ?", "Oui. Deux points de réglage indépendants : la poignée et l'appui coude. Universelle de 1m50 à 1m95."],
-              ["Faut-il de la force dans les mains ?", "Non. Un simple appui du poignet sur l'avant-bras suffit. Pas besoin de fermer la main."],
-              ["Combien de temps pour s'adapter ?", "Environ 1 à 2 semaines. La plupart des utilisateurs trouvent leur rythme en quelques jours."],
-              ["Est-elle remboursée ?", "Partiellement sur prescription médicale (LPPR). En contexte emploi RQTH, prise en charge jusqu'à 90% via Agefiph ou FIPHFP."],
-              ["Quel est le prix ?", "150€ TTC, livraison incluse."],
-              ["Où est-elle fabriquée ?", "Conçue et assemblée en France. Structure en aluminium."],
-              ["Convient-elle aux utilisateurs d'une seule béquille ?", "Oui. legmio est disponible à l'unité, droite ou gauche."],
+              [tr("legmio est-elle réglable ?", "Is legmio adjustable?"), tr("Oui. Deux points de réglage indépendants : la poignée et l'appui coude. Universelle de 1m50 à 1m95.", "Yes. Two independent adjustment points: grip and elbow rest. Universal from 1m50 to 1m95.")],
+              [tr("Faut-il de la force dans les mains ?", "Do I need hand strength?"), tr("Non. Un simple appui du poignet sur l'avant-bras suffit. Pas besoin de fermer la main.", "No. A simple wrist rest on the forearm is enough. No need to grip.")],
+              [tr("Combien de temps pour s'adapter ?", "How long does it take to adapt?"), tr("Environ 1 à 2 semaines. La plupart des utilisateurs trouvent leur rythme en quelques jours.", "About 1 to 2 weeks. Most users find their rhythm within a few days.")],
+              [tr("Est-elle remboursée ?", "Is it reimbursed?"), tr("Partiellement sur prescription médicale (LPPR). En contexte emploi RQTH, prise en charge jusqu'à 90% via Agefiph ou FIPHFP.", "Partially on medical prescription (LPPR). In an RQTH employment context, up to 90% covered via Agefiph or FIPHFP.")],
+              [tr("Quel est le prix ?", "What's the price?"), tr("150€ TTC (prix estimatif), livraison incluse.", "€150 incl. VAT (estimated price), shipping included.")],
+              [tr("Où est-elle fabriquée ?", "Where is it made?"), tr("Conçue et assemblée en France. Structure en aluminium.", "Designed and assembled in France. Aluminum frame.")],
+              [tr("Convient-elle aux utilisateurs d'une seule béquille ?", "Suitable for single-crutch users?"), tr("Oui. legmio est disponible à l'unité, droite ou gauche.", "Yes. legmio is sold individually, right or left.")],
             ].map(([q, a], i) => (
               <Accordion key={i} title={q as string}>{a}</Accordion>
             ))}
           </div>
         </div>
       </section>
+
+      {reviewOpen && <ReviewModal onClose={() => setReviewOpen(false)} />}
     </div>
   );
 }
 
-function FeaturesCarousel() {
-  const slides = [
-    { t: "L'appui avant-bras", p: "Conçue par des roboticiens issus du CNRS et de l'ISIR Sorbonne Université, legmio redistribue la charge de l'appui sur l'avant-bras complet. Fini les douleurs au poignet, à l'épaule, aux nerfs." },
-    { t: "Mains libres. Vraiment.", p: "Porter son enfant, faire ses courses, travailler, cuisiner. legmio te rend ce que les béquilles classiques t'avaient pris." },
-    { t: "Universelle et réglable", p: "Deux points de réglage indépendants. De 1m50 à 1m95. Montage en moins de 2 minutes, sans outil." },
-    { t: "Conçue pour durer", p: "Structure aluminium 850g. Assemblée en France. legmio n'est pas un accessoire temporaire. C'est un équipement de vie." },
+function ProductFeatures() {
+  const { tr } = useLanguage();
+  const items = [
+    { t: tr("Mains libres", "Hands free"), img: "/usecase-quotidien.png", d: tr("L'appui avant-bras redistribue entièrement la charge. Ta main est libre — pour porter, travailler, tenir ton enfant.", "The forearm support fully redistributes the load. Your hand is free.") },
+    { t: tr("Appui avant-bras ergonomique", "Ergonomic forearm rest"), img: "/bequille.png", d: tr("Conçue pour la position naturelle du poignet. Réduit les contraintes à la prise en main.", "Designed for natural wrist position. Reduces grip strain.") },
+    { t: tr("Système de réglage", "Adjustment system"), img: "/bequille.png", d: tr("Deux points de réglage indépendants. Universelle de 1m50 à 1m95. Sans outil.", "Two independent adjustment points. Fits 1m50 to 1m95. No tools.") },
+    { t: tr("Embout interchangeable", "Interchangeable tip"), img: "/bequille.png", d: tr("Tu le changes seul, sans outil. Intérieur, extérieur, usure — toujours la bonne accroche.", "Change it yourself, no tools. Indoors, outdoors — always the right grip.") },
+    { t: tr("Position de repos", "Rest position"), img: "/bequille.png", d: tr("legmio tient debout contre un mur et ne tombe pas.", "legmio stands against a wall without falling.") },
+    { t: tr("Structure légère", "Lightweight frame"), img: "/bequille.png", d: tr("850g. Robuste. Assemblée en France pour durer dans le temps.", "850g. Robust. Assembled in France to last.") },
   ];
   const [i, setI] = useState(0);
-  const s = slides[i];
-  const go = (d: number) => setI((i + d + slides.length) % slides.length);
+  const s = items[i];
   return (
-    <div className="mt-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: "#F5F5F5" }}>
-          <div
-            className="w-full aspect-video flex items-center justify-center text-xs uppercase tracking-wide"
-            style={{ color: "#999" }}
-          >{s.t}</div>
+    <div className="mt-10 grid grid-cols-1 md:grid-cols-[30%_70%] gap-10 items-center">
+      <ul className="space-y-3">
+        {items.map((it, k) => (
+          <li key={k}>
+            <button
+              onClick={() => setI(k)}
+              className="text-left text-lg transition"
+              style={{
+                color: k === i ? "#111111" : "#BBBBBB",
+                fontWeight: k === i ? 700 : 500,
+              }}
+            >
+              {it.t}
+            </button>
+          </li>
+        ))}
+      </ul>
+      <div>
+        <div className="rounded-2xl overflow-hidden bg-[#F5F5F5] aspect-[4/3]">
+          <img src={s.img} alt={s.t} className="w-full h-full object-contain" />
         </div>
-        <div>
-          <h3 className="text-2xl md:text-3xl font-display font-bold" style={{ color: "#111" }}>{s.t}</h3>
-          <p className="mt-4" style={{ color: "#444" }}>{s.p}</p>
-        </div>
+        <h3 className="mt-6 text-2xl md:text-3xl font-display font-bold" style={{ color: "#111" }}>{s.t}</h3>
+        <p className="mt-3" style={{ color: "#444" }}>{s.d}</p>
       </div>
-      <div className="mt-8 flex items-center justify-center gap-4">
-        <button onClick={() => go(-1)} aria-label="Précédent" className="w-10 h-10 rounded-full border flex items-center justify-center" style={{ borderColor: "#111", color: "#111" }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 6l-6 6 6 6" /></svg>
-        </button>
-        <div className="flex gap-2">
-          {slides.map((_, k) => (
-            <button key={k} onClick={() => setI(k)} aria-label={`Slide ${k + 1}`} className="w-2 h-2 rounded-full" style={{ backgroundColor: k === i ? "#111" : "#CCC" }} />
-          ))}
+    </div>
+  );
+}
+
+function ReviewModal({ onClose }: { onClose: () => void }) {
+  const { tr } = useLanguage();
+  const [stars, setStars] = useState(5);
+  const [firstName, setFirstName] = useState("");
+  const [profile, setProfile] = useState("");
+  const [msg, setMsg] = useState("");
+  const [sent, setSent] = useState(false);
+  return (
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center px-4"
+      style={{ backgroundColor: "rgba(0,0,0,0.55)" }}
+      onClick={onClose}
+    >
+      <div className="bg-white rounded-2xl max-w-lg w-full p-6 md:p-8" onClick={(e) => e.stopPropagation()}>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-2xl font-display font-bold" style={{ color: "#111" }}>{tr("Laisser un avis", "Leave a review")}</h3>
+          <button onClick={onClose} aria-label="Close" style={{ color: "#111" }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 6l12 12M6 18L18 6" /></svg>
+          </button>
         </div>
-        <button onClick={() => go(1)} aria-label="Suivant" className="w-10 h-10 rounded-full border flex items-center justify-center" style={{ borderColor: "#111", color: "#111" }}>
-          <IconArrowRight size={16} />
-        </button>
+        {sent ? (
+          <div className="py-6 text-center">
+            <p style={{ color: "#111" }}>{tr("Merci pour ton avis !", "Thanks for your review!")}</p>
+            <button onClick={onClose} className="btn-dark btn-dark-hover mt-6">{tr("Fermer", "Close")}</button>
+          </div>
+        ) : (
+          <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-4">
+            <div>
+              <div className="text-sm mb-2" style={{ color: "#111" }}>{tr("Note", "Rating")}</div>
+              <div className="flex gap-2">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <button type="button" key={n} onClick={() => setStars(n)} aria-label={`${n} stars`} style={{ color: n <= stars ? "#111" : "#DDD" }}>
+                    <IconStar size={26} filled={true} />
+                  </button>
+                ))}
+              </div>
+            </div>
+            <input required value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder={tr("Prénom", "First name")} className="w-full px-4 py-3 rounded-full border outline-none focus:border-black" style={{ borderColor: "#EEE", color: "#111" }} />
+            <input value={profile} onChange={(e) => setProfile(e.target.value)} placeholder={tr("Profil (ex. Post-op, MPR…)", "Profile (e.g. Post-op, PM&R…)")} className="w-full px-4 py-3 rounded-full border outline-none focus:border-black" style={{ borderColor: "#EEE", color: "#111" }} />
+            <textarea required value={msg} onChange={(e) => setMsg(e.target.value)} placeholder={tr("Ton avis…", "Your review…")} rows={4} className="w-full px-4 py-3 rounded-2xl border outline-none focus:border-black" style={{ borderColor: "#EEE", color: "#111" }} />
+            <button type="submit" className="btn-dark btn-dark-hover w-full">{tr("Envoyer", "Send")} <IconArrowRight size={16} /></button>
+          </form>
+        )}
       </div>
     </div>
   );

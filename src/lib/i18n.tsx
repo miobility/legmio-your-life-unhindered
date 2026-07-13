@@ -1,11 +1,16 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 export type Lang = "fr" | "en";
+
+export const HUBSPOT_FR = "https://fd623.share-eu1.hsforms.com/2TRovgVWcTMydP9AzUTJZUQ";
+export const HUBSPOT_EN = "https://fd623.share-eu1.hsforms.com/2ApzYviPbRnyLmAQh5YUR5Q";
+
 type Dict = Record<string, string>;
 
 const fr: Dict = {
-  banner: "Commercialisation courant 2027",
-  nav_product: "Produit",
+  banner_a: "Commercialisation courant 2027",
+  banner_b: "Rejoignez la liste d'attente dès maintenant",
+  nav_product: "Béquille",
   nav_faq: "FAQ",
   nav_blog: "Blog",
   search_ph: "Rechercher",
@@ -15,8 +20,9 @@ const fr: Dict = {
 };
 
 const en: Dict = {
-  banner: "Available 2027",
-  nav_product: "Product",
+  banner_a: "Launching in 2027",
+  banner_b: "Join the waiting list now",
+  nav_product: "Crutch",
   nav_faq: "FAQ",
   nav_blog: "Blog",
   search_ph: "Search",
@@ -27,8 +33,20 @@ const en: Dict = {
 
 const dicts: Record<Lang, Dict> = { fr, en };
 
-type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: string) => string };
-const LangCtx = createContext<Ctx>({ lang: "fr", setLang: () => {}, t: (k) => k });
+type Ctx = {
+  lang: Lang;
+  setLang: (l: Lang) => void;
+  t: (k: string) => string;
+  tr: <T>(f: T, e: T) => T;
+  hubspotUrl: string;
+};
+const LangCtx = createContext<Ctx>({
+  lang: "fr",
+  setLang: () => {},
+  t: (k) => k,
+  tr: (f) => f,
+  hubspotUrl: HUBSPOT_FR,
+});
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("fr");
@@ -41,7 +59,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     if (typeof window !== "undefined") localStorage.setItem("legmio-lang", l);
   };
   const t = (k: string) => dicts[lang][k] ?? k;
-  return <LangCtx.Provider value={{ lang, setLang, t }}>{children}</LangCtx.Provider>;
+  const tr = <T,>(f: T, e: T): T => (lang === "en" ? e : f);
+  const hubspotUrl = lang === "en" ? HUBSPOT_EN : HUBSPOT_FR;
+  return <LangCtx.Provider value={{ lang, setLang, t, tr, hubspotUrl }}>{children}</LangCtx.Provider>;
 }
 
 export function useLanguage() {
