@@ -3,6 +3,7 @@ import { useState } from "react";
 import { IconChevron, IconCheck, IconArrowRight, IconStar } from "@/components/Icons";
 import { useLanguage } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
+import { FeaturesCarousel } from "@/routes/index";
 
 export const Route = createFileRoute("/produit")({
   head: () => ({
@@ -33,11 +34,26 @@ function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+type Review = { stars: number; title: string; quote: string; name: string; profile: string; date: string; img?: string };
+
 function Produit() {
   const { tr, hubspotUrl } = useLanguage();
   const gallery = ["/bequille.png", "/usecase-quotidien.png", "/usecase-reeducation.png", "/usecase-emploi.png", "/usecase-parental.png"];
   const [sel, setSel] = useState(0);
   const [reviewOpen, setReviewOpen] = useState(false);
+
+  const initialReviews: Review[] = [
+    { img: "/sophie.jpg", stars: 5, title: tr("Ça change tout.", "It changes everything."), quote: tr("Je béquille depuis 3 ans et je n'avais jamais imaginé pouvoir porter mon fils. Avec legmio c'est possible.", "3 years on crutches — I never thought I could carry my son. With legmio I can."), name: "Sophie", profile: tr("Sclérose en plaques", "Multiple sclerosis"), date: tr("Mars 2026", "March 2026") },
+    { img: "/marc.jpg", stars: 5, title: tr("Rééducation transformée.", "Rehab transformed."), quote: tr("6 mois de rééducation post-opératoire. Mes épaules n'ont pas souffert. Indispensable.", "6 months of post-op rehab. My shoulders were fine. Essential."), name: "Marc", profile: tr("Post-opératoire hanche", "Post-op hip"), date: tr("Février 2026", "February 2026") },
+    { img: "/camille.jpg", stars: 5, title: tr("Enfin une vraie solution.", "Finally, a real solution."), quote: tr("J'avais abandonné l'idée d'avoir les mains libres. legmio m'a prouvé que c'était possible.", "I'd given up on having free hands. legmio proved me wrong."), name: "Camille", profile: tr("Sarcome d'Ewing", "Ewing sarcoma"), date: tr("Janvier 2026", "January 2026") },
+  ];
+  const [reviews, setReviews] = useState<Review[]>(initialReviews);
+  const reviewCount = reviews.length;
+  const avg = reviewCount > 0 ? reviews.reduce((s, r) => s + r.stars, 0) / reviewCount : 0;
+  const avgStr = avg.toFixed(1);
+
+  const galleryPrev = () => setSel((s) => (s - 1 + gallery.length) % gallery.length);
+  const galleryNext = () => setSel((s) => (s + 1) % gallery.length);
 
   return (
     <div>
@@ -45,8 +61,14 @@ function Produit() {
       <section style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
-            <div className="rounded-2xl overflow-hidden aspect-square" style={{ backgroundColor: "#F5F5F5" }}>
+            <div className="relative rounded-2xl overflow-hidden aspect-square" style={{ backgroundColor: "#F5F5F5" }}>
               <img src={gallery[sel]} alt="" className="w-full h-full object-contain" />
+              <button aria-label="Previous" onClick={galleryPrev} className="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: "rgba(17,17,17,0.9)", color: "#FFF" }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+              </button>
+              <button aria-label="Next" onClick={galleryNext} className="absolute top-1/2 right-3 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: "rgba(17,17,17,0.9)", color: "#FFF" }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+              </button>
             </div>
             <div className="mt-4 flex gap-3 overflow-x-auto">
               {gallery.map((g, i) => (
@@ -78,7 +100,7 @@ function Produit() {
               <div className="flex">
                 {[0, 1, 2, 3, 4].map((i) => <IconStar key={i} size={14} />)}
               </div>
-              <span className="underline" style={{ color: "#666" }}>4.9/5 (12 {tr("avis", "reviews")})</span>
+              <span className="underline" style={{ color: "#666" }}>{avgStr}/5 ({reviewCount} {tr("avis", "reviews")})</span>
             </button>
             <div className="mt-6 flex items-baseline gap-3">
               <div className="text-4xl font-display font-bold" style={{ color: "#111" }}>150€ TTC</div>
@@ -176,13 +198,15 @@ function Produit() {
         `}</style>
       </section>
 
-      {/* SECTION 3 — FEATURES WHOOP-STYLE */}
+      {/* SECTION 3 — FEATURES CAROUSEL */}
       <section id="features" style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <h2 className="text-3xl md:text-4xl" style={{ color: "#111" }}>{tr("Conçue pour durer.", "Built to last.")}</h2>
           </Reveal>
-          <ProductFeatures />
+          <div className="mt-10">
+            <FeaturesCarousel />
+          </div>
         </div>
       </section>
 
@@ -193,8 +217,8 @@ function Produit() {
             <div>
               <h2 className="text-3xl md:text-4xl" style={{ color: "#111" }}>{tr("Avis clients", "Customer reviews")}</h2>
               <div className="mt-4 flex items-baseline gap-3">
-                <div className="text-5xl font-display font-bold" style={{ color: "#111" }}>4.9/5</div>
-                <div style={{ color: "#666" }}>(12 {tr("avis", "reviews")})</div>
+                <div className="text-5xl font-display font-bold" style={{ color: "#111" }}>{avgStr}/5</div>
+                <div style={{ color: "#666" }}>({reviewCount} {tr("avis", "reviews")})</div>
               </div>
             </div>
             <div className="md:text-right">
@@ -205,22 +229,22 @@ function Produit() {
           </div>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { img: "/sophie.jpg", t: tr("Ça change tout.", "It changes everything."), q: tr("Je béquille depuis 3 ans et je n'avais jamais imaginé pouvoir porter mon fils. Avec legmio c'est possible.", "3 years on crutches — I never thought I could carry my son. With legmio I can."), n: "Sophie", p: tr("Sclérose en plaques", "Multiple sclerosis"), d: tr("Mars 2026", "March 2026") },
-              { img: "/marc.jpg", t: tr("Rééducation transformée.", "Rehab transformed."), q: tr("6 mois de rééducation post-opératoire. Mes épaules n'ont pas souffert. Indispensable.", "6 months of post-op rehab. My shoulders were fine. Essential."), n: "Marc", p: tr("Post-opératoire hanche", "Post-op hip"), d: tr("Février 2026", "February 2026") },
-              { img: "/camille.jpg", t: tr("Enfin une vraie solution.", "Finally, a real solution."), q: tr("J'avais abandonné l'idée d'avoir les mains libres. legmio m'a prouvé que c'était possible.", "I'd given up on having free hands. legmio proved me wrong."), n: "Camille", p: tr("Sarcome d'Ewing", "Ewing sarcoma"), d: tr("Janvier 2026", "January 2026") },
-            ].map((r, i) => (
+            {reviews.map((r, i) => (
               <div key={i} className="card-soft p-6">
                 <div className="flex gap-0.5" style={{ color: "#111" }}>
-                  {[0, 1, 2, 3, 4].map((k) => <IconStar key={k} size={14} />)}
+                  {[0, 1, 2, 3, 4].map((k) => <IconStar key={k} size={14} filled={k < r.stars} />)}
                 </div>
-                <h3 className="mt-3 font-display font-bold text-lg" style={{ color: "#111" }}>{r.t}</h3>
-                <p className="mt-2 text-sm" style={{ color: "#333" }}>{r.q}</p>
+                <h3 className="mt-3 font-display font-bold text-lg" style={{ color: "#111" }}>{r.title}</h3>
+                <p className="mt-2 text-sm" style={{ color: "#333" }}>{r.quote}</p>
                 <div className="mt-4 flex items-center gap-3">
-                  <img src={r.img} alt={r.n} className="w-12 h-12 rounded-full object-cover" />
+                  {r.img ? (
+                    <img src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover" />
+                  ) : (
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold" style={{ backgroundColor: "#111", color: "#FFF" }}>{r.name.charAt(0).toUpperCase()}</div>
+                  )}
                   <div className="text-sm">
-                    <div className="font-bold" style={{ color: "#111" }}>{r.n}</div>
-                    <div style={{ color: "#666" }}>{r.p} · {r.d}</div>
+                    <div className="font-bold" style={{ color: "#111" }}>{r.name}</div>
+                    <div style={{ color: "#666" }}>{r.profile}{r.profile ? " · " : ""}{r.date}</div>
                   </div>
                 </div>
               </div>
@@ -252,59 +276,38 @@ function Produit() {
         </div>
       </section>
 
-      {reviewOpen && <ReviewModal onClose={() => setReviewOpen(false)} />}
+      {reviewOpen && (
+        <ReviewModal
+          onClose={() => setReviewOpen(false)}
+          onSubmit={(r) => setReviews((prev) => [r, ...prev])}
+        />
+      )}
     </div>
   );
 }
 
-function ProductFeatures() {
-  const { tr } = useLanguage();
-  const items = [
-    { t: tr("Mains libres", "Hands free"), img: "/usecase-quotidien.png", d: tr("L'appui avant-bras redistribue entièrement la charge. Ta main est libre — pour porter, travailler, tenir ton enfant.", "The forearm support fully redistributes the load. Your hand is free.") },
-    { t: tr("Appui avant-bras ergonomique", "Ergonomic forearm rest"), img: "/bequille.png", d: tr("Conçue pour la position naturelle du poignet. Réduit les contraintes à la prise en main.", "Designed for natural wrist position. Reduces grip strain.") },
-    { t: tr("Système de réglage", "Adjustment system"), img: "/bequille.png", d: tr("Deux points de réglage indépendants. Universelle de 1m50 à 1m95. Sans outil.", "Two independent adjustment points. Fits 1m50 to 1m95. No tools.") },
-    { t: tr("Embout interchangeable", "Interchangeable tip"), img: "/bequille.png", d: tr("Tu le changes seul, sans outil. Intérieur, extérieur, usure — toujours la bonne accroche.", "Change it yourself, no tools. Indoors, outdoors — always the right grip.") },
-    { t: tr("Position de repos", "Rest position"), img: "/bequille.png", d: tr("legmio tient debout contre un mur et ne tombe pas.", "legmio stands against a wall without falling.") },
-    { t: tr("Structure légère", "Lightweight frame"), img: "/bequille.png", d: tr("850g. Robuste. Assemblée en France pour durer dans le temps.", "850g. Robust. Assembled in France to last.") },
-  ];
-  const [i, setI] = useState(0);
-  const s = items[i];
-  return (
-    <div className="mt-10 grid grid-cols-1 md:grid-cols-[30%_70%] gap-10 items-center">
-      <ul className="space-y-3">
-        {items.map((it, k) => (
-          <li key={k}>
-            <button
-              onClick={() => setI(k)}
-              className="text-left text-lg transition"
-              style={{
-                color: k === i ? "#111111" : "#BBBBBB",
-                fontWeight: k === i ? 700 : 500,
-              }}
-            >
-              {it.t}
-            </button>
-          </li>
-        ))}
-      </ul>
-      <div>
-        <div className="rounded-2xl overflow-hidden bg-[#F5F5F5] aspect-[4/3]">
-          <img src={s.img} alt={s.t} className="w-full h-full object-contain" />
-        </div>
-        <h3 className="mt-6 text-2xl md:text-3xl font-display font-bold" style={{ color: "#111" }}>{s.t}</h3>
-        <p className="mt-3" style={{ color: "#444" }}>{s.d}</p>
-      </div>
-    </div>
-  );
-}
 
-function ReviewModal({ onClose }: { onClose: () => void }) {
-  const { tr } = useLanguage();
+function ReviewModal({ onClose, onSubmit }: { onClose: () => void; onSubmit: (r: Review) => void }) {
+  const { tr, lang } = useLanguage();
   const [stars, setStars] = useState(5);
   const [firstName, setFirstName] = useState("");
   const [profile, setProfile] = useState("");
   const [msg, setMsg] = useState("");
   const [sent, setSent] = useState(false);
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const now = new Date();
+    const date = now.toLocaleDateString(lang === "en" ? "en-US" : "fr-FR", { month: "long", year: "numeric" });
+    onSubmit({
+      stars,
+      title: msg.split(".")[0].slice(0, 60) || tr("Nouveau retour", "New feedback"),
+      quote: msg,
+      name: firstName,
+      profile,
+      date,
+    });
+    setSent(true);
+  };
   return (
     <div
       className="fixed inset-0 z-[60] flex items-center justify-center px-4"
@@ -324,7 +327,7 @@ function ReviewModal({ onClose }: { onClose: () => void }) {
             <button onClick={onClose} className="btn-dark btn-dark-hover mt-6">{tr("Fermer", "Close")}</button>
           </div>
         ) : (
-          <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-4">
+          <form onSubmit={submit} className="space-y-4">
             <div>
               <div className="text-sm mb-2" style={{ color: "#111" }}>{tr("Note", "Rating")}</div>
               <div className="flex gap-2">

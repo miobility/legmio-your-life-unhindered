@@ -6,6 +6,7 @@ import {
   IconArrowRight, IconInstagram, IconTiktok, IconLinkedin,
 } from "@/components/Icons";
 import { Reveal } from "@/components/Reveal";
+import { AutoCarousel } from "@/components/AutoCarousel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -72,14 +73,14 @@ function Landing() {
               {tr("Tu connais déjà le problème. Tu le vis.", "You already know the problem. You live it.")}
             </h2>
           </Reveal>
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { img: "/probleme-poignet.jpg", t: tr("Tes épaules, tes poignets, tes mains trinquent.", "Your shoulders, wrists and hands take the hit."), p: tr("La béquille censée t'aider te crée un handicap supplémentaire.", "The crutch meant to help you creates an extra disability.") },
-              { img: "/probleme-mains.avif", t: tr("Tes mains sont prises.", "Your hands are taken."), p: tr("Porter un verre, faire ses courses, ouvrir une porte — des gestes devenus négociations.", "Carrying a glass, shopping, opening a door — every gesture becomes a negotiation.") },
-              { img: "/probleme-temps.jpg", t: tr("Et tu t'y fais.", "And you get used to it."), p: tr("5 ans, 10 ans, 40 ans en béquilles. Sans qu'on t'ait jamais proposé autre chose.", "5, 10, 40 years on crutches — with no one ever offering another way.") },
-            ].map((c, i) => (
-              <Reveal key={i} delay={i * 100}>
-                <div className="card-soft overflow-hidden h-full">
+          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
+            <AutoCarousel>
+              {[
+                { img: "/probleme-poignet.jpg", t: tr("Tes épaules, tes poignets, tes mains trinquent.", "Your shoulders, wrists and hands take the hit."), p: tr("La béquille censée t'aider te crée un handicap supplémentaire.", "The crutch meant to help you creates an extra disability.") },
+                { img: "/probleme-mains.avif", t: tr("Tes mains sont prises.", "Your hands are taken."), p: tr("Porter un verre, faire ses courses, ouvrir une porte — des gestes devenus négociations.", "Carrying a glass, shopping, opening a door — every gesture becomes a negotiation.") },
+                { img: "/probleme-temps.jpg", t: tr("Et tu t'y fais.", "And you get used to it."), p: tr("5 ans, 10 ans, 40 ans en béquilles. Sans qu'on t'ait jamais proposé autre chose.", "5, 10, 40 years on crutches — with no one ever offering another way.") },
+              ].map((c, i) => (
+                <div key={i} className="card-soft overflow-hidden w-[320px] md:w-[380px]">
                   <div className="aspect-[3/2] overflow-hidden" style={{ filter: "grayscale(1)" }}>
                     <img src={c.img} alt="" className="w-full h-full object-cover" loading="lazy" />
                   </div>
@@ -88,8 +89,8 @@ function Landing() {
                     <p className="mt-3 text-sm" style={{ color: "#666666" }}>{c.p}</p>
                   </div>
                 </div>
-              </Reveal>
-            ))}
+              ))}
+            </AutoCarousel>
           </div>
         </div>
       </section>
@@ -117,29 +118,26 @@ function Landing() {
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {[
-              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", embed: "https://www.instagram.com/reel/DX_Qqp9tbvg/embed/", views: "3.6M", likes: "120K", cmt: "2 200", quote: tr("Une invention qui va changer des vies.", "An invention that will change lives.") },
-              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", embed: "https://www.instagram.com/reel/DYhaBkRov_C/embed/", views: "1.2M", likes: "45K", cmt: "800", quote: tr("Enfin une vraie innovation !", "Finally, real innovation!") },
+              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", handle: "@legmio.official", views: "3,6 M", likes: "120 K", cmt: "2 200" },
+              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", handle: "@legmio.official", views: "1,2 M", likes: "45 K", cmt: "800" },
             ].map((r, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden" style={{ backgroundColor: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-                <div className="grid grid-cols-1 md:grid-cols-[45%_55%]">
-                  <div className="bg-black">
-                    <div className="relative w-full" style={{ aspectRatio: "9/16" }}>
-                      <iframe className="absolute inset-0 w-full h-full" src={r.embed} title="Instagram reel" allow="encrypted-media" />
-                    </div>
+              <div key={i} className="rounded-2xl overflow-hidden flex flex-col" style={{ backgroundColor: "#1a1a1a", border: "1px solid #2a2a2a" }}>
+                <div className="relative w-full flex items-center justify-center" style={{ aspectRatio: "9/16", maxHeight: 420, background: "radial-gradient(circle at 30% 20%, #2a2a2a, #0a0a0a)" }}>
+                  <div className="flex flex-col items-center gap-3 text-white/80">
+                    <IconInstagram size={64} />
+                    <div className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.6)" }}>Reel</div>
                   </div>
-                  <div className="p-6 flex flex-col justify-center text-white space-y-3">
-                    <div className="flex gap-4 text-sm">
-                      <div><div className="text-xl font-display font-bold">{r.views}</div><div style={{ color: "#999" }} className="text-xs">{tr("vues", "views")}</div></div>
-                      <div><div className="text-xl font-display font-bold">{r.likes}</div><div style={{ color: "#999" }} className="text-xs">{tr("likes", "likes")}</div></div>
-                      <div><div className="text-xl font-display font-bold">{r.cmt}</div><div style={{ color: "#999" }} className="text-xs">{tr("commentaires", "comments")}</div></div>
-                    </div>
-                    <blockquote className="text-base font-display italic leading-snug">"{r.quote}"</blockquote>
-                    <div>
-                      <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-light inline-flex text-xs px-4 py-2">
-                        {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
-                      </a>
-                    </div>
+                </div>
+                <div className="p-6 flex flex-col gap-4 text-white">
+                  <div className="text-sm" style={{ color: "#bbb" }}>{r.handle}</div>
+                  <div className="grid grid-cols-3 gap-2 text-center">
+                    <div><div className="text-lg font-display font-bold">{r.views}</div><div className="text-xs" style={{ color: "#999" }}>{tr("vues", "views")}</div></div>
+                    <div><div className="text-lg font-display font-bold">{r.likes}</div><div className="text-xs" style={{ color: "#999" }}>{tr("likes", "likes")}</div></div>
+                    <div><div className="text-lg font-display font-bold">{r.cmt}</div><div className="text-xs" style={{ color: "#999" }}>{tr("commentaires", "comments")}</div></div>
                   </div>
+                  <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-light inline-flex text-sm">
+                    {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
+                  </a>
                 </div>
               </div>
             ))}
@@ -155,14 +153,14 @@ function Landing() {
               {tr("Ils l'ont testé. Ils témoignent.", "They tested it. They speak up.")}
             </h2>
           </Reveal>
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { img: "/sophie.jpg", n: "Sophie", a: tr("34 ans", "34"), p: tr("Sclérose en plaques", "Multiple sclerosis"), b: tr("3 ans de béquilles", "3 years on crutches"), q: tr("Avant legmio, chaque sortie était une négociation. Le premier jour où j'ai pu rentrer des courses seule — j'ai pleuré. Ça paraît rien. C'est tout.", "Before legmio, every outing was a negotiation. The first day I could bring groceries home alone — I cried. It sounds like nothing. It's everything.") },
-              { img: "/marc.jpg", n: "Marc", a: tr("47 ans", "47"), p: tr("Post-opératoire hanche", "Post-op hip"), b: tr("6 mois de rééducation", "6 months of rehab"), q: tr("Je pensais que six mois de béquilles c'était six mois à mettre ma vie entre parenthèses. Mes épaules ont tenu. Moi aussi.", "I thought six months on crutches meant six months on hold. My shoulders held up. So did I.") },
-              { img: "/camille.jpg", n: "Camille", a: tr("28 ans", "28"), p: tr("Sarcome d'Ewing", "Ewing sarcoma"), b: tr("Béquilles au quotidien", "Daily crutches"), q: tr("J'avais accepté que mes mains ne m'appartiendraient plus vraiment. legmio m'a prouvé que c'était faux.", "I'd accepted my hands weren't really mine anymore. legmio proved that wrong.") },
-            ].map((t, i) => (
-              <Reveal key={i} delay={i * 100}>
-                <div className="card-soft p-6 h-full">
+          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
+            <AutoCarousel>
+              {[
+                { img: "/sophie.jpg", n: "Sophie", a: tr("34 ans", "34"), p: tr("Sclérose en plaques", "Multiple sclerosis"), b: tr("3 ans de béquilles", "3 years on crutches"), q: tr("Avant legmio, chaque sortie était une négociation. Le premier jour où j'ai pu rentrer des courses seule — j'ai pleuré. Ça paraît rien. C'est tout.", "Before legmio, every outing was a negotiation. The first day I could bring groceries home alone — I cried. It sounds like nothing. It's everything.") },
+                { img: "/marc.jpg", n: "Marc", a: tr("47 ans", "47"), p: tr("Post-opératoire hanche", "Post-op hip"), b: tr("6 mois de rééducation", "6 months of rehab"), q: tr("Je pensais que six mois de béquilles c'était six mois à mettre ma vie entre parenthèses. Mes épaules ont tenu. Moi aussi.", "I thought six months on crutches meant six months on hold. My shoulders held up. So did I.") },
+                { img: "/camille.jpg", n: "Camille", a: tr("28 ans", "28"), p: tr("Sarcome d'Ewing", "Ewing sarcoma"), b: tr("Béquilles au quotidien", "Daily crutches"), q: tr("J'avais accepté que mes mains ne m'appartiendraient plus vraiment. legmio m'a prouvé que c'était faux.", "I'd accepted my hands weren't really mine anymore. legmio proved that wrong.") },
+              ].map((t, i) => (
+                <div key={i} className="card-soft p-6 w-[320px] md:w-[380px] h-full">
                   <div className="flex items-center gap-4">
                     <img src={t.img} alt={t.n} className="w-20 h-20 rounded-full object-cover" />
                     <div>
@@ -173,8 +171,8 @@ function Landing() {
                   <div className="mt-4 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: "#F5F5F5", color: "#111" }}>{t.b}</div>
                   <p className="mt-4 italic text-sm" style={{ color: "#333" }}>"{t.q}"</p>
                 </div>
-              </Reveal>
-            ))}
+              ))}
+            </AutoCarousel>
           </div>
           <div className="mt-12 text-center"><CTA /></div>
         </div>
@@ -199,20 +197,22 @@ function Landing() {
               {tr("legmio s'adapte à ta vie", "legmio adapts to your life")}
             </h2>
           </Reveal>
-          <div className="mt-10 flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
-            {[
-              { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches. Reprendre ce que tu avais arrêté de demander.", "Carry, cook, care for your loved ones. Take back what you had stopped asking for.") },
-              { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Quelques semaines suffisent pour que tes épaules morflent. legmio te laisse récupérer sans tout sacrifier.", "A few weeks is enough for your shoulders to suffer. legmio lets you recover without sacrificing everything.") },
-              { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif. Prise en charge jusqu'à 90% via Agefiph ou FIPHFP.", "Stay mobile, independent, productive. Up to 90% covered via Agefiph or FIPHFP.") },
-              { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant. Le suivre. Être là.", "Hold your child. Keep up. Be there.") },
-            ].map((c, i) => (
-              <div key={i} className="relative shrink-0 w-[85%] sm:w-[60%] md:w-[24%] aspect-[3/4] rounded-2xl overflow-hidden snap-start">
-                <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.75) 100%)" }} />
-                <div className="absolute top-0 left-0 right-0 p-5 text-white font-display font-bold text-lg leading-tight">{c.t}</div>
-                <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm">{c.p}</div>
-              </div>
-            ))}
+          <div className="mt-10 -mx-4 sm:-mx-6 px-4 sm:px-6">
+            <AutoCarousel>
+              {[
+                { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches. Reprendre ce que tu avais arrêté de demander.", "Carry, cook, care for your loved ones. Take back what you had stopped asking for.") },
+                { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Quelques semaines suffisent pour que tes épaules morflent. legmio te laisse récupérer sans tout sacrifier.", "A few weeks is enough for your shoulders to suffer. legmio lets you recover without sacrificing everything.") },
+                { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif.", "Stay mobile, independent, productive.") },
+                { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant. Le suivre. Être là.", "Hold your child. Keep up. Be there.") },
+              ].map((c, i) => (
+                <div key={i} className="relative w-[280px] md:w-[320px] aspect-[3/4] rounded-2xl overflow-hidden">
+                  <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.75) 100%)" }} />
+                  <div className="absolute top-0 left-0 right-0 p-5 text-white font-display font-bold text-lg leading-tight">{c.t}</div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm">{c.p}</div>
+                </div>
+              ))}
+            </AutoCarousel>
           </div>
           <div className="mt-12 text-center"><CTA /></div>
         </div>
@@ -224,9 +224,11 @@ function Landing() {
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">{tr("Conçue pour durer.", "Built to last.")}</h2>
           </Reveal>
-          <FeaturesSelector />
+          <div className="mt-12">
+            <FeaturesCarousel dark />
+          </div>
         </div>
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-6 gap-4 max-w-6xl mx-auto px-6 py-10" style={{ backgroundColor: "#FFFFFF" }}>
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-6 gap-4 max-w-6xl mx-auto px-6 py-6">
           {[
             "850g",
             tr("Mains libres", "Hands free"),
@@ -235,7 +237,7 @@ function Landing() {
             tr("Embouts interchangeables", "Interchangeable tips"),
             tr("Assemblage France", "Assembled in France"),
           ].map((v, i) => (
-            <div key={i} className="text-center" style={{ color: "#111" }}>
+            <div key={i} className="text-center text-white">
               <div className="font-display font-bold text-lg">{v}</div>
             </div>
           ))}
@@ -250,32 +252,46 @@ function Landing() {
               {tr("Une grande avancée pour des millions de personnes", "A major breakthrough for millions of people")}
             </h2>
           </Reveal>
-          <div className="mt-14 max-w-3xl mx-auto rounded-2xl p-8" style={{ backgroundColor: "#F5F5F5", borderLeft: "3px solid #111" }}>
-            <blockquote className="font-display italic text-xl md:text-2xl leading-snug" style={{ color: "#111" }}>
-              "{tr("Une béquille qui rend les mains libres : une grande avancée !", "A crutch that frees the hands — a major breakthrough!")}"
-            </blockquote>
-            <div className="mt-4 text-sm" style={{ color: "#666" }}>
-              Dr Pauline Coignard — {tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape Rehab Center · President APPROCHE · SOFMER")}
+
+          <div className="mt-14 max-w-3xl mx-auto flex items-start gap-6">
+            <img src="/coignard.png" alt="Dr Pauline Coignard" className="w-20 h-20 rounded-full object-cover shrink-0" onError={(e) => (e.currentTarget.style.display = 'none')} />
+            <div>
+              <div className="font-display text-3xl leading-none" style={{ color: "#111" }}>&ldquo;</div>
+              <blockquote className="font-display italic text-xl md:text-2xl leading-snug -mt-2" style={{ color: "#111" }}>
+                {tr("Une béquille qui rend les mains libres : une grande avancée !", "A crutch that frees the hands — a major breakthrough!")}
+              </blockquote>
+              <div className="mt-3 text-sm" style={{ color: "#666" }}>
+                <span className="font-bold" style={{ color: "#111" }}>Dr Pauline Coignard</span> — {tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape Rehab Center · President APPROCHE · SOFMER")}
+              </div>
             </div>
           </div>
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              { v: tr("Médaille d'or", "Gold medal"), l: "Concours Lépine 2026" },
-              { v: tr("Prix de l'Impact", "Impact Award"), l: "Le Média Positif 2026" },
-              { v: tr("Validation terrain", "Field validation"), l: tr("+6 Centres de rééducation et médecins MPR", "+6 rehab centers and PM&R physicians") },
-              { v: tr("Soutien scientifique", "Scientific backing"), l: "CNRS · Sorbonne Université · SATT Lutech · Bpifrance" },
-            ].map((s, i) => (
-              <div key={i} className="card-soft p-6">
-                <div className="font-display font-bold text-xl" style={{ color: "#111" }}>{s.v}</div>
-                <div className="mt-2 text-sm" style={{ color: "#666" }}>{s.l}</div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-8 md:gap-14" style={{ opacity: 0.85 }}>
-            <img src="/logo-cnrs.png" alt="CNRS" className="h-10 object-contain" />
-            <img src="/logo-sorbonne.png" alt="Sorbonne Université" className="h-10 object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
-            <img src="/logo-satt-lutech.png" alt="SATT Lutech" className="h-10 object-contain" />
-            <img src="/logo-bpifrance.png" alt="Bpifrance" className="h-10 object-contain" />
+
+          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
+            <AutoCarousel>
+              {[
+                { logo: "/lepine.png", v: tr("Médaille d'or", "Gold medal"), l: "Concours Lépine 2026", logos: null as string[] | null },
+                { logo: "/mediapositif.png", v: tr("Prix de l'Impact", "Impact Award"), l: "Le Média Positif 2026", logos: null },
+                { logo: "/kerpape.png", v: tr("Validation terrain", "Field validation"), l: tr("+6 Centres de rééducation et médecins MPR", "+6 rehab centers and PM&R physicians"), logos: null },
+                { logo: null, v: tr("Soutien scientifique", "Scientific backing"), l: "CNRS · Sorbonne Université · SATT Lutech · Bpifrance", logos: ["/logo-cnrs.png", "/logo-sorbonne.png", "/logo-satt-lutech.png", "/logo-bpifrance.png"] },
+              ].map((s, i) => (
+                <div key={i} className="card-soft p-6 w-[300px] md:w-[340px] h-full flex flex-col">
+                  {s.logo && (
+                    <div className="h-16 mb-4 flex items-center">
+                      <img src={s.logo} alt="" className="h-16 object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                    </div>
+                  )}
+                  {s.logos && (
+                    <div className="h-16 mb-4 flex items-center gap-3 flex-wrap">
+                      {s.logos.map((l) => (
+                        <img key={l} src={l} alt="" className="h-8 object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                      ))}
+                    </div>
+                  )}
+                  <div className="font-display font-bold text-xl" style={{ color: "#111" }}>{s.v}</div>
+                  <div className="mt-2 text-sm" style={{ color: "#666" }}>{s.l}</div>
+                </div>
+              ))}
+            </AutoCarousel>
           </div>
         </div>
       </section>
@@ -361,7 +377,7 @@ function WallOfLove() {
   );
 }
 
-function FeaturesSelector() {
+export function FeaturesCarousel({ dark = false }: { dark?: boolean }) {
   const { tr } = useLanguage();
   const items = [
     { t: tr("Mains libres", "Hands free"), img: "/usecase-quotidien.png", d: tr("L'appui avant-bras redistribue entièrement la charge. Ta main est libre — pour porter, travailler, tenir ton enfant.", "The forearm support fully redistributes the load. Your hand is free — to carry, work, hold your child.") },
@@ -371,33 +387,21 @@ function FeaturesSelector() {
     { t: tr("Position de repos", "Rest position"), img: "/bequille.png", d: tr("legmio tient debout contre un mur et ne tombe pas. Tu peux t'y adosser et te reposer dessus.", "legmio stands against a wall without falling. You can lean on it and rest.") },
     { t: tr("Structure légère", "Lightweight frame"), img: "/bequille.png", d: tr("850g. Robuste. Légère. Assemblée en France pour durer dans le temps.", "850g. Robust. Light. Assembled in France to last.") },
   ];
-  const [i, setI] = useState(0);
-  const s = items[i];
+  const textColor = dark ? "#FFFFFF" : "#111111";
+  const subColor = dark ? "rgba(255,255,255,0.75)" : "#666666";
   return (
-    <div className="mt-12 grid grid-cols-1 md:grid-cols-[35%_65%] gap-10 items-center">
-      <ul className="space-y-4">
+    <div className="-mx-4 sm:-mx-6 px-4 sm:px-6">
+      <AutoCarousel dark={dark}>
         {items.map((it, k) => (
-          <li key={k}>
-            <button
-              onClick={() => setI(k)}
-              className="text-left text-lg md:text-xl transition"
-              style={{
-                color: k === i ? "#FFFFFF" : "rgba(255,255,255,0.35)",
-                fontWeight: k === i ? 700 : 500,
-              }}
-            >
-              {it.t}
-            </button>
-          </li>
+          <div key={k} className="w-[280px] md:w-[320px]">
+            <div className="rounded-2xl overflow-hidden aspect-[3/4]" style={{ backgroundColor: dark ? "#1a1a1a" : "#F5F5F5" }}>
+              <img src={it.img} alt={it.t} className="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <h3 className="mt-4 font-display font-bold text-lg" style={{ color: textColor }}>{it.t}</h3>
+            <p className="mt-2 text-sm" style={{ color: subColor }}>{it.d}</p>
+          </div>
         ))}
-      </ul>
-      <div>
-        <div className="rounded-2xl overflow-hidden bg-white aspect-[4/3]">
-          <img src={s.img} alt={s.t} className="w-full h-full object-contain" />
-        </div>
-        <h3 className="mt-6 text-2xl md:text-3xl font-display font-bold text-white">{s.t}</h3>
-        <p className="mt-3 text-base" style={{ color: "rgba(255,255,255,0.8)" }}>{s.d}</p>
-      </div>
+      </AutoCarousel>
     </div>
   );
 }
@@ -430,7 +434,7 @@ function Roadmap() {
     <div ref={ref} className="mt-16">
       <div className="hidden md:block relative">
         <div className="absolute top-3 left-0 right-0 h-px" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-        <div className="absolute top-3 left-0 h-px transition-all duration-500" style={{ backgroundColor: "#FFF", width: `${progress * 100}%` }} />
+        <div className="absolute top-3 left-0 h-px transition-all duration-500" style={{ backgroundColor: "#FFF", width: `${Math.min(progress, 1) * 25}%` }} />
         <div className="relative flex justify-between">
           {steps.map((s, i) => {
             const done = i < currentIdx;
