@@ -118,29 +118,26 @@ function Landing() {
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {[
-              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", embed: "https://www.instagram.com/reel/DX_Qqp9tbvg/embed/", views: "3.6M", likes: "120K", cmt: "2 200", quote: tr("Une invention qui va changer des vies.", "An invention that will change lives.") },
-              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", embed: "https://www.instagram.com/reel/DYhaBkRov_C/embed/", views: "1.2M", likes: "45K", cmt: "800", quote: tr("Enfin une vraie innovation !", "Finally, real innovation!") },
+              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", handle: "@legmio.official", views: "3,6 M", likes: "120 K", cmt: "2 200" },
+              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", handle: "@legmio.official", views: "1,2 M", likes: "45 K", cmt: "800" },
             ].map((r, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden" style={{ backgroundColor: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-                <div className="grid grid-cols-1 md:grid-cols-[45%_55%]">
-                  <div className="bg-black">
-                    <div className="relative w-full" style={{ aspectRatio: "9/16" }}>
-                      <iframe className="absolute inset-0 w-full h-full" src={r.embed} title="Instagram reel" allow="encrypted-media" />
-                    </div>
+              <div key={i} className="rounded-2xl overflow-hidden flex flex-col" style={{ backgroundColor: "#1a1a1a", border: "1px solid #2a2a2a" }}>
+                <div className="relative w-full flex items-center justify-center" style={{ aspectRatio: "9/16", maxHeight: 420, background: "radial-gradient(circle at 30% 20%, #2a2a2a, #0a0a0a)" }}>
+                  <div className="flex flex-col items-center gap-3 text-white/80">
+                    <IconInstagram size={64} />
+                    <div className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.6)" }}>Reel</div>
                   </div>
-                  <div className="p-6 flex flex-col justify-center text-white space-y-3">
-                    <div className="flex gap-4 text-sm">
-                      <div><div className="text-xl font-display font-bold">{r.views}</div><div style={{ color: "#999" }} className="text-xs">{tr("vues", "views")}</div></div>
-                      <div><div className="text-xl font-display font-bold">{r.likes}</div><div style={{ color: "#999" }} className="text-xs">{tr("likes", "likes")}</div></div>
-                      <div><div className="text-xl font-display font-bold">{r.cmt}</div><div style={{ color: "#999" }} className="text-xs">{tr("commentaires", "comments")}</div></div>
-                    </div>
-                    <blockquote className="text-base font-display italic leading-snug">"{r.quote}"</blockquote>
-                    <div>
-                      <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-light inline-flex text-xs px-4 py-2">
-                        {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
-                      </a>
-                    </div>
+                </div>
+                <div className="p-6 flex flex-col gap-4 text-white">
+                  <div className="text-sm" style={{ color: "#bbb" }}>{r.handle}</div>
+                  <div className="grid grid-cols-3 gap-2 text-center">
+                    <div><div className="text-lg font-display font-bold">{r.views}</div><div className="text-xs" style={{ color: "#999" }}>{tr("vues", "views")}</div></div>
+                    <div><div className="text-lg font-display font-bold">{r.likes}</div><div className="text-xs" style={{ color: "#999" }}>{tr("likes", "likes")}</div></div>
+                    <div><div className="text-lg font-display font-bold">{r.cmt}</div><div className="text-xs" style={{ color: "#999" }}>{tr("commentaires", "comments")}</div></div>
                   </div>
+                  <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-light inline-flex text-sm">
+                    {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
+                  </a>
                 </div>
               </div>
             ))}
