@@ -100,7 +100,7 @@ function Produit() {
               <div className="flex">
                 {[0, 1, 2, 3, 4].map((i) => <IconStar key={i} size={14} />)}
               </div>
-              <span className="underline" style={{ color: "#666" }}>4.9/5 (12 {tr("avis", "reviews")})</span>
+              <span className="underline" style={{ color: "#666" }}>{avgStr}/5 ({reviewCount} {tr("avis", "reviews")})</span>
             </button>
             <div className="mt-6 flex items-baseline gap-3">
               <div className="text-4xl font-display font-bold" style={{ color: "#111" }}>150€ TTC</div>
