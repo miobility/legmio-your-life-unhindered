@@ -276,51 +276,16 @@ function Produit() {
         </div>
       </section>
 
-      {reviewOpen && <ReviewModal onClose={() => setReviewOpen(false)} />}
+      {reviewOpen && (
+        <ReviewModal
+          onClose={() => setReviewOpen(false)}
+          onSubmit={(r) => setReviews((prev) => [r, ...prev])}
+        />
+      )}
     </div>
   );
 }
 
-function ProductFeatures() {
-  const { tr } = useLanguage();
-  const items = [
-    { t: tr("Mains libres", "Hands free"), img: "/usecase-quotidien.png", d: tr("L'appui avant-bras redistribue entièrement la charge. Ta main est libre — pour porter, travailler, tenir ton enfant.", "The forearm support fully redistributes the load. Your hand is free.") },
-    { t: tr("Appui avant-bras ergonomique", "Ergonomic forearm rest"), img: "/bequille.png", d: tr("Conçue pour la position naturelle du poignet. Réduit les contraintes à la prise en main.", "Designed for natural wrist position. Reduces grip strain.") },
-    { t: tr("Système de réglage", "Adjustment system"), img: "/bequille.png", d: tr("Deux points de réglage indépendants. Universelle de 1m50 à 1m95. Sans outil.", "Two independent adjustment points. Fits 1m50 to 1m95. No tools.") },
-    { t: tr("Embout interchangeable", "Interchangeable tip"), img: "/bequille.png", d: tr("Tu le changes seul, sans outil. Intérieur, extérieur, usure — toujours la bonne accroche.", "Change it yourself, no tools. Indoors, outdoors — always the right grip.") },
-    { t: tr("Position de repos", "Rest position"), img: "/bequille.png", d: tr("legmio tient debout contre un mur et ne tombe pas.", "legmio stands against a wall without falling.") },
-    { t: tr("Structure légère", "Lightweight frame"), img: "/bequille.png", d: tr("850g. Robuste. Assemblée en France pour durer dans le temps.", "850g. Robust. Assembled in France to last.") },
-  ];
-  const [i, setI] = useState(0);
-  const s = items[i];
-  return (
-    <div className="mt-10 grid grid-cols-1 md:grid-cols-[30%_70%] gap-10 items-center">
-      <ul className="space-y-3">
-        {items.map((it, k) => (
-          <li key={k}>
-            <button
-              onClick={() => setI(k)}
-              className="text-left text-lg transition"
-              style={{
-                color: k === i ? "#111111" : "#BBBBBB",
-                fontWeight: k === i ? 700 : 500,
-              }}
-            >
-              {it.t}
-            </button>
-          </li>
-        ))}
-      </ul>
-      <div>
-        <div className="rounded-2xl overflow-hidden bg-[#F5F5F5] aspect-[4/3]">
-          <img src={s.img} alt={s.t} className="w-full h-full object-contain" />
-        </div>
-        <h3 className="mt-6 text-2xl md:text-3xl font-display font-bold" style={{ color: "#111" }}>{s.t}</h3>
-        <p className="mt-3" style={{ color: "#444" }}>{s.d}</p>
-      </div>
-    </div>
-  );
-}
 
 function ReviewModal({ onClose }: { onClose: () => void }) {
   const { tr } = useLanguage();
