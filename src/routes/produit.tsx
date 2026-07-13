@@ -34,11 +34,26 @@ function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+type Review = { stars: number; title: string; quote: string; name: string; profile: string; date: string; img?: string };
+
 function Produit() {
   const { tr, hubspotUrl } = useLanguage();
   const gallery = ["/bequille.png", "/usecase-quotidien.png", "/usecase-reeducation.png", "/usecase-emploi.png", "/usecase-parental.png"];
   const [sel, setSel] = useState(0);
   const [reviewOpen, setReviewOpen] = useState(false);
+
+  const initialReviews: Review[] = [
+    { img: "/sophie.jpg", stars: 5, title: tr("Ça change tout.", "It changes everything."), quote: tr("Je béquille depuis 3 ans et je n'avais jamais imaginé pouvoir porter mon fils. Avec legmio c'est possible.", "3 years on crutches — I never thought I could carry my son. With legmio I can."), name: "Sophie", profile: tr("Sclérose en plaques", "Multiple sclerosis"), date: tr("Mars 2026", "March 2026") },
+    { img: "/marc.jpg", stars: 5, title: tr("Rééducation transformée.", "Rehab transformed."), quote: tr("6 mois de rééducation post-opératoire. Mes épaules n'ont pas souffert. Indispensable.", "6 months of post-op rehab. My shoulders were fine. Essential."), name: "Marc", profile: tr("Post-opératoire hanche", "Post-op hip"), date: tr("Février 2026", "February 2026") },
+    { img: "/camille.jpg", stars: 5, title: tr("Enfin une vraie solution.", "Finally, a real solution."), quote: tr("J'avais abandonné l'idée d'avoir les mains libres. legmio m'a prouvé que c'était possible.", "I'd given up on having free hands. legmio proved me wrong."), name: "Camille", profile: tr("Sarcome d'Ewing", "Ewing sarcoma"), date: tr("Janvier 2026", "January 2026") },
+  ];
+  const [reviews, setReviews] = useState<Review[]>(initialReviews);
+  const reviewCount = reviews.length;
+  const avg = reviewCount > 0 ? reviews.reduce((s, r) => s + r.stars, 0) / reviewCount : 0;
+  const avgStr = avg.toFixed(1);
+
+  const galleryPrev = () => setSel((s) => (s - 1 + gallery.length) % gallery.length);
+  const galleryNext = () => setSel((s) => (s + 1) % gallery.length);
 
   return (
     <div>
@@ -46,8 +61,14 @@ function Produit() {
       <section style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
-            <div className="rounded-2xl overflow-hidden aspect-square" style={{ backgroundColor: "#F5F5F5" }}>
+            <div className="relative rounded-2xl overflow-hidden aspect-square" style={{ backgroundColor: "#F5F5F5" }}>
               <img src={gallery[sel]} alt="" className="w-full h-full object-contain" />
+              <button aria-label="Previous" onClick={galleryPrev} className="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: "rgba(17,17,17,0.9)", color: "#FFF" }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+              </button>
+              <button aria-label="Next" onClick={galleryNext} className="absolute top-1/2 right-3 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: "rgba(17,17,17,0.9)", color: "#FFF" }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+              </button>
             </div>
             <div className="mt-4 flex gap-3 overflow-x-auto">
               {gallery.map((g, i) => (
