@@ -434,7 +434,7 @@ function Roadmap() {
     <div ref={ref} className="mt-16">
       <div className="hidden md:block relative">
         <div className="absolute top-3 left-0 right-0 h-px" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-        <div className="absolute top-3 left-0 h-px transition-all duration-500" style={{ backgroundColor: "#FFF", width: `${progress * 100}%` }} />
+        <div className="absolute top-3 left-0 h-px transition-all duration-500" style={{ backgroundColor: "#FFF", width: `${Math.min(progress, 1) * 25}%` }} />
         <div className="relative flex justify-between">
           {steps.map((s, i) => {
             const done = i < currentIdx;
