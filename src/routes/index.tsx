@@ -197,20 +197,22 @@ function Landing() {
               {tr("legmio s'adapte à ta vie", "legmio adapts to your life")}
             </h2>
           </Reveal>
-          <div className="mt-10 flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
-            {[
-              { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches. Reprendre ce que tu avais arrêté de demander.", "Carry, cook, care for your loved ones. Take back what you had stopped asking for.") },
-              { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Quelques semaines suffisent pour que tes épaules morflent. legmio te laisse récupérer sans tout sacrifier.", "A few weeks is enough for your shoulders to suffer. legmio lets you recover without sacrificing everything.") },
-              { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif. Prise en charge jusqu'à 90% via Agefiph ou FIPHFP.", "Stay mobile, independent, productive. Up to 90% covered via Agefiph or FIPHFP.") },
-              { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant. Le suivre. Être là.", "Hold your child. Keep up. Be there.") },
-            ].map((c, i) => (
-              <div key={i} className="relative shrink-0 w-[85%] sm:w-[60%] md:w-[24%] aspect-[3/4] rounded-2xl overflow-hidden snap-start">
-                <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.75) 100%)" }} />
-                <div className="absolute top-0 left-0 right-0 p-5 text-white font-display font-bold text-lg leading-tight">{c.t}</div>
-                <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm">{c.p}</div>
-              </div>
-            ))}
+          <div className="mt-10 -mx-4 sm:-mx-6 px-4 sm:px-6">
+            <AutoCarousel>
+              {[
+                { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches. Reprendre ce que tu avais arrêté de demander.", "Carry, cook, care for your loved ones. Take back what you had stopped asking for.") },
+                { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Quelques semaines suffisent pour que tes épaules morflent. legmio te laisse récupérer sans tout sacrifier.", "A few weeks is enough for your shoulders to suffer. legmio lets you recover without sacrificing everything.") },
+                { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif.", "Stay mobile, independent, productive.") },
+                { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant. Le suivre. Être là.", "Hold your child. Keep up. Be there.") },
+              ].map((c, i) => (
+                <div key={i} className="relative w-[280px] md:w-[320px] aspect-[3/4] rounded-2xl overflow-hidden">
+                  <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.75) 100%)" }} />
+                  <div className="absolute top-0 left-0 right-0 p-5 text-white font-display font-bold text-lg leading-tight">{c.t}</div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm">{c.p}</div>
+                </div>
+              ))}
+            </AutoCarousel>
           </div>
           <div className="mt-12 text-center"><CTA /></div>
         </div>
