@@ -198,13 +198,15 @@ function Produit() {
         `}</style>
       </section>
 
-      {/* SECTION 3 — FEATURES WHOOP-STYLE */}
+      {/* SECTION 3 — FEATURES CAROUSEL */}
       <section id="features" style={{ backgroundColor: "#FFFFFF" }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <h2 className="text-3xl md:text-4xl" style={{ color: "#111" }}>{tr("Conçue pour durer.", "Built to last.")}</h2>
           </Reveal>
-          <ProductFeatures />
+          <div className="mt-10">
+            <FeaturesCarousel />
+          </div>
         </div>
       </section>
 
@@ -215,8 +217,8 @@ function Produit() {
             <div>
               <h2 className="text-3xl md:text-4xl" style={{ color: "#111" }}>{tr("Avis clients", "Customer reviews")}</h2>
               <div className="mt-4 flex items-baseline gap-3">
-                <div className="text-5xl font-display font-bold" style={{ color: "#111" }}>4.9/5</div>
-                <div style={{ color: "#666" }}>(12 {tr("avis", "reviews")})</div>
+                <div className="text-5xl font-display font-bold" style={{ color: "#111" }}>{avgStr}/5</div>
+                <div style={{ color: "#666" }}>({reviewCount} {tr("avis", "reviews")})</div>
               </div>
             </div>
             <div className="md:text-right">
@@ -227,22 +229,22 @@ function Produit() {
           </div>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { img: "/sophie.jpg", t: tr("Ça change tout.", "It changes everything."), q: tr("Je béquille depuis 3 ans et je n'avais jamais imaginé pouvoir porter mon fils. Avec legmio c'est possible.", "3 years on crutches — I never thought I could carry my son. With legmio I can."), n: "Sophie", p: tr("Sclérose en plaques", "Multiple sclerosis"), d: tr("Mars 2026", "March 2026") },
-              { img: "/marc.jpg", t: tr("Rééducation transformée.", "Rehab transformed."), q: tr("6 mois de rééducation post-opératoire. Mes épaules n'ont pas souffert. Indispensable.", "6 months of post-op rehab. My shoulders were fine. Essential."), n: "Marc", p: tr("Post-opératoire hanche", "Post-op hip"), d: tr("Février 2026", "February 2026") },
-              { img: "/camille.jpg", t: tr("Enfin une vraie solution.", "Finally, a real solution."), q: tr("J'avais abandonné l'idée d'avoir les mains libres. legmio m'a prouvé que c'était possible.", "I'd given up on having free hands. legmio proved me wrong."), n: "Camille", p: tr("Sarcome d'Ewing", "Ewing sarcoma"), d: tr("Janvier 2026", "January 2026") },
-            ].map((r, i) => (
+            {reviews.map((r, i) => (
               <div key={i} className="card-soft p-6">
                 <div className="flex gap-0.5" style={{ color: "#111" }}>
-                  {[0, 1, 2, 3, 4].map((k) => <IconStar key={k} size={14} />)}
+                  {[0, 1, 2, 3, 4].map((k) => <IconStar key={k} size={14} filled={k < r.stars} />)}
                 </div>
-                <h3 className="mt-3 font-display font-bold text-lg" style={{ color: "#111" }}>{r.t}</h3>
-                <p className="mt-2 text-sm" style={{ color: "#333" }}>{r.q}</p>
+                <h3 className="mt-3 font-display font-bold text-lg" style={{ color: "#111" }}>{r.title}</h3>
+                <p className="mt-2 text-sm" style={{ color: "#333" }}>{r.quote}</p>
                 <div className="mt-4 flex items-center gap-3">
-                  <img src={r.img} alt={r.n} className="w-12 h-12 rounded-full object-cover" />
+                  {r.img ? (
+                    <img src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover" />
+                  ) : (
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold" style={{ backgroundColor: "#111", color: "#FFF" }}>{r.name.charAt(0).toUpperCase()}</div>
+                  )}
                   <div className="text-sm">
-                    <div className="font-bold" style={{ color: "#111" }}>{r.n}</div>
-                    <div style={{ color: "#666" }}>{r.p} · {r.d}</div>
+                    <div className="font-bold" style={{ color: "#111" }}>{r.name}</div>
+                    <div style={{ color: "#666" }}>{r.profile}{r.profile ? " · " : ""}{r.date}</div>
                   </div>
                 </div>
               </div>
