@@ -377,7 +377,7 @@ function WallOfLove() {
   );
 }
 
-function FeaturesSelector() {
+export function FeaturesCarousel({ dark = false }: { dark?: boolean }) {
   const { tr } = useLanguage();
   const items = [
     { t: tr("Mains libres", "Hands free"), img: "/usecase-quotidien.png", d: tr("L'appui avant-bras redistribue entièrement la charge. Ta main est libre — pour porter, travailler, tenir ton enfant.", "The forearm support fully redistributes the load. Your hand is free — to carry, work, hold your child.") },
@@ -387,33 +387,21 @@ function FeaturesSelector() {
     { t: tr("Position de repos", "Rest position"), img: "/bequille.png", d: tr("legmio tient debout contre un mur et ne tombe pas. Tu peux t'y adosser et te reposer dessus.", "legmio stands against a wall without falling. You can lean on it and rest.") },
     { t: tr("Structure légère", "Lightweight frame"), img: "/bequille.png", d: tr("850g. Robuste. Légère. Assemblée en France pour durer dans le temps.", "850g. Robust. Light. Assembled in France to last.") },
   ];
-  const [i, setI] = useState(0);
-  const s = items[i];
+  const textColor = dark ? "#FFFFFF" : "#111111";
+  const subColor = dark ? "rgba(255,255,255,0.75)" : "#666666";
   return (
-    <div className="mt-12 grid grid-cols-1 md:grid-cols-[35%_65%] gap-10 items-center">
-      <ul className="space-y-4">
+    <div className="-mx-4 sm:-mx-6 px-4 sm:px-6">
+      <AutoCarousel dark={dark}>
         {items.map((it, k) => (
-          <li key={k}>
-            <button
-              onClick={() => setI(k)}
-              className="text-left text-lg md:text-xl transition"
-              style={{
-                color: k === i ? "#FFFFFF" : "rgba(255,255,255,0.35)",
-                fontWeight: k === i ? 700 : 500,
-              }}
-            >
-              {it.t}
-            </button>
-          </li>
+          <div key={k} className="w-[280px] md:w-[320px]">
+            <div className="rounded-2xl overflow-hidden aspect-[3/4]" style={{ backgroundColor: dark ? "#1a1a1a" : "#F5F5F5" }}>
+              <img src={it.img} alt={it.t} className="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <h3 className="mt-4 font-display font-bold text-lg" style={{ color: textColor }}>{it.t}</h3>
+            <p className="mt-2 text-sm" style={{ color: subColor }}>{it.d}</p>
+          </div>
         ))}
-      </ul>
-      <div>
-        <div className="rounded-2xl overflow-hidden bg-white aspect-[4/3]">
-          <img src={s.img} alt={s.t} className="w-full h-full object-contain" />
-        </div>
-        <h3 className="mt-6 text-2xl md:text-3xl font-display font-bold text-white">{s.t}</h3>
-        <p className="mt-3 text-base" style={{ color: "rgba(255,255,255,0.8)" }}>{s.d}</p>
-      </div>
+      </AutoCarousel>
     </div>
   );
 }
