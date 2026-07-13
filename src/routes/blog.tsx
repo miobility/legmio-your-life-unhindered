@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { IconChevron } from "@/components/Icons";
+import { useLanguage } from "@/lib/i18n";
 
 export const Route = createFileRoute("/blog")({
   head: () => ({
@@ -23,87 +24,114 @@ function Placeholder({ label, aspect = "aspect-video" }: { label: string; aspect
   );
 }
 
-const genesisBody = `En 2020, j'ai subi une lourde opération pour retirer le cancer des os qui rongeait mon bassin. Elle fut un succès — et le début d'un nouveau parcours, à la fois difficile et joyeux.
+const genesisFr = `En 2020, j'ai subi une lourde opération pour retirer le cancer des os qui rongeait mon bassin. Elle fut un succès — et le début d'un nouveau parcours, à la fois difficile et joyeux.
 
 La maladie m'a beaucoup pris. Mais elle m'a aussi appris à mesurer ce qui compte.
 
-L'une des choses les plus dures : ne pas pouvoir porter mon fils quand il avait un ou deux ans. Je devais négocier pour qu'il me suive de son plein gré. Disons qu'il est coriace en négociation.
+L'une des choses les plus dures : ne pas pouvoir porter mon fils quand il avait un ou deux ans. Je devais négocier pour qu'il me suive de son plein gré.
 
 Peu à peu, le sentiment d'impuissance est devenu familier. Et il n'existait aucune solution adaptée.
 
 Alors j'en ai inventé une.
 
-En tant que roboticien, j'ai d'abord créé des prototypes motorisés. Puis j'ai réalisé qu'un dispositif passif pouvait suffire — et c'est là que les choses sont devenues vraiment intéressantes.
+En tant que roboticien, j'ai d'abord créé des prototypes motorisés. Puis j'ai réalisé qu'un dispositif passif pouvait suffire.
 
 Après de nombreuses itérations : legmio. Une béquille qui libère la main.
 
-Je l'utilise quotidiennement depuis plus d'un an. Je peux porter mon fils — même s'il a grandi — et sa petite sœur, arrivée entre-temps. Je fais les courses sans sac à dos. Je porte mon plateau à la cantine.
+Je l'utilise quotidiennement depuis plus d'un an. Je peux porter mon fils, ma fille, faire les courses sans sac à dos, porter mon plateau à la cantine.
 
 Le gain d'autonomie est énorme.
 
 Et f*ck cancer.`;
 
-const article2 = `Deux béquilles, une même promesse — les mains libres. Mais des réalités très différentes.
+const genesisEn = `In 2020, I underwent major surgery to remove the bone cancer that had invaded my pelvis. It was a success — and the start of a new journey, both hard and joyful.
 
-L'iWalk est conçue exclusivement pour les blessures sous le genou. Fracture de cheville, chirurgie du pied, rupture du tendon d'Achille — si votre blessure est dans cette zone et que vous avez un bon équilibre, l'iWalk peut être une solution temporaire efficace. Mais elle pose des conditions strictes : il faut pouvoir tenir sur une jambe pendant 30 secondes, monter les escaliers sans main courante, avoir une condition physique moyenne ou supérieure. Les personnes âgées, en situation de handicap chronique ou avec des pathologies neurologiques ne peuvent généralement pas l'utiliser.
+The illness took a lot from me. But it also taught me what matters.
 
-legmio part d'un principe différent. C'est une béquille avant-bras repensée de fond en comble — pas un substitut temporaire, mais un équipement de vie. Elle s'adresse à tous ceux qui béquillent, quelle que soit la localisation de la blessure ou du handicap, quel que soit l'âge, quelle que soit la durée. L'appui se fait sur l'avant-bras, pas sur le genou — ce qui la rend compatible avec les pathologies au genou, à la hanche, au bassin, les maladies chroniques, les handicaps permanents.
+One of the hardest things: not being able to carry my son when he was one or two years old.
 
-En résumé :
-- iWalk : blessure sous le genou uniquement, bon équilibre requis, solution temporaire
-- legmio : toutes pathologies, tous profils, court terme ou long terme, quotidien et travail
+Bit by bit, the feeling of helplessness became familiar. And no suitable solution existed.
 
-Si vous cherchez une solution pour quelques semaines après une fracture de cheville et que vous êtes en bonne condition physique — l'iWalk peut convenir. Si vous béquillez au quotidien, depuis des mois ou des années, ou si votre blessure est au-dessus du genou — legmio est conçue pour vous.`;
+So I invented one.
 
-const article3 = `Il existe plusieurs types de béquilles sur le marché. Tour d'horizon pour choisir celle qui correspond à votre situation.
+As a roboticist, I first built motorized prototypes. Then I realized a passive device could be enough.
 
-Les béquilles axillaires (ou béquilles classiques) — les béquilles qui passent sous les bras. Très répandues, peu coûteuses. Elles posent deux problèmes majeurs : elles compriment les nerfs axillaires (risque de paralysie temporaire du bras) et elles mobilisent entièrement les deux mains. Recommandées uniquement pour de très courtes durées.
+After many iterations: legmio. A crutch that frees the hand.
 
-Les béquilles avant-bras (ou béquilles anglaises) — l'amélioration standard. L'appui se fait sur l'avant-bras plutôt que sous l'aisselle. Moins dangereuses pour les nerfs, mais les mains restent occupées. Après plusieurs semaines ou mois, les douleurs aux épaules, poignets et coudes s'accumulent.
+I've used it daily for over a year. I can carry my son and daughter, shop without a backpack, carry my tray at lunch.
 
-L'iWalk — une béquille mains libres pour les blessures sous le genou uniquement. Efficace pour une fracture de cheville chez quelqu'un en bonne condition physique. Inadaptée aux blessures au-dessus du genou, aux personnes âgées, aux handicaps chroniques.
+The gain in independence is huge.
 
-legmio — une béquille avant-bras repensée qui libère complètement la main. L'appui est redistribué sur l'avant-bras entier grâce à un système ergonomique breveté, ce qui protège les poignets, les épaules et les nerfs. Compatible avec toutes les pathologies et tous les profils. Conçue par des chercheurs du CNRS et de l'ISIR Sorbonne Université pour durer dans le temps.
-
-Quel type de béquille pour quelle situation :
-- Quelques jours post-opératoire : béquilles axillaires (court terme uniquement)
-- Quelques semaines, blessure sous le genou, bonne condition physique : iWalk
-- Plusieurs mois ou années, toutes pathologies : béquilles anglaises classiques ou legmio (recommandé)
-- Handicap permanent, maladie chronique, maintien en emploi : legmio`;
-
-const articles = [
-  { cat: "Comparatif", title: "legmio vs iWalk : quelle béquille mains libres choisir selon votre situation ?", img: "legmio vs iWalk", body: article2 },
-  { cat: "Comparatif", title: "Béquilles classiques, béquilles anglaises, iWalk, legmio : comment choisir ?", img: "Comparatif complet", body: article3 },
-  { cat: "Autonomie", title: "Comment choisir ses béquilles quand on béquille au quotidien", img: "Autonomie · quotidien", body: "Article à venir." },
-  { cat: "Emploi & handicap", title: "Béquilles et maintien en emploi : ce que vous pouvez demander à votre employeur", img: "Emploi & handicap", body: "Article à venir." },
-];
+And f*ck cancer.`;
 
 function Blog() {
+  const { tr, lang } = useLanguage();
   const [openGenesis, setOpenGenesis] = useState(false);
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+  const articles = [
+    {
+      cat: tr("Comparatif", "Comparison"),
+      title: tr(
+        "legmio vs iWalk : quelle béquille mains libres choisir selon votre situation ?",
+        "legmio vs iWalk: which hands-free crutch fits your situation?"
+      ),
+      img: "legmio vs iWalk",
+      body: tr(
+        "Deux béquilles, une même promesse — les mains libres. Mais des réalités très différentes. L'iWalk est conçue exclusivement pour les blessures sous le genou. legmio part d'un principe différent — une béquille avant-bras repensée de fond en comble, pour tous ceux qui béquillent, quelle que soit la localisation ou la durée.",
+        "Two crutches, one promise — hands free. But very different realities. iWalk is designed exclusively for below-knee injuries. legmio takes a different approach — a fully redesigned forearm crutch for anyone on crutches, whatever the injury or duration."
+      ),
+    },
+    {
+      cat: tr("Comparatif", "Comparison"),
+      title: tr(
+        "Béquilles classiques, béquilles anglaises, iWalk, legmio : comment choisir ?",
+        "Classic crutches, forearm crutches, iWalk, legmio: how to choose?"
+      ),
+      img: "Comparatif complet",
+      body: tr(
+        "Tour d'horizon pour choisir la béquille adaptée à votre situation, entre béquilles axillaires, béquilles anglaises, iWalk et legmio.",
+        "A full overview to pick the right crutch — axillary crutches, forearm crutches, iWalk, and legmio."
+      ),
+    },
+    {
+      cat: tr("Autonomie", "Independence"),
+      title: tr("Comment choisir ses béquilles quand on béquille au quotidien", "How to choose crutches when you use them daily"),
+      img: "Autonomie · quotidien",
+      body: tr("Article à venir.", "Coming soon."),
+    },
+    {
+      cat: tr("Emploi & handicap", "Work & disability"),
+      title: tr("Béquilles et maintien en emploi : ce que vous pouvez demander à votre employeur", "Crutches and staying at work: what you can ask your employer"),
+      img: "Emploi & handicap",
+      body: tr("Article à venir.", "Coming soon."),
+    },
+  ];
+
+  const genesisBody = lang === "en" ? genesisEn : genesisFr;
+
   return (
     <div style={{ backgroundColor: "#FFFFFF" }}>
       <section style={{ backgroundColor: "#F5F5F5" }} className="px-4 sm:px-6 py-20 text-center">
-        <h1 className="text-4xl sm:text-5xl" style={{ color: "#111" }}>Conseils & ressources</h1>
-        <p className="mt-4" style={{ color: "#666" }}>Autonomie · Rééducation · Emploi & handicap · Vie quotidienne</p>
+        <h1 className="text-4xl sm:text-5xl" style={{ color: "#111" }}>{tr("Conseils & ressources", "Advice & resources")}</h1>
+        <p className="mt-4" style={{ color: "#666" }}>{tr("Autonomie · Rééducation · Emploi & handicap · Vie quotidienne", "Independence · Rehab · Work & disability · Daily life")}</p>
       </section>
 
       <section className="px-4 sm:px-6 py-16">
         <div className="max-w-6xl mx-auto">
-          {/* Featured article — Genèse */}
           <article className="card-soft overflow-hidden mb-10">
             <div className="grid grid-cols-1 md:grid-cols-2">
-              <Placeholder label="Nicolas — Laboratoire ISIR" aspect="aspect-video md:aspect-auto md:h-full" />
+              <Placeholder label={tr("Nicolas — ISIR", "Nicolas — ISIR")} aspect="aspect-video md:aspect-auto md:h-full" />
               <div className="p-8">
-                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "#111", color: "#FFF" }}>Genèse</span>
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "#111", color: "#FFF" }}>{tr("Genèse", "Origin")}</span>
                 <h2 className="mt-4 text-2xl md:text-3xl font-display font-bold" style={{ color: "#111" }}>
-                  "F*ck cancer. Et si on inventait la béquille qu'on n'avait jamais faite ?"
+                  {tr('"F*ck cancer. Et si on inventait la béquille qu\'on n\'avait jamais faite ?"', '"F*ck cancer. What if we invented the crutch no one ever built?"')}
                 </h2>
                 <p className="mt-4 text-sm" style={{ color: "#666" }}>
-                  En 2020, j'ai subi une lourde opération pour retirer le cancer des os qui rongeait mon bassin…
+                  {tr("En 2020, j'ai subi une lourde opération pour retirer le cancer des os…", "In 2020, I underwent major surgery for bone cancer…")}
                 </p>
                 <button onClick={() => setOpenGenesis(!openGenesis)} className="mt-4 inline-flex items-center gap-1 text-sm font-bold" style={{ color: "#111" }}>
-                  {openGenesis ? "Réduire" : "Lire l'article"}
+                  {openGenesis ? tr("Réduire", "Collapse") : tr("Lire l'article", "Read article")}
                   <span className={`transition-transform ${openGenesis ? "rotate-180" : ""}`}><IconChevron size={16} /></span>
                 </button>
                 {openGenesis && (
@@ -111,7 +139,7 @@ function Blog() {
                     {genesisBody.split("\n\n").map((p, i) => <p key={i}>{p}</p>)}
                     <div className="pt-4 border-t" style={{ borderColor: "#EEE" }}>
                       <div className="font-bold" style={{ color: "#111" }}>Nicolas Perrin-Gilbert</div>
-                      <div style={{ color: "#666" }}>Co-fondateur & CEO · Chercheur CNRS, ISIR Sorbonne Université</div>
+                      <div style={{ color: "#666" }}>{tr("Co-fondateur & CEO · Chercheur CNRS, ISIR Sorbonne Université", "Co-founder & CEO · CNRS researcher, ISIR Sorbonne Université")}</div>
                     </div>
                   </div>
                 )}
@@ -127,12 +155,12 @@ function Blog() {
                   <span className="inline-block self-start px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "#F5F5F5", color: "#111" }}>{a.cat}</span>
                   <h3 className="mt-4 text-lg font-display font-bold leading-snug flex-1" style={{ color: "#111" }}>{a.title}</h3>
                   <button onClick={() => setOpenIdx(openIdx === i ? null : i)} className="mt-4 self-start text-sm font-bold inline-flex items-center gap-1" style={{ color: "#111" }}>
-                    {openIdx === i ? "Réduire" : "Lire"}
+                    {openIdx === i ? tr("Réduire", "Collapse") : tr("Lire", "Read")}
                     <span className={`transition-transform ${openIdx === i ? "rotate-180" : ""}`}><IconChevron size={16} /></span>
                   </button>
                   {openIdx === i && (
-                    <div className="mt-4 space-y-3 text-sm leading-relaxed" style={{ color: "#333" }}>
-                      {a.body.split("\n\n").map((p, k) => <p key={k}>{p}</p>)}
+                    <div className="mt-4 text-sm leading-relaxed" style={{ color: "#333" }}>
+                      <p>{a.body}</p>
                     </div>
                   )}
                 </div>
