@@ -6,6 +6,7 @@ import {
   IconArrowRight, IconInstagram, IconTiktok, IconLinkedin,
 } from "@/components/Icons";
 import { Reveal } from "@/components/Reveal";
+import { AutoCarousel } from "@/components/AutoCarousel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
