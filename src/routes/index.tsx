@@ -153,14 +153,14 @@ function Landing() {
               {tr("Ils l'ont testé. Ils témoignent.", "They tested it. They speak up.")}
             </h2>
           </Reveal>
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { img: "/sophie.jpg", n: "Sophie", a: tr("34 ans", "34"), p: tr("Sclérose en plaques", "Multiple sclerosis"), b: tr("3 ans de béquilles", "3 years on crutches"), q: tr("Avant legmio, chaque sortie était une négociation. Le premier jour où j'ai pu rentrer des courses seule — j'ai pleuré. Ça paraît rien. C'est tout.", "Before legmio, every outing was a negotiation. The first day I could bring groceries home alone — I cried. It sounds like nothing. It's everything.") },
-              { img: "/marc.jpg", n: "Marc", a: tr("47 ans", "47"), p: tr("Post-opératoire hanche", "Post-op hip"), b: tr("6 mois de rééducation", "6 months of rehab"), q: tr("Je pensais que six mois de béquilles c'était six mois à mettre ma vie entre parenthèses. Mes épaules ont tenu. Moi aussi.", "I thought six months on crutches meant six months on hold. My shoulders held up. So did I.") },
-              { img: "/camille.jpg", n: "Camille", a: tr("28 ans", "28"), p: tr("Sarcome d'Ewing", "Ewing sarcoma"), b: tr("Béquilles au quotidien", "Daily crutches"), q: tr("J'avais accepté que mes mains ne m'appartiendraient plus vraiment. legmio m'a prouvé que c'était faux.", "I'd accepted my hands weren't really mine anymore. legmio proved that wrong.") },
-            ].map((t, i) => (
-              <Reveal key={i} delay={i * 100}>
-                <div className="card-soft p-6 h-full">
+          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
+            <AutoCarousel>
+              {[
+                { img: "/sophie.jpg", n: "Sophie", a: tr("34 ans", "34"), p: tr("Sclérose en plaques", "Multiple sclerosis"), b: tr("3 ans de béquilles", "3 years on crutches"), q: tr("Avant legmio, chaque sortie était une négociation. Le premier jour où j'ai pu rentrer des courses seule — j'ai pleuré. Ça paraît rien. C'est tout.", "Before legmio, every outing was a negotiation. The first day I could bring groceries home alone — I cried. It sounds like nothing. It's everything.") },
+                { img: "/marc.jpg", n: "Marc", a: tr("47 ans", "47"), p: tr("Post-opératoire hanche", "Post-op hip"), b: tr("6 mois de rééducation", "6 months of rehab"), q: tr("Je pensais que six mois de béquilles c'était six mois à mettre ma vie entre parenthèses. Mes épaules ont tenu. Moi aussi.", "I thought six months on crutches meant six months on hold. My shoulders held up. So did I.") },
+                { img: "/camille.jpg", n: "Camille", a: tr("28 ans", "28"), p: tr("Sarcome d'Ewing", "Ewing sarcoma"), b: tr("Béquilles au quotidien", "Daily crutches"), q: tr("J'avais accepté que mes mains ne m'appartiendraient plus vraiment. legmio m'a prouvé que c'était faux.", "I'd accepted my hands weren't really mine anymore. legmio proved that wrong.") },
+              ].map((t, i) => (
+                <div key={i} className="card-soft p-6 w-[320px] md:w-[380px] h-full">
                   <div className="flex items-center gap-4">
                     <img src={t.img} alt={t.n} className="w-20 h-20 rounded-full object-cover" />
                     <div>
@@ -171,8 +171,8 @@ function Landing() {
                   <div className="mt-4 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: "#F5F5F5", color: "#111" }}>{t.b}</div>
                   <p className="mt-4 italic text-sm" style={{ color: "#333" }}>"{t.q}"</p>
                 </div>
-              </Reveal>
-            ))}
+              ))}
+            </AutoCarousel>
           </div>
           <div className="mt-12 text-center"><CTA /></div>
         </div>
