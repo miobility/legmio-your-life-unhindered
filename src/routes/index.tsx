@@ -252,32 +252,46 @@ function Landing() {
               {tr("Une grande avancée pour des millions de personnes", "A major breakthrough for millions of people")}
             </h2>
           </Reveal>
-          <div className="mt-14 max-w-3xl mx-auto rounded-2xl p-8" style={{ backgroundColor: "#F5F5F5", borderLeft: "3px solid #111" }}>
-            <blockquote className="font-display italic text-xl md:text-2xl leading-snug" style={{ color: "#111" }}>
-              "{tr("Une béquille qui rend les mains libres : une grande avancée !", "A crutch that frees the hands — a major breakthrough!")}"
-            </blockquote>
-            <div className="mt-4 text-sm" style={{ color: "#666" }}>
-              Dr Pauline Coignard — {tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape Rehab Center · President APPROCHE · SOFMER")}
+
+          <div className="mt-14 max-w-3xl mx-auto flex items-start gap-6">
+            <img src="/coignard.png" alt="Dr Pauline Coignard" className="w-20 h-20 rounded-full object-cover shrink-0" onError={(e) => (e.currentTarget.style.display = 'none')} />
+            <div>
+              <div className="font-display text-3xl leading-none" style={{ color: "#111" }}>&ldquo;</div>
+              <blockquote className="font-display italic text-xl md:text-2xl leading-snug -mt-2" style={{ color: "#111" }}>
+                {tr("Une béquille qui rend les mains libres : une grande avancée !", "A crutch that frees the hands — a major breakthrough!")}
+              </blockquote>
+              <div className="mt-3 text-sm" style={{ color: "#666" }}>
+                <span className="font-bold" style={{ color: "#111" }}>Dr Pauline Coignard</span> — {tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape Rehab Center · President APPROCHE · SOFMER")}
+              </div>
             </div>
           </div>
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              { v: tr("Médaille d'or", "Gold medal"), l: "Concours Lépine 2026" },
-              { v: tr("Prix de l'Impact", "Impact Award"), l: "Le Média Positif 2026" },
-              { v: tr("Validation terrain", "Field validation"), l: tr("+6 Centres de rééducation et médecins MPR", "+6 rehab centers and PM&R physicians") },
-              { v: tr("Soutien scientifique", "Scientific backing"), l: "CNRS · Sorbonne Université · SATT Lutech · Bpifrance" },
-            ].map((s, i) => (
-              <div key={i} className="card-soft p-6">
-                <div className="font-display font-bold text-xl" style={{ color: "#111" }}>{s.v}</div>
-                <div className="mt-2 text-sm" style={{ color: "#666" }}>{s.l}</div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-8 md:gap-14" style={{ opacity: 0.85 }}>
-            <img src="/logo-cnrs.png" alt="CNRS" className="h-10 object-contain" />
-            <img src="/logo-sorbonne.png" alt="Sorbonne Université" className="h-10 object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
-            <img src="/logo-satt-lutech.png" alt="SATT Lutech" className="h-10 object-contain" />
-            <img src="/logo-bpifrance.png" alt="Bpifrance" className="h-10 object-contain" />
+
+          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
+            <AutoCarousel>
+              {[
+                { logo: "/lepine.png", v: tr("Médaille d'or", "Gold medal"), l: "Concours Lépine 2026", logos: null as string[] | null },
+                { logo: "/mediapositif.png", v: tr("Prix de l'Impact", "Impact Award"), l: "Le Média Positif 2026", logos: null },
+                { logo: "/kerpape.png", v: tr("Validation terrain", "Field validation"), l: tr("+6 Centres de rééducation et médecins MPR", "+6 rehab centers and PM&R physicians"), logos: null },
+                { logo: null, v: tr("Soutien scientifique", "Scientific backing"), l: "CNRS · Sorbonne Université · SATT Lutech · Bpifrance", logos: ["/logo-cnrs.png", "/logo-sorbonne.png", "/logo-satt-lutech.png", "/logo-bpifrance.png"] },
+              ].map((s, i) => (
+                <div key={i} className="card-soft p-6 w-[300px] md:w-[340px] h-full flex flex-col">
+                  {s.logo && (
+                    <div className="h-16 mb-4 flex items-center">
+                      <img src={s.logo} alt="" className="h-16 object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                    </div>
+                  )}
+                  {s.logos && (
+                    <div className="h-16 mb-4 flex items-center gap-3 flex-wrap">
+                      {s.logos.map((l) => (
+                        <img key={l} src={l} alt="" className="h-8 object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                      ))}
+                    </div>
+                  )}
+                  <div className="font-display font-bold text-xl" style={{ color: "#111" }}>{s.v}</div>
+                  <div className="mt-2 text-sm" style={{ color: "#666" }}>{s.l}</div>
+                </div>
+              ))}
+            </AutoCarousel>
           </div>
         </div>
       </section>
