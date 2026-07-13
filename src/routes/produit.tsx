@@ -287,13 +287,27 @@ function Produit() {
 }
 
 
-function ReviewModal({ onClose }: { onClose: () => void }) {
-  const { tr } = useLanguage();
+function ReviewModal({ onClose, onSubmit }: { onClose: () => void; onSubmit: (r: Review) => void }) {
+  const { tr, lang } = useLanguage();
   const [stars, setStars] = useState(5);
   const [firstName, setFirstName] = useState("");
   const [profile, setProfile] = useState("");
   const [msg, setMsg] = useState("");
   const [sent, setSent] = useState(false);
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const now = new Date();
+    const date = now.toLocaleDateString(lang === "en" ? "en-US" : "fr-FR", { month: "long", year: "numeric" });
+    onSubmit({
+      stars,
+      title: msg.split(".")[0].slice(0, 60) || tr("Nouveau retour", "New feedback"),
+      quote: msg,
+      name: firstName,
+      profile,
+      date,
+    });
+    setSent(true);
+  };
   return (
     <div
       className="fixed inset-0 z-[60] flex items-center justify-center px-4"
@@ -313,7 +327,7 @@ function ReviewModal({ onClose }: { onClose: () => void }) {
             <button onClick={onClose} className="btn-dark btn-dark-hover mt-6">{tr("Fermer", "Close")}</button>
           </div>
         ) : (
-          <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-4">
+          <form onSubmit={submit} className="space-y-4">
             <div>
               <div className="text-sm mb-2" style={{ color: "#111" }}>{tr("Note", "Rating")}</div>
               <div className="flex gap-2">
