@@ -227,7 +227,7 @@ function Produit() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl" style={{ color: TEXT }}>{tr("Avis clients", "Customer reviews")}</h2>
+              <h2 className="text-3xl md:text-4xl" style={{ color: TEXT }}>{tr("Ils l'ont testé", "They tested it")}</h2>
               <div className="mt-4 flex items-baseline gap-3">
                 <div className="text-5xl font-display font-bold" style={{ color: TEXT }}>{avgStr}/5</div>
                 <div style={{ color: MUTED }}>({reviewCount} {tr("avis", "reviews")})</div>
