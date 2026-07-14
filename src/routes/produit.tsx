@@ -127,7 +127,7 @@ function Produit() {
 
 
             <div className="mt-8">
-              <Accordion title={tr("Taille", "Size")} defaultOpen>
+              <Accordion title={tr("Taille", "Size")}>
                 {tr("Taille unique — réglable pour utilisateurs 1m50 à 1m95.", "One size — adjustable for users from 1m50 to 1m95.")}
               </Accordion>
               <Accordion title={tr("Caractéristiques", "Specs")}>

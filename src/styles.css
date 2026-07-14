@@ -155,7 +155,7 @@
   from { transform: translateX(-50%); }
   to { transform: translateX(0); }
 }
-@keyframes fade-up {
+@keyframes fade-up-kf {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
@@ -167,8 +167,33 @@
 
 @utility marquee-left { animation: marquee-left 40s linear infinite; }
 @utility marquee-right { animation: marquee-right 40s linear infinite; }
-@utility fade-up { animation: fade-up 0.7s ease-out both; }
 @utility float-rotate { animation: float-rotate 14s ease-in-out infinite; }
+
+/* Marquee (infinite auto-scroll) */
+.marquee-container { overflow: hidden; width: 100%; }
+.marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: marquee-left 30s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+.marquee-item { flex: 0 0 auto; }
+
+/* Scroll-triggered fade-up */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-up.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
 
 .marquee-pause:hover .marquee-left,
 .marquee-pause:hover .marquee-right { animation-play-state: paused; }
@@ -177,6 +202,7 @@
 .reveal.in { opacity: 1; transform: translateY(0); }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-left, .marquee-right, .float-rotate { animation: none; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee-left, .marquee-right, .marquee-track, .float-rotate { animation: none; }
+  .reveal, .fade-up { opacity: 1; transform: none; transition: none; }
 }
+
