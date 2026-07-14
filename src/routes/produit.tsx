@@ -216,12 +216,12 @@ function Produit() {
         </div>
       </section>
 
-      {/* SECTION 4 — AVIS CLIENTS */}
+      {/* SECTION 4 — TÉMOIGNAGES */}
       <section id="reviews" style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl" style={{ color: TEXT }}>{tr("Ils l'ont testé", "They tested it")}</h2>
+              <h2 className="text-3xl md:text-4xl" style={{ color: TEXT }}>{tr("Témoignages", "Testimonials")}</h2>
               <div className="mt-4 flex items-baseline gap-3">
                 <div className="text-5xl font-display font-bold" style={{ color: TEXT }}>{avgStr}/5</div>
                 <div style={{ color: MUTED }}>({reviewCount} {tr("avis", "reviews")})</div>
@@ -236,7 +236,7 @@ function Produit() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {reviews.map((r, i) => (
-              <div key={i} className="card-soft p-6">
+              <div key={i} className="card-soft p-5">
                 <div className="flex gap-0.5" style={{ color: ACCENT }}>
                   {[0, 1, 2, 3, 4].map((k) => <IconStar key={k} size={14} filled={k < r.stars} />)}
                 </div>
@@ -256,6 +256,14 @@ function Produit() {
               </div>
             ))}
           </div>
+
+          <div className="mt-12 text-center">
+            <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover inline-flex">
+              {tr("Je suis intéressé(e)", "I'm interested")} <IconArrowRight size={16} />
+            </a>
+          </div>
+        </div>
+      </section>
         </div>
       </section>
 
