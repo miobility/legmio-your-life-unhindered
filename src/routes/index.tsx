@@ -477,34 +477,41 @@ function Roadmap() {
     { t: tr("Brevet déposé", "Patent filed"), s: "FR2411206 · Octobre 2024", state: "done" as const },
     { t: tr("Prototype validé", "Validated prototype"), s: tr("utilisé en conditions réelles", "used in real-world conditions"), state: "done" as const },
     { t: tr("Industrialisation", "Industrialization"), s: tr("en cours", "in progress"), state: "current" as const },
-    { t: tr("Certification CE Classe I", "CE Class I certification"), s: "MDR 2017/745", state: "upcoming" as const },
+    { t: tr("Dispositif médical C1 & Marquage CE", "Class I medical device & CE marking"), s: "MDR 2017/745", state: "upcoming" as const },
     { t: tr("Commercialisation", "Commercial launch"), s: "2027", state: "upcoming" as const },
   ];
   const currentIdx = steps.findIndex((s) => s.state === "current");
   const progressPct = (currentIdx / (steps.length - 1)) * 100;
+  const CIRCLE = 18;
   return (
     <div className="mt-16">
-      <div className="hidden md:block relative">
-        <div className="absolute top-3 left-0 right-0 h-px" style={{ backgroundColor: BORDER }} />
-        <div className="absolute top-3 left-0 h-[2px]" style={{ backgroundColor: ACCENT, width: `${progressPct}%` }} />
-        <div className="relative flex justify-between">
+      <div className="hidden md:block relative pt-16 pb-4">
+        {/* Progress line (centered on circle row) */}
+        <div className="absolute left-0 right-0 h-px" style={{ top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER }} />
+        <div className="absolute left-0 h-[2px]" style={{ top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${progressPct}%` }} />
+        <div className="relative grid grid-cols-5 gap-4">
           {steps.map((s, i) => {
             const done = s.state === "done";
             const isCurrent = s.state === "current";
             const upcoming = s.state === "upcoming";
             return (
-              <div key={i} className="flex flex-col items-center gap-3 w-40 text-center">
-                <div
-                  className="rounded-full"
-                  style={{
-                    width: isCurrent ? 26 : 14,
-                    height: isCurrent ? 26 : 14,
-                    backgroundColor: isCurrent ? ACCENT : done ? ACCENT : "#FFFFFF",
-                    border: `2px solid ${upcoming ? BORDER : ACCENT}`,
-                  }}
-                />
-                <div className="text-sm" style={{ color: upcoming ? MUTED : TEXT, fontWeight: isCurrent ? 700 : 500, opacity: upcoming ? 0.55 : 1 }}>{s.t}</div>
-                <div className="text-xs" style={{ color: isCurrent ? ACCENT : upcoming ? MUTED : MUTED, opacity: upcoming ? 0.55 : 1 }}>{s.s}</div>
+              <div key={i} className="flex flex-col items-center text-center" style={{ opacity: upcoming ? 0.5 : 1 }}>
+                <div className="h-12 flex items-end justify-center px-2">
+                  <div className="text-sm leading-tight" style={{ color: upcoming ? MUTED : TEXT, fontWeight: isCurrent ? 700 : 500 }}>{s.t}</div>
+                </div>
+                <div className="my-3 flex items-center justify-center" style={{ height: CIRCLE }}>
+                  <div
+                    className="rounded-full"
+                    style={{
+                      width: CIRCLE,
+                      height: CIRCLE,
+                      backgroundColor: (done || isCurrent) ? ACCENT : "#FFFFFF",
+                      border: `2px solid ${upcoming ? BORDER : ACCENT}`,
+                      boxShadow: isCurrent ? `0 0 0 6px rgba(45,90,61,0.15)` : "none",
+                    }}
+                  />
+                </div>
+                <div className="text-xs px-2 leading-snug" style={{ color: isCurrent ? ACCENT : MUTED }}>{s.s}</div>
               </div>
             );
           })}
