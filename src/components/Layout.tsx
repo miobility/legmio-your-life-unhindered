@@ -36,53 +36,6 @@ export function StickyBanner() {
   );
 }
 
-function runSearch(q: string) {
-  if (typeof window === "undefined") return;
-  const query = q.trim();
-  document.querySelectorAll("mark[data-legmio-hit]").forEach((m) => {
-    const t = document.createTextNode(m.textContent || "");
-    m.parentNode?.replaceChild(t, m);
-  });
-  if (!query) return;
-  const rx = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
-  const root = document.querySelector("main");
-  if (!root) return;
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-    acceptNode: (n) => {
-      if (!n.textContent || !n.textContent.trim()) return NodeFilter.FILTER_REJECT;
-      const p = n.parentElement;
-      if (!p) return NodeFilter.FILTER_REJECT;
-      const tag = p.tagName;
-      if (tag === "SCRIPT" || tag === "STYLE" || tag === "MARK" || tag === "INPUT" || tag === "TEXTAREA") return NodeFilter.FILTER_REJECT;
-      return rx.test(n.textContent) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-    },
-  });
-  const nodes: Text[] = [];
-  let cur = walker.nextNode();
-  while (cur) { nodes.push(cur as Text); cur = walker.nextNode(); }
-  let first: HTMLElement | null = null;
-  nodes.forEach((node) => {
-    const text = node.textContent!;
-    rx.lastIndex = 0;
-    const frag = document.createDocumentFragment();
-    let lastIdx = 0;
-    let m: RegExpExecArray | null;
-    while ((m = rx.exec(text)) !== null) {
-      if (m.index > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, m.index)));
-      const mark = document.createElement("mark");
-      mark.setAttribute("data-legmio-hit", "1");
-      mark.style.backgroundColor = "#F5E96A";
-      mark.style.color = "#1A1A1A";
-      mark.textContent = m[0];
-      if (!first) first = mark;
-      frag.appendChild(mark);
-      lastIdx = m.index + m[0].length;
-    }
-    if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
-    node.parentNode?.replaceChild(frag, node);
-  });
-  if (first) (first as HTMLElement).scrollIntoView({ behavior: "smooth", block: "center" });
-}
 
 export function Header() {
   const { t, lang, setLang, hubspotUrl } = useLanguage();
