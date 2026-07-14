@@ -264,8 +264,7 @@ function Produit() {
           </div>
         </div>
       </section>
-        </div>
-      </section>
+
 
       {/* SECTION 5 — FAQ PRODUIT */}
       <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
