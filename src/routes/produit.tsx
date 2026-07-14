@@ -96,7 +96,18 @@ function Produit() {
             <h1 className="text-4xl md:text-5xl font-display font-bold" style={{ color: TEXT }}>
               {tr("La béquille legmio", "The legmio crutch")}
             </h1>
-            <div className="mt-3 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: BG_ALT, color: TEXT }}>
+            <p className="mt-4 text-base leading-relaxed" style={{ color: "#333" }}>
+              {tr(
+                "La première béquille ergonomique mains libres avec appui avant-bras.",
+                "The first hands-free ergonomic crutch with forearm support."
+              )}
+              <br />
+              {tr(
+                "Plus confortable et plus sûre, elle libère les mains lorsque c'est nécessaire et pendant les déplacements.",
+                "More comfortable and safer, it frees your hands when needed and while moving around."
+              )}
+            </p>
+            <div className="mt-4 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: BG_ALT, color: TEXT }}>
               {tr("Dispositif médical CE Classe I (en cours)", "CE Class I medical device (in progress)")}
             </div>
             <button
@@ -113,12 +124,7 @@ function Produit() {
               <div className="text-4xl font-display font-bold" style={{ color: TEXT }}>150€</div>
               <div className="text-sm mt-1" style={{ color: MUTED }}>({tr("prix estimatif", "estimated price")})</div>
             </div>
-            <p className="mt-6 text-base" style={{ color: "#333" }}>
-              {tr(
-                "La seule béquille ergonomique qui libère les mains pendant la marche.",
-                "The only ergonomic crutch that frees your hands while walking."
-              )}
-            </p>
+
 
             <div className="mt-8">
               <Accordion title={tr("À propos", "About")} defaultOpen>
