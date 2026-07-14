@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
-import { IconSearch, IconInstagram, IconTiktok, IconLinkedin } from "@/components/Icons";
+import { IconInstagram, IconTiktok, IconLinkedin } from "@/components/Icons";
 
 const SOCIAL = {
   instagram: "https://www.instagram.com/legmio.official",
