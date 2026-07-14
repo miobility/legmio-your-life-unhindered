@@ -98,49 +98,60 @@ const IconWall = ({ size = 28 }: { size?: number }) => (
   </svg>
 );
 
+const IconNerve = ({ size = 28 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 4c4 0 4 4 8 4s4-4 8-4M4 12c4 0 4 4 8 4s4-4 8-4M4 20c4 0 4-4 8-4s4 4 8 4" />
+  </svg>
+);
+const IconGrip = ({ size = 28 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M7 3v6M11 3v6M15 3v6M19 3v6M5 9h14a2 2 0 012 2v3a7 7 0 01-14 0v-3a2 2 0 012-2z" />
+  </svg>
+);
+
+const specsItems = () => [
+  { icon: <IconFeather />, kFr: "Ultralégère", kEn: "Ultralight", sFr: "Pèse seulement 850g", sEn: "Only 850g" },
+  { icon: <IconHandOpen />, kFr: "Mains libres", kEn: "Hands free", sFr: "Appui sur l'avant-bras", sEn: "Forearm support" },
+  { icon: <IconShieldPill />, kFr: "Robuste", kEn: "Sturdy", sFr: "Supporte jusqu'à 130kg", sEn: "Supports up to 130kg" },
+  { icon: <IconGrip />, kFr: "Ergonomique", kEn: "Ergonomic", sFr: "Poignée qui redistribue les contraintes d'appui", sEn: "Grip that redistributes load" },
+  { icon: <IconNerve />, kFr: "Protectrice", kEn: "Protective", sFr: "Zones d'appui qui protègent les nerfs", sEn: "Support zones that protect nerves" },
+  { icon: <IconSliders />, kFr: "Réglable", kEn: "Adjustable", sFr: "Double réglage en longueur et au niveau de la poignée", sEn: "Dual adjustment: length and grip" },
+  { icon: <IconRecycle />, kFr: "Durable", kEn: "Durable", sFr: "Embouts, poignée, sangles remplaçables", sEn: "Replaceable tips, grip, straps" },
+  { icon: <IconRulerPill />, kFr: "Universelle", kEn: "Universal", sFr: "Convient de 1m50 à 1m95", sEn: "Fits 1m50 to 1m95" },
+];
+
 export function SpecsStrip() {
   const { tr } = useLanguage();
-  const pills = [
-    { icon: <IconBalance />, t: tr("Ultraléger", "Ultralight"), s: "850g" },
-    { icon: <IconHandOpen />, t: tr("Mains libres", "Hands free"), s: tr("Appui avant-bras", "Forearm support") },
-    { icon: <IconRulerPill />, t: tr("Universelle", "Universal"), s: "1m50 – 1m95" },
-    { icon: <IconShieldPill />, t: tr("Robuste", "Sturdy"), s: tr("Jusqu'à 130kg", "Up to 130kg") },
-    { icon: <IconRecycle />, t: tr("Durable", "Durable"), s: tr("Embouts, poignée, sangles remplaçables", "Replaceable tips, grip, straps") },
-    { icon: <IconFlagFr />, t: tr("Local", "Local"), s: tr("Assemblée en France", "Assembled in France") },
-  ];
+  const pills = specsItems();
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {pills.map((p, i) => (
-        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, color: TEXT }}>
+        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, color: TEXT }}>
           <div style={{ color: ACCENT }}>{p.icon}</div>
-          <div className="font-display font-bold text-base leading-tight">{p.t}</div>
-          <div className="text-xs" style={{ color: MUTED }}>{p.s}</div>
+          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
+          <div className="text-xs" style={{ color: MUTED }}>{tr(p.sFr, p.sEn)}</div>
         </div>
       ))}
     </div>
   );
 }
 
-// ============= Product-page features grid (8 items) =============
+// ============= Product-page features grid (10 items) =============
 export function ProductFeatureGrid() {
   const { tr } = useLanguage();
+  const base = specsItems();
   const items = [
-    { icon: <IconHandOpen />, t: tr("Mains libres", "Hands free"), s: tr("La main est entièrement libre pendant la marche", "The hand is completely free while walking") },
-    { icon: <IconFeather />, t: tr("Légère", "Lightweight"), s: tr("850g seulement", "Only 850g") },
-    { icon: <IconShieldPill />, t: tr("Robuste", "Sturdy"), s: tr("Supporte jusqu'à 130kg", "Supports up to 130kg") },
-    { icon: <IconArm />, t: tr("Appui ergonomique", "Ergonomic support"), s: tr("Mousse qui absorbe les vibrations, position naturelle du poignet", "Vibration-absorbing foam, natural wrist position") },
-    { icon: <IconSliders />, t: tr("Double réglage", "Dual adjustment"), s: tr("1m50 à 1m95, sans outil", "1m50 to 1m95, no tools") },
-    { icon: <IconRecycle />, t: tr("Tout remplaçable", "Fully replaceable"), s: tr("Embouts, poignée et sangles interchangeables sans outil", "Tips, grip and straps interchangeable, no tools") },
-    { icon: <IconRest />, t: tr("Position de repos", "Rest position"), s: tr("Tu peux t'appuyer sur legmio pour récupérer", "You can lean on legmio to recover") },
-    { icon: <IconWall />, t: tr("Tient seule", "Stands alone"), s: tr("legmio tient debout contre un mur sans tomber", "legmio stands against a wall without falling") },
+    ...base,
+    { icon: <IconRest />, kFr: "Position de repos", kEn: "Rest position", sFr: "Tu peux t'appuyer sur legmio pour récupérer", sEn: "Lean on legmio to recover" },
+    { icon: <IconWall />, kFr: "Tient seule", kEn: "Stands alone", sFr: "legmio tient debout contre un mur sans tomber", sEn: "legmio stands against a wall without falling" },
   ];
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {items.map((p, i) => (
-        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, color: TEXT }}>
+        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, color: TEXT }}>
           <div style={{ color: ACCENT }}>{p.icon}</div>
-          <div className="font-display font-bold text-base leading-tight">{p.t}</div>
-          <div className="text-xs" style={{ color: MUTED }}>{p.s}</div>
+          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
+          <div className="text-xs" style={{ color: MUTED }}>{tr(p.sFr, p.sEn)}</div>
         </div>
       ))}
     </div>
