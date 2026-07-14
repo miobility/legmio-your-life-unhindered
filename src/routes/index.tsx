@@ -311,21 +311,19 @@ function Landing() {
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
             <AutoCarousel>
               {[
-                { img: "/sophie.jpg", n: "Sophie", p: tr("Sclérose en plaques", "Multiple sclerosis"), b: tr("3 ans de béquilles", "3 years on crutches"), q: tr("Avant legmio, chaque sortie était une négociation. Le premier jour où j'ai pu rentrer des courses seule — j'ai pleuré.", "Before legmio, every outing was a negotiation. The first day I could bring groceries home alone — I cried.") },
-                { img: "/marc.jpg", n: "Selim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), b: tr("Post-blessure", "Post-injury"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail.", "legmio helped me regain real day-to-day autonomy, especially at work.") },
-                { img: "/camille.jpg", n: "Camille", p: tr("Sarcome d'Ewing", "Ewing sarcoma"), b: tr("Béquilles au quotidien", "Daily crutches"), q: tr("J'avais accepté que mes mains ne m'appartiendraient plus vraiment. legmio m'a prouvé que c'était faux.", "I'd accepted my hands weren't really mine anymore. legmio proved that wrong.") },
-                { img: "/coignard.png", n: "Dr Pauline Coignard", p: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape · President APPROCHE · SOFMER"), b: tr("Expert médical", "Medical expert"), q: tr("Une béquille qui rend les mains au patient : une grande avancée !", "A crutch that gives the patient back their hands — a major breakthrough!") },
+                { img: "/pauline.png", n: "Dr Pauline Coignard", p: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape · President APPROCHE · SOFMER"), q: tr("Une béquille qui rend les mains au patient : une grande avancée !", "A crutch that gives the patient back their hands — a major breakthrough!") },
+                { img: "/selim.png", n: "Selim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)") },
+                { img: "/joachim.png", n: "Joachim", p: tr("Post-opératoire ligaments croisés · Convalescence à domicile", "Post-op cruciate ligaments · Home recovery"), q: tr("Après mon opération des ligaments croisés, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my cruciate ligament surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized.") },
               ].map((t, i) => (
-                <div key={i} className="card-soft p-6 w-[320px] md:w-[380px] h-full">
+                <div key={i} className="card-soft p-6 w-[320px] md:w-[380px] flex flex-col" style={{ minHeight: 340 }}>
                   <div className="flex items-center gap-4">
-                    <img src={t.img} alt={t.n} className="w-20 h-20 rounded-full object-cover" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
+                    <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
                     <div>
                       <div className="font-bold" style={{ color: TEXT }}>{t.n}</div>
-                      <div className="text-sm" style={{ color: MUTED }}>{t.p}</div>
+                      <div className="text-xs" style={{ color: MUTED }}>{t.p}</div>
                     </div>
                   </div>
-                  <div className="mt-4 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: BG_ALT, color: TEXT }}>{t.b}</div>
-                  <p className="mt-4 italic text-sm" style={{ color: "#333" }}>"{t.q}"</p>
+                  <p className="mt-5 italic text-sm" style={{ color: "#333" }}>"{t.q}"</p>
                 </div>
               ))}
             </AutoCarousel>
