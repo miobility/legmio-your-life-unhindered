@@ -226,7 +226,7 @@ function Landing() {
               {[
                 ["/logoparisien.png", "Le Parisien"],
                 ["/logoTF1.png", "TF1"],
-                ["/logofranceTV.png", "France Télévisions"],
+                ["/logofranceTV2.jpg", "France Télévisions"],
               ].map(([src, alt]) => (
                 <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, minWidth: 160, height: 72 }}>
                   <img src={src} alt={alt} className="object-contain" style={{ height: 40 }} />
@@ -237,16 +237,15 @@ function Landing() {
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {[
-              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", stat: tr("3,6M vues", "3.6M views"), label: null as string | null },
-              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", stat: null, label: "Le Mag de la Santé — France TV" },
+              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M vues", "3.6M views") },
+              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: "Le Mag de la Santé — France TV" },
             ].map((r, i) => (
               <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft">
                 <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: BG_ALT }}>
                   <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
                 </div>
-                <div className="p-6 flex flex-col gap-4">
-                  {r.stat && <div className="font-display font-bold text-2xl" style={{ color: TEXT }}>{r.stat}</div>}
-                  {r.label && <div className="text-sm font-semibold" style={{ color: TEXT }}>{r.label}</div>}
+                <div className="p-5 flex flex-col gap-3">
+                  <div className="text-base font-semibold" style={{ color: TEXT }}>{r.label}</div>
                   <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
                     {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
                   </a>
@@ -305,7 +304,7 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
-              {tr("Ils l'ont testé. Ils témoignent.", "They tested it. They speak up.")}
+              {tr("Témoignages", "Testimonials")}
             </h2>
           </Reveal>
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
@@ -315,7 +314,7 @@ function Landing() {
                 { img: "/selim.png", n: "Selim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)") },
                 { img: "/joachim.png", n: "Joachim", p: tr("Post-opératoire ligaments croisés · Convalescence à domicile", "Post-op cruciate ligaments · Home recovery"), q: tr("Après mon opération des ligaments croisés, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my cruciate ligament surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized.") },
               ].map((t, i) => (
-                <div key={i} className="card-soft p-6 w-[320px] md:w-[380px] flex flex-col" style={{ minHeight: 340 }}>
+                <div key={i} className="card-soft p-5 w-[320px] md:w-[380px] flex flex-col">
                   <div className="flex items-center gap-4">
                     <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
                     <div>
@@ -347,7 +346,7 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-4xl mx-auto" style={{ color: TEXT }}>
-              {tr("Validée par la science. Récompensée sur le terrain.", "Validated by science. Recognized in the field.")}
+              {tr("Validée scientifiquement. Récompensée sur le terrain.", "Scientifically validated. Recognized in the field.")}
             </h2>
           </Reveal>
 

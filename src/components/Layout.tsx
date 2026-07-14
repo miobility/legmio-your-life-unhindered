@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { IconInstagram, IconTiktok, IconLinkedin } from "@/components/Icons";
@@ -40,6 +40,12 @@ export function StickyBanner() {
 export function Header() {
   const { t, lang, setLang, hubspotUrl } = useLanguage();
   const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isProduct = pathname.startsWith("/produit") || pathname.startsWith("/bequille");
+  const isFaq = pathname.startsWith("/faq");
+  const isBlog = pathname.startsWith("/blog");
+  const linkClass = (active: boolean) =>
+    `hover:opacity-60 transition ${active ? "font-bold" : ""}`;
   return (
     <header
       className="fixed left-0 right-0 z-40 border-b"
@@ -51,9 +57,9 @@ export function Header() {
         </Link>
         <div className="flex-1" />
         <nav className="hidden md:flex items-center gap-6 text-sm">
-          <Link to="/produit" className="hover:opacity-60 transition" style={{ color: TEXT }}>{t("nav_product")}</Link>
-          <Link to="/faq" className="hover:opacity-60 transition" style={{ color: TEXT }}>{t("nav_faq")}</Link>
-          <Link to="/blog" className="hover:opacity-60 transition" style={{ color: TEXT }}>{t("nav_blog")}</Link>
+          <Link to="/produit" className={linkClass(isProduct)} style={{ color: TEXT }}>{t("nav_product")}</Link>
+          <Link to="/faq" className={linkClass(isFaq)} style={{ color: TEXT }}>{t("nav_faq")}</Link>
+          <Link to="/blog" className={linkClass(isBlog)} style={{ color: TEXT }}>{t("nav_blog")}</Link>
         </nav>
         <div className="hidden sm:flex items-center gap-1 text-sm" style={{ color: TEXT }}>
           <button onClick={() => setLang("fr")} aria-label="Français" className={`px-1 py-0.5 transition ${lang === "fr" ? "opacity-100 font-semibold" : "opacity-40 hover:opacity-70"}`}>FR</button>
