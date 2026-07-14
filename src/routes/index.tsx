@@ -226,11 +226,9 @@ function Landing() {
               {[
                 ["/logoparisien.png", "Le Parisien"],
                 ["/logoTF1.png", "TF1"],
-                ["/logoFR2.jpg", "France 2"],
-                ["/logoFR5.svg", "France 5"],
                 ["/logofranceTV.png", "France Télévisions"],
               ].map(([src, alt]) => (
-                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, minWidth: 160 }}>
+                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, minWidth: 160, height: 72 }}>
                   <img src={src} alt={alt} className="object-contain" style={{ height: 40 }} />
                 </div>
               ))}
@@ -239,30 +237,24 @@ function Landing() {
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {[
-              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", handle: "@legmio.official", views: "3,6 M", likes: "120 K", cmt: "2 200" },
-              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", handle: "@legmio.official", views: "1,2 M", likes: "45 K", cmt: "800" },
+              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", stat: tr("3,6M vues", "3.6M views"), label: null as string | null },
+              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", stat: null, label: "Le Mag de la Santé — France TV" },
             ].map((r, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden flex flex-col" style={{ backgroundColor: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-                <div className="relative w-full flex items-center justify-center" style={{ aspectRatio: "16/9", background: "radial-gradient(circle at 30% 20%, #2a2a2a, #0a0a0a)" }}>
-                  <div className="flex flex-col items-center gap-3 text-white/80">
-                    <IconInstagram size={56} />
-                    <div className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.6)" }}>Reel</div>
-                  </div>
+              <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft">
+                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: BG_ALT }}>
+                  <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
                 </div>
-                <div className="p-6 flex flex-col gap-4 text-white">
-                  <div className="text-sm" style={{ color: "#bbb" }}>{r.handle}</div>
-                  <div className="grid grid-cols-3 gap-2 text-center">
-                    <div><div className="text-lg font-display font-bold">{r.views}</div><div className="text-xs" style={{ color: "#999" }}>{tr("vues", "views")}</div></div>
-                    <div><div className="text-lg font-display font-bold">{r.likes}</div><div className="text-xs" style={{ color: "#999" }}>{tr("likes", "likes")}</div></div>
-                    <div><div className="text-lg font-display font-bold">{r.cmt}</div><div className="text-xs" style={{ color: "#999" }}>{tr("commentaires", "comments")}</div></div>
-                  </div>
-                  <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-light inline-flex text-sm">
+                <div className="p-6 flex flex-col gap-4">
+                  {r.stat && <div className="font-display font-bold text-2xl" style={{ color: TEXT }}>{r.stat}</div>}
+                  {r.label && <div className="text-sm font-semibold" style={{ color: TEXT }}>{r.label}</div>}
+                  <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
                     {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
                   </a>
                 </div>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
