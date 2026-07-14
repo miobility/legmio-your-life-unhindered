@@ -262,7 +262,7 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: TEXT }}>
-              {tr("legmio s'adapte à votre vie", "legmio adapts to your life")}
+              {tr("legmio s'adapte à ta vie", "legmio adapts to your life")}
             </h2>
           </Reveal>
           <div className="mt-10 -mx-4 sm:-mx-6 px-4 sm:px-6">
@@ -304,7 +304,7 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
-              {tr("Témoignages", "Testimonials")}
+              {tr("Ils l'ont testé. Ils témoignent.", "They tested it. They speak.")}
             </h2>
           </Reveal>
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
