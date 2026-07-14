@@ -10,25 +10,25 @@ type Dict = Record<string, string>;
 const fr: Dict = {
   banner_a: "Commercialisation courant 2027",
   banner_b: "Rejoignez la liste d'attente dès maintenant",
-  nav_product: "Béquille",
+  nav_product: "La béquille",
   nav_faq: "FAQ",
   nav_blog: "Blog",
   search_ph: "Rechercher",
   cta_interested: "Je suis intéressé(e)",
   footer_tag: "La béquille qui libère les mains.",
-  footer_bottom: "legmio 2026 · Un produit miobility · ISIR · Sorbonne Université · CNRS",
+  footer_bottom: "legmio © 2026 — Un produit miobility",
 };
 
 const en: Dict = {
   banner_a: "Launching in 2027",
   banner_b: "Join the waiting list now",
-  nav_product: "Crutch",
+  nav_product: "The crutch",
   nav_faq: "FAQ",
   nav_blog: "Blog",
   search_ph: "Search",
   cta_interested: "I'm interested",
   footer_tag: "The crutch that frees your hands.",
-  footer_bottom: "legmio 2026 · A miobility product · ISIR · Sorbonne Université · CNRS",
+  footer_bottom: "legmio © 2026 — A miobility product",
 };
 
 const dicts: Record<Lang, Dict> = { fr, en };
