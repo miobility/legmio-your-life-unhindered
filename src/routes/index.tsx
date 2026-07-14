@@ -351,32 +351,36 @@ function Landing() {
             </h2>
           </Reveal>
 
-          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
-            <AutoCarousel>
-              {[
-                { logo: "/lepine.png", v: tr("Médaille d'or", "Gold medal"), l: "Concours Lépine 2026", logos: null as string[] | null },
-                { logo: "/mediapositif.png", v: tr("Prix de l'Impact", "Impact Award"), l: "Le Média Positif 2026", logos: null },
-                { logo: "/kerpape.png", v: tr("Validation terrain", "Field validation"), l: tr("+6 Centres de rééducation & médecins MPR", "+6 rehab centers & PM&R physicians"), logos: null },
-                { logo: null, v: tr("Soutien scientifique", "Scientific backing"), l: "CNRS · Sorbonne Université · SATT Lutech · Bpifrance", logos: ["/logo-cnrs.png", "/logo-sorbonne.png", "/logo-satt-lutech.png", "/logo-bpifrance.png"] },
-              ].map((s, i) => (
-                <div key={i} className="card-soft p-6 w-[300px] md:w-[340px] h-full flex flex-col">
-                  {s.logo && (
-                    <div className="h-16 mb-4 flex items-center">
-                      <img src={s.logo} alt="" className="h-16 object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
-                    </div>
-                  )}
-                  {s.logos && (
-                    <div className="h-16 mb-4 flex items-center gap-3 flex-wrap">
-                      {s.logos.map((l) => (
-                        <img key={l} src={l} alt="" className="h-8 object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
-                      ))}
-                    </div>
-                  )}
-                  <div className="font-display font-bold text-xl" style={{ color: TEXT }}>{s.v}</div>
-                  <div className="mt-2 text-sm" style={{ color: MUTED }}>{s.l}</div>
-                </div>
-              ))}
-            </AutoCarousel>
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              {
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>
+                ),
+                t: tr("Médaille d'Or", "Gold Medal"),
+                s: "Concours Lépine 2026",
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                ),
+                t: tr("Prix de l'Impact", "Impact Award"),
+                s: "Le Média Positif 2026",
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>
+                ),
+                t: tr("Soutenu par la Recherche", "Backed by Research"),
+                s: "CNRS · Sorbonne · SATT Lutech · BPI",
+              },
+            ].map((s, i) => (
+              <div key={i} className="rounded-2xl p-6 flex flex-col items-start gap-3" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}` }}>
+                <div style={{ color: ACCENT }}>{s.icon}</div>
+                <div className="font-display font-bold text-xl leading-tight" style={{ color: TEXT }}>{s.t}</div>
+                <div className="text-sm" style={{ color: MUTED }}>{s.s}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
