@@ -98,49 +98,60 @@ const IconWall = ({ size = 28 }: { size?: number }) => (
   </svg>
 );
 
+const IconNerve = ({ size = 28 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 4c4 0 4 4 8 4s4-4 8-4M4 12c4 0 4 4 8 4s4-4 8-4M4 20c4 0 4-4 8-4s4 4 8 4" />
+  </svg>
+);
+const IconGrip = ({ size = 28 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M7 3v6M11 3v6M15 3v6M19 3v6M5 9h14a2 2 0 012 2v3a7 7 0 01-14 0v-3a2 2 0 012-2z" />
+  </svg>
+);
+
+const specsItems = () => [
+  { icon: <IconFeather />, kFr: "Ultralégère", kEn: "Ultralight", sFr: "Pèse seulement 850g", sEn: "Only 850g" },
+  { icon: <IconHandOpen />, kFr: "Mains libres", kEn: "Hands free", sFr: "Appui sur l'avant-bras", sEn: "Forearm support" },
+  { icon: <IconShieldPill />, kFr: "Robuste", kEn: "Sturdy", sFr: "Supporte jusqu'à 130kg", sEn: "Supports up to 130kg" },
+  { icon: <IconGrip />, kFr: "Ergonomique", kEn: "Ergonomic", sFr: "Poignée qui redistribue les contraintes d'appui", sEn: "Grip that redistributes load" },
+  { icon: <IconNerve />, kFr: "Protectrice", kEn: "Protective", sFr: "Zones d'appui qui protègent les nerfs", sEn: "Support zones that protect nerves" },
+  { icon: <IconSliders />, kFr: "Réglable", kEn: "Adjustable", sFr: "Double réglage en longueur et au niveau de la poignée", sEn: "Dual adjustment: length and grip" },
+  { icon: <IconRecycle />, kFr: "Durable", kEn: "Durable", sFr: "Embouts, poignée, sangles remplaçables", sEn: "Replaceable tips, grip, straps" },
+  { icon: <IconRulerPill />, kFr: "Universelle", kEn: "Universal", sFr: "Convient de 1m50 à 1m95", sEn: "Fits 1m50 to 1m95" },
+];
+
 export function SpecsStrip() {
   const { tr } = useLanguage();
-  const pills = [
-    { icon: <IconBalance />, t: tr("Ultraléger", "Ultralight"), s: "850g" },
-    { icon: <IconHandOpen />, t: tr("Mains libres", "Hands free"), s: tr("Appui avant-bras", "Forearm support") },
-    { icon: <IconRulerPill />, t: tr("Universelle", "Universal"), s: "1m50 – 1m95" },
-    { icon: <IconShieldPill />, t: tr("Robuste", "Sturdy"), s: tr("Jusqu'à 130kg", "Up to 130kg") },
-    { icon: <IconRecycle />, t: tr("Durable", "Durable"), s: tr("Embouts, poignée, sangles remplaçables", "Replaceable tips, grip, straps") },
-    { icon: <IconFlagFr />, t: tr("Local", "Local"), s: tr("Assemblée en France", "Assembled in France") },
-  ];
+  const pills = specsItems();
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {pills.map((p, i) => (
-        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, color: TEXT }}>
+        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, color: TEXT }}>
           <div style={{ color: ACCENT }}>{p.icon}</div>
-          <div className="font-display font-bold text-base leading-tight">{p.t}</div>
-          <div className="text-xs" style={{ color: MUTED }}>{p.s}</div>
+          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
+          <div className="text-xs" style={{ color: MUTED }}>{tr(p.sFr, p.sEn)}</div>
         </div>
       ))}
     </div>
   );
 }
 
-// ============= Product-page features grid (8 items) =============
+// ============= Product-page features grid (10 items) =============
 export function ProductFeatureGrid() {
   const { tr } = useLanguage();
+  const base = specsItems();
   const items = [
-    { icon: <IconHandOpen />, t: tr("Mains libres", "Hands free"), s: tr("La main est entièrement libre pendant la marche", "The hand is completely free while walking") },
-    { icon: <IconFeather />, t: tr("Légère", "Lightweight"), s: tr("850g seulement", "Only 850g") },
-    { icon: <IconShieldPill />, t: tr("Robuste", "Sturdy"), s: tr("Supporte jusqu'à 130kg", "Supports up to 130kg") },
-    { icon: <IconArm />, t: tr("Appui ergonomique", "Ergonomic support"), s: tr("Mousse qui absorbe les vibrations, position naturelle du poignet", "Vibration-absorbing foam, natural wrist position") },
-    { icon: <IconSliders />, t: tr("Double réglage", "Dual adjustment"), s: tr("1m50 à 1m95, sans outil", "1m50 to 1m95, no tools") },
-    { icon: <IconRecycle />, t: tr("Tout remplaçable", "Fully replaceable"), s: tr("Embouts, poignée et sangles interchangeables sans outil", "Tips, grip and straps interchangeable, no tools") },
-    { icon: <IconRest />, t: tr("Position de repos", "Rest position"), s: tr("Tu peux t'appuyer sur legmio pour récupérer", "You can lean on legmio to recover") },
-    { icon: <IconWall />, t: tr("Tient seule", "Stands alone"), s: tr("legmio tient debout contre un mur sans tomber", "legmio stands against a wall without falling") },
+    ...base,
+    { icon: <IconRest />, kFr: "Position de repos", kEn: "Rest position", sFr: "Tu peux t'appuyer sur legmio pour récupérer", sEn: "Lean on legmio to recover" },
+    { icon: <IconWall />, kFr: "Tient seule", kEn: "Stands alone", sFr: "legmio tient debout contre un mur sans tomber", sEn: "legmio stands against a wall without falling" },
   ];
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {items.map((p, i) => (
-        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, color: TEXT }}>
+        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, color: TEXT }}>
           <div style={{ color: ACCENT }}>{p.icon}</div>
-          <div className="font-display font-bold text-base leading-tight">{p.t}</div>
-          <div className="text-xs" style={{ color: MUTED }}>{p.s}</div>
+          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
+          <div className="text-xs" style={{ color: MUTED }}>{tr(p.sFr, p.sEn)}</div>
         </div>
       ))}
     </div>
@@ -215,11 +226,9 @@ function Landing() {
               {[
                 ["/logoparisien.png", "Le Parisien"],
                 ["/logoTF1.png", "TF1"],
-                ["/logoFR2.jpg", "France 2"],
-                ["/logoFR5.svg", "France 5"],
                 ["/logofranceTV.png", "France Télévisions"],
               ].map(([src, alt]) => (
-                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, minWidth: 160 }}>
+                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, minWidth: 160, height: 72 }}>
                   <img src={src} alt={alt} className="object-contain" style={{ height: 40 }} />
                 </div>
               ))}
@@ -228,30 +237,24 @@ function Landing() {
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {[
-              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", handle: "@legmio.official", views: "3,6 M", likes: "120 K", cmt: "2 200" },
-              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", handle: "@legmio.official", views: "1,2 M", likes: "45 K", cmt: "800" },
+              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", stat: tr("3,6M vues", "3.6M views"), label: null as string | null },
+              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", stat: null, label: "Le Mag de la Santé — France TV" },
             ].map((r, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden flex flex-col" style={{ backgroundColor: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-                <div className="relative w-full flex items-center justify-center" style={{ aspectRatio: "16/9", background: "radial-gradient(circle at 30% 20%, #2a2a2a, #0a0a0a)" }}>
-                  <div className="flex flex-col items-center gap-3 text-white/80">
-                    <IconInstagram size={56} />
-                    <div className="text-xs tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.6)" }}>Reel</div>
-                  </div>
+              <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft">
+                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: BG_ALT }}>
+                  <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
                 </div>
-                <div className="p-6 flex flex-col gap-4 text-white">
-                  <div className="text-sm" style={{ color: "#bbb" }}>{r.handle}</div>
-                  <div className="grid grid-cols-3 gap-2 text-center">
-                    <div><div className="text-lg font-display font-bold">{r.views}</div><div className="text-xs" style={{ color: "#999" }}>{tr("vues", "views")}</div></div>
-                    <div><div className="text-lg font-display font-bold">{r.likes}</div><div className="text-xs" style={{ color: "#999" }}>{tr("likes", "likes")}</div></div>
-                    <div><div className="text-lg font-display font-bold">{r.cmt}</div><div className="text-xs" style={{ color: "#999" }}>{tr("commentaires", "comments")}</div></div>
-                  </div>
-                  <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-light inline-flex text-sm">
+                <div className="p-6 flex flex-col gap-4">
+                  {r.stat && <div className="font-display font-bold text-2xl" style={{ color: TEXT }}>{r.stat}</div>}
+                  {r.label && <div className="text-sm font-semibold" style={{ color: TEXT }}>{r.label}</div>}
+                  <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
                     {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
                   </a>
                 </div>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -259,8 +262,8 @@ function Landing() {
       <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: TEXT }}>
-              {tr("legmio s'adapte à ta vie", "legmio adapts to your life")}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: TEXT }}>
+              {tr("legmio s'adapte à votre vie", "legmio adapts to your life")}
             </h2>
           </Reveal>
           <div className="mt-10 -mx-4 sm:-mx-6 px-4 sm:px-6">
@@ -269,7 +272,7 @@ function Landing() {
                 { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches.", "Carry, cook, care for your loved ones.") },
                 { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Récupère sans sacrifier tes épaules.", "Recover without sacrificing your shoulders.") },
                 { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif.", "Stay mobile, independent, productive.") },
-                { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant. Le suivre. Être là.", "Hold your child. Keep up. Be there.") },
+                { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant, des choses lourdes ou encombrantes. Reprendre ce que tu avais arrêté de demander.", "Carry your child, heavy or bulky things. Take back what you'd stopped asking for.") },
               ].map((c, i) => (
                 <div key={i} className="relative w-[280px] md:w-[320px] aspect-[3/4] rounded-2xl overflow-hidden">
                   <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
@@ -308,21 +311,19 @@ function Landing() {
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
             <AutoCarousel>
               {[
-                { img: "/sophie.jpg", n: "Sophie", p: tr("Sclérose en plaques", "Multiple sclerosis"), b: tr("3 ans de béquilles", "3 years on crutches"), q: tr("Avant legmio, chaque sortie était une négociation. Le premier jour où j'ai pu rentrer des courses seule — j'ai pleuré.", "Before legmio, every outing was a negotiation. The first day I could bring groceries home alone — I cried.") },
-                { img: "/marc.jpg", n: "Selim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), b: tr("Post-blessure", "Post-injury"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail.", "legmio helped me regain real day-to-day autonomy, especially at work.") },
-                { img: "/camille.jpg", n: "Camille", p: tr("Sarcome d'Ewing", "Ewing sarcoma"), b: tr("Béquilles au quotidien", "Daily crutches"), q: tr("J'avais accepté que mes mains ne m'appartiendraient plus vraiment. legmio m'a prouvé que c'était faux.", "I'd accepted my hands weren't really mine anymore. legmio proved that wrong.") },
-                { img: "/coignard.png", n: "Dr Pauline Coignard", p: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape · President APPROCHE · SOFMER"), b: tr("Expert médical", "Medical expert"), q: tr("Une béquille qui rend les mains au patient : une grande avancée !", "A crutch that gives the patient back their hands — a major breakthrough!") },
+                { img: "/pauline.png", n: "Dr Pauline Coignard", p: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape · President APPROCHE · SOFMER"), q: tr("Une béquille qui rend les mains au patient : une grande avancée !", "A crutch that gives the patient back their hands — a major breakthrough!") },
+                { img: "/selim.png", n: "Selim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)") },
+                { img: "/joachim.png", n: "Joachim", p: tr("Post-opératoire ligaments croisés · Convalescence à domicile", "Post-op cruciate ligaments · Home recovery"), q: tr("Après mon opération des ligaments croisés, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my cruciate ligament surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized.") },
               ].map((t, i) => (
-                <div key={i} className="card-soft p-6 w-[320px] md:w-[380px] h-full">
+                <div key={i} className="card-soft p-6 w-[320px] md:w-[380px] flex flex-col" style={{ minHeight: 340 }}>
                   <div className="flex items-center gap-4">
-                    <img src={t.img} alt={t.n} className="w-20 h-20 rounded-full object-cover" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
+                    <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
                     <div>
                       <div className="font-bold" style={{ color: TEXT }}>{t.n}</div>
-                      <div className="text-sm" style={{ color: MUTED }}>{t.p}</div>
+                      <div className="text-xs" style={{ color: MUTED }}>{t.p}</div>
                     </div>
                   </div>
-                  <div className="mt-4 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: BG_ALT, color: TEXT }}>{t.b}</div>
-                  <p className="mt-4 italic text-sm" style={{ color: "#333" }}>"{t.q}"</p>
+                  <p className="mt-5 italic text-sm" style={{ color: "#333" }}>"{t.q}"</p>
                 </div>
               ))}
             </AutoCarousel>
@@ -350,32 +351,36 @@ function Landing() {
             </h2>
           </Reveal>
 
-          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
-            <AutoCarousel>
-              {[
-                { logo: "/lepine.png", v: tr("Médaille d'or", "Gold medal"), l: "Concours Lépine 2026", logos: null as string[] | null },
-                { logo: "/mediapositif.png", v: tr("Prix de l'Impact", "Impact Award"), l: "Le Média Positif 2026", logos: null },
-                { logo: "/kerpape.png", v: tr("Validation terrain", "Field validation"), l: tr("+6 Centres de rééducation & médecins MPR", "+6 rehab centers & PM&R physicians"), logos: null },
-                { logo: null, v: tr("Soutien scientifique", "Scientific backing"), l: "CNRS · Sorbonne Université · SATT Lutech · Bpifrance", logos: ["/logo-cnrs.png", "/logo-sorbonne.png", "/logo-satt-lutech.png", "/logo-bpifrance.png"] },
-              ].map((s, i) => (
-                <div key={i} className="card-soft p-6 w-[300px] md:w-[340px] h-full flex flex-col">
-                  {s.logo && (
-                    <div className="h-16 mb-4 flex items-center">
-                      <img src={s.logo} alt="" className="h-16 object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
-                    </div>
-                  )}
-                  {s.logos && (
-                    <div className="h-16 mb-4 flex items-center gap-3 flex-wrap">
-                      {s.logos.map((l) => (
-                        <img key={l} src={l} alt="" className="h-8 object-contain" onError={(e) => (e.currentTarget.style.display = 'none')} />
-                      ))}
-                    </div>
-                  )}
-                  <div className="font-display font-bold text-xl" style={{ color: TEXT }}>{s.v}</div>
-                  <div className="mt-2 text-sm" style={{ color: MUTED }}>{s.l}</div>
-                </div>
-              ))}
-            </AutoCarousel>
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              {
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>
+                ),
+                t: tr("Médaille d'Or", "Gold Medal"),
+                s: "Concours Lépine 2026",
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                ),
+                t: tr("Prix de l'Impact", "Impact Award"),
+                s: "Le Média Positif 2026",
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>
+                ),
+                t: tr("Soutenu par la Recherche", "Backed by Research"),
+                s: "CNRS · Sorbonne · SATT Lutech · BPI",
+              },
+            ].map((s, i) => (
+              <div key={i} className="rounded-2xl p-6 flex flex-col items-start gap-3" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}` }}>
+                <div style={{ color: ACCENT }}>{s.icon}</div>
+                <div className="font-display font-bold text-xl leading-tight" style={{ color: TEXT }}>{s.t}</div>
+                <div className="text-sm" style={{ color: MUTED }}>{s.s}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -472,34 +477,41 @@ function Roadmap() {
     { t: tr("Brevet déposé", "Patent filed"), s: "FR2411206 · Octobre 2024", state: "done" as const },
     { t: tr("Prototype validé", "Validated prototype"), s: tr("utilisé en conditions réelles", "used in real-world conditions"), state: "done" as const },
     { t: tr("Industrialisation", "Industrialization"), s: tr("en cours", "in progress"), state: "current" as const },
-    { t: tr("Certification CE Classe I", "CE Class I certification"), s: "MDR 2017/745", state: "upcoming" as const },
+    { t: tr("Dispositif médical C1 & Marquage CE", "Class I medical device & CE marking"), s: "MDR 2017/745", state: "upcoming" as const },
     { t: tr("Commercialisation", "Commercial launch"), s: "2027", state: "upcoming" as const },
   ];
   const currentIdx = steps.findIndex((s) => s.state === "current");
   const progressPct = (currentIdx / (steps.length - 1)) * 100;
+  const CIRCLE = 18;
   return (
     <div className="mt-16">
-      <div className="hidden md:block relative">
-        <div className="absolute top-3 left-0 right-0 h-px" style={{ backgroundColor: BORDER }} />
-        <div className="absolute top-3 left-0 h-[2px]" style={{ backgroundColor: ACCENT, width: `${progressPct}%` }} />
-        <div className="relative flex justify-between">
+      <div className="hidden md:block relative pt-16 pb-4">
+        {/* Progress line (centered on circle row) */}
+        <div className="absolute left-0 right-0 h-px" style={{ top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER }} />
+        <div className="absolute left-0 h-[2px]" style={{ top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${progressPct}%` }} />
+        <div className="relative grid grid-cols-5 gap-4">
           {steps.map((s, i) => {
             const done = s.state === "done";
             const isCurrent = s.state === "current";
             const upcoming = s.state === "upcoming";
             return (
-              <div key={i} className="flex flex-col items-center gap-3 w-40 text-center">
-                <div
-                  className="rounded-full"
-                  style={{
-                    width: isCurrent ? 26 : 14,
-                    height: isCurrent ? 26 : 14,
-                    backgroundColor: isCurrent ? ACCENT : done ? ACCENT : "#FFFFFF",
-                    border: `2px solid ${upcoming ? BORDER : ACCENT}`,
-                  }}
-                />
-                <div className="text-sm" style={{ color: upcoming ? MUTED : TEXT, fontWeight: isCurrent ? 700 : 500, opacity: upcoming ? 0.55 : 1 }}>{s.t}</div>
-                <div className="text-xs" style={{ color: isCurrent ? ACCENT : upcoming ? MUTED : MUTED, opacity: upcoming ? 0.55 : 1 }}>{s.s}</div>
+              <div key={i} className="flex flex-col items-center text-center" style={{ opacity: upcoming ? 0.5 : 1 }}>
+                <div className="h-12 flex items-end justify-center px-2">
+                  <div className="text-sm leading-tight" style={{ color: upcoming ? MUTED : TEXT, fontWeight: isCurrent ? 700 : 500 }}>{s.t}</div>
+                </div>
+                <div className="my-3 flex items-center justify-center" style={{ height: CIRCLE }}>
+                  <div
+                    className="rounded-full"
+                    style={{
+                      width: CIRCLE,
+                      height: CIRCLE,
+                      backgroundColor: (done || isCurrent) ? ACCENT : "#FFFFFF",
+                      border: `2px solid ${upcoming ? BORDER : ACCENT}`,
+                      boxShadow: isCurrent ? `0 0 0 6px rgba(45,90,61,0.15)` : "none",
+                    }}
+                  />
+                </div>
+                <div className="text-xs px-2 leading-snug" style={{ color: isCurrent ? ACCENT : MUTED }}>{s.s}</div>
               </div>
             );
           })}

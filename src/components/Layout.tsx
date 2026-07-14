@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
-import { IconSearch, IconInstagram, IconTiktok, IconLinkedin } from "@/components/Icons";
+import { IconInstagram, IconTiktok, IconLinkedin } from "@/components/Icons";
 
 const SOCIAL = {
   instagram: "https://www.instagram.com/legmio.official",
@@ -36,58 +36,10 @@ export function StickyBanner() {
   );
 }
 
-function runSearch(q: string) {
-  if (typeof window === "undefined") return;
-  const query = q.trim();
-  document.querySelectorAll("mark[data-legmio-hit]").forEach((m) => {
-    const t = document.createTextNode(m.textContent || "");
-    m.parentNode?.replaceChild(t, m);
-  });
-  if (!query) return;
-  const rx = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
-  const root = document.querySelector("main");
-  if (!root) return;
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-    acceptNode: (n) => {
-      if (!n.textContent || !n.textContent.trim()) return NodeFilter.FILTER_REJECT;
-      const p = n.parentElement;
-      if (!p) return NodeFilter.FILTER_REJECT;
-      const tag = p.tagName;
-      if (tag === "SCRIPT" || tag === "STYLE" || tag === "MARK" || tag === "INPUT" || tag === "TEXTAREA") return NodeFilter.FILTER_REJECT;
-      return rx.test(n.textContent) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-    },
-  });
-  const nodes: Text[] = [];
-  let cur = walker.nextNode();
-  while (cur) { nodes.push(cur as Text); cur = walker.nextNode(); }
-  let first: HTMLElement | null = null;
-  nodes.forEach((node) => {
-    const text = node.textContent!;
-    rx.lastIndex = 0;
-    const frag = document.createDocumentFragment();
-    let lastIdx = 0;
-    let m: RegExpExecArray | null;
-    while ((m = rx.exec(text)) !== null) {
-      if (m.index > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, m.index)));
-      const mark = document.createElement("mark");
-      mark.setAttribute("data-legmio-hit", "1");
-      mark.style.backgroundColor = "#F5E96A";
-      mark.style.color = "#1A1A1A";
-      mark.textContent = m[0];
-      if (!first) first = mark;
-      frag.appendChild(mark);
-      lastIdx = m.index + m[0].length;
-    }
-    if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
-    node.parentNode?.replaceChild(frag, node);
-  });
-  if (first) (first as HTMLElement).scrollIntoView({ behavior: "smooth", block: "center" });
-}
 
 export function Header() {
   const { t, lang, setLang, hubspotUrl } = useLanguage();
   const [open, setOpen] = useState(false);
-  const [q, setQ] = useState("");
   return (
     <header
       className="fixed left-0 right-0 z-40 border-b"
@@ -97,28 +49,12 @@ export function Header() {
         <Link to="/" className="font-display font-bold text-2xl shrink-0" style={{ color: TEXT }}>
           legmio
         </Link>
+        <div className="flex-1" />
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <Link to="/produit" className="hover:opacity-60 transition" style={{ color: TEXT }}>{t("nav_product")}</Link>
           <Link to="/faq" className="hover:opacity-60 transition" style={{ color: TEXT }}>{t("nav_faq")}</Link>
           <Link to="/blog" className="hover:opacity-60 transition" style={{ color: TEXT }}>{t("nav_blog")}</Link>
         </nav>
-        <div className="flex-1" />
-        <form
-          onSubmit={(e) => { e.preventDefault(); runSearch(q); }}
-          className="hidden lg:flex items-center gap-2 border rounded-full px-3 py-1.5"
-          style={{ borderColor: BORDER }}
-        >
-          <button type="submit" aria-label="Search" style={{ color: TEXT }}><IconSearch size={16} /></button>
-          <input
-            type="text"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder={t("search_ph")}
-            aria-label={t("search_ph")}
-            className="bg-transparent text-sm outline-none w-40"
-            style={{ color: TEXT }}
-          />
-        </form>
         <div className="hidden sm:flex items-center gap-1 text-sm" style={{ color: TEXT }}>
           <button onClick={() => setLang("fr")} aria-label="Français" className={`px-1 py-0.5 transition ${lang === "fr" ? "opacity-100 font-semibold" : "opacity-40 hover:opacity-70"}`}>FR</button>
           <span style={{ color: "#CCCCCC" }}>·</span>

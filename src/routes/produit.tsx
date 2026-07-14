@@ -50,9 +50,9 @@ function Produit() {
   const [reviewOpen, setReviewOpen] = useState(false);
 
   const initialReviews: Review[] = [
-    { img: "/sophie.jpg", stars: 5, title: tr("Ça change tout.", "It changes everything."), quote: tr("Je béquille depuis 3 ans et je n'avais jamais imaginé pouvoir porter mon fils. Avec legmio c'est possible.", "3 years on crutches — I never thought I could carry my son. With legmio I can."), name: "Sophie", profile: tr("Sclérose en plaques", "Multiple sclerosis"), date: tr("Mars 2026", "March 2026") },
-    { img: "/marc.jpg", stars: 5, title: tr("Une vraie autonomie retrouvée.", "Real autonomy, back."), quote: tr("J'ai utilisé cette béquille pendant 2 mois à la suite d'une rupture du ligament. Elle m'a vraiment permis de retrouver une certaine autonomie au quotidien, notamment au travail. Grâce à elle, j'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café, indispensable pour travailler dans de bonnes conditions :)", "I used this crutch for 2 months after a ligament rupture. It really let me regain autonomy day-to-day, especially at work. Thanks to it, I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee, which is indispensable for working in good conditions :)"), name: "Selim", profile: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), date: tr("Février 2026", "February 2026") },
-    { img: "/camille.jpg", stars: 5, title: tr("Enfin une vraie solution.", "Finally, a real solution."), quote: tr("J'avais abandonné l'idée d'avoir les mains libres. legmio m'a prouvé que c'était possible.", "I'd given up on having free hands. legmio proved me wrong."), name: "Camille", profile: tr("Sarcome d'Ewing", "Ewing sarcoma"), date: tr("Janvier 2026", "January 2026") },
+    { img: "/pauline.png", stars: 5, title: tr("Une grande avancée.", "A major breakthrough."), quote: tr("Une béquille qui rend les mains libres : une grande avancée !", "A crutch that gives the patient back their hands — a major breakthrough!"), name: "Dr Pauline Coignard", profile: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape · President APPROCHE · SOFMER"), date: tr("Mars 2026", "March 2026") },
+    { img: "/selim.png", stars: 5, title: tr("Une vraie autonomie retrouvée.", "Real autonomy, back."), quote: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)"), name: "Selim", profile: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), date: tr("Février 2026", "February 2026") },
+    { img: "/joachim.png", stars: 5, title: tr("Autonome pendant ma convalescence.", "Autonomous through recovery."), quote: tr("Après mon opération des ligaments croisés, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my cruciate ligament surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized."), name: "Joachim", profile: tr("Post-opératoire ligaments croisés · Convalescence à domicile", "Post-op cruciate ligaments · Home recovery"), date: tr("Janvier 2026", "January 2026") },
   ];
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
   const reviewCount = reviews.length;
@@ -96,7 +96,18 @@ function Produit() {
             <h1 className="text-4xl md:text-5xl font-display font-bold" style={{ color: TEXT }}>
               {tr("La béquille legmio", "The legmio crutch")}
             </h1>
-            <div className="mt-3 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: BG_ALT, color: TEXT }}>
+            <p className="mt-4 text-base leading-relaxed" style={{ color: "#333" }}>
+              {tr(
+                "La première béquille ergonomique mains libres avec appui avant-bras.",
+                "The first hands-free ergonomic crutch with forearm support."
+              )}
+              <br />
+              {tr(
+                "Plus confortable et plus sûre, elle libère les mains lorsque c'est nécessaire et pendant les déplacements.",
+                "More comfortable and safer, it frees your hands when needed and while moving around."
+              )}
+            </p>
+            <div className="mt-4 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: BG_ALT, color: TEXT }}>
               {tr("Dispositif médical CE Classe I (en cours)", "CE Class I medical device (in progress)")}
             </div>
             <button
@@ -113,12 +124,7 @@ function Produit() {
               <div className="text-4xl font-display font-bold" style={{ color: TEXT }}>150€</div>
               <div className="text-sm mt-1" style={{ color: MUTED }}>({tr("prix estimatif", "estimated price")})</div>
             </div>
-            <p className="mt-6 text-base" style={{ color: "#333" }}>
-              {tr(
-                "La seule béquille ergonomique qui libère les mains pendant la marche.",
-                "The only ergonomic crutch that frees your hands while walking."
-              )}
-            </p>
+
 
             <div className="mt-8">
               <Accordion title={tr("À propos", "About")} defaultOpen>
@@ -221,7 +227,7 @@ function Produit() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl" style={{ color: TEXT }}>{tr("Avis clients", "Customer reviews")}</h2>
+              <h2 className="text-3xl md:text-4xl" style={{ color: TEXT }}>{tr("Ils l'ont testé", "They tested it")}</h2>
               <div className="mt-4 flex items-baseline gap-3">
                 <div className="text-5xl font-display font-bold" style={{ color: TEXT }}>{avgStr}/5</div>
                 <div style={{ color: MUTED }}>({reviewCount} {tr("avis", "reviews")})</div>
