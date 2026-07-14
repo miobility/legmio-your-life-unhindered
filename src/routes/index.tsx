@@ -272,7 +272,7 @@ function Landing() {
                 { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches.", "Carry, cook, care for your loved ones.") },
                 { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Récupère sans sacrifier tes épaules.", "Recover without sacrificing your shoulders.") },
                 { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif.", "Stay mobile, independent, productive.") },
-                { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant. Le suivre. Être là.", "Hold your child. Keep up. Be there.") },
+                { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant, des choses lourdes ou encombrantes. Reprendre ce que tu avais arrêté de demander.", "Carry your child, heavy or bulky things. Take back what you'd stopped asking for.") },
               ].map((c, i) => (
                 <div key={i} className="relative w-[280px] md:w-[320px] aspect-[3/4] rounded-2xl overflow-hidden">
                   <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
