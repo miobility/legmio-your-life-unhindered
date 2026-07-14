@@ -237,16 +237,15 @@ function Landing() {
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {[
-              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", stat: tr("3,6M vues", "3.6M views"), label: null as string | null },
-              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", stat: null, label: "Le Mag de la Santé — France TV" },
+              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M vues", "3.6M views") },
+              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: "Le Mag de la Santé — France TV" },
             ].map((r, i) => (
               <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft">
                 <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: BG_ALT }}>
                   <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
                 </div>
-                <div className="p-6 flex flex-col gap-4">
-                  {r.stat && <div className="font-display font-bold text-2xl" style={{ color: TEXT }}>{r.stat}</div>}
-                  {r.label && <div className="text-sm font-semibold" style={{ color: TEXT }}>{r.label}</div>}
+                <div className="p-5 flex flex-col gap-3">
+                  <div className="text-base font-semibold" style={{ color: TEXT }}>{r.label}</div>
                   <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
                     {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
                   </a>
