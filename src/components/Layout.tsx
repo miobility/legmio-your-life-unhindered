@@ -87,7 +87,6 @@ function runSearch(q: string) {
 export function Header() {
   const { t, lang, setLang, hubspotUrl } = useLanguage();
   const [open, setOpen] = useState(false);
-  const [q, setQ] = useState("");
   return (
     <header
       className="fixed left-0 right-0 z-40 border-b"
@@ -97,28 +96,12 @@ export function Header() {
         <Link to="/" className="font-display font-bold text-2xl shrink-0" style={{ color: TEXT }}>
           legmio
         </Link>
+        <div className="flex-1" />
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <Link to="/produit" className="hover:opacity-60 transition" style={{ color: TEXT }}>{t("nav_product")}</Link>
           <Link to="/faq" className="hover:opacity-60 transition" style={{ color: TEXT }}>{t("nav_faq")}</Link>
           <Link to="/blog" className="hover:opacity-60 transition" style={{ color: TEXT }}>{t("nav_blog")}</Link>
         </nav>
-        <div className="flex-1" />
-        <form
-          onSubmit={(e) => { e.preventDefault(); runSearch(q); }}
-          className="hidden lg:flex items-center gap-2 border rounded-full px-3 py-1.5"
-          style={{ borderColor: BORDER }}
-        >
-          <button type="submit" aria-label="Search" style={{ color: TEXT }}><IconSearch size={16} /></button>
-          <input
-            type="text"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder={t("search_ph")}
-            aria-label={t("search_ph")}
-            className="bg-transparent text-sm outline-none w-40"
-            style={{ color: TEXT }}
-          />
-        </form>
         <div className="hidden sm:flex items-center gap-1 text-sm" style={{ color: TEXT }}>
           <button onClick={() => setLang("fr")} aria-label="Français" className={`px-1 py-0.5 transition ${lang === "fr" ? "opacity-100 font-semibold" : "opacity-40 hover:opacity-70"}`}>FR</button>
           <span style={{ color: "#CCCCCC" }}>·</span>
