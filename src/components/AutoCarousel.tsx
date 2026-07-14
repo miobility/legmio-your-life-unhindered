@@ -3,13 +3,13 @@ import { Children, useEffect, useRef, useState, type ReactNode } from "react";
 export function AutoCarousel({
   children,
   scrollStep = 320,
-  speed = 50,
+  cycleSeconds = 30,
   dark = false,
   className = "",
 }: {
   children: ReactNode;
   scrollStep?: number;
-  speed?: number; // px/sec
+  cycleSeconds?: number;
   dark?: boolean;
   className?: string;
 }) {
@@ -27,15 +27,16 @@ export function AutoCarousel({
       const dt = now - last;
       last = now;
       if (!paused && el) {
-        el.scrollLeft += (speed * dt) / 1000;
         const half = el.scrollWidth / 2;
+        const speed = half > 0 ? half / cycleSeconds : 0;
+        el.scrollLeft += (speed * dt) / 1000;
         if (half > 0 && el.scrollLeft >= half) el.scrollLeft -= half;
       }
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [paused, speed]);
+  }, [paused, cycleSeconds]);
 
   const scrollByStep = (dir: 1 | -1) => {
     if (!ref.current) return;
