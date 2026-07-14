@@ -1,67 +1,45 @@
-## Plan — legmio V3
+# legmio — Site-wide overhaul plan
 
-Complete rebuild of the 4 pages to match the V3 spec (alternating #111111/#FFFFFF sections, unified CTA "Je suis intéressé(e)", zero emoji, SVG icons only, Syne + Inter).
+Given the scope, I'll execute in this order. Confirm before I proceed.
 
-### Global changes
+## 1. Design system (styles.css)
+Replace palette with warm off-white theme:
+- `--background: #FAFAF8`, alt `#F2F0EB`, text `#1A1A1A`, muted `#6B6B6B`
+- Accent/CTA `#2D5A3D` (hover `#234832`), border `#E8E4DC`
+- Footer bg `#1A1A1A`, sticky banner bg `#2D5A3D`
+- CTA buttons: pill radius 50px, green bg, white text
+Update `btn-dark`, `btn-outline-dark`, `card-soft` to new tokens. Applied via CSS vars so all inline `#111/#FFF/#F5F5F5` legacy references keep working visually but I'll do a pass swapping the most visible ones (sections, cards) to new palette.
 
-**`src/styles.css`**
-- Keep Syne + Inter via `<link>` in root (already loaded).
-- Add `btn-light` utility: white bg, #111 text, 50px radius (for use on dark sections).
-- Keep `btn-dark`: #111 bg, white text, 50px radius (for use on light sections).
-- Keep marquee, fade-up keyframes; add `float-rotate` keyframe for product animation.
+## 2. Header (Layout.tsx)
+- Rename nav "Béquille" → "La béquille"
+- Banner uses new green
+- Footer: bg `#1A1A1A`, text update to "legmio © 2026 — Un produit miobility", add links to `/mentions-legales` and `/confidentialite`, social icons already active.
 
-**`src/lib/i18n.tsx`**
-- Update translations: `cta_interested` → "Je suis intéressé(e)" / "I'm interested", `banner` → "Commercialisation courant 2027".
-- Add new keys used by V3 sections.
+## 3. Landing page (index.tsx) — reorder + edits
+New order: Hero → Problème → Ils parlent de nous → Use cases → Specs strip (static, 6 pills) → Témoignages (carousel + Dr Coignard + Selim replaces Marc) → Ils l'attendent (remove "Tu te reconnais ?") → Crédibilité (carousel, 4 cards, new title) → Roadmap (progress stops at step 3, "Où en sommes-nous ?") → Actualité (social icons + 1 CTA, no form).
+CTAs: only Hero, after Témoignages, final CTA section.
+Media logos: convert to `AutoCarousel` with arrows.
+Instagram cards: dark card format (no iframe).
 
-**`src/components/Layout.tsx`**
-- `StickyBanner`: fixed, black bg, single message, links to `#waitlist`.
-- `Header`: white bg with subtle shadow, sticky below banner, logo left, nav center (Produit/FAQ/Blog), right = search input (outline + SVG loupe) + FR/EN + CTA button.
-- `Footer`: black bg, 4 cols, bottom line "legmio 2026 · Un produit miobility · ISIR · Sorbonne Université · CNRS".
+## 4. Product page (/produit)
+- Title "La béquille", price 150€ + "(prix estimatif)", remove "Livraison incluse"
+- Replace features carousel with static 8-pill grid
+- Update "À propos" and "Ce qui est inclus" copy
+- Update Marc → Selim review with new photo/quote
+- Wire reviews to Supabase table `reviews` (id, name, profile, rating, comment, created_at, approved). Only approved shown; average/count computed from fetched rows. Requires enabling Lovable Cloud + migration.
 
-**Reusable SVG icon set** in a new `src/components/Icons.tsx` (search, chevron, check, instagram, tiktok, linkedin, arrow-right, weight, ruler, shield, factory, france-flag).
+## 5. Blog (/blog + article pages)
+Keep Genèse. Add 5 new articles with FR/EN bilingual content and Genèse-style detail pages. Create route `/blog/$slug` if not existing, otherwise inline expandable format matching current template. Cover images use provided paths with fallbacks.
 
-### Page rebuilds
+## 6. Legal pages
+Create `/mentions-legales` and `/confidentialite` with provided content, blog-style template.
 
-**`src/routes/index.tsx`** — 10 sections alternating black/white per spec:
-1. Hero (black) — YouTube embed `wRDP3A0-4eU` autoplay muted loop + title/CTA.
-2. Problème (white) — 3 cards with generated B&W placeholder images.
-3. Ils parlent de nous (black) — media logos (Le Parisien/TF1/France 2/France 5) with `filter: brightness(0) invert(1)` + Instagram reel featured card (link to reel, stats 3.6M/120K/2.2k).
-4. Témoignages (white) — 3 cards Sophie/Marc/Camille + CTA.
-5. Wall of love (black) — 2 marquee rows with 10 quotes + CTA.
-6. Use cases (white) — 4 cards grid + CTA.
-7. Description produit + specs (black) — 5 accordion/slider sections + white specs strip.
-8. Crédibilité (white) — CNRS/Sorbonne/SATT/Bpi logos + quote card + 3 stats.
-9. Roadmap (black) — horizontal 5-step line.
-10. Liste d'attente (white) — `#waitlist` anchor, HubSpot placeholder form, social icons.
-Followed by revendeurs mention.
+## 7. i18n
+Add EN translations for all new strings.
 
-**`src/routes/produit.tsx`** — 5 sections per spec:
-1. Hero produit (white) — sticky right col with 7 accordions, gallery left.
-2. Animation béquille (black) — placeholder box with float+rotate animation on `/legmio_hd_transparent.png` (fallback to gradient if missing).
-3. Features carrousel (white) — 4 slides with arrows/dots.
-4. Avis clients (grey #F5F5F5) — 3 review cards + rating bars.
-5. FAQ produit (white) — 7 accordions.
+## Open questions before I start
+1. Blog article detail: does the current blog page have individual article routes, or is Genèse rendered inline on /blog? I'll inspect and match its pattern.
+2. Supabase reviews: I'll enable Lovable Cloud and create the migration. New reviews will be inserted with `approved=false` (moderation required) — confirm this is intended, or should new submissions auto-approve?
+3. Image paths (`/lepine.png`, `/mediapositif.png`, `/coignard.png`, `/photo-blog-1..5.png`, institution logos): are these already in `/public`, or should I use fallback placeholders where missing?
 
-**`src/routes/faq.tsx`** — keep current structure, restyle header, ensure no emojis.
-
-**`src/routes/blog.tsx`** — hero #F5F5F5 + article 1 (Genèse, full-width featured with full content in expandable) + 4 other article cards. Since blog articles have full content, render as expandable or link to placeholder detail. Keeping to spec: featured full-width card shows title + extract + click to expand full content inline.
-
-### Assets
-
-- Generate ~15 placeholder images via imagegen (B&W for problem section, color portraits for testimonials, product zooms, use case scenes).
-- To save tokens/time, use existing image slots where possible and generate the most visible ones. For lesser-used slots, use CSS gradient placeholders.
-
-### Notes / decisions
-
-- HubSpot form: keep placeholder (form IDs not provided).
-- Instagram reel: embed as `<iframe>` from `instagram.com/reel/DX_Qqp9tbvg/embed` for featured card.
-- Search input in header: non-functional (visual only), matches Hyperice layout.
-- Media logos: since actual PNGs not provided, render text-based logos in serif/bold styled to look like wordmarks, with brightness filter for dark backgrounds.
-- Institutional logos same approach.
-
-### Out of scope (defer)
-
-- Actual review submission modal wiring, lightbox for gallery, real HubSpot integration, working search.
-
-Ship after user approval.
+Reply "go" (with answers to 2 and 3) and I'll execute the full pass.
