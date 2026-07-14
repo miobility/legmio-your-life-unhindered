@@ -314,7 +314,7 @@ function Landing() {
                 { img: "/selim.png", n: "Selim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)") },
                 { img: "/joachim.png", n: "Joachim", p: tr("Post-opératoire ligaments croisés · Convalescence à domicile", "Post-op cruciate ligaments · Home recovery"), q: tr("Après mon opération des ligaments croisés, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my cruciate ligament surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized.") },
               ].map((t, i) => (
-                <div key={i} className="card-soft p-6 w-[320px] md:w-[380px] flex flex-col" style={{ minHeight: 340 }}>
+                <div key={i} className="card-soft p-5 w-[320px] md:w-[380px] flex flex-col">
                   <div className="flex items-center gap-4">
                     <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
                     <div>
