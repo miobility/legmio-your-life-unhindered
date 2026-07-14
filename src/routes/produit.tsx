@@ -127,13 +127,7 @@ function Produit() {
 
 
             <div className="mt-8">
-              <Accordion title={tr("À propos", "About")} defaultOpen>
-                {tr(
-                  "La seule béquille ergonomique qui libère les mains pendant la marche.",
-                  "The only ergonomic crutch that frees your hands while walking."
-                )}
-              </Accordion>
-              <Accordion title={tr("Taille", "Size")}>
+              <Accordion title={tr("Taille", "Size")} defaultOpen>
                 {tr("Taille unique — réglable pour utilisateurs 1m50 à 1m95.", "One size — adjustable for users from 1m50 to 1m95.")}
               </Accordion>
               <Accordion title={tr("Caractéristiques", "Specs")}>
