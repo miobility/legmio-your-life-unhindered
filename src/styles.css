@@ -36,15 +36,15 @@
 :root {
   --radius: 0.625rem;
   --background: #FAFAF8;
-  --foreground: #1A1A1A;
+  --foreground: #0D0D29;
   --card: #FFFFFF;
-  --card-foreground: #1A1A1A;
+  --card-foreground: #0D0D29;
   --popover: #FFFFFF;
-  --popover-foreground: #1A1A1A;
+  --popover-foreground: #0D0D29;
   --primary: #2D5A3D;
   --primary-foreground: #FFFFFF;
   --secondary: #F2F0EB;
-  --secondary-foreground: #1A1A1A;
+  --secondary-foreground: #0D0D29;
   --muted: #F2F0EB;
   --muted-foreground: #6B6B6B;
   --accent: #2D5A3D;
@@ -57,12 +57,12 @@
 
   --legmio-bg: #FAFAF8;
   --legmio-bg-alt: #F2F0EB;
-  --legmio-text: #1A1A1A;
+  --legmio-text: #0D0D29;
   --legmio-muted: #6B6B6B;
   --legmio-accent: #2D5A3D;
   --legmio-accent-hover: #234832;
   --legmio-border: #E8E4DC;
-  --legmio-footer: #1A1A1A;
+  --legmio-footer: #0D0D29;
 }
 
 @layer base {
@@ -70,7 +70,7 @@
   html { scroll-behavior: smooth; }
   body {
     background-color: #FAFAF8;
-    color: #1A1A1A;
+    color: #0D0D29;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
@@ -137,7 +137,7 @@
   border: 1px solid #FFFFFF;
   transition: all 0.2s ease;
   cursor: pointer;
-  &:hover { background-color: #FFFFFF; color: #1A1A1A; }
+  &:hover { background-color: #FFFFFF; color: #0D0D29; }
 }
 
 @utility card-soft {
