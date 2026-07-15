@@ -163,7 +163,7 @@ function Landing() {
   return (
     <div style={{ backgroundColor: BG }}>
       {/* SECTION 1 — HERO */}
-      <section style={{ backgroundColor: "#111111" }} className="px-4 sm:px-6 py-16 md:py-24">
+      <section style={{ backgroundColor: "#0D0D29" }} className="px-4 sm:px-6 py-16 md:py-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[45%_55%] gap-10 items-center">
           <div className="rounded-2xl overflow-hidden bg-black order-1">
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "70vh" }}>
@@ -332,7 +332,7 @@ function Landing() {
       </section>
 
       {/* SECTION 7 — ILS L'ATTENDENT */}
-      <section style={{ backgroundColor: "#111111" }} className="py-20 md:py-28 overflow-hidden">
+      <section style={{ backgroundColor: "#0D0D29" }} className="py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">
             {tr("Ils l'attendent avec impatience.", "They're waiting for it.")}

@@ -36,15 +36,15 @@
 :root {
   --radius: 0.625rem;
   --background: #FAFAF8;
-  --foreground: #0D0D29;
+  --foreground: #1A1A1A;
   --card: #FFFFFF;
-  --card-foreground: #0D0D29;
+  --card-foreground: #1A1A1A;
   --popover: #FFFFFF;
-  --popover-foreground: #0D0D29;
+  --popover-foreground: #1A1A1A;
   --primary: #2D5A3D;
   --primary-foreground: #FFFFFF;
   --secondary: #F2F0EB;
-  --secondary-foreground: #0D0D29;
+  --secondary-foreground: #1A1A1A;
   --muted: #F2F0EB;
   --muted-foreground: #6B6B6B;
   --accent: #2D5A3D;
@@ -57,12 +57,12 @@
 
   --legmio-bg: #FAFAF8;
   --legmio-bg-alt: #F2F0EB;
-  --legmio-text: #0D0D29;
+  --legmio-text: #1A1A1A;
   --legmio-muted: #6B6B6B;
   --legmio-accent: #2D5A3D;
   --legmio-accent-hover: #234832;
   --legmio-border: #E8E4DC;
-  --legmio-footer: #0D0D29;
+  --legmio-footer: #1A1A1A;
 }
 
 @layer base {
@@ -70,7 +70,7 @@
   html { scroll-behavior: smooth; }
   body {
     background-color: #FAFAF8;
-    color: #0D0D29;
+    color: #1A1A1A;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
@@ -82,8 +82,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #2D5A3D;
-  color: #FFFFFF;
+  background-color: #FFCD7C;
+  color: #1A1A1A;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
   border-radius: 50px;
@@ -137,7 +137,7 @@
   border: 1px solid #FFFFFF;
   transition: all 0.2s ease;
   cursor: pointer;
-  &:hover { background-color: #FFFFFF; color: #0D0D29; }
+  &:hover { background-color: #FFFFFF; color: #1A1A1A; }
 }
 
 @utility card-soft {
@@ -205,4 +205,3 @@
   .marquee-left, .marquee-right, .marquee-track, .float-rotate { animation: none; }
   .reveal, .fade-up { opacity: 1; transform: none; transition: none; }
 }
-

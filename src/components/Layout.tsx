@@ -9,10 +9,10 @@ const SOCIAL = {
   linkedin: "https://www.linkedin.com/in/nicolas-perrin-gilbert-2815a4179/",
 };
 
-const ACCENT = "#2D5A3D";
+const ACCENT = "#FFCD7C";
 const TEXT = "#1A1A1A";
 const MUTED = "#6B6B6B";
-const BORDER = "#E8E4DC";
+const BORDER = "#FAFAF8";
 const BG = "#FAFAF8";
 
 export function StickyBanner() {
@@ -29,7 +29,7 @@ export function StickyBanner() {
       target="_blank"
       rel="noreferrer"
       className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center text-xs sm:text-sm font-medium px-4 hover:opacity-90 transition overflow-hidden"
-      style={{ backgroundColor: ACCENT, color: "#FFFFFF" }}
+      style={{ backgroundColor: ACCENT, color: "#1A1A1A" }}
     >
       <span key={idx} className="truncate fade-up">{msg}</span>
     </a>
@@ -49,11 +49,15 @@ export function Header() {
   return (
     <header
       className="fixed left-0 right-0 z-40 border-b"
-      style={{ top: 40, backgroundColor: BG, borderColor: BORDER, boxShadow: "0 1px 4px rgba(26,26,26,0.04)" }}
-    >
+      style={{ top: 40, 
+        // backgroundImage: "linear-gradient(90deg, #0D0D29 0%, #0D0D29 20%, #5C5C8A 30%, #FFFFFF 50%)",
+        backgroundImage: "linear-gradient(to bottom, rgba(255,255,255,1.0) 0%, rgba(255,255,255,1.0) 3%, rgba(255,255,255,0.0) 10%, rgba(255,255,255,0.0) 92%, rgba(255,255,255,0.3) 95%, rgba(255,255,255,1) 100%), linear-gradient(145deg, #0D0D29 0%, #0D0D29 20%, #5C5C8A 30%, #FFFFFF 60%)",
+        backgroundColor: "#FFFFFF", 
+        borderColor: BORDER, 
+        boxShadow: "0 1px 4px rgba(26,26,26,0.04)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-6">
         <Link to="/" className="font-display font-bold text-2xl shrink-0" style={{ color: TEXT }}>
-          legmio
+          <img src={"/logo_Legmio.svg"} alt="Legmio" className="h-10 w-auto" />
         </Link>
         <div className="flex-1" />
         <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -95,10 +99,10 @@ export function Header() {
 export function Footer() {
   const { t, tr } = useLanguage();
   return (
-    <footer style={{ backgroundColor: "#1A1A1A", color: "#FFFFFF" }} className="pt-16 pb-8 px-4 sm:px-6">
+    <footer style={{ backgroundColor: "#0D0D29", color: "#FFFFFF" }} className="pt-16 pb-8 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         <div>
-          <div className="font-display font-bold text-2xl" style={{ color: "#FFFFFF" }}>legmio</div>
+          <div className="font-display font-bold text-2xl" style={{ color: "#FFFFFF" }}><img src={"/logo_Legmio.svg"} alt="Legmio" className="h-10 w-auto" /></div>
           <p className="mt-3 text-sm" style={{ color: "#BBBBBB" }}>{t("footer_tag")}</p>
         </div>
         <div>
