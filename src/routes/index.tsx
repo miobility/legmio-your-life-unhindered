@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
 
 const BG = "#FAFAF8";
 const BG_ALT = "#F2F0EB";
-const TEXT = "#1A1A1A";
+const TEXT = "#0D0D29";
 const MUTED = "#6B6B6B";
 const BORDER = "#E8E4DC";
 const ACCENT = "#2D5A3D";
@@ -160,19 +160,79 @@ export function ProductFeatureGrid() {
 
 function Landing() {
   const { tr } = useLanguage();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const tracks = video.textTracks;
+
+    for (let i = 0; i < tracks.length; i++) {
+      tracks[i].mode = "disabled";
+    }
+
+    const trackIndex = tr("fr", "en") === "fr" ? 0 : 1;
+
+    if (tracks[trackIndex]) {
+      tracks[trackIndex].mode = "showing";
+    }
+  });
+
   return (
     <div style={{ backgroundColor: BG }}>
       {/* SECTION 1 — HERO */}
-      <section style={{ backgroundColor: "#0D0D29" }} className="px-4 sm:px-6 py-16 md:py-24">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[45%_55%] gap-10 items-center">
-          <div className="rounded-2xl overflow-hidden bg-black order-1">
-            <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "70vh" }}>
-              <video className="absolute inset-0 w-full h-full object-cover" src="/hero-video.mp4" autoPlay muted loop playsInline />
+      <section style={{ backgroundColor: "#0D0D29" }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[40%_60%] gap-10 items-center">
+          <div className="w-full max-w-[350px] mx-auto rounded-2xl overflow-hidden bg-black">
+            <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
+              {/* <video className="absolute inset-0 w-full h-full object-cover" src="/hero-video.mp4" autoPlay muted loop playsInline /> */}
+              
+              <video
+                ref={videoRef}
+                className="absolute inset-0 w-full h-full object-cover"
+                autoPlay
+                muted
+                playsInline
+              >
+                <source src="/hero-video.mp4" type="video/mp4" />
+
+                <track
+                  src="/subtitles_fr.vtt"
+                  kind="subtitles"
+                  srcLang="fr"
+                  label="Français"
+                />
+
+                <track
+                  src="/subtitles_en.vtt"
+                  kind="subtitles"
+                  srcLang="en"
+                  label="English"
+                />
+              </video>
+
+              {/* <div key={subtitleSrc}>
+                <video
+                  className="absolute inset-0 w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  playsInline
+                >
+                  <source src="/hero-video.mp4" type="video/mp4" />
+                  <track
+                    src={subtitleSrc}
+                    kind="subtitles"
+                    default
+                  />
+                </video>
+              </div> */}
+
             </div>
           </div>
           <div className="text-white space-y-6 fade-up order-2">
             <div className="text-xs tracking-[0.2em] uppercase" style={{ color: "rgba(255,255,255,0.6)" }}>
-              {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "NEXT-GENERATION CRUTCH")}
+              {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT-GENERATION CRUTCH")}
             </div>
             <h1 className="text-5xl sm:text-6xl md:text-7xl leading-[1.02] text-white">
               {tr("Des mains libres et une autonomie enfin retrouvée.", "Hands free. Independence restored.")}

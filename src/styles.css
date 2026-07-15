@@ -83,7 +83,7 @@
   justify-content: center;
   gap: 0.5rem;
   background-color: #FFCD7C;
-  color: #1A1A1A;
+  color: #0D0D29;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
   border-radius: 50px;
@@ -91,7 +91,7 @@
   cursor: pointer;
 }
 @utility btn-dark-hover {
-  &:hover { background-color: #234832; transform: translateY(-1px); }
+  &:hover { background-color: #FFCD7C; transform: translateY(-1px); }
 }
 @utility btn-light {
   display: inline-flex;
@@ -99,7 +99,7 @@
   justify-content: center;
   gap: 0.5rem;
   background-color: #FFFFFF;
-  color: #2D5A3D;
+  color: #0D0D29;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
   border-radius: 50px;
