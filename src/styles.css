@@ -82,7 +82,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #FFCD7C;
+  background-color: #ffca75;
   color: #0D0D29;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
@@ -91,7 +91,7 @@
   cursor: pointer;
 }
 @utility btn-dark-hover {
-  &:hover { background-color: #FFCD7C; transform: translateY(-1px); }
+  &:hover { background-color: #ffca75; transform: translateY(-1px); }
 }
 @utility btn-light {
   display: inline-flex;

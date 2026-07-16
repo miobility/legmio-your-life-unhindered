@@ -9,7 +9,7 @@ const SOCIAL = {
   linkedin: "https://www.linkedin.com/in/nicolas-perrin-gilbert-2815a4179/",
 };
 
-const ACCENT = "#FFCD7C";
+const ACCENT = "#ffca75";
 const TEXT = "#1A1A1A";
 const MUTED = "#6B6B6B";
 const BORDER = "#FAFAF8";
@@ -57,7 +57,7 @@ export function Header() {
         boxShadow: "0 1px 4px rgba(26,26,26,0.04)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-6">
         <Link to="/" className="font-display font-bold text-2xl shrink-0" style={{ color: TEXT }}>
-          <img src={"/logo_Legmio.svg"} alt="Legmio" className="h-10 w-auto" />
+          <img src={"/logo_legmio.svg"} alt="Legmio" className="h-10 w-auto" />
         </Link>
         <div className="flex-1" />
         <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -102,7 +102,7 @@ export function Footer() {
     <footer style={{ backgroundColor: "#0D0D29", color: "#FFFFFF" }} className="pt-16 pb-8 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         <div>
-          <div className="font-display font-bold text-2xl" style={{ color: "#FFFFFF" }}><img src={"/logo_Legmio.svg"} alt="Legmio" className="h-10 w-auto" /></div>
+          <div className="font-display font-bold text-2xl" style={{ color: "#FFFFFF" }}><img src={"/logo_legmio.svg"} alt="Legmio" className="h-10 w-auto" /></div>
           <p className="mt-3 text-sm" style={{ color: "#BBBBBB" }}>{t("footer_tag")}</p>
         </div>
         <div>
