@@ -185,14 +185,13 @@ function Landing() {
       <section style={{ backgroundColor: "#0D0D29" }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[40%_60%] gap-10 items-center">
           <div className="w-full max-w-[350px] mx-auto rounded-2xl overflow-hidden bg-black">
-            <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
-              {/* <video className="absolute inset-0 w-full h-full object-cover" src="/hero-video.mp4" autoPlay muted loop playsInline /> */}
-              
+            <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>              
               <video
                 ref={videoRef}
                 className="absolute inset-0 w-full h-full object-cover"
                 autoPlay
                 muted
+                loop
                 playsInline
               >
                 <source src="/hero-video.mp4" type="video/mp4" />
@@ -211,22 +210,6 @@ function Landing() {
                   label="English"
                 />
               </video>
-
-              {/* <div key={subtitleSrc}>
-                <video
-                  className="absolute inset-0 w-full h-full object-cover"
-                  autoPlay
-                  muted
-                  playsInline
-                >
-                  <source src="/hero-video.mp4" type="video/mp4" />
-                  <track
-                    src={subtitleSrc}
-                    kind="subtitles"
-                    default
-                  />
-                </video>
-              </div> */}
 
             </div>
           </div>
@@ -300,7 +283,7 @@ function Landing() {
               { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M vues", "3.6M views") },
               { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: "Le Mag de la Santé — France TV" },
             ].map((r, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft">
+              <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft w-full max-w-[350px] mx-auto">
                 <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: BG_ALT }}>
                   <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
                 </div>
