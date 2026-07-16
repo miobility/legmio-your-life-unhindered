@@ -12,7 +12,7 @@ const SOCIAL = {
 const ACCENT = "#ffca75";
 const TEXT = "#1A1A1A";
 const MUTED = "#6B6B6B";
-const BORDER = "#FAFAF8";
+const BORDER = "transparent";
 const BG = "#FAFAF8";
 
 export function StickyBanner() {
@@ -51,7 +51,7 @@ export function Header() {
       className="fixed left-0 right-0 z-40 border-b"
       style={{ top: 40, 
         // backgroundImage: "linear-gradient(90deg, #0D0D29 0%, #0D0D29 20%, #5C5C8A 30%, #FFFFFF 50%)",
-        backgroundImage: "linear-gradient(to bottom, rgba(255,255,255,1.0) 0%, rgba(255,255,255,1.0) 3%, rgba(255,255,255,0.0) 10%, rgba(255,255,255,0.0) 92%, rgba(255,255,255,0.3) 95%, rgba(255,255,255,1) 100%), linear-gradient(145deg, #0D0D29 0%, #0D0D29 20%, #5C5C8A 30%, #FFFFFF 60%)",
+        backgroundImage: "linear-gradient(145deg, #0D0D29 0%, #0D0D29 20%, #5C5C8A 30%, #FFFFFF 60%)",
         backgroundColor: "#FFFFFF", 
         borderColor: BORDER, 
         boxShadow: "0 1px 4px rgba(26,26,26,0.04)" }}>
