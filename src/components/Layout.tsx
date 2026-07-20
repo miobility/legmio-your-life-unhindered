@@ -9,7 +9,7 @@ const SOCIAL = {
   linkedin: "https://www.linkedin.com/in/nicolas-perrin-gilbert-2815a4179/",
 };
 
-const ACCENT = "#FFFFFF";
+const ACCENT = "#ffca75";
 const TEXT = "#1A1A1A";
 const WHITETEXT = "#FAFAF8"
 const MUTED = "#6B6B6B";
@@ -30,7 +30,7 @@ export function StickyBanner() {
       target="_blank"
       rel="noreferrer"
       className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center text-xs sm:text-sm font-medium px-4 hover:opacity-90 transition overflow-hidden"
-      style={{ backgroundColor: ACCENT, color: "#1A1A1A" }}
+      style={{ backgroundColor: ACCENT, color: "#0D0D29" }}
     >
       <span key={idx} className="truncate fade-up">{msg}</span>
     </a>

@@ -82,7 +82,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #ffca75;
+  background-color: #ffffff;
   color: #0D0D29;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
@@ -91,14 +91,14 @@
   cursor: pointer;
 }
 @utility btn-dark-hover {
-  &:hover { background-color: #ffca75; transform: translateY(-1px); }
+  &:hover { background-color: #ffffff; transform: translateY(-1px); }
 }
 @utility btn-light {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #FFCA75;
+  background-color: #ffffff;
   color: #0D0D29;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
@@ -107,7 +107,7 @@
   cursor: pointer;
 }
 @utility btn-light-hover {
-  &:hover { background-color: #FFCA75; transform: translateY(-1px); }
+  &:hover { background-color: #ffffff; transform: translateY(-1px); }
 }
 @utility btn-outline-dark {
   display: inline-flex;
