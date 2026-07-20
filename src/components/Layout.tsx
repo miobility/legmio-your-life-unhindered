@@ -11,6 +11,7 @@ const SOCIAL = {
 
 const ACCENT = "#ffca75";
 const TEXT = "#1A1A1A";
+const WHITETEXT = "#FAFAF8"
 const MUTED = "#6B6B6B";
 const BORDER = "transparent";
 const BG = "#FAFAF8";
@@ -51,8 +52,8 @@ export function Header() {
       className="fixed left-0 right-0 z-40 border-b"
       style={{ top: 40, 
         // backgroundImage: "linear-gradient(90deg, #0D0D29 0%, #0D0D29 20%, #5C5C8A 30%, #FFFFFF 50%)",
-        backgroundImage: "linear-gradient(145deg, #0D0D29 0%, #0D0D29 20%, #5C5C8A 30%, #FFFFFF 60%)",
-        backgroundColor: "#FFFFFF", 
+        backgroundImage: "#0D0D29",
+        backgroundColor: "#0D0D29", 
         borderColor: BORDER, 
         boxShadow: "0 1px 4px rgba(26,26,26,0.04)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-6">
@@ -61,11 +62,11 @@ export function Header() {
         </Link>
         <div className="flex-1" />
         <nav className="hidden md:flex items-center gap-6 text-sm">
-          <Link to="/produit" className={linkClass(isProduct)} style={{ color: TEXT }}>{t("nav_product")}</Link>
-          <Link to="/faq" className={linkClass(isFaq)} style={{ color: TEXT }}>{t("nav_faq")}</Link>
-          <Link to="/blog" className={linkClass(isBlog)} style={{ color: TEXT }}>{t("nav_blog")}</Link>
+          <Link to="/produit" className={linkClass(isProduct)} style={{ color: WHITETEXT }}>{t("nav_product")}</Link>
+          <Link to="/faq" className={linkClass(isFaq)} style={{ color: WHITETEXT }}>{t("nav_faq")}</Link>
+          <Link to="/blog" className={linkClass(isBlog)} style={{ color: WHITETEXT }}>{t("nav_blog")}</Link>
         </nav>
-        <div className="hidden sm:flex items-center gap-1 text-sm" style={{ color: TEXT }}>
+        <div className="hidden sm:flex items-center gap-1 text-sm" style={{ color: WHITETEXT }}>
           <button onClick={() => setLang("fr")} aria-label="Français" className={`px-1 py-0.5 transition ${lang === "fr" ? "opacity-100 font-semibold" : "opacity-40 hover:opacity-70"}`}>FR</button>
           <span style={{ color: "#CCCCCC" }}>·</span>
           <button onClick={() => setLang("en")} aria-label="English" className={`px-1 py-0.5 transition ${lang === "en" ? "opacity-100 font-semibold" : "opacity-40 hover:opacity-70"}`}>EN</button>
