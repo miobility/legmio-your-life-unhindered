@@ -82,8 +82,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #2D5A3D;
-  color: #FFFFFF;
+  background-color: #ffffff;
+  color: #0D0D29;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
   border-radius: 50px;
@@ -91,15 +91,15 @@
   cursor: pointer;
 }
 @utility btn-dark-hover {
-  &:hover { background-color: #234832; transform: translateY(-1px); }
+  &:hover { background-color: #ffffff; transform: translateY(-1px); }
 }
 @utility btn-light {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #FFFFFF;
-  color: #2D5A3D;
+  background-color: #ffffff;
+  color: #0D0D29;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
   border-radius: 50px;
@@ -107,7 +107,7 @@
   cursor: pointer;
 }
 @utility btn-light-hover {
-  &:hover { background-color: #F2F0EB; transform: translateY(-1px); }
+  &:hover { background-color: #ffffff; transform: translateY(-1px); }
 }
 @utility btn-outline-dark {
   display: inline-flex;
@@ -115,14 +115,14 @@
   justify-content: center;
   gap: 0.5rem;
   background-color: transparent;
-  color: #2D5A3D;
+  color: #0D0D29;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
   border-radius: 50px;
   border: 1px solid #2D5A3D;
   transition: all 0.2s ease;
   cursor: pointer;
-  &:hover { background-color: #2D5A3D; color: #FFFFFF; }
+  &:hover { background-color: #0D0D29; color: #FFFFFF; }
 }
 @utility btn-outline-light {
   display: inline-flex;
@@ -205,4 +205,3 @@
   .marquee-left, .marquee-right, .marquee-track, .float-rotate { animation: none; }
   .reveal, .fade-up { opacity: 1; transform: none; transition: none; }
 }
-

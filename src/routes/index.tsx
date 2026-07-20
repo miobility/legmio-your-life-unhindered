@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
 
 const BG = "#FAFAF8";
 const BG_ALT = "#F2F0EB";
-const TEXT = "#1A1A1A";
+const TEXT = "#0D0D29";
 const MUTED = "#6B6B6B";
 const BORDER = "#E8E4DC";
 const ACCENT = "#2D5A3D";
@@ -160,19 +160,62 @@ export function ProductFeatureGrid() {
 
 function Landing() {
   const { tr } = useLanguage();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const tracks = video.textTracks;
+
+    for (let i = 0; i < tracks.length; i++) {
+      tracks[i].mode = "disabled";
+    }
+
+    const trackIndex = tr("fr", "en") === "fr" ? 0 : 1;
+
+    if (tracks[trackIndex]) {
+      tracks[trackIndex].mode = "showing";
+    }
+  });
+
   return (
     <div style={{ backgroundColor: BG }}>
       {/* SECTION 1 — HERO */}
-      <section style={{ backgroundColor: "#111111" }} className="px-4 sm:px-6 py-16 md:py-24">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[45%_55%] gap-10 items-center">
-          <div className="rounded-2xl overflow-hidden bg-black order-1">
-            <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "70vh" }}>
-              <video className="absolute inset-0 w-full h-full object-cover" src="/hero-video.mp4" autoPlay muted loop playsInline />
+      <section style={{ backgroundColor: "#0D0D29" }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[40%_60%] gap-10 items-center">
+          <div className="w-full max-w-[350px] mx-auto rounded-2xl overflow-hidden bg-black">
+            <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>              
+              <video
+                ref={videoRef}
+                className="absolute inset-0 w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+              >
+                <source src="/hero-video.mp4" type="video/mp4" />
+
+                <track
+                  src="/subtitles_fr.vtt"
+                  kind="subtitles"
+                  srcLang="fr"
+                  label="Français"
+                />
+
+                <track
+                  src="/subtitles_en.vtt"
+                  kind="subtitles"
+                  srcLang="en"
+                  label="English"
+                />
+              </video>
+
             </div>
           </div>
           <div className="text-white space-y-6 fade-up order-2">
             <div className="text-xs tracking-[0.2em] uppercase" style={{ color: "rgba(255,255,255,0.6)" }}>
-              {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "NEXT-GENERATION CRUTCH")}
+              {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT-GENERATION CRUTCH")}
             </div>
             <h1 className="text-5xl sm:text-6xl md:text-7xl leading-[1.02] text-white">
               {tr("Des mains libres et une autonomie enfin retrouvée.", "Hands free. Independence restored.")}
@@ -240,7 +283,7 @@ function Landing() {
               { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M vues", "3.6M views") },
               { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: "Le Mag de la Santé — France TV" },
             ].map((r, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft">
+              <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft w-full max-w-[350px] mx-auto">
                 <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: BG_ALT }}>
                   <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
                 </div>
@@ -332,7 +375,7 @@ function Landing() {
       </section>
 
       {/* SECTION 7 — ILS L'ATTENDENT */}
-      <section style={{ backgroundColor: "#111111" }} className="py-20 md:py-28 overflow-hidden">
+      <section style={{ backgroundColor: "#0D0D29" }} className="py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">
             {tr("Ils l'attendent avec impatience.", "They're waiting for it.")}
