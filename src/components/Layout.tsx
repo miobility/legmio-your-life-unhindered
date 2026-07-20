@@ -9,7 +9,7 @@ const SOCIAL = {
   linkedin: "https://www.linkedin.com/in/nicolas-perrin-gilbert-2815a4179/",
 };
 
-const ACCENT = "#ffca75";
+const ACCENT = "#FFFFFF";
 const TEXT = "#1A1A1A";
 const WHITETEXT = "#FAFAF8"
 const MUTED = "#6B6B6B";
