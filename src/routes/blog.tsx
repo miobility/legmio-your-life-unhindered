@@ -15,11 +15,14 @@ export const Route = createFileRoute("/blog")({
   component: Blog,
 });
 
-const BG = "#120B3B";
-const BG_ALT = "#1A1040";
-const TEXT = "#FFFFFF";
-const MUTED = "#A89ED0";
-const BORDER = "#2A1F6B";
+const NAVY = "#120B3B";
+const WHITE = "#FFFFFF";
+const CREAM = "#FAFAF8";
+const INK = "#1A1040";
+const INK_MUTED = "#6B6B6B";
+const MUTED_NAVY = "#A89ED0";
+const BORDER_LIGHT = "#E8E4DC";
+const ACCENT = "#F5C842";
 
 const genesisFr = `En 2020, j'ai subi une lourde opération pour retirer le cancer des os qui rongeait mon bassin. Elle fut un succès — et le début d'un nouveau parcours, à la fois difficile et joyeux.
 
