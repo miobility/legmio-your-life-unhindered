@@ -415,7 +415,7 @@ function Landing() {
             <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="opacity-80 hover:opacity-100"><IconLinkedin size={28} /></a>
           </div>
           <div className="mt-10"><CTALight /></div>
-          <p className="mt-10 text-xs" style={{ color: INK_MUTED }}>
+          <p className="mt-10 text-base" style={{ color: INK_MUTED }}>
             {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?")}{" "}
             <a href="/pro" className="underline" style={{ color: NAVY }}>{tr("Espace pro", "Pro area")} →</a>
           </p>
