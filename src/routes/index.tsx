@@ -288,7 +288,7 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
-              {tr("Testé. Approuvé.", "Tested. Approved.")}
+              {tr("Testée et approuvée.", "Tested and approved.")}
             </h2>
           </Reveal>
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
