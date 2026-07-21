@@ -178,8 +178,8 @@ function Landing() {
     <div style={{ backgroundColor: NAVY }}>
       {/* 1 — HERO (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
-          <div className="w-full max-w-[300px] mx-auto md:mx-0 md:justify-self-end rounded-2xl overflow-hidden" style={{ backgroundColor: "#000" }}>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[35%_65%] gap-8 md:gap-10 items-center">
+          <div className="w-full max-w-[300px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: "#000" }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
               <video
                 ref={videoRef}
