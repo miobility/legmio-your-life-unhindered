@@ -134,38 +134,50 @@ const themes: Theme[] = [
 function Faq() {
   const { lang, tr } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
+  const NAVY = "#120B3B";
+  const WHITE = "#FFFFFF";
+  const CREAM = "#FAFAF8";
+  const INK = "#1A1040";
+  const INK_MUTED = "#6B6B6B";
+  const MUTED_NAVY = "#A89ED0";
+  const BORDER_LIGHT = "#E8E4DC";
   return (
-    <div style={{ backgroundColor: "#FFFFFF" }}>
-      <section className="px-4 sm:px-6 py-20">
-        <h1 className="text-4xl sm:text-5xl text-center" style={{ color: "#111" }}>
+    <div style={{ backgroundColor: WHITE }}>
+      <section className="px-4 sm:px-6 py-20" style={{ backgroundColor: NAVY }}>
+        <h1 className="text-4xl sm:text-5xl text-center" style={{ color: WHITE }}>
           {tr("Tout ce que tu veux savoir.", "Everything you want to know.")}
         </h1>
+        <p className="mt-4 text-center text-sm" style={{ color: MUTED_NAVY }}>
+          {tr("Toutes les réponses en un seul endroit.", "All the answers in one place.")}
+        </p>
       </section>
-      <section className="px-4 sm:px-6 pb-24">
-        <div className="max-w-3xl mx-auto space-y-10">
-          {themes.map((th, ti) => (
-            <div key={ti}>
-              <h2 className="text-xl mb-2 font-display font-bold" style={{ color: "#111" }}>{th.title[lang === "en" ? 1 : 0]}</h2>
+      {themes.map((th, ti) => {
+        const isCream = ti % 2 === 1;
+        const bg = isCream ? CREAM : WHITE;
+        return (
+          <section key={ti} className="px-4 sm:px-6 py-14" style={{ backgroundColor: bg }}>
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-xl mb-4 font-display font-bold" style={{ color: INK }}>{th.title[lang === "en" ? 1 : 0]}</h2>
               <div>
                 {th.items.map((it, ii) => {
                   const key = `${ti}-${ii}`;
                   const isOpen = open === key;
                   const idx = lang === "en" ? 1 : 0;
                   return (
-                    <div key={ii} className="border-b" style={{ borderColor: "#EEEEEE" }}>
-                      <button onClick={() => setOpen(isOpen ? null : key)} className="w-full flex justify-between items-center py-4 text-left" style={{ color: "#111" }}>
+                    <div key={ii} className="border-b" style={{ borderColor: BORDER_LIGHT }}>
+                      <button onClick={() => setOpen(isOpen ? null : key)} className="w-full flex justify-between items-center py-4 text-left" style={{ color: INK }}>
                         <span>{it.q[idx]}</span>
-                        <span className={`transition-transform ${isOpen ? "rotate-180" : ""}`}><IconChevron size={18} /></span>
+                        <span className={`transition-transform ${isOpen ? "rotate-180" : ""}`} style={{ color: NAVY }}><IconChevron size={18} /></span>
                       </button>
-                      {isOpen && <div className="pb-4 text-sm" style={{ color: "#666" }}>{it.a[idx]}</div>}
+                      {isOpen && <div className="pb-4 text-sm" style={{ color: INK_MUTED }}>{it.a[idx]}</div>}
                     </div>
                   );
                 })}
               </div>
             </div>
-          ))}
-        </div>
-      </section>
+          </section>
+        );
+      })}
     </div>
   );
 }
