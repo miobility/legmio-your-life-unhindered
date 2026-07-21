@@ -243,7 +243,7 @@ function Landing() {
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
-              {tr("On veut changer ça.", "We want to change that.")}
+              {tr("legmio a tout repensé.", "legmio rethought everything.")}
             </h2>
           </Reveal>
           <div className="mt-12">
