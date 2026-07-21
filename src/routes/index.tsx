@@ -172,14 +172,14 @@ function Landing() {
     if (tracks[trackIndex]) tracks[trackIndex].mode = "showing";
   });
 
-  const pathologies = ["SEP", "Syndrome d'Ehlers-Danlos", "Cancer des os", "Amputation", "Paraplégie partielle"];
+  
 
   return (
     <div style={{ backgroundColor: NAVY }}>
       {/* 1 — HERO (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[35%_65%] gap-10 items-center">
-          <div className="w-full max-w-[350px] md:mx-0 mx-auto rounded-2xl overflow-hidden" style={{ backgroundColor: "#000" }}>
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
+          <div className="w-full max-w-[300px] mx-auto md:mx-0 md:justify-self-end rounded-2xl overflow-hidden" style={{ backgroundColor: "#000" }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
               <video
                 ref={videoRef}
@@ -196,7 +196,7 @@ function Landing() {
             <div className="text-xs tracking-[0.2em] uppercase" style={{ color: MUTED_NAVY }}>
               {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT-GENERATION CRUTCH")}
             </div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl leading-[1.05]" style={{ color: WHITE }}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl leading-[1.05]" style={{ color: WHITE }}>
               {tr(
                 <>Des mains libres<br />et une autonomie<br />enfin retrouvée.</>,
                 <>Hands free.<br />Independence,<br />finally restored.</>
@@ -206,6 +206,7 @@ function Landing() {
           </div>
         </div>
       </section>
+
 
       {/* 2 — PROBLÈME (WHITE) */}
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
@@ -242,7 +243,7 @@ function Landing() {
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
-              {tr("On veut changer ça.", "We want to change that.")}
+              {tr("legmio a tout repensé.", "legmio rethought everything.")}
             </h2>
           </Reveal>
           <div className="mt-12">
@@ -256,13 +257,13 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
-              {tr("legmio s'adapte à ta vie", "legmio adapts to your life")}
+              {tr("Partout où tu en as besoin.", "Wherever you need it.")}
             </h2>
           </Reveal>
           <div className="mt-10 -mx-4 sm:-mx-6 px-4 sm:px-6">
             <AutoCarousel>
               {[
-                { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches.", "Carry, cook, care for your loved ones."), badges: pathologies },
+                { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches.", "Carry, cook, care for your loved ones.") },
                 { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Récupère sans sacrifier tes épaules.", "Recover without sacrificing your shoulders.") },
                 { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif.", "Stay mobile, independent, productive.") },
                 { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant, des choses lourdes ou encombrantes.", "Carry your child, heavy or bulky things.") },
@@ -271,15 +272,8 @@ function Landing() {
                   <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)" }} />
                   <div className="absolute top-0 left-0 right-0 p-5 text-white font-display font-bold text-lg leading-tight">{c.t}</div>
-                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm space-y-2">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm">
                     <div>{c.p}</div>
-                    {c.badges && (
-                      <div className="flex flex-wrap gap-1 pt-1">
-                        {c.badges.map((b) => (
-                          <span key={b} className="text-[10px] px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(245,200,66,0.20)", color: ACCENT }}>{b}</span>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 </div>
               ))}
@@ -288,12 +282,13 @@ function Landing() {
         </div>
       </section>
 
+
       {/* 5 — TÉMOIGNAGES (CREAM) */}
       <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
-              {tr("Testé. Approuvé.", "Tested. Approved.")}
+              {tr("Testée et approuvée.", "Tested and approved.")}
             </h2>
           </Reveal>
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
@@ -324,7 +319,7 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-4xl mx-auto" style={{ color: INK }}>
-              {tr("Validée scientifiquement. Récompensée sur le terrain.", "Scientifically validated. Recognized in the field.")}
+              {tr("Une innovation récompensée.", "An award-winning innovation.")}
             </h2>
           </Reveal>
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -392,7 +387,7 @@ function Landing() {
       <section style={{ backgroundColor: WHITE }} className="py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
-            {tr("Des milliers de personnes attendent legmio.", "Thousands of people are waiting for legmio.")}
+            {tr("Bientôt disponible.", "Coming soon.")}
           </h2>
         </div>
         <WallOfLove />
