@@ -5,12 +5,12 @@ import { useLanguage } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { ProductFeatureGrid } from "@/routes/index";
 
-const BG = "#FAFAF8";
-const BG_ALT = "#F2F0EB";
-const TEXT = "#1A1A1A";
-const MUTED = "#6B6B6B";
-const BORDER = "#E8E4DC";
-const ACCENT = "#2D5A3D";
+const BG = "#120B3B";
+const BG_ALT = "#1A1040";
+const TEXT = "#FFFFFF";
+const MUTED = "#A89ED0";
+const BORDER = "#2A1F6B";
+const ACCENT = "#F5C842";
 
 export const Route = createFileRoute("/produit")({
   head: () => ({

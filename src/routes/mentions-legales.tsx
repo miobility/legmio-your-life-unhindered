@@ -11,10 +11,10 @@ export const Route = createFileRoute("/mentions-legales")({
   component: MentionsLegales,
 });
 
-const TEXT = "#1A1A1A";
-const MUTED = "#6B6B6B";
-const BG = "#FAFAF8";
-const BG_ALT = "#F2F0EB";
+const TEXT = "#FFFFFF";
+const MUTED = "#A89ED0";
+const BG = "#120B3B";
+const BG_ALT = "#1A1040";
 
 function MentionsLegales() {
   const { tr } = useLanguage();
