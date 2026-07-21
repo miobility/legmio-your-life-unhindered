@@ -387,7 +387,7 @@ function Landing() {
       <section style={{ backgroundColor: WHITE }} className="py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
-            {tr("Des milliers de personnes attendent legmio.", "Thousands of people are waiting for legmio.")}
+            {tr("Bientôt disponible.", "Coming soon.")}
           </h2>
         </div>
         <WallOfLove />
