@@ -257,13 +257,13 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
-              {tr("legmio s'adapte à ta vie", "legmio adapts to your life")}
+              {tr("Partout où tu en as besoin.", "Wherever you need it.")}
             </h2>
           </Reveal>
           <div className="mt-10 -mx-4 sm:-mx-6 px-4 sm:px-6">
             <AutoCarousel>
               {[
-                { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches.", "Carry, cook, care for your loved ones."), badges: pathologies },
+                { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches.", "Carry, cook, care for your loved ones.") },
                 { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Récupère sans sacrifier tes épaules.", "Recover without sacrificing your shoulders.") },
                 { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif.", "Stay mobile, independent, productive.") },
                 { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant, des choses lourdes ou encombrantes.", "Carry your child, heavy or bulky things.") },
@@ -272,15 +272,8 @@ function Landing() {
                   <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)" }} />
                   <div className="absolute top-0 left-0 right-0 p-5 text-white font-display font-bold text-lg leading-tight">{c.t}</div>
-                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm space-y-2">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm">
                     <div>{c.p}</div>
-                    {c.badges && (
-                      <div className="flex flex-wrap gap-1 pt-1">
-                        {c.badges.map((b) => (
-                          <span key={b} className="text-[10px] px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(245,200,66,0.20)", color: ACCENT }}>{b}</span>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 </div>
               ))}
@@ -288,6 +281,7 @@ function Landing() {
           </div>
         </div>
       </section>
+
 
       {/* 5 — TÉMOIGNAGES (CREAM) */}
       <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
