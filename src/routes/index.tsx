@@ -178,8 +178,8 @@ function Landing() {
     <div style={{ backgroundColor: NAVY }}>
       {/* 1 — HERO (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[35%_65%] gap-10 items-center">
-          <div className="w-full max-w-[350px] md:mx-0 mx-auto rounded-2xl overflow-hidden" style={{ backgroundColor: "#000" }}>
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
+          <div className="w-full max-w-[300px] mx-auto md:mx-0 md:justify-self-end rounded-2xl overflow-hidden" style={{ backgroundColor: "#000" }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
               <video
                 ref={videoRef}
@@ -196,7 +196,7 @@ function Landing() {
             <div className="text-xs tracking-[0.2em] uppercase" style={{ color: MUTED_NAVY }}>
               {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT-GENERATION CRUTCH")}
             </div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl leading-[1.05]" style={{ color: WHITE }}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl leading-[1.05]" style={{ color: WHITE }}>
               {tr(
                 <>Des mains libres<br />et une autonomie<br />enfin retrouvée.</>,
                 <>Hands free.<br />Independence,<br />finally restored.</>
@@ -206,6 +206,7 @@ function Landing() {
           </div>
         </div>
       </section>
+
 
       {/* 2 — PROBLÈME (WHITE) */}
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
