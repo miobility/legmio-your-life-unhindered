@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { SOCIAL } from "@/components/Layout";
 import {
@@ -20,21 +20,21 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const BG = "#FAFAF8";
-const BG_ALT = "#F2F0EB";
-const TEXT = "#0D0D29";
-const MUTED = "#6B6B6B";
-const BORDER = "#E8E4DC";
-const ACCENT = "#2D5A3D";
+const BG = "#120B3B";
+const BG_ALT = "#1A1040";
+const TEXT = "#FFFFFF";
+const MUTED = "#A89ED0";
+const BORDER = "#2A1F6B";
+const ACCENT = "#F5C842";
 
-function CTA({ dark, block }: { dark?: boolean; block?: boolean }) {
+function CTA({ block }: { dark?: boolean; block?: boolean }) {
   const { t, hubspotUrl } = useLanguage();
   return (
     <a
       href={hubspotUrl}
       target="_blank"
       rel="noreferrer"
-      className={`${dark ? "btn-light btn-light-hover" : "btn-dark btn-dark-hover"} ${block ? "w-full" : ""}`}
+      className={`btn-dark btn-dark-hover ${block ? "w-full" : ""}`}
     >
       {t("cta_interested")} <IconArrowRight size={16} />
     </a>
@@ -67,19 +67,9 @@ const IconRecycle = ({ size = 28 }: { size?: number }) => (
     <path d="M7 19H4l3-5M17 5h3l-3 5M12 4l3 3M8 20l-3-3M20 12l-3 3" />
   </svg>
 );
-const IconFlagFr = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 21V4M4 4h14l-2 4 2 4H4" />
-  </svg>
-);
 const IconFeather = ({ size = 28 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
     <path d="M20 4c-6 0-11 5-11 11v4h4c6 0 11-5 11-11" /><path d="M4 20l9-9" />
-  </svg>
-);
-const IconArm = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 20l6-6 4 4 6-10" /><circle cx="20" cy="4" r="2" />
   </svg>
 );
 const IconSliders = ({ size = 28 }: { size?: number }) => (
@@ -97,7 +87,6 @@ const IconWall = ({ size = 28 }: { size?: number }) => (
     <path d="M4 21V4h16M8 21V4M12 21V4M16 21V4" />
   </svg>
 );
-
 const IconNerve = ({ size = 28 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
     <path d="M4 4c4 0 4 4 8 4s4-4 8-4M4 12c4 0 4 4 8 4s4-4 8-4M4 20c4 0 4-4 8-4s4 4 8 4" />
@@ -126,7 +115,7 @@ export function SpecsStrip() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {pills.map((p, i) => (
-        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, color: TEXT }}>
+        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: BG_ALT, border: `1px solid ${BORDER}`, color: TEXT }}>
           <div style={{ color: ACCENT }}>{p.icon}</div>
           <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
           <div className="text-xs" style={{ color: MUTED }}>{tr(p.sFr, p.sEn)}</div>
@@ -148,7 +137,7 @@ export function ProductFeatureGrid() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {items.map((p, i) => (
-        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, color: TEXT }}>
+        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: BG_ALT, border: `1px solid ${BORDER}`, color: TEXT }}>
           <div style={{ color: ACCENT }}>{p.icon}</div>
           <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
           <div className="text-xs" style={{ color: MUTED }}>{tr(p.sFr, p.sEn)}</div>
@@ -165,83 +154,64 @@ function Landing() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
     const tracks = video.textTracks;
-
-    for (let i = 0; i < tracks.length; i++) {
-      tracks[i].mode = "disabled";
-    }
-
+    for (let i = 0; i < tracks.length; i++) tracks[i].mode = "disabled";
     const trackIndex = tr("fr", "en") === "fr" ? 0 : 1;
-
-    if (tracks[trackIndex]) {
-      tracks[trackIndex].mode = "showing";
-    }
+    if (tracks[trackIndex]) tracks[trackIndex].mode = "showing";
   });
+
+  const pathologies = ["SEP", "Syndrome d'Ehlers-Danlos", "Cancer des os", "Amputation", "Paraplégie partielle"];
 
   return (
     <div style={{ backgroundColor: BG }}>
-      {/* SECTION 1 — HERO */}
-      <section style={{ backgroundColor: "#0D0D29" }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[40%_60%] gap-10 items-center">
-          <div className="w-full max-w-[350px] mx-auto rounded-2xl overflow-hidden bg-black">
-            <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>              
+      {/* 1 — HERO */}
+      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[35%_65%] gap-10 items-center">
+          <div className="w-full max-w-[350px] md:mx-0 mx-auto rounded-2xl overflow-hidden" style={{ backgroundColor: "#000" }}>
+            <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
               <video
                 ref={videoRef}
                 className="absolute inset-0 w-full h-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
+                autoPlay muted loop playsInline
               >
                 <source src="/hero-video.mp4" type="video/mp4" />
-
-                <track
-                  src="/subtitles_fr.vtt"
-                  kind="subtitles"
-                  srcLang="fr"
-                  label="Français"
-                />
-
-                <track
-                  src="/subtitles_en.vtt"
-                  kind="subtitles"
-                  srcLang="en"
-                  label="English"
-                />
+                <track src="/subtitles_fr.vtt" kind="subtitles" srcLang="fr" label="Français" />
+                <track src="/subtitles_en.vtt" kind="subtitles" srcLang="en" label="English" />
               </video>
-
             </div>
           </div>
           <div className="text-white space-y-6 fade-up order-2">
-            <div className="text-xs tracking-[0.2em] uppercase" style={{ color: "rgba(255,255,255,0.6)" }}>
+            <div className="text-xs tracking-[0.2em] uppercase" style={{ color: MUTED }}>
               {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT-GENERATION CRUTCH")}
             </div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl leading-[1.02] text-white">
-              {tr("Des mains libres et une autonomie enfin retrouvée.", "Hands free. Independence restored.")}
+            <h1 className="text-6xl sm:text-7xl md:text-8xl leading-[1.02] text-white">
+              {tr(
+                <>Des mains libres<br />et une autonomie<br />enfin retrouvée.</>,
+                <>Hands free.<br />Independence,<br />finally restored.</>
+              )}
             </h1>
-            <div className="pt-2"><CTA dark /></div>
+            <div className="pt-2"><CTA /></div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 2 — PROBLÈME */}
-      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 2 — PROBLÈME */}
+      <section style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: TEXT }}>
-              {tr("Tu connais déjà le problème. Tu le vis.", "You already know the problem. You live it.")}
+              {tr("Les béquilles classiques ont leurs limites.", "Classic crutches have their limits.")}
             </h2>
           </Reveal>
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
             <AutoCarousel>
               {[
-                { img: "/probleme-poignet.jpg", t: tr("Tes épaules, tes poignets, tes mains trinquent.", "Your shoulders, wrists and hands take the hit."), p: tr("La béquille censée t'aider te crée un handicap supplémentaire.", "The crutch meant to help you creates an extra disability.") },
-                { img: "/probleme-mains.avif", t: tr("Tes mains sont prises.", "Your hands are taken."), p: tr("Porter un verre, faire ses courses, ouvrir une porte — des gestes devenus négociations.", "Carrying a glass, shopping, opening a door — every gesture becomes a negotiation.") },
-                { img: "/probleme-temps.jpg", t: tr("Et tu t'y fais.", "And you get used to it."), p: tr("5 ans, 10 ans, 40 ans en béquilles. Sans qu'on t'ait jamais proposé autre chose.", "5, 10, 40 years on crutches — with no one ever offering another way.") },
+                { img: "/probleme-poignet.jpg", t: tr("Appui concentré sur le poignet et l'épaule.", "Load concentrated on wrist and shoulder."), p: tr("À force d'utilisation, les contraintes s'accumulent sur les mêmes zones articulaires.", "Over time, stress builds up on the same joint zones.") },
+                { img: "/probleme-mains.avif", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are taken to move."), p: tr("Porter, cuisiner, travailler, tenir son enfant — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, holding your child — every gesture requires a pause.") },
+                { img: "/probleme-temps.jpg", t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally evolved."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches rely on principles decades old.") },
               ].map((c, i) => (
                 <div key={i} className="card-soft overflow-hidden w-[320px] md:w-[380px]">
-                  <div className="aspect-[3/2] overflow-hidden" style={{ filter: "grayscale(1)" }}>
+                  <div className="aspect-[3/2] overflow-hidden">
                     <img src={c.img} alt="" className="w-full h-full object-cover" loading="lazy" />
                   </div>
                   <div className="p-6">
@@ -255,8 +225,114 @@ function Landing() {
         </div>
       </section>
 
-      {/* SECTION 3 — ILS PARLENT DE NOUS */}
+      {/* 3 — FONCTIONNALITÉS */}
+      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-6xl mx-auto">
+          <Reveal>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
+              {tr("On veut changer ça.", "We want to change that.")}
+            </h2>
+          </Reveal>
+          <div className="mt-12">
+            <SpecsStrip />
+          </div>
+        </div>
+      </section>
+
+      {/* 4 — USE CASES */}
       <section style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
+          <Reveal>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: TEXT }}>
+              {tr("legmio s'adapte à ta vie", "legmio adapts to your life")}
+            </h2>
+          </Reveal>
+          <div className="mt-10 -mx-4 sm:-mx-6 px-4 sm:px-6">
+            <AutoCarousel>
+              {[
+                { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches.", "Carry, cook, care for your loved ones."), badges: pathologies },
+                { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Récupère sans sacrifier tes épaules.", "Recover without sacrificing your shoulders.") },
+                { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif.", "Stay mobile, independent, productive.") },
+                { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant, des choses lourdes ou encombrantes.", "Carry your child, heavy or bulky things.") },
+              ].map((c, i) => (
+                <div key={i} className="relative w-[280px] md:w-[320px] aspect-[3/4] rounded-2xl overflow-hidden">
+                  <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)" }} />
+                  <div className="absolute top-0 left-0 right-0 p-5 text-white font-display font-bold text-lg leading-tight">{c.t}</div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm space-y-2">
+                    <div>{c.p}</div>
+                    {c.badges && (
+                      <div className="flex flex-wrap gap-1 pt-1">
+                        {c.badges.map((b) => (
+                          <span key={b} className="text-[10px] px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(245,200,66,0.20)", color: ACCENT }}>{b}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </AutoCarousel>
+          </div>
+        </div>
+      </section>
+
+      {/* 5 — TÉMOIGNAGES */}
+      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
+          <Reveal>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
+              {tr("Testé. Approuvé.", "Tested. Approved.")}
+            </h2>
+          </Reveal>
+          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
+            <AutoCarousel>
+              {[
+                { img: "/pauline.png", n: "Dr Pauline Coignard", p: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape · President APPROCHE · SOFMER"), q: tr("Une béquille qui rend les mains au patient : une grande avancée !", "A crutch that gives the patient back their hands — a major breakthrough!") },
+                { img: "/selim.png", n: "Salim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)") },
+                { img: "/marc.jpg", n: "Marc", p: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-op meniscus · Home recovery"), q: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my meniscus surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized.") },
+              ].map((t, i) => (
+                <div key={i} className="card-soft p-5 w-[320px] md:w-[380px] flex flex-col">
+                  <div className="flex items-center gap-4">
+                    <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
+                    <div>
+                      <div className="font-bold" style={{ color: TEXT }}>{t.n}</div>
+                      <div className="text-xs" style={{ color: MUTED }}>{t.p}</div>
+                    </div>
+                  </div>
+                  <p className="mt-5 italic text-sm" style={{ color: MUTED }}>"{t.q}"</p>
+                </div>
+              ))}
+            </AutoCarousel>
+          </div>
+        </div>
+      </section>
+
+      {/* 6 — CRÉDIBILITÉ */}
+      <section style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
+          <Reveal>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-4xl mx-auto" style={{ color: TEXT }}>
+              {tr("Validée scientifiquement. Récompensée sur le terrain.", "Scientifically validated. Recognized in the field.")}
+            </h2>
+          </Reveal>
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'Or", "Gold Medal"), s: "Concours Lépine 2026" },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award"), s: "Le Média Positif 2026" },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la Recherche", "Backed by Research"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
+            ].map((s, i) => (
+              <div key={i} className="rounded-2xl p-6 flex flex-col items-start gap-3" style={{ backgroundColor: BG, border: `1px solid ${BORDER}` }}>
+                <div style={{ color: ACCENT }}>{s.icon}</div>
+                <div className="font-display font-bold text-xl leading-tight" style={{ color: TEXT }}>{s.t}</div>
+                <div className="text-sm" style={{ color: MUTED }}>{s.s}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7 — ILS PARLENT DE NOUS (médias + Instagram) */}
+      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
@@ -278,10 +354,11 @@ function Landing() {
             </AutoCarousel>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
-              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M vues", "3.6M views") },
-              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: "Le Mag de la Santé — France TV" },
+              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M de vues", "3.6M views") },
+              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
+              { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views") },
             ].map((r, i) => (
               <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft w-full max-w-[350px] mx-auto">
                 <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: BG_ALT }}>
@@ -296,139 +373,21 @@ function Landing() {
               </div>
             ))}
           </div>
-
         </div>
       </section>
 
-      {/* SECTION 4 — USE CASES */}
-      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-7xl mx-auto">
-          <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: TEXT }}>
-              {tr("legmio s'adapte à ta vie", "legmio adapts to your life")}
-            </h2>
-          </Reveal>
-          <div className="mt-10 -mx-4 sm:-mx-6 px-4 sm:px-6">
-            <AutoCarousel>
-              {[
-                { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches.", "Carry, cook, care for your loved ones.") },
-                { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Récupère sans sacrifier tes épaules.", "Recover without sacrificing your shoulders.") },
-                { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif.", "Stay mobile, independent, productive.") },
-                { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant, des choses lourdes ou encombrantes. Reprendre ce que tu avais arrêté de demander.", "Carry your child, heavy or bulky things. Take back what you'd stopped asking for.") },
-              ].map((c, i) => (
-                <div key={i} className="relative w-[280px] md:w-[320px] aspect-[3/4] rounded-2xl overflow-hidden">
-                  <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.75) 100%)" }} />
-                  <div className="absolute top-0 left-0 right-0 p-5 text-white font-display font-bold text-lg leading-tight">{c.t}</div>
-                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm">{c.p}</div>
-                </div>
-              ))}
-            </AutoCarousel>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5 — FONCTIONNALITÉS (specs strip only) */}
-      <section style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-6xl mx-auto">
-          <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
-              {tr("Conçue pour durer.", "Built to last.")}
-            </h2>
-          </Reveal>
-          <div className="mt-12">
-            <SpecsStrip />
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 6 — TÉMOIGNAGES */}
-      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-7xl mx-auto">
-          <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
-              {tr("Ils l'ont testé. Ils témoignent.", "They tested it. They speak.")}
-            </h2>
-          </Reveal>
-          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
-            <AutoCarousel>
-              {[
-                { img: "/pauline.png", n: "Dr Pauline Coignard", p: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape · President APPROCHE · SOFMER"), q: tr("Une béquille qui rend les mains au patient : une grande avancée !", "A crutch that gives the patient back their hands — a major breakthrough!") },
-                { img: "/selim.png", n: "Selim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)") },
-                { img: "/joachim.png", n: "Joachim", p: tr("Post-opératoire ligaments croisés · Convalescence à domicile", "Post-op cruciate ligaments · Home recovery"), q: tr("Après mon opération des ligaments croisés, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my cruciate ligament surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized.") },
-              ].map((t, i) => (
-                <div key={i} className="card-soft p-5 w-[320px] md:w-[380px] flex flex-col">
-                  <div className="flex items-center gap-4">
-                    <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
-                    <div>
-                      <div className="font-bold" style={{ color: TEXT }}>{t.n}</div>
-                      <div className="text-xs" style={{ color: MUTED }}>{t.p}</div>
-                    </div>
-                  </div>
-                  <p className="mt-5 italic text-sm" style={{ color: "#333" }}>"{t.q}"</p>
-                </div>
-              ))}
-            </AutoCarousel>
-          </div>
-          <div className="mt-12 text-center"><CTA /></div>
-        </div>
-      </section>
-
-      {/* SECTION 7 — ILS L'ATTENDENT */}
-      <section style={{ backgroundColor: "#0D0D29" }} className="py-20 md:py-28 overflow-hidden">
+      {/* 8 — WALL OF LOVE */}
+      <section style={{ backgroundColor: BG_ALT }} className="py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-white">
-            {tr("Ils l'attendent avec impatience.", "They're waiting for it.")}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
+            {tr("Des milliers de personnes attendent legmio.", "Thousands of people are waiting for legmio.")}
           </h2>
         </div>
         <WallOfLove />
       </section>
 
-      {/* SECTION 8 — CRÉDIBILITÉ */}
+      {/* 9 — ROADMAP */}
       <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-7xl mx-auto">
-          <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-4xl mx-auto" style={{ color: TEXT }}>
-              {tr("Validée scientifiquement. Récompensée sur le terrain.", "Scientifically validated. Recognized in the field.")}
-            </h2>
-          </Reveal>
-
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              {
-                icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>
-                ),
-                t: tr("Médaille d'Or", "Gold Medal"),
-                s: "Concours Lépine 2026",
-              },
-              {
-                icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
-                ),
-                t: tr("Prix de l'Impact", "Impact Award"),
-                s: "Le Média Positif 2026",
-              },
-              {
-                icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>
-                ),
-                t: tr("Soutenu par la Recherche", "Backed by Research"),
-                s: "CNRS · Sorbonne · SATT Lutech · BPI",
-              },
-            ].map((s, i) => (
-              <div key={i} className="rounded-2xl p-6 flex flex-col items-start gap-3" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}` }}>
-                <div style={{ color: ACCENT }}>{s.icon}</div>
-                <div className="font-display font-bold text-xl leading-tight" style={{ color: TEXT }}>{s.t}</div>
-                <div className="text-sm" style={{ color: MUTED }}>{s.s}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 9 — ROADMAP */}
-      <section style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-5xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>{tr("Où en sommes-nous ?", "Where are we today?")}</h2>
@@ -437,8 +396,8 @@ function Landing() {
         </div>
       </section>
 
-      {/* SECTION 10 — ACTUALITÉ + CTA */}
-      <section id="waitlist" style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 10 — ACTUALITÉ + CTA */}
+      <section id="waitlist" style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-lg mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: TEXT }}>
             {tr("Suis l'actualité de legmio.", "Follow legmio.")}
@@ -450,7 +409,8 @@ function Landing() {
           </div>
           <div className="mt-10"><CTA /></div>
           <p className="mt-10 text-xs" style={{ color: MUTED }}>
-            {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?")} <a href="mailto:contact@legmio.com" className="underline">contact@legmio.com</a>
+            {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?")}{" "}
+            <a href="/pro" className="underline" style={{ color: ACCENT }}>{tr("Espace pro", "Pro area")} →</a>
           </p>
         </div>
       </section>
@@ -460,35 +420,40 @@ function Landing() {
 
 function WallOfLove() {
   const { tr } = useLanguage();
-  const quotesFr = [
+  const row1Fr = [
     "C'est la béquille que j'attends depuis longtemps.",
     "J'ai hâte que ça soit commercialisé, on est des milliers à en avoir besoin !",
     "Une main de libre, un bonheur.",
     "Ça fait longtemps que je me disais : mais c'est fou que personne n'ait encore inventé ça.",
     "Votre invention est révolutionnaire et va changer la vie de beaucoup d'entre nous.",
+  ];
+  const row2Fr = [
     "J'utilise des béquilles depuis 20 ans... si le prix est convenable, je prends.",
     "Vos béquilles sont une révolution. On attend avec impatience.",
     "Je marche sans béquilles parce que je ne peux rien faire d'autre si j'ai les béquilles !",
     "Voir votre invention remonte le moral.",
     "Elle a l'air de vraiment redonner de la liberté de mouvement.",
   ];
-  const quotesEn = [
+  const row1En = [
     "The crutch I've been waiting for forever.",
-    "Can't wait for it to launch — thousands of us need this!",
+    "Can't wait for launch — thousands of us need this!",
     "One free hand — pure happiness.",
-    "I've been saying for years: it's insane no one had built this yet.",
+    "I've been saying for years: crazy no one built this yet.",
     "Your invention is revolutionary and will change many lives.",
+  ];
+  const row2En = [
     "20 years on crutches... if the price is fair, count me in.",
     "Your crutches are a revolution. We're waiting eagerly.",
     "I walk without crutches because I can't do anything else with them!",
     "Seeing your invention lifts my spirits.",
     "It really seems to give back freedom of movement.",
   ];
-  const quotes = tr(quotesFr, quotesEn);
-  const row1 = [...quotes, ...quotes];
-  const row2 = [...quotes.slice().reverse(), ...quotes.slice().reverse()];
+  const row1 = tr(row1Fr, row1En);
+  const row2 = tr(row2Fr, row2En);
+  const dup1 = [...row1, ...row1];
+  const dup2 = [...row2, ...row2];
   const Card = ({ q }: { q: string }) => (
-    <div className="rounded-2xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: "#FFFFFF", color: "#1A1A1A" }}>
+    <div className="rounded-2xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: BG, border: `1px solid ${BORDER}`, color: TEXT }}>
       <p className="italic text-sm">"{q}"</p>
     </div>
   );
@@ -496,19 +461,18 @@ function WallOfLove() {
     <div className="mt-14 space-y-6 marquee-pause">
       <div className="overflow-hidden">
         <div className="flex gap-4 marquee-left" style={{ width: "max-content" }}>
-          {row1.map((q, i) => <Card key={`a${i}`} q={q} />)}
+          {dup1.map((q, i) => <Card key={`a${i}`} q={q} />)}
         </div>
       </div>
       <div className="overflow-hidden">
         <div className="flex gap-4 marquee-right" style={{ width: "max-content" }}>
-          {row2.map((q, i) => <Card key={`b${i}`} q={q} />)}
+          {dup2.map((q, i) => <Card key={`b${i}`} q={q} />)}
         </div>
       </div>
     </div>
   );
 }
 
-// Re-export for legacy imports (produit.tsx used to import FeaturesCarousel)
 export function FeaturesCarousel() {
   return <ProductFeatureGrid />;
 }
@@ -528,7 +492,6 @@ function Roadmap() {
   return (
     <div className="mt-16">
       <div className="hidden md:block relative pt-16 pb-4">
-        {/* Progress line (centered on circle row) */}
         <div className="absolute left-0 right-0 h-px" style={{ top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER }} />
         <div className="absolute left-0 h-[2px]" style={{ top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${progressPct}%` }} />
         <div className="relative grid grid-cols-5 gap-4">
@@ -547,9 +510,9 @@ function Roadmap() {
                     style={{
                       width: CIRCLE,
                       height: CIRCLE,
-                      backgroundColor: (done || isCurrent) ? ACCENT : "#FFFFFF",
+                      backgroundColor: (done || isCurrent) ? ACCENT : BG,
                       border: `2px solid ${upcoming ? BORDER : ACCENT}`,
-                      boxShadow: isCurrent ? `0 0 0 6px rgba(45,90,61,0.15)` : "none",
+                      boxShadow: isCurrent ? `0 0 0 6px rgba(245,200,66,0.20)` : "none",
                     }}
                   />
                 </div>
@@ -569,7 +532,7 @@ function Roadmap() {
               <div className="mt-1 rounded-full shrink-0" style={{
                 width: isCurrent ? 18 : 12,
                 height: isCurrent ? 18 : 12,
-                backgroundColor: isCurrent ? ACCENT : done ? ACCENT : "#FFFFFF",
+                backgroundColor: isCurrent ? ACCENT : done ? ACCENT : BG,
                 border: `2px solid ${upcoming ? BORDER : ACCENT}`,
               }} />
               <div>

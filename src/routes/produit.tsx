@@ -5,12 +5,12 @@ import { useLanguage } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { ProductFeatureGrid } from "@/routes/index";
 
-const BG = "#FAFAF8";
-const BG_ALT = "#F2F0EB";
-const TEXT = "#1A1A1A";
-const MUTED = "#6B6B6B";
-const BORDER = "#E8E4DC";
-const ACCENT = "#2D5A3D";
+const BG = "#120B3B";
+const BG_ALT = "#1A1040";
+const TEXT = "#FFFFFF";
+const MUTED = "#A89ED0";
+const BORDER = "#2A1F6B";
+const ACCENT = "#F5C842";
 
 export const Route = createFileRoute("/produit")({
   head: () => ({
@@ -51,8 +51,8 @@ function Produit() {
 
   const initialReviews: Review[] = [
     { img: "/pauline.png", stars: 5, title: tr("Une grande avancée.", "A major breakthrough."), quote: tr("Une béquille qui rend les mains libres : une grande avancée !", "A crutch that gives the patient back their hands — a major breakthrough!"), name: "Dr Pauline Coignard", profile: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape · President APPROCHE · SOFMER"), date: tr("Mars 2026", "March 2026") },
-    { img: "/selim.png", stars: 5, title: tr("Une vraie autonomie retrouvée.", "Real autonomy, back."), quote: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)"), name: "Selim", profile: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), date: tr("Février 2026", "February 2026") },
-    { img: "/joachim.png", stars: 5, title: tr("Autonome pendant ma convalescence.", "Autonomous through recovery."), quote: tr("Après mon opération des ligaments croisés, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my cruciate ligament surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized."), name: "Joachim", profile: tr("Post-opératoire ligaments croisés · Convalescence à domicile", "Post-op cruciate ligaments · Home recovery"), date: tr("Janvier 2026", "January 2026") },
+    { img: "/selim.png", stars: 5, title: tr("Une vraie autonomie retrouvée.", "Real autonomy, back."), quote: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)"), name: "Salim", profile: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), date: tr("Février 2026", "February 2026") },
+    { img: "/marc.jpg", stars: 5, title: tr("Autonome pendant ma convalescence.", "Autonomous through recovery."), quote: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my meniscus surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized."), name: "Marc", profile: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-op meniscus · Home recovery"), date: tr("Janvier 2026", "January 2026") },
   ];
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
   const reviewCount = reviews.length;

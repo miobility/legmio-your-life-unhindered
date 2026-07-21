@@ -15,11 +15,11 @@ export const Route = createFileRoute("/blog")({
   component: Blog,
 });
 
-const BG = "#FAFAF8";
-const BG_ALT = "#F2F0EB";
-const TEXT = "#1A1A1A";
-const MUTED = "#6B6B6B";
-const BORDER = "#E8E4DC";
+const BG = "#120B3B";
+const BG_ALT = "#1A1040";
+const TEXT = "#FFFFFF";
+const MUTED = "#A89ED0";
+const BORDER = "#2A1F6B";
 
 const genesisFr = `En 2020, j'ai subi une lourde opération pour retirer le cancer des os qui rongeait mon bassin. Elle fut un succès — et le début d'un nouveau parcours, à la fois difficile et joyeux.
 
@@ -222,10 +222,10 @@ function ArticleCard({ a }: { a: Article }) {
           <img src={a.cover} alt={title} className="w-full h-full object-cover" onError={(e) => (e.currentTarget.src = "/usecase-quotidien.png")} />
         </div>
         <div className="p-8">
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "#2D5A3D", color: "#FFF" }}>{tag}</span>
+          <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "#F5C842", color: "#FFF" }}>{tag}</span>
           <h2 className="mt-4 text-2xl md:text-3xl font-display font-bold" style={{ color: TEXT }}>{title}</h2>
           <p className="mt-4 text-sm" style={{ color: MUTED }}>{excerpt}</p>
-          <button onClick={() => setOpen(!open)} className="mt-4 inline-flex items-center gap-1 text-sm font-bold" style={{ color: "#2D5A3D" }}>
+          <button onClick={() => setOpen(!open)} className="mt-4 inline-flex items-center gap-1 text-sm font-bold" style={{ color: "#F5C842" }}>
             {open ? tr("Réduire", "Collapse") : tr("Lire l'article", "Read article")}
             <span className={`transition-transform ${open ? "rotate-180" : ""}`}><IconChevron size={16} /></span>
           </button>
