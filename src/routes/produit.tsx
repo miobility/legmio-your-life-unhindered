@@ -184,7 +184,7 @@ function Produit() {
       <section id="features" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("On veut changer ça.", "We want to change that.")}</h2>
+            <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("Fonctionnalités", "Features")}</h2>
           </Reveal>
           <div className="mt-10">
             <ProductFeatureGrid />
