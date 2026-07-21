@@ -172,7 +172,7 @@ function Landing() {
     if (tracks[trackIndex]) tracks[trackIndex].mode = "showing";
   });
 
-  const pathologies = ["SEP", "Syndrome d'Ehlers-Danlos", "Cancer des os", "Amputation", "Paraplégie partielle"];
+  
 
   return (
     <div style={{ backgroundColor: NAVY }}>
