@@ -263,7 +263,7 @@ function Produit() {
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl" style={{ color: WHITE }}>
-            {tr("Prêt à retrouver tes mains libres ?", "Ready to get your hands back?")}
+            {tr(<>Prêt à retrouver<br />tes mains libres ?</>, <>Ready to get<br />your hands back?</>)}
           </h2>
           <div className="mt-8">
             <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover inline-flex">
