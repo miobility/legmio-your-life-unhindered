@@ -16,11 +16,11 @@ import { Header, StickyBanner, Footer } from "@/components/Layout";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#FFFFFF" }}>
+    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#120B3B" }}>
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold font-display" style={{ color: "#111111" }}>404</h1>
-        <h2 className="mt-4 text-xl font-semibold" style={{ color: "#111111" }}>Page not found</h2>
-        <p className="mt-2 text-sm" style={{ color: "#444444" }}>The page you're looking for doesn't exist.</p>
+        <h1 className="text-7xl font-bold font-display" style={{ color: "#FFFFFF" }}>404</h1>
+        <h2 className="mt-4 text-xl font-semibold" style={{ color: "#FFFFFF" }}>Page not found</h2>
+        <p className="mt-2 text-sm" style={{ color: "#A89ED0" }}>The page you're looking for doesn't exist.</p>
         <div className="mt-6">
           <Link to="/" className="btn-dark btn-dark-hover">Go home</Link>
         </div>
@@ -36,10 +36,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
   return (
-    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#FFFFFF" }}>
+    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#120B3B" }}>
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold" style={{ color: "#111111" }}>This page didn't load</h1>
-        <p className="mt-2 text-sm" style={{ color: "#444444" }}>Something went wrong.</p>
+        <h1 className="text-xl font-semibold" style={{ color: "#FFFFFF" }}>This page didn't load</h1>
+        <p className="mt-2 text-sm" style={{ color: "#A89ED0" }}>Something went wrong.</p>
         <div className="mt-6 flex justify-center gap-2">
           <button onClick={() => { router.invalidate(); reset(); }} className="btn-dark btn-dark-hover">Try again</button>
         </div>
