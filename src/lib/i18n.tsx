@@ -8,8 +8,8 @@ export const HUBSPOT_EN = "https://fd623.share-eu1.hsforms.com/2ApzYviPbRnyLmAQh
 type Dict = Record<string, string>;
 
 const fr: Dict = {
-  banner_a: "Commercialisation courant 2027",
-  banner_b: "Rejoignez la liste d'attente dès maintenant",
+  banner_a: "Rejoindre la liste d'attente",
+  banner_b: "Rejoindre la liste d'attente",
   nav_product: "Béquille",
   nav_faq: "FAQ",
   nav_blog: "Blog",
