@@ -20,22 +20,33 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const BG = "#120B3B";
-const BG_ALT = "#1A1040";
-const TEXT = "#FFFFFF";
-const MUTED = "#A89ED0";
-const BORDER = "#2A1F6B";
+// Palette
+const NAVY = "#120B3B";
+const NAVY_ALT = "#1A1040";
+const WHITE = "#FFFFFF";
+const CREAM = "#FAFAF8";
+const INK = "#1A1040";
+const INK_MUTED = "#6B6B6B";
+const BORDER_LIGHT = "#E8E4DC";
+const BORDER_NAVY = "#2A1F6B";
+const MUTED_NAVY = "#A89ED0";
 const ACCENT = "#F5C842";
 
-function CTA({ block }: { dark?: boolean; block?: boolean }) {
+function CTADark({ block }: { block?: boolean }) {
+  // For NAVY sections: gold bg, navy text
   const { t, hubspotUrl } = useLanguage();
   return (
-    <a
-      href={hubspotUrl}
-      target="_blank"
-      rel="noreferrer"
-      className={`btn-dark btn-dark-hover ${block ? "w-full" : ""}`}
-    >
+    <a href={hubspotUrl} target="_blank" rel="noreferrer" className={`btn-dark btn-dark-hover ${block ? "w-full" : ""}`}>
+      {t("cta_interested")} <IconArrowRight size={16} />
+    </a>
+  );
+}
+
+function CTALight({ block }: { block?: boolean }) {
+  // For WHITE/CREAM sections: navy bg, white text
+  const { t, hubspotUrl } = useLanguage();
+  return (
+    <a href={hubspotUrl} target="_blank" rel="noreferrer" className={`btn-light btn-light-hover ${block ? "w-full" : ""}`}>
       {t("cta_interested")} <IconArrowRight size={16} />
     </a>
   );
@@ -109,23 +120,24 @@ const specsItems = () => [
   { icon: <IconRulerPill />, kFr: "Universelle", kEn: "Universal", sFr: "Convient de 1m50 à 1m95", sEn: "Fits 1m50 to 1m95" },
 ];
 
+// SpecsStrip on CREAM section: white cards, navy text/icons
 export function SpecsStrip() {
   const { tr } = useLanguage();
   const pills = specsItems();
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {pills.map((p, i) => (
-        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: BG_ALT, border: `1px solid ${BORDER}`, color: TEXT }}>
-          <div style={{ color: ACCENT }}>{p.icon}</div>
+        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
+          <div style={{ color: NAVY }}>{p.icon}</div>
           <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
-          <div className="text-xs" style={{ color: MUTED }}>{tr(p.sFr, p.sEn)}</div>
+          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn)}</div>
         </div>
       ))}
     </div>
   );
 }
 
-// ============= Product-page features grid (10 items) =============
+// Product feature grid: used on WHITE section (produit page)
 export function ProductFeatureGrid() {
   const { tr } = useLanguage();
   const base = specsItems();
@@ -137,10 +149,10 @@ export function ProductFeatureGrid() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {items.map((p, i) => (
-        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: BG_ALT, border: `1px solid ${BORDER}`, color: TEXT }}>
-          <div style={{ color: ACCENT }}>{p.icon}</div>
+        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
+          <div style={{ color: NAVY }}>{p.icon}</div>
           <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
-          <div className="text-xs" style={{ color: MUTED }}>{tr(p.sFr, p.sEn)}</div>
+          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn)}</div>
         </div>
       ))}
     </div>
@@ -163,9 +175,9 @@ function Landing() {
   const pathologies = ["SEP", "Syndrome d'Ehlers-Danlos", "Cancer des os", "Amputation", "Paraplégie partielle"];
 
   return (
-    <div style={{ backgroundColor: BG }}>
-      {/* 1 — HERO */}
-      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
+    <div style={{ backgroundColor: NAVY }}>
+      {/* 1 — HERO (NAVY) */}
+      <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[35%_65%] gap-10 items-center">
           <div className="w-full max-w-[350px] md:mx-0 mx-auto rounded-2xl overflow-hidden" style={{ backgroundColor: "#000" }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
@@ -180,26 +192,26 @@ function Landing() {
               </video>
             </div>
           </div>
-          <div className="text-white space-y-6 fade-up order-2">
-            <div className="text-xs tracking-[0.2em] uppercase" style={{ color: MUTED }}>
+          <div className="space-y-6 fade-up order-2" style={{ color: WHITE }}>
+            <div className="text-xs tracking-[0.2em] uppercase" style={{ color: MUTED_NAVY }}>
               {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT-GENERATION CRUTCH")}
             </div>
-            <h1 className="text-6xl sm:text-7xl md:text-8xl leading-[1.02] text-white">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl leading-[1.05]" style={{ color: WHITE }}>
               {tr(
                 <>Des mains libres<br />et une autonomie<br />enfin retrouvée.</>,
                 <>Hands free.<br />Independence,<br />finally restored.</>
               )}
             </h1>
-            <div className="pt-2"><CTA /></div>
+            <div className="pt-2"><CTADark /></div>
           </div>
         </div>
       </section>
 
-      {/* 2 — PROBLÈME */}
-      <section style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 2 — PROBLÈME (WHITE) */}
+      <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: TEXT }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
               {tr("Les béquilles classiques ont leurs limites.", "Classic crutches have their limits.")}
             </h2>
           </Reveal>
@@ -210,13 +222,13 @@ function Landing() {
                 { img: "/probleme-mains.avif", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are taken to move."), p: tr("Porter, cuisiner, travailler, tenir son enfant — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, holding your child — every gesture requires a pause.") },
                 { img: "/probleme-temps.jpg", t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally evolved."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches rely on principles decades old.") },
               ].map((c, i) => (
-                <div key={i} className="card-soft overflow-hidden w-[320px] md:w-[380px]">
+                <div key={i} className="card-cream overflow-hidden w-[320px] md:w-[380px]">
                   <div className="aspect-[3/2] overflow-hidden">
                     <img src={c.img} alt="" className="w-full h-full object-cover" loading="lazy" />
                   </div>
                   <div className="p-6">
-                    <h3 className="text-lg" style={{ color: TEXT }}>{c.t}</h3>
-                    <p className="mt-3 text-sm" style={{ color: MUTED }}>{c.p}</p>
+                    <h3 className="text-lg" style={{ color: INK }}>{c.t}</h3>
+                    <p className="mt-3 text-sm" style={{ color: INK_MUTED }}>{c.p}</p>
                   </div>
                 </div>
               ))}
@@ -225,11 +237,11 @@ function Landing() {
         </div>
       </section>
 
-      {/* 3 — FONCTIONNALITÉS */}
-      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 3 — FONCTIONNALITÉS (CREAM) */}
+      <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
               {tr("On veut changer ça.", "We want to change that.")}
             </h2>
           </Reveal>
@@ -239,11 +251,11 @@ function Landing() {
         </div>
       </section>
 
-      {/* 4 — USE CASES */}
-      <section style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 4 — USE CASES (WHITE) */}
+      <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: TEXT }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
               {tr("legmio s'adapte à ta vie", "legmio adapts to your life")}
             </h2>
           </Reveal>
@@ -255,7 +267,7 @@ function Landing() {
                 { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif.", "Stay mobile, independent, productive.") },
                 { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant, des choses lourdes ou encombrantes.", "Carry your child, heavy or bulky things.") },
               ].map((c, i) => (
-                <div key={i} className="relative w-[280px] md:w-[320px] aspect-[3/4] rounded-2xl overflow-hidden">
+                <div key={i} className="relative w-[280px] md:w-[320px] aspect-[3/4] rounded-2xl overflow-hidden" style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
                   <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)" }} />
                   <div className="absolute top-0 left-0 right-0 p-5 text-white font-display font-bold text-lg leading-tight">{c.t}</div>
@@ -276,11 +288,11 @@ function Landing() {
         </div>
       </section>
 
-      {/* 5 — TÉMOIGNAGES */}
-      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 5 — TÉMOIGNAGES (CREAM) */}
+      <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
               {tr("Testé. Approuvé.", "Tested. Approved.")}
             </h2>
           </Reveal>
@@ -291,15 +303,15 @@ function Landing() {
                 { img: "/selim.png", n: "Salim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)") },
                 { img: "/marc.jpg", n: "Marc", p: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-op meniscus · Home recovery"), q: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my meniscus surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized.") },
               ].map((t, i) => (
-                <div key={i} className="card-soft p-5 w-[320px] md:w-[380px] flex flex-col">
+                <div key={i} className="card-white p-5 w-[320px] md:w-[380px] flex flex-col">
                   <div className="flex items-center gap-4">
                     <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
                     <div>
-                      <div className="font-bold" style={{ color: TEXT }}>{t.n}</div>
-                      <div className="text-xs" style={{ color: MUTED }}>{t.p}</div>
+                      <div className="font-bold" style={{ color: INK }}>{t.n}</div>
+                      <div className="text-xs" style={{ color: INK_MUTED }}>{t.p}</div>
                     </div>
                   </div>
-                  <p className="mt-5 italic text-sm" style={{ color: MUTED }}>"{t.q}"</p>
+                  <p className="mt-5 italic text-sm" style={{ color: INK_MUTED }}>"{t.q}"</p>
                 </div>
               ))}
             </AutoCarousel>
@@ -307,11 +319,11 @@ function Landing() {
         </div>
       </section>
 
-      {/* 6 — CRÉDIBILITÉ */}
-      <section style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 6 — CRÉDIBILITÉ (WHITE) */}
+      <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-4xl mx-auto" style={{ color: TEXT }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-4xl mx-auto" style={{ color: INK }}>
               {tr("Validée scientifiquement. Récompensée sur le terrain.", "Scientifically validated. Recognized in the field.")}
             </h2>
           </Reveal>
@@ -321,21 +333,21 @@ function Landing() {
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award"), s: "Le Média Positif 2026" },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la Recherche", "Backed by Research"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
             ].map((s, i) => (
-              <div key={i} className="rounded-2xl p-6 flex flex-col items-start gap-3" style={{ backgroundColor: BG, border: `1px solid ${BORDER}` }}>
-                <div style={{ color: ACCENT }}>{s.icon}</div>
-                <div className="font-display font-bold text-xl leading-tight" style={{ color: TEXT }}>{s.t}</div>
-                <div className="text-sm" style={{ color: MUTED }}>{s.s}</div>
+              <div key={i} className="rounded-2xl p-6 flex flex-col items-start gap-3 card-cream">
+                <div style={{ color: NAVY }}>{s.icon}</div>
+                <div className="font-display font-bold text-xl leading-tight" style={{ color: INK }}>{s.t}</div>
+                <div className="text-sm" style={{ color: INK_MUTED }}>{s.s}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 7 — ILS PARLENT DE NOUS (médias + Instagram) */}
-      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 7 — ILS PARLENT DE NOUS (NAVY) */}
+      <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: WHITE }}>
               {tr("Ils parlent de nous.", "They talk about us.")}
             </h2>
           </Reveal>
@@ -347,7 +359,7 @@ function Landing() {
                 ["/logoTF1.png", "TF1"],
                 ["/logofranceTV2.jpg", "France Télévisions"],
               ].map(([src, alt]) => (
-                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}`, minWidth: 160, height: 72 }}>
+                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 160, height: 72 }}>
                   <img src={src} alt={alt} className="object-contain" style={{ height: 40 }} />
                 </div>
               ))}
@@ -361,11 +373,11 @@ function Landing() {
               { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views") },
             ].map((r, i) => (
               <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft w-full max-w-[350px] mx-auto">
-                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: BG_ALT }}>
+                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: NAVY_ALT }}>
                   <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
                 </div>
                 <div className="p-5 flex flex-col gap-3">
-                  <div className="text-base font-semibold" style={{ color: TEXT }}>{r.label}</div>
+                  <div className="text-base font-semibold" style={{ color: WHITE }}>{r.label}</div>
                   <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
                     {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
                   </a>
@@ -376,41 +388,41 @@ function Landing() {
         </div>
       </section>
 
-      {/* 8 — WALL OF LOVE */}
-      <section style={{ backgroundColor: BG_ALT }} className="py-20 md:py-28 overflow-hidden">
+      {/* 8 — WALL OF LOVE (WHITE) */}
+      <section style={{ backgroundColor: WHITE }} className="py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
             {tr("Des milliers de personnes attendent legmio.", "Thousands of people are waiting for legmio.")}
           </h2>
         </div>
         <WallOfLove />
       </section>
 
-      {/* 9 — ROADMAP */}
-      <section style={{ backgroundColor: BG }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 9 — ROADMAP (CREAM) */}
+      <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: TEXT }}>{tr("Où en sommes-nous ?", "Where are we today?")}</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>{tr("Où en sommes-nous ?", "Where are we today?")}</h2>
           </Reveal>
           <Roadmap />
         </div>
       </section>
 
-      {/* 10 — ACTUALITÉ + CTA */}
-      <section id="waitlist" style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 10 — ACTUALITÉ + CTA (WHITE) */}
+      <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-lg mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: TEXT }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>
             {tr("Suis l'actualité de legmio.", "Follow legmio.")}
           </h2>
-          <div className="mt-8 flex items-center justify-center gap-6" style={{ color: TEXT }}>
+          <div className="mt-8 flex items-center justify-center gap-6" style={{ color: INK }}>
             <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="opacity-80 hover:opacity-100"><IconInstagram size={28} /></a>
             <a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" aria-label="TikTok" className="opacity-80 hover:opacity-100"><IconTiktok size={28} /></a>
             <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="opacity-80 hover:opacity-100"><IconLinkedin size={28} /></a>
           </div>
-          <div className="mt-10"><CTA /></div>
-          <p className="mt-10 text-xs" style={{ color: MUTED }}>
+          <div className="mt-10"><CTALight /></div>
+          <p className="mt-10 text-xs" style={{ color: INK_MUTED }}>
             {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?")}{" "}
-            <a href="/pro" className="underline" style={{ color: ACCENT }}>{tr("Espace pro", "Pro area")} →</a>
+            <a href="/pro" className="underline" style={{ color: NAVY }}>{tr("Espace pro", "Pro area")} →</a>
           </p>
         </div>
       </section>
@@ -453,7 +465,7 @@ function WallOfLove() {
   const dup1 = [...row1, ...row1];
   const dup2 = [...row2, ...row2];
   const Card = ({ q }: { q: string }) => (
-    <div className="rounded-2xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: BG, border: `1px solid ${BORDER}`, color: TEXT }}>
+    <div className="rounded-2xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
       <p className="italic text-sm">"{q}"</p>
     </div>
   );
@@ -478,6 +490,7 @@ export function FeaturesCarousel() {
 }
 
 function Roadmap() {
+  // Cream section: dark text, navy for done/current, light border for upcoming.
   const { tr } = useLanguage();
   const steps = [
     { t: tr("Brevet déposé", "Patent filed"), s: "FR2411206 · Octobre 2024", state: "done" as const },
@@ -489,10 +502,11 @@ function Roadmap() {
   const currentIdx = steps.findIndex((s) => s.state === "current");
   const progressPct = (currentIdx / (steps.length - 1)) * 100;
   const CIRCLE = 18;
+  const UPCOMING_TEXT = "#A89ED0";
   return (
     <div className="mt-16">
       <div className="hidden md:block relative pt-16 pb-4">
-        <div className="absolute left-0 right-0 h-px" style={{ top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER }} />
+        <div className="absolute left-0 right-0 h-px" style={{ top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER_LIGHT }} />
         <div className="absolute left-0 h-[2px]" style={{ top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${progressPct}%` }} />
         <div className="relative grid grid-cols-5 gap-4">
           {steps.map((s, i) => {
@@ -500,23 +514,23 @@ function Roadmap() {
             const isCurrent = s.state === "current";
             const upcoming = s.state === "upcoming";
             return (
-              <div key={i} className="flex flex-col items-center text-center" style={{ opacity: upcoming ? 0.5 : 1 }}>
+              <div key={i} className="flex flex-col items-center text-center">
                 <div className="h-12 flex items-end justify-center px-2">
-                  <div className="text-sm leading-tight" style={{ color: upcoming ? MUTED : TEXT, fontWeight: isCurrent ? 700 : 500 }}>{s.t}</div>
+                  <div className="text-sm leading-tight" style={{ color: upcoming ? UPCOMING_TEXT : INK, fontWeight: isCurrent ? 700 : 500 }}>{s.t}</div>
                 </div>
-                <div className="my-3 flex items-center justify-center" style={{ height: CIRCLE }}>
+                <div className="my-3 flex items-center justify-center" style={{ height: CIRCLE + 6 }}>
                   <div
                     className="rounded-full"
                     style={{
-                      width: CIRCLE,
-                      height: CIRCLE,
-                      backgroundColor: (done || isCurrent) ? ACCENT : BG,
-                      border: `2px solid ${upcoming ? BORDER : ACCENT}`,
-                      boxShadow: isCurrent ? `0 0 0 6px rgba(245,200,66,0.20)` : "none",
+                      width: isCurrent ? CIRCLE + 6 : CIRCLE,
+                      height: isCurrent ? CIRCLE + 6 : CIRCLE,
+                      backgroundColor: (done || isCurrent) ? ACCENT : WHITE,
+                      border: `2px solid ${upcoming ? BORDER_LIGHT : ACCENT}`,
+                      boxShadow: isCurrent ? `0 0 0 6px rgba(245,200,66,0.25)` : "none",
                     }}
                   />
                 </div>
-                <div className="text-xs px-2 leading-snug" style={{ color: isCurrent ? ACCENT : MUTED }}>{s.s}</div>
+                <div className="text-xs px-2 leading-snug mt-2" style={{ color: upcoming ? UPCOMING_TEXT : INK_MUTED, fontWeight: isCurrent ? 600 : 400 }}>{s.s}</div>
               </div>
             );
           })}
@@ -532,12 +546,12 @@ function Roadmap() {
               <div className="mt-1 rounded-full shrink-0" style={{
                 width: isCurrent ? 18 : 12,
                 height: isCurrent ? 18 : 12,
-                backgroundColor: isCurrent ? ACCENT : done ? ACCENT : BG,
-                border: `2px solid ${upcoming ? BORDER : ACCENT}`,
+                backgroundColor: isCurrent || done ? ACCENT : WHITE,
+                border: `2px solid ${upcoming ? BORDER_LIGHT : ACCENT}`,
               }} />
               <div>
-                <div className="text-sm" style={{ color: upcoming ? MUTED : TEXT, fontWeight: isCurrent ? 700 : 500, opacity: upcoming ? 0.6 : 1 }}>{s.t}</div>
-                <div className="text-xs" style={{ color: isCurrent ? ACCENT : MUTED, opacity: upcoming ? 0.6 : 1 }}>{s.s}</div>
+                <div className="text-sm" style={{ color: upcoming ? UPCOMING_TEXT : INK, fontWeight: isCurrent ? 700 : 500 }}>{s.t}</div>
+                <div className="text-xs" style={{ color: upcoming ? UPCOMING_TEXT : INK_MUTED }}>{s.s}</div>
               </div>
             </div>
           );
