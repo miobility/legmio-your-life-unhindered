@@ -20,8 +20,8 @@ const fr: Dict = {
 };
 
 const en: Dict = {
-  banner_a: "Launching in 2027",
-  banner_b: "Join the waiting list now",
+  banner_a: "Join the waiting list",
+  banner_b: "Join the waiting list",
   nav_product: "The crutch",
   nav_faq: "FAQ",
   nav_blog: "Blog",
