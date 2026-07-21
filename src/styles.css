@@ -98,8 +98,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #F5C842;
-  color: #120B3B;
+  background-color: #120B3B;
+  color: #FFFFFF;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
   border-radius: 50px;
@@ -107,7 +107,7 @@
   cursor: pointer;
 }
 @utility btn-light-hover {
-  &:hover { background-color: #E0B535; transform: translateY(-1px); }
+  &:hover { background-color: #1A1040; transform: translateY(-1px); }
 }
 @utility btn-outline-dark {
   display: inline-flex;
@@ -130,14 +130,14 @@
   justify-content: center;
   gap: 0.5rem;
   background-color: transparent;
-  color: #F5C842;
+  color: #120B3B;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
   border-radius: 50px;
-  border: 1px solid #F5C842;
+  border: 1px solid #120B3B;
   transition: all 0.2s ease;
   cursor: pointer;
-  &:hover { background-color: #F5C842; color: #120B3B; }
+  &:hover { background-color: #120B3B; color: #FFFFFF; }
 }
 
 @utility card-soft {
@@ -145,6 +145,18 @@
   border: 1px solid #2A1F6B;
   border-radius: 1rem;
   box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+@utility card-white {
+  background-color: #FFFFFF;
+  border: 1px solid #E8E4DC;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+@utility card-cream {
+  background-color: #FAFAF8;
+  border: 1px solid #E8E4DC;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
 }
 
 @utility carousel-arrow {

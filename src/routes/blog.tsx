@@ -15,11 +15,14 @@ export const Route = createFileRoute("/blog")({
   component: Blog,
 });
 
-const BG = "#120B3B";
-const BG_ALT = "#1A1040";
-const TEXT = "#FFFFFF";
-const MUTED = "#A89ED0";
-const BORDER = "#2A1F6B";
+const NAVY = "#120B3B";
+const WHITE = "#FFFFFF";
+const CREAM = "#FAFAF8";
+const INK = "#1A1040";
+const INK_MUTED = "#6B6B6B";
+const MUTED_NAVY = "#A89ED0";
+const BORDER_LIGHT = "#E8E4DC";
+const ACCENT = "#F5C842";
 
 const genesisFr = `En 2020, j'ai subi une lourde opération pour retirer le cancer des os qui rongeait mon bassin. Elle fut un succès — et le début d'un nouveau parcours, à la fois difficile et joyeux.
 
@@ -216,26 +219,26 @@ function ArticleCard({ a }: { a: Article }) {
   const body = lang === "en" ? a.bodyEn : a.bodyFr;
   const tag = lang === "en" ? a.tagEn : a.tag;
   return (
-    <article className="card-soft overflow-hidden">
+    <article className="card-white overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="aspect-video md:aspect-auto md:h-full overflow-hidden" style={{ backgroundColor: BG_ALT }}>
+        <div className="aspect-video md:aspect-auto md:h-full overflow-hidden" style={{ backgroundColor: CREAM }}>
           <img src={a.cover} alt={title} className="w-full h-full object-cover" onError={(e) => (e.currentTarget.src = "/usecase-quotidien.png")} />
         </div>
         <div className="p-8">
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: "#F5C842", color: "#FFF" }}>{tag}</span>
-          <h2 className="mt-4 text-2xl md:text-3xl font-display font-bold" style={{ color: TEXT }}>{title}</h2>
-          <p className="mt-4 text-sm" style={{ color: MUTED }}>{excerpt}</p>
-          <button onClick={() => setOpen(!open)} className="mt-4 inline-flex items-center gap-1 text-sm font-bold" style={{ color: "#F5C842" }}>
+          <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: ACCENT, color: NAVY }}>{tag}</span>
+          <h2 className="mt-4 text-2xl md:text-3xl font-display font-bold" style={{ color: INK }}>{title}</h2>
+          <p className="mt-4 text-sm" style={{ color: INK_MUTED }}>{excerpt}</p>
+          <button onClick={() => setOpen(!open)} className="mt-4 inline-flex items-center gap-1 text-sm font-bold" style={{ color: NAVY }}>
             {open ? tr("Réduire", "Collapse") : tr("Lire l'article", "Read article")}
             <span className={`transition-transform ${open ? "rotate-180" : ""}`}><IconChevron size={16} /></span>
           </button>
           {open && (
-            <div className="mt-6 space-y-4 text-sm leading-relaxed" style={{ color: "#333" }}>
+            <div className="mt-6 space-y-4 text-sm leading-relaxed" style={{ color: INK_MUTED }}>
               {body.split("\n\n").map((p, i) => <p key={i}>{p}</p>)}
               {a.id === "genese" && (
-                <div className="pt-4 border-t" style={{ borderColor: BORDER }}>
-                  <div className="font-bold" style={{ color: TEXT }}>Nicolas Perrin-Gilbert</div>
-                  <div style={{ color: MUTED }}>{tr("Co-fondateur & CEO · Chercheur CNRS, ISIR Sorbonne Université", "Co-founder & CEO · CNRS researcher, ISIR Sorbonne Université")}</div>
+                <div className="pt-4 border-t" style={{ borderColor: BORDER_LIGHT }}>
+                  <div className="font-bold" style={{ color: INK }}>Nicolas Perrin-Gilbert</div>
+                  <div style={{ color: INK_MUTED }}>{tr("Co-fondateur & CEO · Chercheur CNRS, ISIR Sorbonne Université", "Co-founder & CEO · CNRS researcher, ISIR Sorbonne Université")}</div>
                 </div>
               )}
             </div>
@@ -249,13 +252,13 @@ function ArticleCard({ a }: { a: Article }) {
 function Blog() {
   const { tr } = useLanguage();
   return (
-    <div style={{ backgroundColor: BG }}>
-      <section style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-20 text-center">
-        <h1 className="text-4xl sm:text-5xl" style={{ color: TEXT }}>{tr("Conseils & ressources", "Advice & resources")}</h1>
-        <p className="mt-4" style={{ color: MUTED }}>{tr("Autonomie · Rééducation · Emploi & handicap · Vie quotidienne", "Independence · Rehab · Work & disability · Daily life")}</p>
+    <div style={{ backgroundColor: WHITE }}>
+      <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 text-center">
+        <h1 className="text-4xl sm:text-5xl" style={{ color: WHITE }}>{tr("Conseils & ressources", "Advice & resources")}</h1>
+        <p className="mt-4" style={{ color: MUTED_NAVY }}>{tr("Autonomie · Rééducation · Emploi & handicap · Vie quotidienne", "Independence · Rehab · Work & disability · Daily life")}</p>
       </section>
 
-      <section className="px-4 sm:px-6 py-16">
+      <section className="px-4 sm:px-6 py-16" style={{ backgroundColor: WHITE }}>
         <div className="max-w-6xl mx-auto space-y-8">
           {articles.map((a) => <ArticleCard key={a.id} a={a} />)}
         </div>
