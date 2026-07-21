@@ -265,9 +265,6 @@ function Produit() {
           <h2 className="text-3xl md:text-5xl" style={{ color: WHITE }}>
             {tr("Prêt à retrouver tes mains libres ?", "Ready to get your hands back?")}
           </h2>
-          <p className="mt-4" style={{ color: MUTED_NAVY }}>
-            {tr("Rejoins la liste d'attente. Lancement 2027.", "Join the waiting list. Launch in 2027.")}
-          </p>
           <div className="mt-8">
             <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover inline-flex">
               {tr("Je suis intéressé(e)", "I'm interested")} <IconArrowRight size={16} />
