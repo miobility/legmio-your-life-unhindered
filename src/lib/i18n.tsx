@@ -9,7 +9,7 @@ type Dict = Record<string, string>;
 
 const fr: Dict = {
   banner_a: "Rejoindre la liste d'attente",
-  banner_b: "Rejoindre la liste d'attente",
+  banner_b: "Commercialisation courant 2027",
   nav_product: "Béquille",
   nav_faq: "FAQ",
   nav_blog: "Blog",
