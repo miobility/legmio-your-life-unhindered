@@ -383,25 +383,8 @@ function Landing() {
             </AutoCarousel>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {[
-              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M de vues", "3.6M views") },
-              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
-              { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views") },
-            ].map((r, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft w-full max-w-[350px] mx-auto">
-                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: NAVY_ALT }}>
-                  <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
-                </div>
-                <div className="p-5 flex flex-col gap-3">
-                  <div className="text-base font-semibold" style={{ color: WHITE }}>{r.label}</div>
-                  <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
-                    {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
+          <InstaCards />
+
         </div>
       </section>
 
