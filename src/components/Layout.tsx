@@ -19,16 +19,9 @@ const BORDER = "#2A1F6B";
 export function StickyBanner() {
   const { t, hubspotUrl } = useLanguage();
   const [idx, setIdx] = useState(0);
-  const [hidden, setHidden] = useState(false);
   useEffect(() => {
     const id = setInterval(() => setIdx((v) => (v + 1) % 2), 3000);
     return () => clearInterval(id);
-  }, []);
-  useEffect(() => {
-    const onScroll = () => setHidden(window.scrollY > 50);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
   }, []);
   const msg = idx === 0 ? t("banner_a") : t("banner_b");
   return (
@@ -37,14 +30,7 @@ export function StickyBanner() {
       target="_blank"
       rel="noreferrer"
       className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center text-xs sm:text-sm font-medium px-4 hover:opacity-90 overflow-hidden"
-      style={{
-        backgroundColor: ACCENT,
-        color: NAVY,
-        transition: "opacity 300ms ease, transform 300ms ease",
-        opacity: hidden ? 0 : 1,
-        transform: hidden ? "translateY(-100%)" : "translateY(0)",
-        pointerEvents: hidden ? "none" : "auto",
-      }}
+      style={{ backgroundColor: ACCENT, color: NAVY }}
     >
       <span key={idx} className="truncate fade-up">{msg}</span>
     </a>
