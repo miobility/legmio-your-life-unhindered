@@ -33,8 +33,8 @@ function ProPage() {
           </h1>
           <p className="mt-6 text-lg" style={{ color: MUTED_NAVY }}>
             {tr(
-              "Prenez rendez-vous pour une démonstration, un test ou une discussion partenariat.",
-              "Book a meeting for a demo, a test, or a partnership discussion."
+              "Prenez rendez-vous pour échanger individuellement en visio.",
+              "Book a one-on-one video meeting."
             )}
           </p>
         </div>

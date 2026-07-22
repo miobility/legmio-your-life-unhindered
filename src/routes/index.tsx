@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { SOCIAL } from "@/components/Layout";
 import {
@@ -257,30 +257,51 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
-              {tr("Partout où tu en as besoin.", "Wherever you need it.")}
+              <span className="hidden md:inline">{tr("À chaque fois que tu en as besoin.", "Whenever you need it.")}</span>
+              <span className="md:hidden">{tr(<>À chaque fois<br />que tu en as besoin.</>, <>Whenever<br />you need it.</>)}</span>
             </h2>
           </Reveal>
-          <div className="mt-10 -mx-4 sm:-mx-6 px-4 sm:px-6">
-            <AutoCarousel>
-              {[
-                { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches.", "Carry, cook, care for your loved ones.") },
-                { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Récupère sans sacrifier tes épaules.", "Recover without sacrificing your shoulders.") },
-                { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif.", "Stay mobile, independent, productive.") },
-                { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant, des choses lourdes ou encombrantes.", "Carry your child, heavy or bulky things.") },
-              ].map((c, i) => (
-                <div key={i} className="relative w-[280px] md:w-[320px] aspect-[3/4] rounded-2xl overflow-hidden" style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
-                  <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)" }} />
-                  <div className="absolute top-0 left-0 right-0 p-5 text-white font-display font-bold text-lg leading-tight">{c.t}</div>
-                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm">
-                    <div>{c.p}</div>
-                  </div>
-                </div>
-              ))}
-            </AutoCarousel>
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: (
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" /></svg>
+                ),
+                t: tr("Handicap & quotidien", "Disability & daily life"),
+                p: tr("Pour les béquilles qui font partie de ta vie au long cours.", "For crutches that are part of your life for the long haul."),
+              },
+              {
+                icon: (
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z" /></svg>
+                ),
+                t: tr("Post-opératoire", "Post-op"),
+                p: tr("Pour récupérer sans tout sacrifier.", "To recover without sacrificing everything."),
+              },
+              {
+                icon: (
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" /><path d="M3 13h18" /></svg>
+                ),
+                t: tr("Maintien en emploi", "Staying at work"),
+                p: tr("Pour rester autonome et productif au travail.", "To stay independent and productive at work."),
+              },
+              {
+                icon: (
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="5" r="2.2" /><circle cx="16" cy="8" r="1.6" /><path d="M6 21v-6l-2-4a2 2 0 013.6-1.6L9 12h3l2 3v6" /><path d="M14 21v-5l2-3" /></svg>
+                ),
+                t: tr("Vie parentale", "Parenting life"),
+                p: tr("Porter son enfant, le suivre, être là.", "Carry your child, keep up, be there."),
+              },
+            ].map((c, i) => (
+              <div key={i} className="card-cream p-6 flex flex-col items-start gap-3">
+                <div style={{ color: NAVY }}>{c.icon}</div>
+                <h3 className="font-display font-bold text-lg leading-tight" style={{ color: INK }}>{c.t}</h3>
+                <p className="text-sm" style={{ color: INK_MUTED }}>{c.p}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
 
 
       {/* 5 — TÉMOIGNAGES (CREAM) */}
@@ -353,6 +374,7 @@ function Landing() {
                 ["/logoparisien.png", "Le Parisien"],
                 ["/logoTF1.png", "TF1"],
                 ["/logofranceTV2.jpg", "France Télévisions"],
+                ["/mediapositif.png", "Le Média Positif"],
               ].map(([src, alt]) => (
                 <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 160, height: 72 }}>
                   <img src={src} alt={alt} className="object-contain" style={{ height: 40 }} />
@@ -361,25 +383,8 @@ function Landing() {
             </AutoCarousel>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {[
-              { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M de vues", "3.6M views") },
-              { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
-              { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views") },
-            ].map((r, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden flex flex-col card-soft w-full max-w-[350px] mx-auto">
-                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: NAVY_ALT }}>
-                  <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
-                </div>
-                <div className="p-5 flex flex-col gap-3">
-                  <div className="text-base font-semibold" style={{ color: WHITE }}>{r.label}</div>
-                  <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
-                    {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
+          <InstaCards />
+
         </div>
       </section>
 
@@ -407,7 +412,7 @@ function Landing() {
       <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-lg mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>
-            {tr("Suis l'actualité de legmio.", "Follow legmio.")}
+            {tr(<>Suis l'actualité<br />de legmio.</>, <>Follow<br />legmio.</>)}
           </h2>
           <div className="mt-8 flex items-center justify-center gap-6" style={{ color: INK }}>
             <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="opacity-80 hover:opacity-100"><IconInstagram size={28} /></a>
@@ -416,7 +421,8 @@ function Landing() {
           </div>
           <div className="mt-10"><CTALight /></div>
           <p className="mt-10 text-base" style={{ color: INK_MUTED }}>
-            {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?")}{" "}
+            {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?")}
+            <br className="sm:hidden" />{" "}
             <a href="/pro" className="underline" style={{ color: NAVY }}>{tr("Espace pro", "Pro area")} →</a>
           </p>
         </div>
@@ -555,3 +561,88 @@ function Roadmap() {
     </div>
   );
 }
+
+function InstaCards() {
+  const { tr } = useLanguage();
+  const items = [
+    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M de vues", "3.6M views") },
+    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
+    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views") },
+  ];
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const idx = Math.round(el.scrollLeft / el.clientWidth);
+      setActive(Math.max(0, Math.min(items.length - 1, idx)));
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [items.length]);
+  const goTo = (i: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollTo({ left: i * el.clientWidth, behavior: "smooth" });
+  };
+  return (
+    <div className="mt-16 max-w-6xl mx-auto">
+      {/* Desktop: grid */}
+      <div className="hidden md:grid grid-cols-3 gap-6">
+        {items.map((r, i) => (
+          <InstaCard key={i} r={r} />
+        ))}
+      </div>
+      {/* Mobile: snap carousel + dots */}
+      <div className="md:hidden -mx-4 sm:-mx-6">
+        <div
+          ref={scrollRef}
+          className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {items.map((r, i) => (
+            <div key={i} className="snap-center shrink-0 w-full flex justify-center px-4 sm:px-6">
+              <InstaCard r={r} />
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 flex items-center justify-center gap-2">
+          {items.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Slide ${i + 1}`}
+              onClick={() => goTo(i)}
+              className="rounded-full transition"
+              style={{
+                width: 8,
+                height: 8,
+                backgroundColor: i === active ? ACCENT : "#4B3C8F",
+                opacity: i === active ? 1 : 0.7,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function InstaCard({ r }: { r: { url: string; img: string; label: string } }) {
+  const { tr } = useLanguage();
+  return (
+    <div className="rounded-2xl overflow-hidden flex flex-col card-soft w-full max-w-[350px] mx-auto">
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: NAVY_ALT }}>
+        <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
+      </div>
+      <div className="p-5 flex flex-col gap-3">
+        <div className="text-base font-semibold" style={{ color: WHITE }}>{r.label}</div>
+        <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
+          {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
+        </a>
+      </div>
+    </div>
+  );
+}
+

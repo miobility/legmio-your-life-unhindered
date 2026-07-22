@@ -19,9 +19,16 @@ const BORDER = "#2A1F6B";
 export function StickyBanner() {
   const { t, hubspotUrl } = useLanguage();
   const [idx, setIdx] = useState(0);
+  const [hidden, setHidden] = useState(false);
   useEffect(() => {
     const id = setInterval(() => setIdx((v) => (v + 1) % 2), 3000);
     return () => clearInterval(id);
+  }, []);
+  useEffect(() => {
+    const onScroll = () => setHidden(window.scrollY > 50);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
   const msg = idx === 0 ? t("banner_a") : t("banner_b");
   return (
@@ -29,21 +36,30 @@ export function StickyBanner() {
       href={hubspotUrl}
       target="_blank"
       rel="noreferrer"
-      className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center text-xs sm:text-sm font-medium px-4 hover:opacity-90 transition overflow-hidden"
-      style={{ backgroundColor: ACCENT, color: NAVY }}
+      className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center text-xs sm:text-sm font-medium px-4 hover:opacity-90 overflow-hidden"
+      style={{
+        backgroundColor: ACCENT,
+        color: NAVY,
+        transition: "opacity 300ms ease, transform 300ms ease",
+        opacity: hidden ? 0 : 1,
+        transform: hidden ? "translateY(-100%)" : "translateY(0)",
+        pointerEvents: hidden ? "none" : "auto",
+      }}
     >
       <span key={idx} className="truncate fade-up">{msg}</span>
     </a>
   );
 }
 
+
 export function Header() {
-  const { t, lang, setLang, hubspotUrl } = useLanguage();
+  const { t, lang, setLang, hubspotUrl, tr } = useLanguage();
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isProduct = pathname.startsWith("/produit") || pathname.startsWith("/bequille");
   const isFaq = pathname.startsWith("/faq");
   const isBlog = pathname.startsWith("/blog");
+  const isPro = pathname.startsWith("/pro");
   const linkStyle = (active: boolean) => ({ color: active ? ACCENT : WHITE });
   const linkClass = (active: boolean) =>
     `hover:opacity-80 transition ${active ? "font-bold" : ""}`;
@@ -60,14 +76,15 @@ export function Header() {
           <Link to="/produit" className={linkClass(isProduct)} style={linkStyle(isProduct)}>{t("nav_product")}</Link>
           <Link to="/faq" className={linkClass(isFaq)} style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
           <Link to="/blog" className={linkClass(isBlog)} style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
+          <Link to="/pro" className={linkClass(isPro)} style={linkStyle(isPro)}>{tr("Espace pro", "Pro area")}</Link>
         </nav>
         <div className="hidden sm:flex items-center gap-1 text-sm" style={{ color: WHITE }}>
           <button onClick={() => setLang("fr")} aria-label="Français" className={`px-1 py-0.5 transition ${lang === "fr" ? "opacity-100 font-semibold" : "opacity-40 hover:opacity-70"}`}>FR</button>
           <span style={{ color: MUTED }}>·</span>
           <button onClick={() => setLang("en")} aria-label="English" className={`px-1 py-0.5 transition ${lang === "en" ? "opacity-100 font-semibold" : "opacity-40 hover:opacity-70"}`}>EN</button>
         </div>
-        <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover hidden sm:inline-flex text-sm px-5 py-2.5">
-          {t("cta_interested")}
+        <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover hidden sm:inline-flex text-sm px-5 py-2.5 items-center gap-1.5">
+          {t("cta_interested")} <span aria-hidden="true">→</span>
         </a>
         <button className="md:hidden p-2" style={{ color: WHITE }} onClick={() => setOpen(!open)} aria-label="Menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d={open ? "M6 6l12 12M6 18L18 6" : "M4 6h16M4 12h16M4 18h16"} /></svg>
@@ -78,19 +95,21 @@ export function Header() {
           <Link to="/produit" onClick={() => setOpen(false)} style={linkStyle(isProduct)}>{t("nav_product")}</Link>
           <Link to="/faq" onClick={() => setOpen(false)} style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
           <Link to="/blog" onClick={() => setOpen(false)} style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
+          <Link to="/pro" onClick={() => setOpen(false)} style={linkStyle(isPro)}>{tr("Espace pro", "Pro area")}</Link>
           <div className="flex items-center gap-3 pt-2" style={{ color: WHITE }}>
             <button onClick={() => setLang("fr")} className={lang === "fr" ? "font-semibold" : "opacity-40"}>FR</button>
             <span>·</span>
             <button onClick={() => setLang("en")} className={lang === "en" ? "font-semibold" : "opacity-40"}>EN</button>
           </div>
-          <a href={hubspotUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover text-sm px-5 py-2.5 mt-2 self-start">
-            {t("cta_interested")}
+          <a href={hubspotUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover text-sm px-5 py-2.5 mt-2 self-start inline-flex items-center gap-1.5">
+            {t("cta_interested")} <span aria-hidden="true">→</span>
           </a>
         </div>
       )}
     </header>
   );
 }
+
 
 export function Footer() {
   const { t, tr } = useLanguage();
