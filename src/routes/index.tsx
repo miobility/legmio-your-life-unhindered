@@ -257,30 +257,51 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
-              {tr("Partout où tu en as besoin.", "Wherever you need it.")}
+              <span className="hidden md:inline">{tr("À chaque fois que tu en as besoin.", "Whenever you need it.")}</span>
+              <span className="md:hidden">{tr(<>À chaque fois<br />que tu en as besoin.</>, <>Whenever<br />you need it.</>)}</span>
             </h2>
           </Reveal>
-          <div className="mt-10 -mx-4 sm:-mx-6 px-4 sm:px-6">
-            <AutoCarousel>
-              {[
-                { img: "/usecase-quotidien.png", t: tr("Handicap & quotidien long terme", "Long-term disability & daily life"), p: tr("Porter, cuisiner, s'occuper de ses proches.", "Carry, cook, care for your loved ones.") },
-                { img: "/usecase-reeducation.png", t: tr("Post-opératoire & rééducation", "Post-op & rehabilitation"), p: tr("Récupère sans sacrifier tes épaules.", "Recover without sacrificing your shoulders.") },
-                { img: "/usecase-emploi.png", t: tr("Maintien en emploi", "Staying at work"), p: tr("Rester mobile, autonome, productif.", "Stay mobile, independent, productive.") },
-                { img: "/usecase-parental.png", t: tr("Vie parentale", "Parenting life"), p: tr("Porter son enfant, des choses lourdes ou encombrantes.", "Carry your child, heavy or bulky things.") },
-              ].map((c, i) => (
-                <div key={i} className="relative w-[280px] md:w-[320px] aspect-[3/4] rounded-2xl overflow-hidden" style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
-                  <img src={c.img} alt={c.t} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%)" }} />
-                  <div className="absolute top-0 left-0 right-0 p-5 text-white font-display font-bold text-lg leading-tight">{c.t}</div>
-                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white text-sm">
-                    <div>{c.p}</div>
-                  </div>
-                </div>
-              ))}
-            </AutoCarousel>
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: (
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" /></svg>
+                ),
+                t: tr("Handicap & quotidien", "Disability & daily life"),
+                p: tr("Pour les béquilles qui font partie de ta vie au long cours.", "For crutches that are part of your life for the long haul."),
+              },
+              {
+                icon: (
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z" /></svg>
+                ),
+                t: tr("Post-opératoire", "Post-op"),
+                p: tr("Pour récupérer sans tout sacrifier.", "To recover without sacrificing everything."),
+              },
+              {
+                icon: (
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" /><path d="M3 13h18" /></svg>
+                ),
+                t: tr("Maintien en emploi", "Staying at work"),
+                p: tr("Pour rester autonome et productif au travail.", "To stay independent and productive at work."),
+              },
+              {
+                icon: (
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="5" r="2.2" /><circle cx="16" cy="8" r="1.6" /><path d="M6 21v-6l-2-4a2 2 0 013.6-1.6L9 12h3l2 3v6" /><path d="M14 21v-5l2-3" /></svg>
+                ),
+                t: tr("Vie parentale", "Parenting life"),
+                p: tr("Porter son enfant, le suivre, être là.", "Carry your child, keep up, be there."),
+              },
+            ].map((c, i) => (
+              <div key={i} className="card-cream p-6 flex flex-col items-start gap-3">
+                <div style={{ color: NAVY }}>{c.icon}</div>
+                <h3 className="font-display font-bold text-lg leading-tight" style={{ color: INK }}>{c.t}</h3>
+                <p className="text-sm" style={{ color: INK_MUTED }}>{c.p}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
 
 
       {/* 5 — TÉMOIGNAGES (CREAM) */}
