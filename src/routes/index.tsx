@@ -561,3 +561,88 @@ function Roadmap() {
     </div>
   );
 }
+
+function InstaCards() {
+  const { tr } = useLanguage();
+  const items = [
+    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M de vues", "3.6M views") },
+    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
+    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views") },
+  ];
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const idx = Math.round(el.scrollLeft / el.clientWidth);
+      setActive(Math.max(0, Math.min(items.length - 1, idx)));
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [items.length]);
+  const goTo = (i: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollTo({ left: i * el.clientWidth, behavior: "smooth" });
+  };
+  return (
+    <div className="mt-16 max-w-6xl mx-auto">
+      {/* Desktop: grid */}
+      <div className="hidden md:grid grid-cols-3 gap-6">
+        {items.map((r, i) => (
+          <InstaCard key={i} r={r} />
+        ))}
+      </div>
+      {/* Mobile: snap carousel + dots */}
+      <div className="md:hidden -mx-4 sm:-mx-6">
+        <div
+          ref={scrollRef}
+          className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {items.map((r, i) => (
+            <div key={i} className="snap-center shrink-0 w-full flex justify-center px-4 sm:px-6">
+              <InstaCard r={r} />
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 flex items-center justify-center gap-2">
+          {items.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Slide ${i + 1}`}
+              onClick={() => goTo(i)}
+              className="rounded-full transition"
+              style={{
+                width: 8,
+                height: 8,
+                backgroundColor: i === active ? ACCENT : "#4B3C8F",
+                opacity: i === active ? 1 : 0.7,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function InstaCard({ r }: { r: { url: string; img: string; label: string } }) {
+  const { tr } = useLanguage();
+  return (
+    <div className="rounded-2xl overflow-hidden flex flex-col card-soft w-full max-w-[350px] mx-auto">
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: NAVY_ALT }}>
+        <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
+      </div>
+      <div className="p-5 flex flex-col gap-3">
+        <div className="text-base font-semibold" style={{ color: WHITE }}>{r.label}</div>
+        <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
+          {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
+        </a>
+      </div>
+    </div>
+  );
+}
+
