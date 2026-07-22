@@ -565,9 +565,9 @@ function Roadmap() {
 function InstaCards() {
   const { tr } = useLanguage();
   const items = [
+    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views") },
     { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M de vues", "3.6M views") },
     { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
-    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views") },
   ];
   const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
