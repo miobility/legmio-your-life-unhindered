@@ -421,7 +421,8 @@ function Landing() {
           </div>
           <div className="mt-10"><CTALight /></div>
           <p className="mt-10 text-base" style={{ color: INK_MUTED }}>
-            {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?")}{" "}
+            {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?")}
+            <br className="sm:hidden" />{" "}
             <a href="/pro" className="underline" style={{ color: NAVY }}>{tr("Espace pro", "Pro area")} →</a>
           </p>
         </div>
