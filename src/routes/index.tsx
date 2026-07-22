@@ -412,7 +412,7 @@ function Landing() {
       <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-lg mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>
-            {tr("Suis l'actualité de legmio.", "Follow legmio.")}
+            {tr(<>Suis l'actualité<br />de legmio.</>, <>Follow<br />legmio.</>)}
           </h2>
           <div className="mt-8 flex items-center justify-center gap-6" style={{ color: INK }}>
             <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="opacity-80 hover:opacity-100"><IconInstagram size={28} /></a>
