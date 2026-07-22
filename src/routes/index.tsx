@@ -374,6 +374,7 @@ function Landing() {
                 ["/logoparisien.png", "Le Parisien"],
                 ["/logoTF1.png", "TF1"],
                 ["/logofranceTV2.jpg", "France Télévisions"],
+                ["/mediapositif.png", "Le Média Positif"],
               ].map(([src, alt]) => (
                 <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 160, height: 72 }}>
                   <img src={src} alt={alt} className="object-contain" style={{ height: 40 }} />
