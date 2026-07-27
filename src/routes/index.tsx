@@ -110,14 +110,14 @@ const IconGrip = ({ size = 28 }: { size?: number }) => (
 );
 
 const specsItems = () => [
-  { icon: <IconFeather />, kFr: "Ultralégère", kEn: "Ultralight", sFr: "Pèse seulement 850g", sEn: "Only 850g" },
-  { icon: <IconHandOpen />, kFr: "Mains libres", kEn: "Hands free", sFr: "Appui sur l'avant-bras", sEn: "Forearm support" },
-  { icon: <IconShieldPill />, kFr: "Robuste", kEn: "Sturdy", sFr: "Supporte jusqu'à 130kg", sEn: "Supports up to 130kg" },
-  { icon: <IconGrip />, kFr: "Ergonomique", kEn: "Ergonomic", sFr: "Poignée qui redistribue les contraintes d'appui", sEn: "Grip that redistributes load" },
-  { icon: <IconNerve />, kFr: "Protectrice", kEn: "Protective", sFr: "Zones d'appui qui protègent les nerfs", sEn: "Support zones that protect nerves" },
-  { icon: <IconSliders />, kFr: "Réglable", kEn: "Adjustable", sFr: "Double réglage en longueur et au niveau de la poignée", sEn: "Dual adjustment: length and grip" },
-  { icon: <IconRecycle />, kFr: "Durable", kEn: "Durable", sFr: "Embouts, poignée, sangles remplaçables", sEn: "Replaceable tips, grip, straps" },
-  { icon: <IconRulerPill />, kFr: "Universelle", kEn: "Universal", sFr: "Convient de 1m50 à 1m95", sEn: "Fits 1m50 to 1m95" },
+  { icon: <IconFeather />, kFr: "Ultralégère", kEn: "Ultralight", kDe: "Ultraleicht", sFr: "Pèse seulement 850g", sEn: "Weighs only 850g", sDe: "Wiegt nur 850g" },
+  { icon: <IconHandOpen />, kFr: "Mains libres", kEn: "Hands-free", kDe: "Freie Hände", sFr: "Appui sur l'avant-bras", sEn: "Forearm support", sDe: "Unterarmstütze" },
+  { icon: <IconShieldPill />, kFr: "Robuste", kEn: "Robust", kDe: "Robust", sFr: "Supporte jusqu'à 130kg", sEn: "Supports up to 130kg", sDe: "Trägt bis zu 130kg" },
+  { icon: <IconGrip />, kFr: "Ergonomique", kEn: "Ergonomic", kDe: "Ergonomisch", sFr: "Poignée qui redistribue les contraintes d'appui", sEn: "Grip that redistributes load", sDe: "Griff der die Stützbelastung umverteilt" },
+  { icon: <IconNerve />, kFr: "Protectrice", kEn: "Protective", kDe: "Schützend", sFr: "Zones d'appui qui protègent les nerfs", sEn: "Support zones that protect nerves", sDe: "Stützzonen die die Nerven schützen" },
+  { icon: <IconSliders />, kFr: "Réglable", kEn: "Adjustable", kDe: "Verstellbar", sFr: "Double réglage en longueur et au niveau de la poignée", sEn: "Dual adjustment in length and grip", sDe: "Doppelverstellung in Länge und Griff" },
+  { icon: <IconRecycle />, kFr: "Durable", kEn: "Durable", kDe: "Langlebig", sFr: "Embouts, poignée, sangles remplaçables", sEn: "Tips, grip, straps replaceable", sDe: "Aufsätze, Griff, Gurte austauschbar" },
+  { icon: <IconRulerPill />, kFr: "Universelle", kEn: "Universal", kDe: "Universell", sFr: "Convient de 1m50 à 1m95", sEn: "Fits users from 1.50m to 1.95m", sDe: "Geeignet für 1,50m bis 1,95m" },
 ];
 
 // SpecsStrip on CREAM section: white cards, navy text/icons
@@ -129,8 +129,8 @@ export function SpecsStrip() {
       {pills.map((p, i) => (
         <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
           <div style={{ color: NAVY }}>{p.icon}</div>
-          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
-          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn)}</div>
+          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
+          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
         </div>
       ))}
     </div>
@@ -143,16 +143,16 @@ export function ProductFeatureGrid() {
   const base = specsItems();
   const items = [
     ...base,
-    { icon: <IconRest />, kFr: "Position de repos", kEn: "Rest position", sFr: "Tu peux t'appuyer sur legmio pour récupérer", sEn: "Lean on legmio to recover" },
-    { icon: <IconWall />, kFr: "Tient seule", kEn: "Stands alone", sFr: "legmio tient debout contre un mur sans tomber", sEn: "legmio stands against a wall without falling" },
+    { icon: <IconRest />, kFr: "Position de repos", kEn: "Rest position", kDe: "Ruheposition", sFr: "Tu peux t'appuyer sur legmio pour récupérer", sEn: "You can lean on legmio to rest", sDe: "Du kannst dich zum Ausruhen auf legmio stützen" },
+    { icon: <IconWall />, kFr: "Tient seule", kEn: "Stands alone", kDe: "Steht allein", sFr: "legmio tient debout contre un mur sans tomber", sEn: "legmio stands against a wall without falling", sDe: "legmio steht gegen eine Wand ohne umzufallen" },
   ];
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {items.map((p, i) => (
         <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
           <div style={{ color: NAVY }}>{p.icon}</div>
-          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
-          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn)}</div>
+          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
+          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
         </div>
       ))}
     </div>
@@ -168,7 +168,7 @@ function Landing() {
     if (!video) return;
     const tracks = video.textTracks;
     for (let i = 0; i < tracks.length; i++) tracks[i].mode = "disabled";
-    const trackIndex = tr("fr", "en") === "fr" ? 0 : 1;
+    const trackIndex = tr("fr", "en", "de") === "fr" ? 0 : 1;
     if (tracks[trackIndex]) tracks[trackIndex].mode = "showing";
   });
 
@@ -194,12 +194,13 @@ function Landing() {
           </div>
           <div className="space-y-6 fade-up order-2" style={{ color: WHITE }}>
             <div className="text-xs tracking-[0.2em] uppercase" style={{ color: MUTED_NAVY }}>
-              {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT-GENERATION CRUTCH")}
+              {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT GENERATION CRUTCH", "DIE KRÜCKE DER NEUEN GENERATION")}
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl leading-[1.05]" style={{ color: WHITE }}>
               {tr(
                 <>Des mains libres<br />et une autonomie<br />enfin retrouvée.</>,
-                <>Hands free.<br />Independence,<br />finally restored.</>
+                <>Free hands<br />and newfound<br />independence.</>,
+                <>Freie Hände<br />und neu gewonnene<br />Selbstständigkeit.</>
               )}
             </h1>
             <div className="pt-2"><CTADark /></div>
@@ -213,15 +214,15 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
-              {tr("Les béquilles classiques ont leurs limites.", "Classic crutches have their limits.")}
+              {tr("Les béquilles classiques ont leurs limites.", "Classic crutches have their limits.", "Herkömmliche Krücken haben ihre Grenzen.")}
             </h2>
           </Reveal>
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
             <AutoCarousel>
               {[
-                { img: "/probleme-poignet.jpg", t: tr("Appui concentré sur le poignet et l'épaule.", "Load concentrated on wrist and shoulder."), p: tr("À force d'utilisation, les contraintes s'accumulent sur les mêmes zones articulaires.", "Over time, stress builds up on the same joint zones.") },
-                { img: "/probleme-mains.avif", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are taken to move."), p: tr("Porter, cuisiner, travailler, tenir son enfant — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, holding your child — every gesture requires a pause.") },
-                { img: "/probleme-temps.jpg", t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally evolved."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches rely on principles decades old.") },
+                { img: "/probleme-poignet.jpg", t: tr("Appui concentré sur le poignet et l'épaule.", "Strain concentrated on the wrist and shoulder.", "Belastung konzentriert auf Handgelenk und Schulter."), p: tr("À force d'utilisation, les contraintes s'accumulent sur les mêmes zones articulaires.", "With repeated use, stress builds up in the same joint areas.", "Bei regelmäßiger Nutzung häufen sich die Belastungen an denselben Gelenkzonen an.") },
+                { img: "/probleme-mains.avif", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are needed just to move.", "Beide Hände werden zum Gehen benötigt."), p: tr("Porter, cuisiner, travailler, tenir son enfant — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, holding your child — all things that require stopping.", "Tragen, kochen, arbeiten, ein Kind halten — all das erfordert einen Stopp.") },
+                { img: "/probleme-temps.jpg", t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally changed.", "Das Design hat sich grundlegend nicht verändert."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches are built on the same principles as decades ago.", "Die heute erhältlichen Krücken beruhen seit Jahrzehnten auf denselben Prinzipien.") },
               ].map((c, i) => (
                 <div key={i} className="card-cream overflow-hidden w-[320px] md:w-[380px]">
                   <div className="aspect-[3/2] overflow-hidden">
@@ -243,7 +244,7 @@ function Landing() {
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
-              {tr("legmio a tout repensé.", "legmio rethought everything.")}
+              {tr("legmio a tout repensé.", "legmio rethought everything.", "legmio hat alles neu gedacht.")}
             </h2>
           </Reveal>
           <div className="mt-12">
@@ -257,8 +258,8 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
-              <span className="hidden md:inline">{tr("À chaque fois que tu en as besoin.", "Whenever you need it.")}</span>
-              <span className="md:hidden">{tr(<>À chaque fois<br />que tu en as besoin.</>, <>Whenever<br />you need it.</>)}</span>
+              <span className="hidden md:inline">{tr("À chaque fois que tu en as besoin.", "Whenever you need it.", "Wann immer du sie brauchst.")}</span>
+              <span className="md:hidden">{tr(<>À chaque fois<br />que tu en as besoin.</>, <>Whenever<br />you need it.</>, <>Wann immer.<br />du sie brauchst.</>)}</span>
             </h2>
           </Reveal>
           <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -267,29 +268,29 @@ function Landing() {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" /></svg>
                 ),
-                t: tr("Handicap & quotidien", "Disability & daily life"),
-                p: tr("Pour les béquilles qui font partie de ta vie au long cours.", "For crutches that are part of your life for the long haul."),
+                t: tr("Handicap & quotidien", "Disability & daily life", "Behinderung & Alltag"),
+                p: tr("Pour les béquilles qui font partie de ta vie au long cours.", "For crutches that are a long-term part of your life.", "Für Krücken die langfristig Teil deines Lebens sind."),
               },
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z" /></svg>
                 ),
-                t: tr("Post-opératoire", "Post-op"),
-                p: tr("Pour récupérer sans tout sacrifier.", "To recover without sacrificing everything."),
+                t: tr("Post-opératoire", "Post-operative", "Postoperativ"),
+                p: tr("Pour récupérer sans tout sacrifier.", "To recover without giving everything up.", "Um sich zu erholen ohne auf alles verzichten zu müssen."),
               },
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" /><path d="M3 13h18" /></svg>
                 ),
-                t: tr("Maintien en emploi", "Staying at work"),
-                p: tr("Pour rester autonome et productif au travail.", "To stay independent and productive at work."),
+                t: tr("Maintien en emploi", "Staying employed", "Beschäftigungserhalt"),
+                p: tr("Pour rester autonome et productif au travail.", "To remain independent and productive at work.", "Um bei der Arbeit selbstständig und produktiv zu bleiben."),
               },
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="5" r="2.2" /><circle cx="16" cy="8" r="1.6" /><path d="M6 21v-6l-2-4a2 2 0 013.6-1.6L9 12h3l2 3v6" /><path d="M14 21v-5l2-3" /></svg>
                 ),
-                t: tr("Vie parentale", "Parenting life"),
-                p: tr("Porter son enfant, le suivre, être là.", "Carry your child, keep up, be there."),
+                t: tr("Vie parentale", "Parenting", "Elternleben"),
+                p: tr("Porter son enfant, le suivre, être là.", "Carrying your child, keeping up, being there.", "Sein Kind tragen, begleiten, da sein."),
               },
             ].map((c, i) => (
               <div key={i} className="card-cream p-6 flex flex-col items-start gap-3">
@@ -309,15 +310,15 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
-              {tr("Testée et approuvée.", "Tested and approved.")}
+              {tr("Testée et approuvée.", "Tested and approved.", "Getestet und bewährt.")}
             </h2>
           </Reveal>
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
             <AutoCarousel>
               {[
-                { img: "/pauline.png", n: "Dr Pauline Coignard", p: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape · President APPROCHE · SOFMER"), q: tr("Une béquille qui rend les mains au patient : une grande avancée !", "A crutch that gives the patient back their hands — a major breakthrough!") },
-                { img: "/selim.png", n: "Salim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)") },
-                { img: "/marc.jpg", n: "Marc", p: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-op meniscus · Home recovery"), q: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my meniscus surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized.") },
+                { img: "/pauline.png", n: "Dr Pauline Coignard", p: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "MPR Physician · Kerpape Centre · President APPROCHE · SOFMER", "MPR-Ärztin · Kerpape Zentrum · Präsidentin APPROCHE · SOFMER"), q: tr("Une béquille qui rend les mains au patient : une grande avancée !", "Une béquille qui rend les mains au patient : une grande avancée !", "Une béquille qui rend les mains au patient : une grande avancée !") },
+                { img: "/selim.png", n: "Salim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)") },
+                { img: "/marc.jpg", n: "Marc", p: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), q: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.") },
               ].map((t, i) => (
                 <div key={i} className="card-white p-5 w-[320px] md:w-[380px] flex flex-col">
                   <div className="flex items-center gap-4">
@@ -340,14 +341,14 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-4xl mx-auto" style={{ color: INK }}>
-              {tr("Une innovation récompensée.", "An award-winning innovation.")}
+              {tr("Une innovation récompensée.", "An award-winning innovation.", "Eine ausgezeichnete Innovation.")}
             </h2>
           </Reveal>
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'Or", "Gold Medal"), s: "Concours Lépine 2026" },
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award"), s: "Le Média Positif 2026" },
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la Recherche", "Backed by Research"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'Or", "Gold Medal", "Goldmedaille"), s: "Concours Lépine 2026" },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award", "Impact-Preis"), s: "Le Média Positif 2026" },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la Recherche", "Backed by Research", "Unterstützt durch die Forschung"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
             ].map((s, i) => (
               <div key={i} className="rounded-2xl p-6 flex flex-col items-start gap-3 card-cream">
                 <div style={{ color: NAVY }}>{s.icon}</div>
@@ -364,7 +365,7 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: WHITE }}>
-              {tr("Ils parlent de nous.", "They talk about us.")}
+              {tr("Ils parlent de nous.", "They talk about us.", "Sie berichten über uns.")}
             </h2>
           </Reveal>
 
@@ -392,7 +393,7 @@ function Landing() {
       <section style={{ backgroundColor: WHITE }} className="py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
-            {tr("Bientôt disponible.", "Coming soon.")}
+            {tr("Bientôt disponible.", "Coming soon.", "Bald verfügbar.")}
           </h2>
         </div>
         <WallOfLove />
@@ -402,7 +403,7 @@ function Landing() {
       <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>{tr("Où en sommes-nous ?", "Where are we today?")}</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>{tr("Où en sommes-nous ?", "Where are we?", "Wo stehen wir?")}</h2>
           </Reveal>
           <Roadmap />
         </div>
@@ -412,7 +413,7 @@ function Landing() {
       <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-lg mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>
-            {tr(<>Suis l'actualité<br />de legmio.</>, <>Follow<br />legmio.</>)}
+            {tr(<>Suis l'actualité<br />de legmio.</>, <>Follow<br />legmio's news.</>, <>Folge den Neuigkeiten<br />von legmio.</>)}
           </h2>
           <div className="mt-8 flex items-center justify-center gap-6" style={{ color: INK }}>
             <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="opacity-80 hover:opacity-100"><IconInstagram size={28} /></a>
@@ -421,9 +422,9 @@ function Landing() {
           </div>
           <div className="mt-10"><CTALight /></div>
           <p className="mt-10 text-base" style={{ color: INK_MUTED }}>
-            {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?")}
+            {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?", "Gesundheitsfachkraft oder Händler?")}
             <br className="sm:hidden" />{" "}
-            <a href="/pro" className="underline" style={{ color: NAVY }}>{tr("Espace pro", "Pro area")} →</a>
+            <a href="/pro" className="underline" style={{ color: NAVY }}>{tr("Espace pro", "Pro space", "Fachbereich")} →</a>
           </p>
         </div>
       </section>
@@ -461,8 +462,8 @@ function WallOfLove() {
     "Seeing your invention lifts my spirits.",
     "It really seems to give back freedom of movement.",
   ];
-  const row1 = tr(row1Fr, row1En);
-  const row2 = tr(row2Fr, row2En);
+  const row1 = tr(row1Fr, row1Fr, row1Fr);
+  const row2 = tr(row2Fr, row2Fr, row2Fr);
   const dup1 = [...row1, ...row1];
   const dup2 = [...row2, ...row2];
   const Card = ({ q }: { q: string }) => (
@@ -494,11 +495,11 @@ function Roadmap() {
   // Cream section: dark text, navy for done/current, light border for upcoming.
   const { tr } = useLanguage();
   const steps = [
-    { t: tr("Brevet déposé", "Patent filed"), s: "FR2411206 · Octobre 2024", state: "done" as const },
-    { t: tr("Prototype validé", "Validated prototype"), s: tr("utilisé en conditions réelles", "used in real-world conditions"), state: "done" as const },
-    { t: tr("Industrialisation", "Industrialization"), s: tr("en cours", "in progress"), state: "current" as const },
-    { t: tr("Dispositif médical C1 & Marquage CE", "Class I medical device & CE marking"), s: "MDR 2017/745", state: "upcoming" as const },
-    { t: tr("Commercialisation", "Commercial launch"), s: "2027", state: "upcoming" as const },
+    { t: tr("Brevet déposé", "Patent filed", "Patent angemeldet"), s: "FR2411206 · Octobre 2024", state: "done" as const },
+    { t: tr("Prototype validé", "Prototype validated", "Prototyp validiert"), s: tr("utilisé en conditions réelles", "used in real conditions", "in realen Bedingungen getestet"), state: "done" as const },
+    { t: tr("Industrialisation", "Industrialisation", "Industrialisierung"), s: tr("en cours", "in progress", "laufend"), state: "current" as const },
+    { t: tr("Dispositif médical C1 & Marquage CE", "Class I Medical Device & CE Marking", "Medizinprodukt Kl. I & CE-Kennzeichnung"), s: "MDR 2017/745", state: "upcoming" as const },
+    { t: tr("Commercialisation", "Commercial launch", "Markteinführung"), s: "2027", state: "upcoming" as const },
   ];
   const currentIdx = steps.findIndex((s) => s.state === "current");
   const progressPct = (currentIdx / (steps.length - 1)) * 100;
@@ -565,9 +566,9 @@ function Roadmap() {
 function InstaCards() {
   const { tr } = useLanguage();
   const items = [
-    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views") },
-    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M de vues", "3.6M views") },
-    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
+    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views", "1 Mio. Aufrufe") },
+    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M de vues", "3.6M views", "3,6 Mio. Aufrufe") },
+    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
   ];
   const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -639,7 +640,7 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string } }) {
       <div className="p-5 flex flex-col gap-3">
         <div className="text-base font-semibold" style={{ color: WHITE }}>{r.label}</div>
         <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
-          {tr("Voir sur Instagram", "View on Instagram")} <IconArrowRight size={14} />
+          {tr("Voir sur Instagram", "View on Instagram", "Auf Instagram ansehen")} <IconArrowRight size={14} />
         </a>
       </div>
     </div>
