@@ -69,8 +69,10 @@ type Article = {
   cover: string;
   tag: string;
   tagEn: string;
+  tagDe: string;
   titleFr: string;
   titleEn: string;
+  titleDe: string;
   excerptFr: string;
   excerptEn: string;
   bodyFr: string;
@@ -84,8 +86,10 @@ const articles: Article[] = [
     cover: "/usecase-quotidien.png",
     tag: "Genèse",
     tagEn: "Origin",
+    tagDe: "Geschichte",
     titleFr: '"F*ck cancer. Et si on inventait la béquille qu\'on n\'avait jamais faite ?"',
     titleEn: '"F*ck cancer. What if we invented the crutch no one ever built?"',
+    titleDe: '"F*ck Cancer. Was, wenn wir die Krücke erfinden würden, die es nie gab?"',
     excerptFr: "En 2020, j'ai subi une lourde opération pour retirer le cancer des os…",
     excerptEn: "In 2020, I underwent major surgery for bone cancer…",
     bodyFr: genesisFr,
@@ -97,8 +101,10 @@ const articles: Article[] = [
     cover: "/photo-blog-1.jpg",
     tag: "Innovation",
     tagEn: "Innovation",
+    tagDe: "Innovation",
     titleFr: "Pourquoi la béquille n'a (presque) pas changé depuis 30 ans",
-    titleEn: "Why the crutch has (barely) changed in 30 years",
+    titleEn: "Why the crutch has (almost) not changed in 30 years",
+    titleDe: "Warum sich die Krücke seit 30 Jahren (kaum) verändert hat",
     excerptFr: "Les innovations portent sur la poignée, les matériaux, le réglage. La structure, elle, reste la même.",
     excerptEn: "Innovations touch the grip, the materials, the adjustments. The structure stays the same.",
     bodyFr: `Les principaux axes de développement dans le domaine des béquilles médicales se concentrent sur trois zones : l'amélioration de la prise en main, avec des poignées ergonomiques en mousse, silicone ou gel pour réduire les douleurs aux mains et aux poignets ; la réduction des chocs, avec des systèmes d'amortissement limitant l'impact sur les bras et les épaules ; et l'ajustabilité, avec des béquilles réglables en hauteur et adaptées à différentes morphologies.
@@ -122,8 +128,10 @@ legmio was designed at ISIR (Sorbonne Université / CNRS), within the ANR ASSIST
     cover: "/photo-blog-2.webp",
     tag: "Chiffres",
     tagEn: "Data",
+    tagDe: "Daten",
     titleFr: "1,5 million de Français sous béquilles chaque année : le chiffre que personne ne regarde",
-    titleEn: "1.5 million French people on crutches each year — the number no one looks at",
+    titleEn: "1.5 million French people on crutches every year — the number no one looks at",
+    titleDe: "1,5 Millionen Franzosen jedes Jahr auf Krücken — die Zahl, die niemand beachtet",
     excerptFr: "Fractures, blessures sportives, chirurgie, troubles neurologiques — qui béquille vraiment en France ?",
     excerptEn: "Fractures, sports injuries, surgery, neurological conditions — who actually uses crutches in France?",
     bodyFr: `Chaque année en France, environ 1,5 million de personnes se voient prescrire des béquilles. Les pathologies et blessures les plus fréquemment associées à ces prescriptions incluent les fractures osseuses (jambe, genou, cheville, pied), les blessures sportives (entorses, rupture du ligament croisé antérieur ou du ménisque), les blessures de tendons ou ligaments (tendon d'Achille, tendinite), les suites de chirurgie du bas du corps, et certains troubles neurologiques (sclérose en plaques, rééducation après un AVC, paralysie cérébrale).
@@ -143,8 +151,10 @@ This is the ground legmio addresses: daily, prolonged use, with a device designe
     cover: "/photo-blog-3.jpg",
     tag: "Marché",
     tagEn: "Market",
+    tagDe: "Markt",
     titleFr: "Béquille axillaire, canadienne, tripode : ce qui existe sur le marché",
-    titleEn: "Axillary, forearm, tripod: what's on the market",
+    titleEn: "Axillary, forearm, tripod crutches: what exists on the market",
+    titleDe: "Achsel-, Unterarm-, Dreibeinkrücken: was es auf dem Markt gibt",
     excerptFr: "Tour d'horizon des grandes familles de béquilles et de ce qui les distingue vraiment.",
     excerptEn: "An overview of crutch families and what really sets them apart.",
     bodyFr: `Le marché des béquilles médicales se structure autour de plusieurs grandes catégories.
@@ -172,8 +182,10 @@ There are also child crutches (lighter, colorful), sport crutches (ergonomic, mo
     cover: "/photo-blog-4.jpg",
     tag: "Ergonomie",
     tagEn: "Ergonomics",
+    tagDe: "Ergonomie",
     titleFr: "La vraie raison pour laquelle votre béquille vous fait mal sous l'aisselle",
-    titleEn: "The real reason your crutch hurts under the armpit",
+    titleEn: "The real reason your crutch hurts under your armpit",
+    titleDe: "Der wahre Grund warum Ihre Krücke unter der Achselhöhle schmerzt",
     excerptFr: "Ce n'est pas une question d'habitude. C'est une question de mécanique.",
     excerptEn: "It's not a matter of habit. It's mechanics.",
     bodyFr: `Parmi les facteurs limitant l'usage prolongé des béquilles, on retrouve les risques et blessures associés à une utilisation continue — en particulier la gêne au niveau de la zone d'appui sous l'aisselle, propre aux béquilles axillaires. C'est un compromis connu de ce type de béquille : bonne stabilité pour un usage temporaire, mais inconfort qui s'installe sur la durée.
@@ -193,8 +205,10 @@ That trade-off is exactly what legmio reworked: by concentrating the load on the
     cover: "/photo-blog-5.jpg",
     tag: "Convalescence",
     tagEn: "Recovery",
+    tagDe: "Genesung",
     titleFr: "Entorse, ligaments, tendinite : pourquoi votre béquille freine votre convalescence",
-    titleEn: "Sprain, ligaments, tendinitis: why your crutch slows recovery",
+    titleEn: "Sprain, ligaments, tendinitis: why your crutch slows your recovery",
+    titleDe: "Verstauchung, Bänder, Sehnenentzündung: warum Ihre Krücke die Genesung verlangsamt",
     excerptFr: "Les béquilles classiques vous immobilisent les mains au moment où vous en avez le plus besoin.",
     excerptEn: "Classic crutches lock your hands at the moment you need them most.",
     bodyFr: `Parmi les pathologies et blessures fréquemment associées à la prescription de béquilles : les blessures sportives, de l'entorse à la déchirure du ligament croisé antérieur ou du ménisque, ainsi que les blessures de tendons ou ligaments comme la rupture du tendon d'Achille ou la tendinite. Ce sont des motifs de convalescence temporaire, souvent chez des personnes par ailleurs actives.

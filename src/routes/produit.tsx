@@ -20,7 +20,7 @@ export const Route = createFileRoute("/produit")({
   head: () => ({
     meta: [
       { title: "legmio — La béquille" },
-      { name: "description", content: "La béquille legmio, la seule béquille ergonomique mains libres. 150€ (prix estimatif). Conçue en France." },
+      { name: "description", content: "La béquille legmio, la seule béquille ergonomique mains libres. 200€ (prix estimatif). Conçue en France." },
       { property: "og:title", content: "legmio — La béquille" },
       { property: "og:description", content: "La seule béquille ergonomique qui libère les mains pendant la marche." },
     ],
@@ -54,9 +54,9 @@ function Produit() {
   const [reviewOpen, setReviewOpen] = useState(false);
 
   const initialReviews: Review[] = [
-    { img: "/pauline.png", stars: 5, title: tr("Une grande avancée.", "A major breakthrough."), quote: tr("Une béquille qui rend les mains libres : une grande avancée !", "A crutch that gives the patient back their hands — a major breakthrough!"), name: "Dr Pauline Coignard", profile: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "PM&R physician · Kerpape · President APPROCHE · SOFMER"), date: tr("Mars 2026", "March 2026") },
-    { img: "/selim.png", stars: 5, title: tr("Une vraie autonomie retrouvée.", "Real autonomy, back."), quote: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio let me regain real day-to-day autonomy, especially at work. I could move around more easily and handle simple but essential tasks on my own — like grabbing a coffee :)"), name: "Salim", profile: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament rupture · 2 months of use"), date: tr("Février 2026", "February 2026") },
-    { img: "/marc.jpg", stars: 5, title: tr("Autonome pendant ma convalescence.", "Autonomous through recovery."), quote: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my meniscus surgery, legmio kept me autonomous at home through my whole recovery. Moving around, carrying things, doing things solo — it changes everything when you're immobilized."), name: "Marc", profile: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-op meniscus · Home recovery"), date: tr("Janvier 2026", "January 2026") },
+    { img: "/pauline.png", stars: 5, title: tr("Une grande avancée.", "A major breakthrough.", "Ein großer Fortschritt."), quote: tr("Une béquille qui rend les mains libres : une grande avancée !", "Une béquille qui rend les mains libres : une grande avancée !", "Une béquille qui rend les mains libres : une grande avancée !"), name: "Dr Pauline Coignard", profile: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "MPR Physician · Kerpape Centre · President APPROCHE · SOFMER", "MPR-Ärztin · Kerpape Zentrum · Präsidentin APPROCHE · SOFMER"), date: tr("Mars 2026", "March 2026", "März 2026") },
+    { img: "/selim.png", stars: 5, title: tr("Une vraie autonomie retrouvée.", "Real autonomy, back.", "Echte Selbstständigkeit zurückgewonnen."), quote: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)"), name: "Salim", profile: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), date: tr("Février 2026", "February 2026", "Februar 2026") },
+    { img: "/marc.jpg", stars: 5, title: tr("Autonome pendant ma convalescence.", "Autonomous through recovery.", "Selbstständig während der Genesung."), quote: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé."), name: "Marc", profile: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), date: tr("Janvier 2026", "January 2026", "Januar 2026") },
   ];
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
   const reviewCount = reviews.length;
@@ -98,21 +98,23 @@ function Produit() {
 
           <div className="md:sticky md:top-32 md:self-start">
             <h1 className="text-4xl md:text-5xl font-display font-bold" style={{ color: INK }}>
-              {tr("La béquille legmio", "The legmio crutch")}
+              {tr("La béquille legmio", "The legmio crutch", "Die legmio Krücke")}
             </h1>
             <p className="mt-4 text-base leading-relaxed" style={{ color: INK_MUTED }}>
               {tr(
                 "La première béquille ergonomique mains libres avec appui avant-bras.",
-                "The first hands-free ergonomic crutch with forearm support."
+                "The first hands-free ergonomic crutch with forearm support.",
+                "Die erste ergonomische Unterarmkrücke mit freien Händen."
               )}
               <br />
               {tr(
                 "Plus confortable et plus sûre, elle libère les mains lorsque c'est nécessaire et pendant les déplacements.",
-                "More comfortable and safer, it frees your hands when needed and while moving around."
+                "More comfortable and safer, it frees your hands when needed and while moving.",
+                "Komfortabler und sicherer befreit sie die Hände wenn nötig und beim Gehen."
               )}
             </p>
             <div className="mt-4 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: WHITE, color: INK, border: `1px solid ${BORDER_LIGHT}` }}>
-              {tr("Dispositif médical CE Classe I (en cours)", "CE Class I medical device (in progress)")}
+              {tr("Dispositif médical CE Classe I (en cours)", "CE Class I Medical Device (pending)", "CE Medizinprodukt Klasse I (ausstehend)")}
             </div>
             <button
               onClick={() => scrollTo("reviews")}
@@ -122,58 +124,58 @@ function Produit() {
               <div className="flex" style={{ color: ACCENT }}>
                 {[0, 1, 2, 3, 4].map((i) => <IconStar key={i} size={14} />)}
               </div>
-              <span className="underline" style={{ color: INK_MUTED }}>{avgStr}/5 ({reviewCount} {tr("avis", "reviews")})</span>
+              <span className="underline" style={{ color: INK_MUTED }}>{avgStr}/5 ({reviewCount} {tr("avis", "reviews", "Bewertungen")})</span>
             </button>
             <div className="mt-6">
-              <div className="text-4xl font-display font-bold" style={{ color: INK }}>150€</div>
-              <div className="text-sm mt-1" style={{ color: INK_MUTED }}>({tr("prix estimatif", "estimated price")})</div>
+              <div className="text-4xl font-display font-bold" style={{ color: INK }}>200€</div>
+              <div className="text-sm mt-1" style={{ color: INK_MUTED }}>({tr("prix estimatif", "estimated price", "Richtpreis")})</div>
             </div>
 
 
             <div className="mt-8">
-              <Accordion title={tr("Taille", "Size")}>
-                {tr("Taille unique — réglable pour utilisateurs 1m50 à 1m95.", "One size — adjustable for users from 1m50 to 1m95.")}
+              <Accordion title={tr("Taille", "Size", "Größe")}>
+                {tr("legmio convient aux utilisateurs mesurant entre 1m50 et 1m95, pour un poids jusqu'à 130 kg.", "legmio is suitable for users between 1.50m and 1.95m tall, weighing up to 130 kg.", "legmio ist für Nutzer zwischen 1,50m und 1,95m geeignet, mit einem Gewicht bis zu 130 kg.")}
               </Accordion>
-              <Accordion title={tr("Caractéristiques", "Specs")}>
+              <Accordion title={tr("Caractéristiques", "Specifications", "Eigenschaften")}>
                 <ul className="space-y-2">
                   {[
-                    [tr("Poids", "Weight"), "850g"],
-                    [tr("Matériau", "Material"), tr("Aluminium", "Aluminum")],
-                    [tr("Hauteur réglable", "Adjustable height"), "1m10 – 1m40"],
-                    [tr("Pour", "For"), tr("utilisateurs 1m50 à 1m95", "users 1m50 to 1m95")],
-                    [tr("Charge max", "Max load"), "130kg"],
-                    [tr("Embouts", "Tips"), tr("interchangeables sans outil", "interchangeable, no tools")],
-                    [tr("Assemblage", "Assembly"), tr("France", "France")],
-                    [tr("Brevet", "Patent"), "FR2411206"],
-                    [tr("Certification", "Certification"), tr("CE Classe I en cours · MDR 2017/745", "CE Class I in progress · MDR 2017/745")],
+                    [tr("Poids", "Weight", "Gewicht"), "850g"],
+                    [tr("Matériau", "Material", "Material"), tr("Aluminium", "Aluminum", "Aluminium")],
+                    [tr("Hauteur réglable", "Adjustable height", "Verstellbare Höhe"), tr("1m10 à 1m40", "1.10m to 1.40m", "1,10m bis 1,40m")],
+                    [tr("Pour", "For", "Für"), tr("utilisateurs 1m50 à 1m95", "users 1m50 to 1m95", "Nutzer 1,50m bis 1,95m")],
+                    [tr("Charge max", "Max load", "Maximallast"), "130kg"],
+                    [tr("Embouts", "Tips", "Aufsätze"), tr("interchangeables 16mm", "interchangeable 16mm", "austauschbar 16mm")],
+                    [tr("Assemblage", "Assembly", "Montage"), tr("France", "France", "Frankreich")],
+                    [tr("Brevet", "Patent", "Patent"), "FR2411206"],
+                    [tr("Certification", "Certification", "Zertifizierung"), tr("CE Classe I en cours · MDR 2017/745", "CE Class I in progress · MDR 2017/745", "CE Klasse I ausstehend · MDR 2017/745")],
                   ].map(([k, v]) => (
                     <li key={k} className="flex justify-between gap-4"><span style={{ color: INK_MUTED }}>{k}</span><span style={{ color: INK }}>{v}</span></li>
                   ))}
                 </ul>
               </Accordion>
-              <Accordion title={tr("Idéal pour", "Ideal for")}>
+              <Accordion title={tr("Idéal pour", "Ideal for", "Ideal für")}>
                 <ul className="space-y-2">
                   {[
-                    tr("Retrouver l'usage complet de ses mains au quotidien", "Regain full use of your hands every day"),
-                    tr("Réduire les douleurs aux épaules et aux poignets", "Reduce shoulder and wrist pain"),
-                    tr("Maintenir son autonomie en famille, au travail, en déplacement", "Stay independent at home, at work, on the go"),
-                    tr("Rééducation post-opératoire sans contrainte", "Post-op rehab without strain"),
+                    tr("Retrouver l'usage complet de ses mains au quotidien", "Regaining full use of your hands", "Vollständige Handnutzung zurückgewinnen"),
+                    tr("Réduire les douleurs aux épaules et aux poignets", "Reducing shoulder and wrist pain", "Schulter- und Handgelenkschmerzen reduzieren"),
+                    tr("Maintenir son autonomie en famille, au travail, en déplacement", "Maintaining independence in daily life, at work, and with family", "Selbstständigkeit im Alltag, bei der Arbeit und in der Familie erhalten"),
+                    tr("Rééducation post-opératoire sans contrainte", "Post-operative recovery without constraints", "Postoperative Genesung ohne Einschränkungen"),
                   ].map((i) => (
                     <li key={i} className="flex gap-2" style={{ color: NAVY }}><IconCheck size={16} /> <span style={{ color: INK_MUTED }}>{i}</span></li>
                   ))}
                 </ul>
               </Accordion>
-              <Accordion title={tr("Ce qui est inclus", "What's included")}>
+              <Accordion title={tr("Ce qui est inclus", "What's included", "Lieferumfang")}>
                 <ul className="space-y-1" style={{ color: INK_MUTED }}>
-                  <li>· {tr("1 béquille legmio (disponible pour main droite ou gauche)", "1 legmio crutch (available for right or left hand)")}</li>
-                  <li>· {tr("1 embout (remplaçable)", "1 tip (replaceable)")}</li>
-                  <li>· {tr("1 notice de réglage", "1 adjustment guide")}</li>
-                  <li>· {tr("Garantie 2 ans", "2-year warranty")}</li>
+                  <li>· {tr("1 béquille legmio (disponible pour main droite ou gauche)", "1 legmio crutch (right or left)", "1 legmio Krücke (rechts oder links)")}</li>
+                  <li>· {tr("1 embout (remplaçable)", "1 tip (replaceable)", "1 Aufsatz (austauschbar)")}</li>
+                  <li>· {tr("1 notice de réglage", "1 adjustment guide", "1 Einstellungsanleitung")}</li>
+                  <li>· {tr("Garantie 2 ans", "2-year warranty", "2 Jahre Garantie")}</li>
                 </ul>
               </Accordion>
 
               <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-light btn-light-hover w-full mt-8">
-                {tr("Je suis intéressé(e)", "I'm interested")} <IconArrowRight size={16} />
+                {tr("Je suis intéressé(e)", "I'm interested", "Ich bin interessiert")} <IconArrowRight size={16} />
               </a>
             </div>
           </div>
@@ -184,7 +186,7 @@ function Produit() {
       <section id="features" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("Fonctionnalités", "Features")}</h2>
+            <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("Fonctionnalités", "Features", "Funktionen")}</h2>
           </Reveal>
           <div className="mt-10">
             <ProductFeatureGrid />
@@ -197,15 +199,15 @@ function Produit() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("Témoignages", "Testimonials")}</h2>
+              <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("Témoignages", "Testimonials", "Erfahrungsberichte")}</h2>
               <div className="mt-4 flex items-baseline gap-3">
                 <div className="text-5xl font-display font-bold" style={{ color: INK }}>{avgStr}/5</div>
-                <div style={{ color: INK_MUTED }}>({reviewCount} {tr("avis", "reviews")})</div>
+                <div style={{ color: INK_MUTED }}>({reviewCount} {tr("avis", "reviews", "Bewertungen")})</div>
               </div>
             </div>
             <div className="md:text-right">
               <button onClick={() => setReviewOpen(true)} className="btn-outline-light">
-                {tr("Laisser un avis", "Leave a review")}
+                {tr("Laisser un avis", "Leave a review", "Eine Bewertung hinterlassen")}
               </button>
             </div>
           </div>
@@ -240,18 +242,18 @@ function Produit() {
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-baseline justify-between gap-4 mb-6">
-            <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("Questions fréquentes", "Frequently asked questions")}</h2>
-            <a href="/faq" className="text-sm underline" style={{ color: INK }}>{tr("Voir toutes les questions", "See all questions")}</a>
+            <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("Questions fréquentes", "Frequently asked questions", "Häufig gestellte Fragen")}</h2>
+            <a href="/faq" className="text-sm underline" style={{ color: INK }}>{tr("Voir toutes les questions", "See all questions", "Alle Fragen ansehen")}</a>
           </div>
           <div>
             {[
-              [tr("legmio est-elle réglable ?", "Is legmio adjustable?"), tr("Oui. Deux points de réglage indépendants : la poignée et l'appui coude. Universelle de 1m50 à 1m95.", "Yes. Two independent adjustment points: grip and elbow rest. Universal from 1m50 to 1m95.")],
-              [tr("Faut-il de la force dans les mains ?", "Do I need hand strength?"), tr("Non. Un simple appui du poignet sur l'avant-bras suffit. Pas besoin de fermer la main.", "No. A simple wrist rest on the forearm is enough. No need to grip.")],
-              [tr("Combien de temps pour s'adapter ?", "How long does it take to adapt?"), tr("Environ 1 à 2 semaines. La plupart des utilisateurs trouvent leur rythme en quelques jours.", "About 1 to 2 weeks. Most users find their rhythm within a few days.")],
-              [tr("Est-elle remboursée ?", "Is it reimbursed?"), tr("Partiellement sur prescription médicale (LPPR). En contexte emploi RQTH, prise en charge jusqu'à 90% via Agefiph ou FIPHFP.", "Partially on medical prescription (LPPR). In an RQTH employment context, up to 90% covered via Agefiph or FIPHFP.")],
-              [tr("Quel est le prix ?", "What's the price?"), tr("150€ (prix estimatif).", "€150 (estimated price).")],
-              [tr("Où est-elle fabriquée ?", "Where is it made?"), tr("Conçue et assemblée en France. Structure en aluminium.", "Designed and assembled in France. Aluminum frame.")],
-              [tr("Convient-elle aux utilisateurs d'une seule béquille ?", "Suitable for single-crutch users?"), tr("Oui. legmio est disponible à l'unité, droite ou gauche.", "Yes. legmio is sold individually, right or left.")],
+              [tr("legmio est-elle réglable ?", "Is legmio adjustable?", "Ist legmio verstellbar?"), tr("Oui. Deux points de réglage indépendants : la poignée et l'appui coude. Universelle de 1m50 à 1m95.", "Yes. Two independent adjustment points: grip and elbow rest. Universal from 1m50 to 1m95.", "Ja. Zwei unabhängige Einstellpunkte: Griff und Ellbogenstütze. Universell von 1,50m bis 1,95m.")],
+              [tr("Faut-il de la force dans les mains ?", "Do I need hand strength?", "Braucht man Kraft in den Händen?"), tr("Non. Un simple appui du poignet sur l'avant-bras suffit. Pas besoin de fermer la main.", "No. A simple wrist rest on the forearm is enough. No need to grip.", "Nein. Eine einfache Handgelenksauflage auf dem Unterarm genügt. Kein Zugreifen nötig.")],
+              [tr("Combien de temps pour s'adapter ?", "How long does it take to adapt?", "Wie lange dauert die Eingewöhnung?"), tr("Environ 1 à 2 semaines. La plupart des utilisateurs trouvent leur rythme en quelques jours.", "About 1 to 2 weeks. Most users find their rhythm within a few days.", "Etwa 1 bis 2 Wochen. Die meisten Nutzer finden innerhalb weniger Tage ihren Rhythmus.")],
+              [tr("Est-elle remboursée ?", "Is it reimbursed?", "Wird sie erstattet?"), tr("Partiellement sur prescription médicale (LPPR). En contexte emploi RQTH, prise en charge jusqu'à 90% via Agefiph ou FIPHFP.", "Partially on medical prescription (LPPR). In an RQTH employment context, up to 90% covered via Agefiph or FIPHFP.", "Teilweise auf ärztliche Verordnung (LPPR). Im RQTH-Beschäftigungskontext bis zu 90% Übernahme über Agefiph oder FIPHFP.")],
+              [tr("Quel est le prix ?", "What's the price?", "Wie hoch ist der Preis?"), tr("200€ (prix estimatif).", "200€ (estimated price).", "200€ (Richtpreis).")],
+              [tr("Où est-elle fabriquée ?", "Where is it made?", "Wo wird sie hergestellt?"), tr("Conçue et assemblée en France. Structure en aluminium.", "Designed and assembled in France. Aluminum frame.", "Entworfen und montiert in Frankreich. Aluminiumstruktur.")],
+              [tr("Convient-elle aux utilisateurs d'une seule béquille ?", "Suitable for single-crutch users?", "Geeignet für Nutzer einer einzigen Krücke?"), tr("Oui. legmio est disponible à l'unité, droite ou gauche.", "Yes. legmio is sold individually, right or left.", "Ja. legmio ist einzeln erhältlich, rechts oder links.")],
             ].map(([q, a], i) => (
               <Accordion key={i} title={q as string}>{a}</Accordion>
             ))}
@@ -263,11 +265,11 @@ function Produit() {
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl" style={{ color: WHITE }}>
-            {tr(<>Prêt à retrouver<br />tes mains libres ?</>, <>Ready to get<br />your hands back?</>)}
+            {tr(<>Prêt à retrouver<br />tes mains libres ?</>, <>Ready to get<br />your hands back?</>, <>Bereit deine<br />Hände zurückzubekommen?</>)}
           </h2>
           <div className="mt-8">
             <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover inline-flex">
-              {tr("Je suis intéressé(e)", "I'm interested")} <IconArrowRight size={16} />
+              {tr("Je suis intéressé(e)", "I'm interested", "Ich bin interessiert")} <IconArrowRight size={16} />
             </a>
           </div>
         </div>
