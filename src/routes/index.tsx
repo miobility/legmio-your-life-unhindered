@@ -168,7 +168,7 @@ function Landing() {
     if (!video) return;
     const tracks = video.textTracks;
     for (let i = 0; i < tracks.length; i++) tracks[i].mode = "disabled";
-    const trackIndex = tr("fr", "en") === "fr" ? 0 : 1;
+    const trackIndex = tr("fr", "en", "de") === "fr" ? 0 : 1;
     if (tracks[trackIndex]) tracks[trackIndex].mode = "showing";
   });
 
@@ -194,12 +194,13 @@ function Landing() {
           </div>
           <div className="space-y-6 fade-up order-2" style={{ color: WHITE }}>
             <div className="text-xs tracking-[0.2em] uppercase" style={{ color: MUTED_NAVY }}>
-              {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT-GENERATION CRUTCH")}
+              {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT GENERATION CRUTCH", "DIE KRÜCKE DER NEUEN GENERATION")}
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl leading-[1.05]" style={{ color: WHITE }}>
               {tr(
                 <>Des mains libres<br />et une autonomie<br />enfin retrouvée.</>,
-                <>Hands free.<br />Independence,<br />finally restored.</>
+                <>Free hands<br />and newfound<br />independence.</>,
+                <>Freie Hände<br />und neu gewonnene<br />Selbstständigkeit.</>
               )}
             </h1>
             <div className="pt-2"><CTADark /></div>
@@ -213,15 +214,15 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
-              {tr("Les béquilles classiques ont leurs limites.", "Classic crutches have their limits.")}
+              {tr("Les béquilles classiques ont leurs limites.", "Classic crutches have their limits.", "Herkömmliche Krücken haben ihre Grenzen.")}
             </h2>
           </Reveal>
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
             <AutoCarousel>
               {[
-                { img: "/probleme-poignet.jpg", t: tr("Appui concentré sur le poignet et l'épaule.", "Load concentrated on wrist and shoulder."), p: tr("À force d'utilisation, les contraintes s'accumulent sur les mêmes zones articulaires.", "Over time, stress builds up on the same joint zones.") },
-                { img: "/probleme-mains.avif", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are taken to move."), p: tr("Porter, cuisiner, travailler, tenir son enfant — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, holding your child — every gesture requires a pause.") },
-                { img: "/probleme-temps.jpg", t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally evolved."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches rely on principles decades old.") },
+                { img: "/probleme-poignet.jpg", t: tr("Appui concentré sur le poignet et l'épaule.", "Strain concentrated on the wrist and shoulder.", "Belastung konzentriert auf Handgelenk und Schulter."), p: tr("À force d'utilisation, les contraintes s'accumulent sur les mêmes zones articulaires.", "With repeated use, stress builds up in the same joint areas.", "Bei regelmäßiger Nutzung häufen sich die Belastungen an denselben Gelenkzonen an.") },
+                { img: "/probleme-mains.avif", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are needed just to move.", "Beide Hände werden zum Gehen benötigt."), p: tr("Porter, cuisiner, travailler, tenir son enfant — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, holding your child — all things that require stopping.", "Tragen, kochen, arbeiten, ein Kind halten — all das erfordert einen Stopp.") },
+                { img: "/probleme-temps.jpg", t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally changed.", "Das Design hat sich grundlegend nicht verändert."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches are built on the same principles as decades ago.", "Die heute erhältlichen Krücken beruhen seit Jahrzehnten auf denselben Prinzipien.") },
               ].map((c, i) => (
                 <div key={i} className="card-cream overflow-hidden w-[320px] md:w-[380px]">
                   <div className="aspect-[3/2] overflow-hidden">
@@ -243,7 +244,7 @@ function Landing() {
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
-              {tr("legmio a tout repensé.", "legmio rethought everything.")}
+              {tr("legmio a tout repensé.", "legmio rethought everything.", "legmio hat alles neu gedacht.")}
             </h2>
           </Reveal>
           <div className="mt-12">
@@ -257,8 +258,8 @@ function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
-              <span className="hidden md:inline">{tr("À chaque fois que tu en as besoin.", "Whenever you need it.")}</span>
-              <span className="md:hidden">{tr(<>À chaque fois<br />que tu en as besoin.</>, <>Whenever<br />you need it.</>)}</span>
+              <span className="hidden md:inline">{tr("À chaque fois que tu en as besoin.", "Whenever you need it.", "Wann immer du sie brauchst.")}</span>
+              <span className="md:hidden">{tr(<>À chaque fois<br />que tu en as besoin.</>, <>Whenever<br />you need it.</>, <>Wann immer.<br />du sie brauchst.</>)}</span>
             </h2>
           </Reveal>
           <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -267,29 +268,29 @@ function Landing() {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" /></svg>
                 ),
-                t: tr("Handicap & quotidien", "Disability & daily life"),
-                p: tr("Pour les béquilles qui font partie de ta vie au long cours.", "For crutches that are part of your life for the long haul."),
+                t: tr("Handicap & quotidien", "Disability & daily life", "Behinderung & Alltag"),
+                p: tr("Pour les béquilles qui font partie de ta vie au long cours.", "For crutches that are a long-term part of your life.", "Für Krücken die langfristig Teil deines Lebens sind."),
               },
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z" /></svg>
                 ),
-                t: tr("Post-opératoire", "Post-op"),
-                p: tr("Pour récupérer sans tout sacrifier.", "To recover without sacrificing everything."),
+                t: tr("Post-opératoire", "Post-operative", "Postoperativ"),
+                p: tr("Pour récupérer sans tout sacrifier.", "To recover without giving everything up.", "Um sich zu erholen ohne auf alles verzichten zu müssen."),
               },
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" /><path d="M3 13h18" /></svg>
                 ),
-                t: tr("Maintien en emploi", "Staying at work"),
-                p: tr("Pour rester autonome et productif au travail.", "To stay independent and productive at work."),
+                t: tr("Maintien en emploi", "Staying employed", "Beschäftigungserhalt"),
+                p: tr("Pour rester autonome et productif au travail.", "To remain independent and productive at work.", "Um bei der Arbeit selbstständig und produktiv zu bleiben."),
               },
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="5" r="2.2" /><circle cx="16" cy="8" r="1.6" /><path d="M6 21v-6l-2-4a2 2 0 013.6-1.6L9 12h3l2 3v6" /><path d="M14 21v-5l2-3" /></svg>
                 ),
-                t: tr("Vie parentale", "Parenting life"),
-                p: tr("Porter son enfant, le suivre, être là.", "Carry your child, keep up, be there."),
+                t: tr("Vie parentale", "Parenting", "Elternleben"),
+                p: tr("Porter son enfant, le suivre, être là.", "Carrying your child, keeping up, being there.", "Sein Kind tragen, begleiten, da sein."),
               },
             ].map((c, i) => (
               <div key={i} className="card-cream p-6 flex flex-col items-start gap-3">
