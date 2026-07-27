@@ -110,14 +110,14 @@ const IconGrip = ({ size = 28 }: { size?: number }) => (
 );
 
 const specsItems = () => [
-  { icon: <IconFeather />, kFr: "Ultralégère", kEn: "Ultralight", sFr: "Pèse seulement 850g", sEn: "Only 850g" },
-  { icon: <IconHandOpen />, kFr: "Mains libres", kEn: "Hands free", sFr: "Appui sur l'avant-bras", sEn: "Forearm support" },
-  { icon: <IconShieldPill />, kFr: "Robuste", kEn: "Sturdy", sFr: "Supporte jusqu'à 130kg", sEn: "Supports up to 130kg" },
-  { icon: <IconGrip />, kFr: "Ergonomique", kEn: "Ergonomic", sFr: "Poignée qui redistribue les contraintes d'appui", sEn: "Grip that redistributes load" },
-  { icon: <IconNerve />, kFr: "Protectrice", kEn: "Protective", sFr: "Zones d'appui qui protègent les nerfs", sEn: "Support zones that protect nerves" },
-  { icon: <IconSliders />, kFr: "Réglable", kEn: "Adjustable", sFr: "Double réglage en longueur et au niveau de la poignée", sEn: "Dual adjustment: length and grip" },
-  { icon: <IconRecycle />, kFr: "Durable", kEn: "Durable", sFr: "Embouts, poignée, sangles remplaçables", sEn: "Replaceable tips, grip, straps" },
-  { icon: <IconRulerPill />, kFr: "Universelle", kEn: "Universal", sFr: "Convient de 1m50 à 1m95", sEn: "Fits 1m50 to 1m95" },
+  { icon: <IconFeather />, kFr: "Ultralégère", kEn: "Ultralight", kDe: "Ultraleicht", sFr: "Pèse seulement 850g", sEn: "Weighs only 850g", sDe: "Wiegt nur 850g" },
+  { icon: <IconHandOpen />, kFr: "Mains libres", kEn: "Hands-free", kDe: "Freie Hände", sFr: "Appui sur l'avant-bras", sEn: "Forearm support", sDe: "Unterarmstütze" },
+  { icon: <IconShieldPill />, kFr: "Robuste", kEn: "Robust", kDe: "Robust", sFr: "Supporte jusqu'à 130kg", sEn: "Supports up to 130kg", sDe: "Trägt bis zu 130kg" },
+  { icon: <IconGrip />, kFr: "Ergonomique", kEn: "Ergonomic", kDe: "Ergonomisch", sFr: "Poignée qui redistribue les contraintes d'appui", sEn: "Grip that redistributes load", sDe: "Griff der die Stützbelastung umverteilt" },
+  { icon: <IconNerve />, kFr: "Protectrice", kEn: "Protective", kDe: "Schützend", sFr: "Zones d'appui qui protègent les nerfs", sEn: "Support zones that protect nerves", sDe: "Stützzonen die die Nerven schützen" },
+  { icon: <IconSliders />, kFr: "Réglable", kEn: "Adjustable", kDe: "Verstellbar", sFr: "Double réglage en longueur et au niveau de la poignée", sEn: "Dual adjustment in length and grip", sDe: "Doppelverstellung in Länge und Griff" },
+  { icon: <IconRecycle />, kFr: "Durable", kEn: "Durable", kDe: "Langlebig", sFr: "Embouts, poignée, sangles remplaçables", sEn: "Tips, grip, straps replaceable", sDe: "Aufsätze, Griff, Gurte austauschbar" },
+  { icon: <IconRulerPill />, kFr: "Universelle", kEn: "Universal", kDe: "Universell", sFr: "Convient de 1m50 à 1m95", sEn: "Fits users from 1.50m to 1.95m", sDe: "Geeignet für 1,50m bis 1,95m" },
 ];
 
 // SpecsStrip on CREAM section: white cards, navy text/icons
@@ -129,8 +129,8 @@ export function SpecsStrip() {
       {pills.map((p, i) => (
         <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
           <div style={{ color: NAVY }}>{p.icon}</div>
-          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
-          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn)}</div>
+          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
+          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
         </div>
       ))}
     </div>
@@ -143,16 +143,16 @@ export function ProductFeatureGrid() {
   const base = specsItems();
   const items = [
     ...base,
-    { icon: <IconRest />, kFr: "Position de repos", kEn: "Rest position", sFr: "Tu peux t'appuyer sur legmio pour récupérer", sEn: "Lean on legmio to recover" },
-    { icon: <IconWall />, kFr: "Tient seule", kEn: "Stands alone", sFr: "legmio tient debout contre un mur sans tomber", sEn: "legmio stands against a wall without falling" },
+    { icon: <IconRest />, kFr: "Position de repos", kEn: "Rest position", kDe: "Ruheposition", sFr: "Tu peux t'appuyer sur legmio pour récupérer", sEn: "You can lean on legmio to rest", sDe: "Du kannst dich zum Ausruhen auf legmio stützen" },
+    { icon: <IconWall />, kFr: "Tient seule", kEn: "Stands alone", kDe: "Steht allein", sFr: "legmio tient debout contre un mur sans tomber", sEn: "legmio stands against a wall without falling", sDe: "legmio steht gegen eine Wand ohne umzufallen" },
   ];
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {items.map((p, i) => (
         <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
           <div style={{ color: NAVY }}>{p.icon}</div>
-          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn)}</div>
-          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn)}</div>
+          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
+          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
         </div>
       ))}
     </div>
