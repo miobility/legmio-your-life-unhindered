@@ -38,8 +38,66 @@ export function StickyBanner() {
 }
 
 
+function LangSwitcher({ onPick }: { onPick?: () => void }) {
+  const { lang, setLang } = useLanguage();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+  const active = LANGS.find((l) => l.code === lang)!;
+  const pick = (c: Lang) => {
+    setLang(c);
+    setOpen(false);
+    onPick?.();
+  };
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen(!open)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label="Language"
+        className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm transition hover:opacity-80"
+        style={{ color: WHITE }}
+      >
+        <span aria-hidden="true">{active.flag}</span>
+        <span className="font-semibold">{active.code.toUpperCase()}</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform ${open ? "rotate-180" : ""}`}><path d="M6 9l6 6 6-6" /></svg>
+      </button>
+      {open && (
+        <div
+          role="listbox"
+          className="absolute right-0 mt-2 min-w-[170px] py-1 z-50 overflow-hidden"
+          style={{ backgroundColor: NAVY, border: `1px solid ${BORDER}`, borderRadius: 8, color: WHITE }}
+        >
+          {LANGS.map((l) => (
+            <button
+              key={l.code}
+              role="option"
+              aria-selected={l.code === lang}
+              onClick={() => pick(l.code)}
+              className="w-full text-left px-3 py-2 text-sm flex items-center gap-2 transition"
+              style={{ fontWeight: l.code === lang ? 700 : 400 }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = NAVY_ALT)}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+            >
+              <span aria-hidden="true">{l.flag}</span>
+              <span>{l.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function Header() {
-  const { t, lang, setLang, hubspotUrl, tr } = useLanguage();
+  const { t, hubspotUrl } = useLanguage();
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isProduct = pathname.startsWith("/produit") || pathname.startsWith("/bequille");
@@ -62,13 +120,9 @@ export function Header() {
           <Link to="/produit" className={linkClass(isProduct)} style={linkStyle(isProduct)}>{t("nav_product")}</Link>
           <Link to="/faq" className={linkClass(isFaq)} style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
           <Link to="/blog" className={linkClass(isBlog)} style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
-          <Link to="/pro" className={linkClass(isPro)} style={linkStyle(isPro)}>{tr("Espace pro", "Pro area")}</Link>
+          <Link to="/pro" className={linkClass(isPro)} style={linkStyle(isPro)}>{t("nav_pro")}</Link>
         </nav>
-        <div className="hidden sm:flex items-center gap-1 text-sm" style={{ color: WHITE }}>
-          <button onClick={() => setLang("fr")} aria-label="Français" className={`px-1 py-0.5 transition ${lang === "fr" ? "opacity-100 font-semibold" : "opacity-40 hover:opacity-70"}`}>FR</button>
-          <span style={{ color: MUTED }}>·</span>
-          <button onClick={() => setLang("en")} aria-label="English" className={`px-1 py-0.5 transition ${lang === "en" ? "opacity-100 font-semibold" : "opacity-40 hover:opacity-70"}`}>EN</button>
-        </div>
+        <div className="hidden sm:block"><LangSwitcher /></div>
         <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover hidden sm:inline-flex text-sm px-5 py-2.5 items-center gap-1.5">
           {t("cta_interested")} <span aria-hidden="true">→</span>
         </a>
@@ -81,12 +135,8 @@ export function Header() {
           <Link to="/produit" onClick={() => setOpen(false)} style={linkStyle(isProduct)}>{t("nav_product")}</Link>
           <Link to="/faq" onClick={() => setOpen(false)} style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
           <Link to="/blog" onClick={() => setOpen(false)} style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
-          <Link to="/pro" onClick={() => setOpen(false)} style={linkStyle(isPro)}>{tr("Espace pro", "Pro area")}</Link>
-          <div className="flex items-center gap-3 pt-2" style={{ color: WHITE }}>
-            <button onClick={() => setLang("fr")} className={lang === "fr" ? "font-semibold" : "opacity-40"}>FR</button>
-            <span>·</span>
-            <button onClick={() => setLang("en")} className={lang === "en" ? "font-semibold" : "opacity-40"}>EN</button>
-          </div>
+          <Link to="/pro" onClick={() => setOpen(false)} style={linkStyle(isPro)}>{t("nav_pro")}</Link>
+          <div className="flex items-center gap-3 pt-2"><LangSwitcher /></div>
           <a href={hubspotUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover text-sm px-5 py-2.5 mt-2 self-start inline-flex items-center gap-1.5">
             {t("cta_interested")} <span aria-hidden="true">→</span>
           </a>
