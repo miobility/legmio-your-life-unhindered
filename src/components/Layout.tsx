@@ -162,19 +162,19 @@ export function Footer() {
             <li><Link to="/produit" className="hover:text-white">{t("nav_product")}</Link></li>
             <li><Link to="/faq" className="hover:text-white">{t("nav_faq")}</Link></li>
             <li><Link to="/blog" className="hover:text-white">{t("nav_blog")}</Link></li>
-            <li><Link to="/pro" className="hover:text-white">{tr("Espace pro", "Pro area")}</Link></li>
+            <li><Link to="/pro" className="hover:text-white">{t("nav_pro")}</Link></li>
             <li><a href="mailto:contact@legmio.com" className="hover:text-white">Contact</a></li>
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>{tr("Légal", "Legal")}</h4>
+          <h4 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>{tr("Légal", "Legal", "Rechtliches")}</h4>
           <ul className="space-y-2 text-sm" style={{ color: MUTED }}>
-            <li><Link to="/mentions-legales" className="hover:text-white">{tr("Mentions légales", "Legal notice")}</Link></li>
-            <li><Link to="/confidentialite" className="hover:text-white">{tr("Politique de confidentialité", "Privacy policy")}</Link></li>
+            <li><Link to="/mentions-legales" className="hover:text-white">{tr("Mentions légales", "Legal notice", "Impressum")}</Link></li>
+            <li><Link to="/confidentialite" className="hover:text-white">{tr("Politique de confidentialité", "Privacy policy", "Datenschutzrichtlinie")}</Link></li>
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>{tr("Réseaux", "Social")}</h4>
+          <h4 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>{tr("Réseaux", "Social", "Soziale Netzwerke")}</h4>
           <ul className="space-y-3 text-sm" style={{ color: MUTED }}>
             <li><a href={SOCIAL.instagram} target="_blank" rel="noreferrer" className="hover:text-white inline-flex items-center gap-2"><IconInstagram size={16} /> Instagram</a></li>
             <li><a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" className="hover:text-white inline-flex items-center gap-2"><IconTiktok size={16} /> TikTok</a></li>
