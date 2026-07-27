@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { useLanguage } from "@/lib/i18n";
+import { useEffect, useRef, useState } from "react";
+import { useLanguage, LANGS, type Lang } from "@/lib/i18n";
 import { IconInstagram, IconTiktok, IconLinkedin } from "@/components/Icons";
 
 const SOCIAL = {
