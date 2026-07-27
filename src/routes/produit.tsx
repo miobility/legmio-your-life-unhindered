@@ -296,10 +296,10 @@ function ReviewModal({ onClose, onSubmit }: { onClose: () => void; onSubmit: (r:
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const now = new Date();
-    const date = now.toLocaleDateString(lang === "en" ? "en-US" : "fr-FR", { month: "long", year: "numeric" });
+    const date = now.toLocaleDateString(lang === "en" ? "en-US" : lang === "de" ? "de-DE" : "fr-FR", { month: "long", year: "numeric" });
     onSubmit({
       stars,
-      title: msg.split(".")[0].slice(0, 60) || tr("Nouveau retour", "New feedback"),
+      title: msg.split(".")[0].slice(0, 60) || tr("Nouveau retour", "New feedback", "Neues Feedback"),
       quote: msg,
       name: firstName,
       profile,
@@ -315,20 +315,20 @@ function ReviewModal({ onClose, onSubmit }: { onClose: () => void; onSubmit: (r:
     >
       <div className="rounded-2xl max-w-lg w-full p-6 md:p-8" style={{ backgroundColor: WHITE }} onClick={(e) => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-2xl font-display font-bold" style={{ color: INK }}>{tr("Laisser un avis", "Leave a review")}</h3>
+          <h3 className="text-2xl font-display font-bold" style={{ color: INK }}>{tr("Laisser un avis", "Leave a review", "Eine Bewertung hinterlassen")}</h3>
           <button onClick={onClose} aria-label="Close" style={{ color: INK }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 6l12 12M6 18L18 6" /></svg>
           </button>
         </div>
         {sent ? (
           <div className="py-6 text-center">
-            <p style={{ color: INK }}>{tr("Merci pour ton avis !", "Thanks for your review!")}</p>
-            <button onClick={onClose} className="btn-light btn-light-hover mt-6">{tr("Fermer", "Close")}</button>
+            <p style={{ color: INK }}>{tr("Merci pour ton avis !", "Thanks for your review!", "Danke für deine Bewertung!")}</p>
+            <button onClick={onClose} className="btn-light btn-light-hover mt-6">{tr("Fermer", "Close", "Schließen")}</button>
           </div>
         ) : (
           <form onSubmit={submit} className="space-y-4">
             <div>
-              <div className="text-sm mb-2" style={{ color: INK }}>{tr("Note", "Rating")}</div>
+              <div className="text-sm mb-2" style={{ color: INK }}>{tr("Note", "Rating", "Bewertung")}</div>
               <div className="flex gap-2">
                 {[1, 2, 3, 4, 5].map((n) => (
                   <button type="button" key={n} onClick={() => setStars(n)} aria-label={`${n} stars`} style={{ color: n <= stars ? ACCENT : "#DDD" }}>
@@ -337,10 +337,10 @@ function ReviewModal({ onClose, onSubmit }: { onClose: () => void; onSubmit: (r:
                 ))}
               </div>
             </div>
-            <input required value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder={tr("Prénom", "First name")} className="w-full px-4 py-3 rounded-full border outline-none" style={{ borderColor: BORDER_LIGHT, color: INK }} />
-            <input value={profile} onChange={(e) => setProfile(e.target.value)} placeholder={tr("Profil (ex. Post-op, MPR…)", "Profile (e.g. Post-op, PM&R…)")} className="w-full px-4 py-3 rounded-full border outline-none" style={{ borderColor: BORDER_LIGHT, color: INK }} />
-            <textarea required value={msg} onChange={(e) => setMsg(e.target.value)} placeholder={tr("Ton avis…", "Your review…")} rows={4} className="w-full px-4 py-3 rounded-2xl border outline-none" style={{ borderColor: BORDER_LIGHT, color: INK }} />
-            <button type="submit" className="btn-light btn-light-hover w-full">{tr("Envoyer", "Send")} <IconArrowRight size={16} /></button>
+            <input required value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder={tr("Prénom", "First name", "Vorname")} className="w-full px-4 py-3 rounded-full border outline-none" style={{ borderColor: BORDER_LIGHT, color: INK }} />
+            <input value={profile} onChange={(e) => setProfile(e.target.value)} placeholder={tr("Profil (ex. Post-op, MPR…)", "Profile (e.g. Post-op, PM&R…)", "Profil (z. B. Post-OP, MPR…)")} className="w-full px-4 py-3 rounded-full border outline-none" style={{ borderColor: BORDER_LIGHT, color: INK }} />
+            <textarea required value={msg} onChange={(e) => setMsg(e.target.value)} placeholder={tr("Ton avis…", "Your review…", "Deine Bewertung…")} rows={4} className="w-full px-4 py-3 rounded-2xl border outline-none" style={{ borderColor: BORDER_LIGHT, color: INK }} />
+            <button type="submit" className="btn-light btn-light-hover w-full">{tr("Envoyer", "Send", "Senden")} <IconArrowRight size={16} /></button>
           </form>
         )}
       </div>
