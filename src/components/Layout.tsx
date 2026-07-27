@@ -56,7 +56,7 @@ function LangSwitcher({ onPick }: { onPick?: () => void }) {
     onPick?.();
   };
   return (
-    <div className="relative" ref={ref}>
+    <div className="relative overflow-visible" ref={ref}>
       <button
         onClick={() => setOpen(!open)}
         aria-haspopup="listbox"
@@ -72,7 +72,7 @@ function LangSwitcher({ onPick }: { onPick?: () => void }) {
       {open && (
         <div
           role="listbox"
-          className="absolute right-0 mt-2 min-w-[170px] py-1 z-50 overflow-hidden"
+          className="absolute mt-2 py-1 z-50 overflow-hidden left-0 right-auto max-w-[180px] sm:right-0 sm:left-auto sm:min-w-[170px] sm:max-w-none"
           style={{ backgroundColor: NAVY, border: `1px solid ${BORDER}`, borderRadius: 8, color: WHITE }}
         >
           {LANGS.map((l) => (
@@ -87,7 +87,7 @@ function LangSwitcher({ onPick }: { onPick?: () => void }) {
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
             >
               <span aria-hidden="true">{l.flag}</span>
-              <span>{l.label}</span>
+              <span className="truncate">{l.label}</span>
             </button>
           ))}
         </div>
