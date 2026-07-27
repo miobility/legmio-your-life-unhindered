@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useLanguage } from "@/lib/i18n";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const Route = createFileRoute("/pro")({
   head: () => ({
