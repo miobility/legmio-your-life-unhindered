@@ -119,7 +119,9 @@ function ArticleCard({ a }: { a: Article }) {
             {open ? tr("Réduire", "Collapse", "Zuklappen") : tr("Lire l'article", "Read article", "Artikel lesen")}
             <span className={`transition-transform ${open ? "rotate-180" : ""}`}><IconChevron size={16} /></span>
           </button>
-          {open && (
+          {/* Le corps reste dans le HTML : replie, pas retire. */}
+          <div className={`repli ${open ? "repli-ouvert" : ""}`}>
+           <div>
             <div className="mt-6 space-y-4 text-sm leading-relaxed" style={{ color: INK_MUTED }}>
               {lang === "de" && (
                 <div className="rounded-xl p-4" style={{ backgroundColor: CREAM, color: INK }}>
@@ -134,7 +136,8 @@ function ArticleCard({ a }: { a: Article }) {
                 </div>
               )}
             </div>
-          )}
+           </div>
+          </div>
         </div>
       </div>
     </article>
