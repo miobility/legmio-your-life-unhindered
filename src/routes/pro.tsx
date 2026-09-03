@@ -14,14 +14,14 @@ export const Route = createFileRoute("/pro")({
   component: ProPage,
 });
 
-const NAVY = "#120B3B";
+const NAVY = "#0D0D29";
 const WHITE = "#FFFFFF";
 const CREAM = "#FAFAF8";
-const INK = "#1A1040";
+const INK = "#15122E";
 const INK_MUTED = "#6B6B6B";
 const MUTED_NAVY = "#A89ED0";
 const BORDER_LIGHT = "#E8E4DC";
-const ACCENT = "#F5C842";
+const ACCENT = "#FFCA75";
 
 const MEETING_URL = "https://meetings-eu1.hubspot.com/benjamin-rajjou";
 
@@ -49,7 +49,7 @@ function ProPage() {
         </div>
       </section>
 
-      <section className="px-4 sm:px-6 py-16 md:py-20" style={{ backgroundColor: CREAM }}>
+      <section className="px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: CREAM }}>
         <div className="max-w-5xl mx-auto">
           {isMobile ? (
             <div className="flex justify-center">

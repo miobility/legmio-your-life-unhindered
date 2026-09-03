@@ -13,8 +13,8 @@ export const Route = createFileRoute("/confidentialite")({
 
 const TEXT = "#FFFFFF";
 const MUTED = "#A89ED0";
-const BG = "#120B3B";
-const BG_ALT = "#1A1040";
+const BG = "#0D0D29";
+const BG_ALT = "#15122E";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (

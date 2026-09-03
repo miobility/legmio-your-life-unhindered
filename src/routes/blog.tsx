@@ -15,14 +15,14 @@ export const Route = createFileRoute("/blog")({
   component: Blog,
 });
 
-const NAVY = "#120B3B";
+const NAVY = "#0D0D29";
 const WHITE = "#FFFFFF";
 const CREAM = "#FAFAF8";
-const INK = "#1A1040";
+const INK = "#15122E";
 const INK_MUTED = "#6B6B6B";
 const MUTED_NAVY = "#A89ED0";
 const BORDER_LIGHT = "#E8E4DC";
-const ACCENT = "#F5C842";
+const ACCENT = "#FFCA75";
 
 const genesisFr = `En 2020, j'ai subi une lourde opération pour retirer le cancer des os qui rongeait mon bassin. Elle fut un succès — et le début d'un nouveau parcours, à la fois difficile et joyeux.
 
@@ -272,12 +272,12 @@ function Blog() {
   const { tr } = useLanguage();
   return (
     <div style={{ backgroundColor: WHITE }}>
-      <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 text-center">
-        <h1 className="text-4xl sm:text-5xl" style={{ color: WHITE }}>{tr("Conseils & ressources", "Tips & resources", "Tipps & Ressourcen")}</h1>
+      <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28 text-center">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl" style={{ color: WHITE }}>{tr("Conseils & ressources", "Tips & resources", "Tipps & Ressourcen")}</h1>
         <p className="mt-4" style={{ color: MUTED_NAVY }}>{tr("Autonomie · Rééducation · Emploi & handicap · Vie quotidienne", "Independence · Rehab · Work & disability · Daily life", "Selbstständigkeit · Rehabilitation · Arbeit & Behinderung · Alltag")}</p>
       </section>
 
-      <section className="px-4 sm:px-6 py-16" style={{ backgroundColor: WHITE }}>
+      <section className="px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: WHITE }}>
         <div className="max-w-6xl mx-auto space-y-8">
           {articles.map((a) => <ArticleCard key={a.id} a={a} />)}
         </div>

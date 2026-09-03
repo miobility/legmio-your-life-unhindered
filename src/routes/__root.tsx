@@ -20,7 +20,7 @@ import { Header, StickyBanner, Footer } from "@/components/Layout";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#120B3B" }}>
+    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#0D0D29" }}>
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold font-display" style={{ color: "#FFFFFF" }}>404</h1>
         <h2 className="mt-4 text-xl font-semibold" style={{ color: "#FFFFFF" }}>Page not found</h2>
@@ -40,7 +40,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
   return (
-    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#120B3B" }}>
+    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#0D0D29" }}>
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold" style={{ color: "#FFFFFF" }}>This page didn't load</h1>
         <p className="mt-2 text-sm" style={{ color: "#A89ED0" }}>Something went wrong.</p>

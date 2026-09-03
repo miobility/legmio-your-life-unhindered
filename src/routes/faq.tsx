@@ -133,17 +133,17 @@ function Faq() {
   const { lang, tr } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
   const idx = lang === "fr" ? 0 : lang === "de" ? 2 : 1;
-  const NAVY = "#120B3B";
+  const NAVY = "#0D0D29";
   const WHITE = "#FFFFFF";
   const CREAM = "#FAFAF8";
-  const INK = "#1A1040";
+  const INK = "#15122E";
   const INK_MUTED = "#6B6B6B";
   const MUTED_NAVY = "#A89ED0";
   const BORDER_LIGHT = "#E8E4DC";
   return (
     <div style={{ backgroundColor: WHITE }}>
       <section className="px-4 sm:px-6 py-20" style={{ backgroundColor: NAVY }}>
-        <h1 className="text-4xl sm:text-5xl text-center" style={{ color: WHITE }}>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl text-center" style={{ color: WHITE }}>
           {tr("Tout ce que tu veux savoir.", "Everything you want to know.", "Alles was du wissen möchtest.")}
         </h1>
         <p className="mt-4 text-center text-sm" style={{ color: MUTED_NAVY }}>

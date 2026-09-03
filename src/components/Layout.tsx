@@ -9,12 +9,12 @@ const SOCIAL = {
   linkedin: "https://www.linkedin.com/in/nicolas-perrin-gilbert-2815a4179/",
 };
 
-const ACCENT = "#F5C842";
-const NAVY = "#120B3B";
-const NAVY_ALT = "#1A1040";
+const ACCENT = "#FFCA75";
+const NAVY = "#0D0D29";
+const NAVY_ALT = "#15122E";
 const WHITE = "#FFFFFF";
 const MUTED = "#A89ED0";
-const BORDER = "#2A1F6B";
+const BORDER = "#252159";
 
 export function StickyBanner() {
   const { t, hubspotUrl } = useLanguage();

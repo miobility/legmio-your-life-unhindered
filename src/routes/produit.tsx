@@ -5,14 +5,14 @@ import { useLanguage } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { ProductFeatureGrid } from "@/routes/index";
 
-const NAVY = "#120B3B";
+const NAVY = "#0D0D29";
 const WHITE = "#FFFFFF";
 const CREAM = "#FAFAF8";
-const INK = "#1A1040";
+const INK = "#15122E";
 const INK_MUTED = "#6B6B6B";
 const MUTED_NAVY = "#A89ED0";
 const BORDER_LIGHT = "#E8E4DC";
-const ACCENT = "#F5C842";
+const ACCENT = "#FFCA75";
 
 export const Route = createFileRoute("/produit")({
   head: () => ({
@@ -90,7 +90,7 @@ function Produit() {
           </div>
 
           <div className="md:sticky md:top-32 md:self-start">
-            <h1 className="text-4xl md:text-5xl font-display font-bold" style={{ color: INK }}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold" style={{ color: INK }}>
               {tr("La béquille legmio", "The legmio crutch", "Die legmio Krücke")}
             </h1>
             <p className="mt-4 text-base leading-relaxed" style={{ color: INK_MUTED }}>
@@ -164,7 +164,7 @@ function Produit() {
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl text-center" style={{ color: WHITE }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: WHITE }}>
               {tr("Deux modes d'utilisation.", "Two modes of use.", "Zwei Nutzungsmodi.")}
             </h2>
             <p className="mt-5 text-center text-base max-w-xl mx-auto" style={{ color: MUTED_NAVY }}>
@@ -227,7 +227,7 @@ function Produit() {
       <section id="features" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("Fonctionnalités", "Features", "Funktionen")}</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>{tr("Fonctionnalités", "Features", "Funktionen")}</h2>
           </Reveal>
           <div className="mt-10">
             <ProductFeatureGrid />
@@ -238,7 +238,7 @@ function Produit() {
       {/* SECTION 4 — TÉMOIGNAGES (CREAM) */}
       <section id="reviews" style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("Témoignages", "Testimonials", "Erfahrungsberichte")}</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>{tr("Témoignages", "Testimonials", "Erfahrungsberichte")}</h2>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {reviews.map((r, i) => (
@@ -268,7 +268,7 @@ function Produit() {
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-baseline justify-between gap-4 mb-6">
-            <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("Questions fréquentes", "Frequently asked questions", "Häufig gestellte Fragen")}</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>{tr("Questions fréquentes", "Frequently asked questions", "Häufig gestellte Fragen")}</h2>
             <a href="/faq" className="text-sm underline" style={{ color: INK }}>{tr("Voir toutes les questions", "See all questions", "Alle Fragen ansehen")}</a>
           </div>
           <div>
@@ -290,7 +290,7 @@ function Produit() {
       {/* SECTION 6 — CTA FINAL (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl" style={{ color: WHITE }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: WHITE }}>
             {tr(<>Prêt à retrouver<br />tes mains libres ?</>, <>Ready to get<br />your hands back?</>, <>Bereit deine<br />Hände zurückzubekommen?</>)}
           </h2>
           <div className="mt-8">

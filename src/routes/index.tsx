@@ -21,16 +21,16 @@ export const Route = createFileRoute("/")({
 });
 
 // Palette
-const NAVY = "#120B3B";
-const NAVY_ALT = "#1A1040";
+const NAVY = "#0D0D29";
+const NAVY_ALT = "#15122E";
 const WHITE = "#FFFFFF";
 const CREAM = "#FAFAF8";
-const INK = "#1A1040";
+const INK = "#15122E";
 const INK_MUTED = "#6B6B6B";
 const BORDER_LIGHT = "#E8E4DC";
-const BORDER_NAVY = "#2A1F6B";
+const BORDER_NAVY = "#252159";
 const MUTED_NAVY = "#A89ED0";
-const ACCENT = "#F5C842";
+const ACCENT = "#FFCA75";
 
 function CTADark({ block }: { block?: boolean }) {
   // For NAVY sections: gold bg, navy text
@@ -181,7 +181,7 @@ function Landing() {
       {/* 1 — HERO (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[35%_65%] gap-8 md:gap-10 items-center">
-          <div className="w-full max-w-[300px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: "#000" }}>
+          <div className="w-full max-w-[300px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
               <video
                 ref={videoRef}
@@ -528,7 +528,7 @@ function Roadmap() {
                       height: isCurrent ? CIRCLE + 6 : CIRCLE,
                       backgroundColor: (done || isCurrent) ? ACCENT : WHITE,
                       border: `2px solid ${upcoming ? BORDER_LIGHT : ACCENT}`,
-                      boxShadow: isCurrent ? `0 0 0 6px rgba(245,200,66,0.25)` : "none",
+                      boxShadow: isCurrent ? `0 0 0 6px rgba(255,202,117,0.25)` : "none",
                     }}
                   />
                 </div>
@@ -619,7 +619,7 @@ function InstaCards() {
               style={{
                 width: 8,
                 height: 8,
-                backgroundColor: i === active ? ACCENT : "#4B3C8F",
+                backgroundColor: i === active ? ACCENT : "#6B66A0",
                 opacity: i === active ? 1 : 0.7,
               }}
             />
