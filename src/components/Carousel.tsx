@@ -56,9 +56,11 @@ export function Carousel({
           msOverflowStyle: "none",
           // Des que overflow-x vaut auto, overflow-y ne peut plus valoir visible :
           // il devient auto, et le bloc se laissait tirer verticalement au doigt.
-          // pan-x : seul le geste horizontal est capte ici, le vertical fait
-          // defiler la page. contain : plus de « retour arriere » en fin de course.
-          touchAction: "pan-x",
+          // overflow-y-hidden suffit a l'empecher, et le geste vertical remonte
+          // alors naturellement a la page.
+          // Surtout pas de touch-action ici : « pan-x » interdirait le geste
+          // vertical sur toute la chaine, page comprise — on ne pourrait plus
+          // descendre en posant le doigt sur un carrousel.
           overscrollBehaviorX: "contain",
         }}
       >

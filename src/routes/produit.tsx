@@ -73,7 +73,7 @@ function Produit() {
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
               </button>
             </div>
-            <div className="mt-4 flex gap-3 overflow-x-auto overflow-y-hidden" style={{ touchAction: "pan-x", overscrollBehaviorX: "contain" }}>
+            <div className="mt-4 flex gap-3 overflow-x-auto overflow-y-hidden" style={{ overscrollBehaviorX: "contain" }}>
               {gallery.map((g, i) => (
                 <button
                   key={i}
