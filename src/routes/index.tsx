@@ -197,7 +197,9 @@ export function Landing() {
               </video>
             </div>
           </div>
-          <div className="order-1 md:order-2 space-y-6 fade-up" style={{ color: WHITE }}>
+          {/* Centre sur mobile : la grille a deux colonnes disparait, et tout
+              le reste de la page est centre. A gauche, le bloc detonnait. */}
+          <div className="order-1 md:order-2 space-y-6 fade-up text-center md:text-left" style={{ color: WHITE }}>
             <div className="text-xs tracking-[0.2em] uppercase" style={{ color: MUTED_NAVY }}>
               {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT GENERATION CRUTCH", "DIE KRÜCKE DER NEUEN GENERATION")}
             </div>
