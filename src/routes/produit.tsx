@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { IconChevron, IconCheck, IconArrowRight, IconStar } from "@/components/Icons";
+import { IconChevron, IconCheck, IconArrowRight } from "@/components/Icons";
 import { useLanguage } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { ProductFeatureGrid } from "@/routes/index";
@@ -39,7 +39,7 @@ function Accordion({ title, children, defaultOpen = false }: { title: string; ch
   );
 }
 
-type Review = { stars: number; title: string; quote: string; name: string; profile: string; date: string; img?: string };
+type Review = { title: string; quote: string; name: string; profile: string; date: string; img?: string };
 
 function Produit() {
   const { tr } = useLanguage();
@@ -51,9 +51,9 @@ function Produit() {
   const [sel, setSel] = useState(0);
 
   const reviews: Review[] = [
-    { img: "/pauline.png", stars: 5, title: tr("Une grande avancée.", "A major breakthrough.", "Ein großer Fortschritt."), quote: tr("Une béquille qui rend les mains libres : une grande avancée !", "Une béquille qui rend les mains libres : une grande avancée !", "Une béquille qui rend les mains libres : une grande avancée !"), name: "Dr Pauline Coignard", profile: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "MPR Physician · Kerpape Centre · President APPROCHE · SOFMER", "MPR-Ärztin · Kerpape Zentrum · Präsidentin APPROCHE · SOFMER"), date: tr("Mars 2026", "March 2026", "März 2026") },
-    { stars: 5, title: tr("Une vraie autonomie retrouvée.", "Real autonomy, back.", "Echte Selbstständigkeit zurückgewonnen."), quote: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)"), name: "Salim", profile: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), date: tr("Février 2026", "February 2026", "Februar 2026") },
-    { stars: 5, title: tr("Autonome pendant ma convalescence.", "Autonomous through recovery.", "Selbstständig während der Genesung."), quote: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé."), name: "Joachim", profile: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), date: tr("Janvier 2026", "January 2026", "Januar 2026") },
+    { img: "/pauline.png", title: tr("Une grande avancée !", "Une grande avancée !", "Une grande avancée !"), quote: tr("Une béquille qui rend les mains libres : une grande avancée !", "Une béquille qui rend les mains libres : une grande avancée !", "Une béquille qui rend les mains libres : une grande avancée !"), name: "Dr Pauline Coignard", profile: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "MPR Physician · Kerpape Centre · President APPROCHE · SOFMER", "MPR-Ärztin · Kerpape Zentrum · Präsidentin APPROCHE · SOFMER"), date: tr("Mars 2026", "March 2026", "März 2026") },
+    { title: tr("Retrouver une certaine autonomie au quotidien.", "Retrouver une certaine autonomie au quotidien.", "Retrouver une certaine autonomie au quotidien."), quote: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)"), name: "Salim", profile: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), date: tr("Février 2026", "February 2026", "Februar 2026") },
+    { title: tr("Ça change tout quand on est immobilisé.", "Ça change tout quand on est immobilisé.", "Ça change tout quand on est immobilisé."), quote: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé."), name: "Joachim", profile: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), date: tr("Janvier 2026", "January 2026", "Januar 2026") },
   ];
   const galleryPrev = () => setSel((s) => (s - 1 + gallery.length) % gallery.length);
   const galleryNext = () => setSel((s) => (s + 1) % gallery.length);
@@ -243,10 +243,7 @@ function Produit() {
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {reviews.map((r, i) => (
               <div key={i} className="card-white p-5">
-                <div className="flex gap-0.5" style={{ color: ACCENT }}>
-                  {[0, 1, 2, 3, 4].map((k) => <IconStar key={k} size={14} filled={k < r.stars} />)}
-                </div>
-                <h3 className="mt-3 font-display font-bold text-lg" style={{ color: INK }}>{r.title}</h3>
+                <h3 className="font-display font-bold text-lg leading-snug" style={{ color: INK }}>{r.title}</h3>
                 <p className="mt-2 text-sm" style={{ color: INK_MUTED }}>{r.quote}</p>
                 <div className="mt-4 flex items-center gap-3">
                   {r.img && (
