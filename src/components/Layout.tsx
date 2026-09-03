@@ -153,8 +153,10 @@ export function Footer() {
   return (
     <footer style={{ backgroundColor: NAVY, color: WHITE }} className="pt-16 pb-8 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
-        <div>
-          <div className="font-display font-bold text-2xl" style={{ color: WHITE }}><img src={"/logo_legmio.svg"} alt="Legmio" className="h-10 w-auto" /></div>
+        <div className="flex flex-col items-start">
+          <Link to="/" aria-label="legmio — accueil">
+            <img src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto block" />
+          </Link>
           <p className="mt-3 text-sm" style={{ color: MUTED }}>{t("footer_tag")}</p>
         </div>
         <div>

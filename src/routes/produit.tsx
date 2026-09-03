@@ -91,7 +91,7 @@ function Produit() {
 
           <div className="md:sticky md:top-32 md:self-start">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold" style={{ color: INK }}>
-              {tr("La béquille legmio", "The legmio crutch", "Die legmio Krücke")}
+              {tr("Béquille legmio", "legmio crutch", "legmio Krücke")}
             </h1>
             <p className="mt-4 text-base leading-relaxed" style={{ color: INK_MUTED }}>
               {tr(
@@ -164,10 +164,10 @@ function Produit() {
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: WHITE }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: WHITE }}>
               {tr("Deux modes d'utilisation.", "Two modes of use.", "Zwei Nutzungsmodi.")}
             </h2>
-            <p className="mt-5 text-center text-base max-w-xl mx-auto" style={{ color: MUTED_NAVY }}>
+            <p className="mt-5 text-base max-w-xl" style={{ color: MUTED_NAVY }}>
               {tr(
                 "Tu marches normalement, et tu libères les mains lorsque nécessaire.",
                 "You walk normally, and free your hands when needed.",
@@ -208,7 +208,7 @@ function Produit() {
                 ),
               },
             ].map((m, i) => (
-              <figure key={i} className="card-soft overflow-hidden w-full max-w-[340px] mx-auto">
+              <figure key={i} className="card-soft overflow-hidden w-full max-w-[340px]">
                 <div className="w-full overflow-hidden" style={{ aspectRatio: "9/16" }}>
                   <img src={m.img} alt={m.alt} className="w-full h-full object-cover" loading="lazy" width={900} height={1600} />
                 </div>
