@@ -58,11 +58,6 @@ const IconBalance = ({ size = 28 }: { size?: number }) => (
     <path d="M12 3v18M4 8h16M6 8l-3 6a3 3 0 006 0L6 8zM18 8l-3 6a3 3 0 006 0l-3-6z" />
   </svg>
 );
-const IconHandOpen = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M7 11V5a1.5 1.5 0 013 0v6M10 11V4a1.5 1.5 0 013 0v7M13 11V5a1.5 1.5 0 013 0v8M16 11V7a1.5 1.5 0 013 0v9a5 5 0 01-5 5h-2a5 5 0 01-5-5v-2l-2-3a1.5 1.5 0 012-2l2 2" />
-  </svg>
-);
 const IconRulerPill = ({ size = 28 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
     <path d="M3 16l5-13 13 5-5 13-13-5z" /><path d="M8 6l1 2M11 8l1 2M14 11l1 2" />
@@ -103,6 +98,12 @@ const IconNerve = ({ size = 28 }: { size?: number }) => (
     <path d="M4 4c4 0 4 4 8 4s4-4 8-4M4 12c4 0 4 4 8 4s4-4 8-4M4 20c4 0 4-4 8-4s4 4 8 4" />
   </svg>
 );
+const IconDualMode = ({ size = 28 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="7" height="7" rx="2" /><rect x="14" y="13" width="7" height="7" rx="2" />
+    <path d="M10 7.5h4a3 3 0 013 3v1M14 16.5h-4a3 3 0 01-3-3v-1" />
+  </svg>
+);
 const IconGrip = ({ size = 28 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
     <path d="M7 3v6M11 3v6M15 3v6M19 3v6M5 9h14a2 2 0 012 2v3a7 7 0 01-14 0v-3a2 2 0 012-2z" />
@@ -110,8 +111,8 @@ const IconGrip = ({ size = 28 }: { size?: number }) => (
 );
 
 const specsItems = () => [
-  { icon: <IconFeather />, kFr: "Ultralégère", kEn: "Ultralight", kDe: "Ultraleicht", sFr: "Pèse seulement 850g", sEn: "Weighs only 850g", sDe: "Wiegt nur 850g" },
-  { icon: <IconHandOpen />, kFr: "Mains libres", kEn: "Hands-free", kDe: "Freie Hände", sFr: "Appui sur l'avant-bras", sEn: "Forearm support", sDe: "Unterarmstütze" },
+  { icon: <IconFeather />, kFr: "Légère", kEn: "Light", kDe: "Leicht", sFr: "850 g", sEn: "850 g", sDe: "850 g" },
+  { icon: <IconDualMode />, kFr: "Deux modes d'utilisation", kEn: "Two modes of use", kDe: "Zwei Nutzungsmodi", sFr: "Appui sur le coude quand nécessaire", sEn: "Elbow support when needed", sDe: "Ellbogenstütze bei Bedarf" },
   { icon: <IconShieldPill />, kFr: "Robuste", kEn: "Robust", kDe: "Robust", sFr: "Supporte jusqu'à 130kg", sEn: "Supports up to 130kg", sDe: "Trägt bis zu 130kg" },
   { icon: <IconGrip />, kFr: "Ergonomique", kEn: "Ergonomic", kDe: "Ergonomisch", sFr: "Poignée qui redistribue les contraintes d'appui", sEn: "Grip that redistributes load", sDe: "Griff der die Stützbelastung umverteilt" },
   { icon: <IconNerve />, kFr: "Protectrice", kEn: "Protective", kDe: "Schützend", sFr: "Zones d'appui qui protègent les nerfs", sEn: "Support zones that protect nerves", sDe: "Stützzonen die die Nerven schützen" },
@@ -221,7 +222,7 @@ function Landing() {
             <AutoCarousel>
               {[
                 { img: "/probleme-poignet.jpg", t: tr("Appui concentré sur le poignet et l'épaule.", "Strain concentrated on the wrist and shoulder.", "Belastung konzentriert auf Handgelenk und Schulter."), p: tr("À force d'utilisation, les contraintes s'accumulent sur les mêmes zones articulaires.", "With repeated use, stress builds up in the same joint areas.", "Bei regelmäßiger Nutzung häufen sich die Belastungen an denselben Gelenkzonen an.") },
-                { img: "/probleme-mains.avif", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are needed just to move.", "Beide Hände werden zum Gehen benötigt."), p: tr("Porter, cuisiner, travailler, tenir son enfant — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, holding your child — all things that require stopping.", "Tragen, kochen, arbeiten, ein Kind halten — all das erfordert einen Stopp.") },
+                { img: "/probleme-mains.avif", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are needed just to move.", "Beide Hände werden zum Gehen benötigt."), p: tr("Porter, cuisiner, travailler, ouvrir une porte — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, opening a door — all things that require stopping.", "Tragen, kochen, arbeiten, eine Tür öffnen — all das erfordert einen Stopp.") },
                 { img: "/probleme-temps.jpg", t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally changed.", "Das Design hat sich grundlegend nicht verändert."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches are built on the same principles as decades ago.", "Die heute erhältlichen Krücken beruhen seit Jahrzehnten auf denselben Prinzipien.") },
               ].map((c, i) => (
                 <div key={i} className="card-cream overflow-hidden w-[320px] md:w-[380px]">
@@ -262,35 +263,28 @@ function Landing() {
               <span className="md:hidden">{tr(<>À chaque fois<br />que tu en as besoin.</>, <>Whenever<br />you need it.</>, <>Wann immer.<br />du sie brauchst.</>)}</span>
             </h2>
           </Reveal>
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" /></svg>
                 ),
-                t: tr("Handicap & quotidien", "Disability & daily life", "Behinderung & Alltag"),
-                p: tr("Pour les béquilles qui font partie de ta vie au long cours.", "For crutches that are a long-term part of your life.", "Für Krücken die langfristig Teil deines Lebens sind."),
-              },
-              {
-                icon: (
-                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z" /></svg>
-                ),
-                t: tr("Post-opératoire", "Post-operative", "Postoperativ"),
-                p: tr("Pour récupérer sans tout sacrifier.", "To recover without giving everything up.", "Um sich zu erholen ohne auf alles verzichten zu müssen."),
+                t: tr("Handicap au quotidien", "Disability & daily life", "Behinderung im Alltag"),
+                p: tr("Sur le long terme, devenir plus autonome et indépendant au quotidien.", "Over the long term, becoming more autonomous and independent day to day.", "Langfristig selbstständiger und unabhängiger im Alltag werden."),
               },
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" /><path d="M3 13h18" /></svg>
                 ),
                 t: tr("Maintien en emploi", "Staying employed", "Beschäftigungserhalt"),
-                p: tr("Pour rester autonome et productif au travail.", "To remain independent and productive at work.", "Um bei der Arbeit selbstständig und produktiv zu bleiben."),
+                p: tr("Récupérer sans tout sacrifier, et rester autonome au travail. Aides RQTH mobilisables.", "Recovering without giving everything up, and staying independent at work.", "Sich erholen ohne auf alles zu verzichten und bei der Arbeit selbstständig bleiben."),
               },
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="5" r="2.2" /><circle cx="16" cy="8" r="1.6" /><path d="M6 21v-6l-2-4a2 2 0 013.6-1.6L9 12h3l2 3v6" /><path d="M14 21v-5l2-3" /></svg>
                 ),
                 t: tr("Vie parentale", "Parenting", "Elternleben"),
-                p: tr("Porter son enfant, le suivre, être là.", "Carrying your child, keeping up, being there.", "Sein Kind tragen, begleiten, da sein."),
+                p: tr("Gagner en autonomie au quotidien avec des enfants.", "Gaining day-to-day independence with children.", "Im Alltag mit Kindern selbstständiger werden."),
               },
             ].map((c, i) => (
               <div key={i} className="card-cream p-6 flex flex-col items-start gap-3">
@@ -317,12 +311,14 @@ function Landing() {
             <AutoCarousel>
               {[
                 { img: "/pauline.png", n: "Dr Pauline Coignard", p: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "MPR Physician · Kerpape Centre · President APPROCHE · SOFMER", "MPR-Ärztin · Kerpape Zentrum · Präsidentin APPROCHE · SOFMER"), q: tr("Une béquille qui rend les mains au patient : une grande avancée !", "Une béquille qui rend les mains au patient : une grande avancée !", "Une béquille qui rend les mains au patient : une grande avancée !") },
-                { img: "/selim.png", n: "Salim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)") },
-                { img: "/marc.jpg", n: "Marc", p: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), q: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.") },
+                { img: undefined as string | undefined, n: "Salim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)") },
+                { img: undefined as string | undefined, n: "Marc", p: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), q: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.") },
               ].map((t, i) => (
-                <div key={i} className="card-white p-5 w-[320px] md:w-[380px] flex flex-col">
+                <div key={i} className="card-white p-5 w-[320px] md:w-[380px] h-full flex flex-col">
                   <div className="flex items-center gap-4">
-                    <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
+                    {t.img && (
+                      <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" />
+                    )}
                     <div>
                       <div className="font-bold" style={{ color: INK }}>{t.n}</div>
                       <div className="text-xs" style={{ color: INK_MUTED }}>{t.p}</div>

@@ -24,7 +24,7 @@ function MentionsLegales() {
         <h1 className="text-4xl sm:text-5xl font-display font-bold" style={{ color: TEXT }}>{tr("Mentions légales", "Legal notice", "Impressum")}</h1>
       </section>
       <section className="px-4 sm:px-6 py-16">
-        <article className="max-w-[680px] mx-auto text-[15px] leading-relaxed space-y-6" style={{ color: "#333" }}>
+        <article className="max-w-[680px] mx-auto text-[15px] leading-relaxed space-y-6" style={{ color: MUTED }}>
           <div>
             <h2 className="font-display text-2xl font-bold mt-4 mb-3" style={{ color: TEXT }}>{tr("Éditeur du site", "Site publisher", "Herausgeber der Website")}</h2>
             <p>{tr("Le site legmio.com est édité par miobility, projet en cours d'immatriculation.", "The site legmio.com is published by miobility, a project currently being registered.", "Die Website legmio.com wird von miobility herausgegeben, einem Projekt, das sich derzeit in der Registrierung befindet.")}</p>

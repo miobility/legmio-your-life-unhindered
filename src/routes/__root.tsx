@@ -63,7 +63,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/only_logo.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/logo_legmio.svg", type: "image/svg+xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" },
@@ -110,7 +110,7 @@ function RootComponent() {
       <LanguageProvider>
         <StickyBanner />
         <Header />
-        <main className="pt-24">
+        <main className="pt-[105px]">
           <Outlet />
         </main>
         <Footer />

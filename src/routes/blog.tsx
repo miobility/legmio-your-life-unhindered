@@ -113,14 +113,14 @@ Côté matériaux, l'évolution porte sur des matériaux plus légers — fibre 
 
 Ce sont des ajustements réels, mais qui portent sur la même structure depuis longtemps : la béquille reste un objet qu'on tient, avec un appui concentré sous l'aisselle ou sur la main et le poignet selon le modèle.
 
-legmio a été conçu à l'ISIR (Sorbonne Université / CNRS), dans le cadre du projet ANR ASSISTMOV, à partir d'une approche différente : redistribuer l'appui sur l'avant-bras plutôt que sur la seule main ou l'aisselle, ce qui protège les nerfs et libère la main, tout en travaillant aussi la poignée elle-même, avec une mousse d'amortissement qui réduit les contraintes à la prise en main. Une innovation biomécanique protégée par un brevet déposé en octobre 2024, distinguée par la médaille d'or au Concours Lépine 2025.`,
+legmio a été conçu à l'ISIR (Sorbonne Université / CNRS), dans le cadre du projet ANR ASSISTMOV, à partir d'une approche différente : redistribuer l'appui sur l'avant-bras plutôt que sur la seule main ou l'aisselle, ce qui protège les nerfs et libère la main, tout en travaillant aussi la poignée elle-même, avec une mousse d'amortissement qui réduit les contraintes à la prise en main. Une innovation biomécanique protégée par un brevet déposé en octobre 2024, distinguée par la médaille d'or au Concours Lépine 2026.`,
     bodyEn: `The main development axes in medical crutches focus on three areas: improving grip with ergonomic foam, silicone or gel handles to reduce hand and wrist pain; shock absorption to limit impact on arms and shoulders; and adjustability with height-adjustable models fitting varied body sizes.
 
 Materials evolve too — carbon fiber, aeronautical aluminum — to reduce physical fatigue while supporting intensive daily use.
 
 These are real adjustments, but they act on the same structure the crutch has had for decades: an object you hold, with load concentrated under the armpit or on the hand and wrist.
 
-legmio was designed at ISIR (Sorbonne Université / CNRS), within the ANR ASSISTMOV project, from a different approach: redistribute the load onto the forearm rather than the hand or armpit alone, which protects the nerves and frees the hand — while also reworking the grip itself with damping foam. A biomechanical innovation protected by a patent filed in October 2024, awarded the gold medal at the Concours Lépine 2025.`,
+legmio was designed at ISIR (Sorbonne Université / CNRS), within the ANR ASSISTMOV project, from a different approach: redistribute the load onto the forearm rather than the hand or armpit alone, which protects the nerves and frees the hand — while also reworking the grip itself with damping foam. A biomechanical innovation protected by a patent filed in October 2024, awarded the gold medal at the Concours Lépine 2026.`,
     date: "Juillet 2026",
   },
   {
@@ -138,12 +138,12 @@ legmio was designed at ISIR (Sorbonne Université / CNRS), within the ANR ASSIST
 
 Le segment des adultes domine largement le marché. Le secteur compte plus de 1 800 établissements, services et centres de médecine physique et de réadaptation en France, avec une moyenne de 65 lits et places par établissement, aux côtés de plus de 20 000 pharmacies.
 
-C'est ce terrain que legmio adresse : un usage quotidien et prolongé, avec un dispositif pensé pour ne pas nécessiter de poigne — une main affaiblie ou une prise fragile n'empêche pas son utilisation — et pour libérer la main pendant la marche, à un poids de 850g.`,
+C'est ce terrain que legmio adresse : un usage quotidien et prolongé, avec un dispositif dont la poignée réduit nettement le besoin en force de préhension — une main affaiblie ou une prise fragile n'empêche pas son utilisation — et pour libérer la main pendant la marche, à un poids de 850g.`,
     bodyEn: `Each year in France, around 1.5 million people are prescribed crutches. The most common conditions include bone fractures (leg, knee, ankle, foot), sports injuries (sprains, ACL or meniscus tears), tendon or ligament injuries (Achilles, tendinitis), lower-body post-surgery, and some neurological conditions (multiple sclerosis, post-stroke rehab, cerebral palsy).
 
 The adult segment dominates the market. The sector includes more than 1,800 physical medicine and rehab centers in France, alongside 20,000+ pharmacies.
 
-This is the ground legmio addresses: daily, prolonged use, with a device designed not to require grip strength — a weakened hand does not prevent its use — and to free the hand while walking, at 850g.`,
+This is the ground legmio addresses: daily, prolonged use, with a grip designed to clearly reduce the need for gripping strength — a weakened hand does not prevent its use — and to free the hand while walking, at 850g.`,
     date: "Juillet 2026",
   },
   {
@@ -192,12 +192,12 @@ There are also child crutches (lighter, colorful), sport crutches (ergonomic, mo
 
 C'est l'un des éléments qui explique la préférence, en Europe notamment, pour les béquilles d'avant-bras : le point d'appui se déplace de l'aisselle vers le bras et la main, ce qui limite ce problème spécifique tout en sollicitant différemment le poignet.
 
-C'est ce compromis que legmio a directement retravaillé : en concentrant l'appui sur l'avant-bras plutôt que sur l'aisselle ou la main, la conception protège les nerfs et redistribue les contraintes, sans exiger de force de préhension. Une innovation validée par plus de 6 médecins MPR et testée en usage réel sur plus d'un mois avant son lancement.`,
+C'est ce compromis que legmio a directement retravaillé : en concentrant l'appui sur l'avant-bras plutôt que sur l'aisselle ou la main, la conception protège les nerfs et redistribue les contraintes, tout en réduisant le besoin en force de préhension. Une innovation validée par plus de 6 médecins MPR et testée en usage réel sur plus d'un mois avant son lancement.`,
     bodyEn: `Among the factors limiting long-term crutch use are the risks and injuries linked to continuous use — especially discomfort under the armpit, specific to axillary crutches. It's a known trade-off: good stability for temporary use, but discomfort that sets in over time.
 
 That's one reason Europe leans toward forearm crutches: the load shifts from armpit to arm and hand, which limits this specific issue while stressing the wrist differently.
 
-That trade-off is exactly what legmio reworked: by concentrating the load on the forearm rather than the armpit or the hand, the design protects the nerves and redistributes the load, without requiring grip strength. An innovation validated by 6+ PM&R physicians and tested in real use for over a month before launch.`,
+That trade-off is exactly what legmio reworked: by concentrating the load on the forearm rather than the armpit or the hand, the design protects the nerves and redistributes the load, while reducing the need for gripping strength. An innovation validated by 6+ PM&R physicians and tested in real use for over a month before launch.`,
     date: "Juillet 2026",
   },
   {
