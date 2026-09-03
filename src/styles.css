@@ -296,3 +296,19 @@
   .etape-active { animation: none; }
   .carte-survol { transition: none; &:hover { translate: none; } }
 }
+
+/* ── Accordeons ──────────────────────────────────────────────
+   La reponse reste DANS le HTML, repliee par une grille de hauteur 0fr
+   plutot que retiree du DOM. Sans cela, ni Google ni un lecteur d'ecran
+   ne voient le contenu tant qu'on n'a pas clique. */
+@utility repli {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  & > * { overflow: hidden; }
+}
+@utility repli-ouvert { grid-template-rows: 1fr; }
+
+@media (prefers-reduced-motion: reduce) {
+  .repli { transition: none; }
+}

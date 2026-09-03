@@ -140,8 +140,27 @@ function Faq() {
   const INK_MUTED = "#6B6B6B";
   const MUTED_NAVY = "#A89ED0";
   const BORDER_LIGHT = "#E8E4DC";
+  // Donnees structurees FAQPage : possibles seulement parce que les reponses
+  // sont desormais presentes dans le HTML servi. Google exige que le contenu
+  // balise soit reellement dans la page.
+  const donneesFaq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: themes.flatMap((th) =>
+      th.items.map((it) => ({
+        "@type": "Question",
+        name: it.q[idx],
+        acceptedAnswer: { "@type": "Answer", text: it.a[idx] },
+      }))
+    ),
+  };
+
   return (
     <div style={{ backgroundColor: WHITE }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesFaq) }}
+      />
       <section className="px-4 sm:px-6 py-20" style={{ backgroundColor: NAVY }}>
         <h1 className="text-4xl sm:text-5xl md:text-6xl text-center" style={{ color: WHITE }}>
           {tr("Tout ce que tu veux savoir.", "Everything you want to know.", "Alles was du wissen möchtest.")}
@@ -163,11 +182,22 @@ function Faq() {
                   const isOpen = open === key;
                   return (
                     <div key={ii} className="border-b" style={{ borderColor: BORDER_LIGHT }}>
-                      <button onClick={() => setOpen(isOpen ? null : key)} className="w-full flex justify-between items-center py-4 text-left" style={{ color: INK }}>
+                      <button
+                        onClick={() => setOpen(isOpen ? null : key)}
+                        aria-expanded={isOpen}
+                        aria-controls={`reponse-${key}`}
+                        className="w-full flex justify-between items-center py-4 text-left gap-4"
+                        style={{ color: INK }}
+                      >
                         <span>{it.q[idx]}</span>
-                        <span className={`transition-transform ${isOpen ? "rotate-180" : ""}`} style={{ color: NAVY }}><IconChevron size={18} /></span>
+                        <span className={`shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} style={{ color: NAVY }}><IconChevron size={18} /></span>
                       </button>
-                      {isOpen && <div className="pb-4 text-sm" style={{ color: INK_MUTED }}>{it.a[idx]}</div>}
+                      {/* La reponse reste dans le HTML : repliee, pas retiree. */}
+                      <div id={`reponse-${key}`} role="region" className={`repli ${isOpen ? "repli-ouvert" : ""}`}>
+                        <div>
+                          <div className="pb-4 text-sm" style={{ color: INK_MUTED }}>{it.a[idx]}</div>
+                        </div>
+                      </div>
                     </div>
                   );
                 })}

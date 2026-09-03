@@ -26,15 +26,29 @@ export const Route = createFileRoute("/produit")({
   component: Produit,
 });
 
+let compteurAccordeon = 0;
+
 function Accordion({ title, children, defaultOpen = false }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
+  const [id] = useState(() => `accordeon-${++compteurAccordeon}`);
   return (
     <div className="border-b" style={{ borderColor: BORDER_LIGHT }}>
-      <button onClick={() => setOpen(!open)} className="w-full flex justify-between items-center py-4 text-left" style={{ color: INK }}>
+      <button
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-controls={id}
+        className="w-full flex justify-between items-center py-4 text-left gap-4"
+        style={{ color: INK }}
+      >
         <span className="font-semibold">{title}</span>
-        <span className={`transition-transform ${open ? "rotate-180" : ""}`}><IconChevron size={18} /></span>
+        <span className={`shrink-0 transition-transform ${open ? "rotate-180" : ""}`}><IconChevron size={18} /></span>
       </button>
-      {open && <div className="pb-5 text-sm" style={{ color: INK_MUTED }}>{children}</div>}
+      {/* Contenu replie, pas retire : sans cela il est absent du HTML servi. */}
+      <div id={id} role="region" className={`repli ${open ? "repli-ouvert" : ""}`}>
+        <div>
+          <div className="pb-5 text-sm" style={{ color: INK_MUTED }}>{children}</div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -51,9 +65,9 @@ function Produit() {
   const [sel, setSel] = useState(0);
 
   const reviews: Review[] = [
-    { img: "/pauline.png", title: tr("Une grande avancée !", "Une grande avancée !", "Une grande avancée !"), quote: tr("Une béquille qui rend les mains libres : une grande avancée !", "Une béquille qui rend les mains libres : une grande avancée !", "Une béquille qui rend les mains libres : une grande avancée !"), name: "Dr Pauline Coignard", profile: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "MPR Physician · Kerpape Centre · President APPROCHE · SOFMER", "MPR-Ärztin · Kerpape Zentrum · Präsidentin APPROCHE · SOFMER"), date: tr("Mars 2026", "March 2026", "März 2026") },
-    { title: tr("Retrouver une certaine autonomie au quotidien.", "Retrouver une certaine autonomie au quotidien.", "Retrouver une certaine autonomie au quotidien."), quote: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)"), name: "Salim", profile: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), date: tr("Février 2026", "February 2026", "Februar 2026") },
-    { title: tr("Ça change tout quand on est immobilisé.", "Ça change tout quand on est immobilisé.", "Ça change tout quand on est immobilisé."), quote: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé."), name: "Joachim", profile: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), date: tr("Janvier 2026", "January 2026", "Januar 2026") },
+    { img: "/pauline.png", title: tr("Une grande avancée !", "A major step forward!", "Ein großer Fortschritt!"), quote: tr("Une béquille qui rend les mains au patient : une grande avancée !", "A crutch that gives patients their hands back: a major step forward!", "Eine Krücke, die dem Patienten die Hände zurückgibt: ein großer Fortschritt!"), name: "Dr Pauline Coignard", profile: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "MPR Physician · Kerpape Centre · President APPROCHE · SOFMER", "MPR-Ärztin · Kerpape Zentrum · Präsidentin APPROCHE · SOFMER"), date: tr("Mars 2026", "March 2026", "März 2026") },
+    { title: tr("Retrouver une certaine autonomie au quotidien.", "Getting back a real degree of day-to-day independence.", "Ein Stück Selbstständigkeit im Alltag zurückgewinnen."), quote: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio gave me back a real degree of day-to-day independence, especially at work. I could move around more easily and do simple but essential things on my own, like going to make myself a coffee :)", "legmio hat mir im Alltag ein Stück Selbstständigkeit zurückgegeben, vor allem bei der Arbeit. Ich konnte mich leichter bewegen und einfache, aber wichtige Dinge allein erledigen — zum Beispiel mir einen Kaffee holen :)"), name: "Salim", profile: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), date: tr("Février 2026", "February 2026", "Februar 2026") },
+    { title: tr("Ça change tout quand on est immobilisé.", "It changes everything when you are immobilised.", "Das ändert alles, wenn man bewegungsunfähig ist."), quote: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "After my meniscus surgery, legmio let me stay independent at home throughout my recovery. Moving around, carrying things, doing things on my own — it changes everything when you are immobilised.", "Nach meiner Meniskus-Operation konnte ich dank legmio während meiner ganzen Genesung zu Hause selbstständig bleiben. Sich bewegen, Dinge tragen, alles allein erledigen — das ändert alles, wenn man bewegungsunfähig ist."), name: "Joachim", profile: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), date: tr("Janvier 2026", "January 2026", "Januar 2026") },
   ];
   const galleryPrev = () => setSel((s) => (s - 1 + gallery.length) % gallery.length);
   const galleryNext = () => setSel((s) => (s + 1) % gallery.length);
