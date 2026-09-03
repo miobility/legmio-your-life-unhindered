@@ -372,9 +372,12 @@ function Landing() {
                 ["/logoTF1.png", "TF1"],
                 ["/logofranceTV2.jpg", "France Télévisions"],
                 ["/mediapositif.png", "Le Média Positif"],
+                ["/logofaireface.jpg", "Faire Face"],
+                ["/logohacavie.png", "Hacavie"],
+                ["/logocnrsinnovation.png", "CNRS Innovation"],
               ].map(([src, alt]) => (
-                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 160, height: 72 }}>
-                  <img src={src} alt={alt} className="object-contain" style={{ height: 40 }} />
+                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 170, height: 80 }}>
+                  <img src={src} alt={alt} className="object-contain" style={{ maxHeight: 52, maxWidth: 150 }} />
                 </div>
               ))}
             </AutoCarousel>

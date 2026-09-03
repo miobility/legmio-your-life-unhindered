@@ -10,6 +10,7 @@ const WHITE = "#FFFFFF";
 const CREAM = "#FAFAF8";
 const INK = "#1A1040";
 const INK_MUTED = "#6B6B6B";
+const MUTED_NAVY = "#A89ED0";
 const BORDER_LIGHT = "#E8E4DC";
 const ACCENT = "#F5C842";
 
@@ -154,7 +155,70 @@ function Produit() {
         </div>
       </section>
 
-      {/* SECTION 2 — FEATURES GRID (WHITE) */}
+      {/* SECTION 2 — DEUX MODES (NAVY) */}
+      <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl text-center" style={{ color: WHITE }}>
+              {tr("Deux modes d'utilisation.", "Two modes of use.", "Zwei Nutzungsmodi.")}
+            </h2>
+            <p className="mt-5 text-center text-base max-w-xl mx-auto" style={{ color: MUTED_NAVY }}>
+              {tr(
+                "Tu marches normalement, et tu libères les mains lorsque nécessaire.",
+                "You walk normally, and free your hands when needed.",
+                "Du gehst normal und machst die Hände frei, wenn nötig."
+              )}
+            </p>
+          </Reveal>
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {[
+              {
+                img: "/mode-bequille.jpg",
+                n: "01",
+                alt: tr(
+                  "Un utilisateur marche avec deux béquilles legmio, les mains posées sur les poignées.",
+                  "A user walks with two legmio crutches, hands resting on the grips.",
+                  "Ein Nutzer geht mit zwei legmio-Krücken, die Hände auf den Griffen."
+                ),
+                t: tr("Mode marche", "Walking mode", "Gehmodus"),
+                p: tr(
+                  "Les mains sur les poignées, l'appui réparti sur l'avant-bras.",
+                  "Hands on the grips, load spread across the forearm.",
+                  "Die Hände auf den Griffen, die Last auf dem Unterarm verteilt."
+                ),
+              },
+              {
+                img: "/mode-mains-libres.jpg",
+                n: "02",
+                alt: tr(
+                  "Le même utilisateur, les béquilles maintenues par les coudes, se sert un verre à deux mains.",
+                  "The same user, crutches held by the elbows, pours a drink using both hands.",
+                  "Derselbe Nutzer hält die Krücken mit den Ellbogen und schenkt sich mit beiden Händen ein."
+                ),
+                t: tr("Mode mains libres", "Hands-free mode", "Freihand-Modus"),
+                p: tr(
+                  "L'appui passe sur le coude : les deux mains redeviennent disponibles.",
+                  "The support shifts to the elbow: both hands become available again.",
+                  "Die Stütze wandert zum Ellbogen: Beide Hände werden wieder frei."
+                ),
+              },
+            ].map((m, i) => (
+              <figure key={i} className="card-soft overflow-hidden w-full max-w-[340px] mx-auto">
+                <div className="w-full overflow-hidden" style={{ aspectRatio: "9/16" }}>
+                  <img src={m.img} alt={m.alt} className="w-full h-full object-cover" loading="lazy" width={900} height={1600} />
+                </div>
+                <figcaption className="p-6">
+                  <div className="text-xs font-bold tracking-[0.18em]" style={{ color: ACCENT }}>{m.n}</div>
+                  <h3 className="mt-2 font-display font-bold text-xl leading-tight" style={{ color: WHITE }}>{m.t}</h3>
+                  <p className="mt-2 text-sm" style={{ color: MUTED_NAVY }}>{m.p}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3 — FEATURES GRID (WHITE) */}
       <section id="features" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
@@ -166,7 +230,7 @@ function Produit() {
         </div>
       </section>
 
-      {/* SECTION 3 — TÉMOIGNAGES (CREAM) */}
+      {/* SECTION 4 — TÉMOIGNAGES (CREAM) */}
       <section id="reviews" style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl" style={{ color: INK }}>{tr("Témoignages", "Testimonials", "Erfahrungsberichte")}</h2>
@@ -195,7 +259,7 @@ function Produit() {
       </section>
 
 
-      {/* SECTION 4 — FAQ PRODUIT (WHITE) */}
+      {/* SECTION 5 — FAQ PRODUIT (WHITE) */}
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-baseline justify-between gap-4 mb-6">
@@ -218,7 +282,7 @@ function Produit() {
         </div>
       </section>
 
-      {/* SECTION 5 — CTA FINAL (NAVY) */}
+      {/* SECTION 6 — CTA FINAL (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl" style={{ color: WHITE }}>
