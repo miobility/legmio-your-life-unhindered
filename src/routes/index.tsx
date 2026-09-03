@@ -7,6 +7,7 @@ import {
 } from "@/components/Icons";
 import { Reveal } from "@/components/Reveal";
 import { AutoCarousel } from "@/components/AutoCarousel";
+import { HubspotForm } from "@/components/HubspotForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,9 +35,9 @@ const ACCENT = "#FFCA75";
 
 function CTADark({ block }: { block?: boolean }) {
   // For NAVY sections: gold bg, navy text
-  const { t, hubspotUrl } = useLanguage();
+  const { t } = useLanguage();
   return (
-    <a href={hubspotUrl} target="_blank" rel="noreferrer" className={`btn-dark btn-dark-hover ${block ? "w-full" : ""}`}>
+    <a href="#waitlist" className={`btn-dark btn-dark-hover ${block ? "w-full" : ""}`}>
       {t("cta_interested")} <IconArrowRight size={16} />
     </a>
   );
@@ -44,9 +45,9 @@ function CTADark({ block }: { block?: boolean }) {
 
 function CTALight({ block }: { block?: boolean }) {
   // For WHITE/CREAM sections: navy bg, white text
-  const { t, hubspotUrl } = useLanguage();
+  const { t } = useLanguage();
   return (
-    <a href={hubspotUrl} target="_blank" rel="noreferrer" className={`btn-light btn-light-hover ${block ? "w-full" : ""}`}>
+    <a href="#waitlist" className={`btn-light btn-light-hover ${block ? "w-full" : ""}`}>
       {t("cta_interested")} <IconArrowRight size={16} />
     </a>
   );
@@ -411,7 +412,7 @@ function Landing() {
 
       {/* 10 — ACTUALITÉ + CTA (WHITE) */}
       <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-lg mx-auto text-center">
+        <div className="max-w-xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>
             {tr(<>Suis l'actualité<br />de legmio.</>, <>Follow<br />legmio's news.</>, <>Folge den Neuigkeiten<br />von legmio.</>)}
           </h2>
@@ -420,7 +421,7 @@ function Landing() {
             <a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" aria-label="TikTok" className="opacity-80 hover:opacity-100"><IconTiktok size={28} /></a>
             <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="opacity-80 hover:opacity-100"><IconLinkedin size={28} /></a>
           </div>
-          <div className="mt-10"><CTALight /></div>
+          <div className="mt-10 text-left"><HubspotForm /></div>
           <p className="mt-10 text-base" style={{ color: INK_MUTED }}>
             {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?", "Gesundheitsfachkraft oder Händler?")}
             <br className="sm:hidden" />{" "}
