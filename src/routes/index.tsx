@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "legmio — La béquille qui libère les mains" },
-      { name: "description", content: "legmio est la seule béquille ergonomique mains libres. Née de la recherche CNRS/Sorbonne Université. Commercialisation courant 2027." },
+      { name: "description", content: "legmio est la première béquille ergonomique avec un mode mains libres. Née de la recherche CNRS/Sorbonne Université. Commercialisation courant 2027." },
       { property: "og:title", content: "legmio — La béquille qui libère les mains" },
       { property: "og:description", content: "Des mains libres et une autonomie enfin retrouvée." },
     ],
