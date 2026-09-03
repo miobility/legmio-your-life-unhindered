@@ -9,6 +9,7 @@ import {
 import { Reveal } from "@/components/Reveal";
 import { Carousel } from "@/components/Carousel";
 import { Marquee } from "@/components/Marquee";
+import { Inscription } from "@/components/Inscription";
 import { Compteur } from "@/components/Compteur";
 import { MARGE_TEMPS_FORT, SEUIL } from "@/lib/apparition";
 
@@ -210,7 +211,9 @@ export function Landing() {
                 <>Freie Hände<br />und neu gewonnene<br />Selbstständigkeit.</>
               )}
             </h1>
-            <div className="pt-2"><CTADark /></div>
+              {/* Le champ est dans le premier ecran : on ne renvoie plus le visiteur
+                  vers un onglet HubSpot a l'instant ou il vient de decider. */}
+              <div className="pt-2 max-w-md mx-auto md:mx-0"><Inscription ton="sombre" /></div>
           </div>
         </div>
       </section>
@@ -220,7 +223,7 @@ export function Landing() {
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
+            <h2 className="text-4xl sm:text-5xl md:text-[3.25rem] leading-[1.05] text-center max-w-3xl mx-auto" style={{ color: INK }}>
               {tr("Les béquilles classiques ont leurs limites.", "Classic crutches have their limits.", "Herkömmliche Krücken haben ihre Grenzen.")}
             </h2>
           </Reveal>
@@ -250,7 +253,7 @@ export function Landing() {
       <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
+            <h2 className="text-4xl sm:text-5xl md:text-[3.25rem] leading-[1.05] text-center" style={{ color: INK }}>
               {tr("legmio a tout repensé.", "legmio rethought everything.", "legmio hat alles neu gedacht.")}
             </h2>
           </Reveal>
@@ -264,12 +267,30 @@ export function Landing() {
           </div>
         </div>
       </section>
+      {/* 3bis — LE CHIFFRE (NAVY) */}
+      {/* Les nombres verifiables etaient enfermes dans des vignettes de la
+          taille d'un timbre. Celui-ci sort du lot et occupe sa propre bande. */}
+      <section style={{ backgroundColor: NAVY }} className="halo-or px-4 sm:px-6 py-20 md:py-24">
+        <div className="max-w-3xl mx-auto text-center fade-up">
+          <div className="font-display font-extrabold leading-none tracking-tight"
+               style={{ color: ACCENT, fontSize: "clamp(4.5rem, 16vw, 9rem)" }}>
+            <Compteur valeur={850} suffixe=" g" />
+          </div>
+          <p className="mt-6 text-lg sm:text-xl leading-snug" style={{ color: WHITE }}>
+            {tr(
+              "Le poids d'une legmio. Assez peu pour la porter toute une journée, pas seulement le temps d'une rééducation.",
+              "What a legmio weighs. Light enough to carry all day, not just through rehab.",
+              "So viel wiegt eine legmio. Leicht genug für den ganzen Tag, nicht nur für die Reha."
+            )}
+          </p>
+        </div>
+      </section>
 
       {/* 4 — USE CASES (WHITE) */}
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-3xl mx-auto" style={{ color: INK }}>
+            <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] text-center max-w-3xl mx-auto" style={{ color: INK }}>
               <span className="hidden md:inline">{tr("À chaque fois que tu en as besoin.", "Whenever you need it.", "Wann immer du sie brauchst.")}</span>
               <span className="md:hidden">{tr(<>À chaque fois<br />que tu en as besoin.</>, <>Whenever<br />you need it.</>, <>Wann immer.<br />du sie brauchst.</>)}</span>
             </h2>
@@ -314,7 +335,7 @@ export function Landing() {
       <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
+            <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] text-center" style={{ color: INK }}>
               {tr("Testée et approuvée.", "Tested and approved.", "Getestet und bewährt.")}
             </h2>
           </Reveal>
@@ -347,7 +368,7 @@ export function Landing() {
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center max-w-4xl mx-auto" style={{ color: INK }}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl text-center max-w-4xl mx-auto" style={{ color: INK }}>
               {tr("Une innovation récompensée.", "An award-winning innovation.", "Eine ausgezeichnete Innovation.")}
             </h2>
           </Reveal>
@@ -371,7 +392,7 @@ export function Landing() {
       <section style={{ backgroundColor: NAVY }} className="halo-or px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: WHITE }}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl text-center" style={{ color: WHITE }}>
               {tr("Ils parlent de nous.", "They talk about us.", "Sie berichten über uns.")}
             </h2>
           </Reveal>
@@ -410,7 +431,7 @@ export function Landing() {
       {/* 8 — WALL OF LOVE (WHITE) */}
       <section style={{ backgroundColor: WHITE }} className="py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
+          <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] text-center" style={{ color: INK }}>
             {tr("Bientôt disponible.", "Coming soon.", "Bald verfügbar.")}
           </h2>
         </div>
@@ -421,7 +442,7 @@ export function Landing() {
       <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>{tr("Où en sommes-nous ?", "Where are we?", "Wo stehen wir?")}</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] text-center" style={{ color: INK }}>{tr("Où en sommes-nous ?", "Where are we?", "Wo stehen wir?")}</h2>
           </Reveal>
           <Roadmap />
         </div>
@@ -430,7 +451,7 @@ export function Landing() {
       {/* 10 — ACTUALITÉ + CTA (WHITE) */}
       <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>
+          <h2 className="text-3xl sm:text-4xl md:text-[2.75rem]" style={{ color: INK }}>
             {tr(<>Suis l'actualité<br />de legmio.</>, <>Follow<br />legmio's news.</>, <>Folge den Neuigkeiten<br />von legmio.</>)}
           </h2>
           <div className="mt-8 flex items-center justify-center gap-6" style={{ color: INK }}>
@@ -438,7 +459,7 @@ export function Landing() {
             <a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" aria-label="TikTok" className="opacity-80 hover:opacity-100"><IconTiktok size={28} /></a>
             <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="opacity-80 hover:opacity-100"><IconLinkedin size={28} /></a>
           </div>
-          <div className="mt-10"><CTALight /></div>
+          <div className="mt-10"><Inscription /></div>
           <p className="mt-10 text-base" style={{ color: INK_MUTED }}>
             {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?", "Gesundheitsfachkraft oder Händler?")}
             <br className="sm:hidden" />{" "}
