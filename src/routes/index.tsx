@@ -381,6 +381,8 @@ export function Landing() {
                 { src: "/logoTF1.png", alt: "TF1", h: 52 },
                 { src: "/logofranceTV2.jpg", alt: "France Télévisions", h: 52 },
                 { src: "/mediapositif.png", alt: "Le Média Positif", h: 52 },
+                { src: "/logohospimedia.png", alt: "Hospimedia", h: 40 },
+                { src: "/logoautonomia.png", alt: "Autonomia", h: 46 },
                 { src: "/logofaireface.jpg", alt: "Faire Face", h: 46 },
                 { src: "/logohacavie.png", alt: "Hacavie", h: 44 },
                 { src: "/logocnrsinnovation.png", alt: "CNRS Innovation", h: 70 },
