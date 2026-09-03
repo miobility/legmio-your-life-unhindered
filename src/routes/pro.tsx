@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useLanguage } from "@/lib/i18n";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { MeetingsEmbed } from "@/components/MeetingsEmbed";
 
 export const Route = createFileRoute("/pro")({
   head: () => ({
@@ -14,20 +14,17 @@ export const Route = createFileRoute("/pro")({
   component: ProPage,
 });
 
-const NAVY = "#120B3B";
+const NAVY = "#0D0D29";
 const WHITE = "#FFFFFF";
 const CREAM = "#FAFAF8";
-const INK = "#1A1040";
 const INK_MUTED = "#6B6B6B";
 const MUTED_NAVY = "#A89ED0";
 const BORDER_LIGHT = "#E8E4DC";
-const ACCENT = "#F5C842";
 
 const MEETING_URL = "https://meetings-eu1.hubspot.com/benjamin-rajjou";
 
 function ProPage() {
   const { tr } = useLanguage();
-  const isMobile = useIsMobile();
   return (
     <div style={{ backgroundColor: CREAM }}>
       <section className="px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: NAVY }}>
@@ -49,32 +46,11 @@ function ProPage() {
         </div>
       </section>
 
-      <section className="px-4 sm:px-6 py-16 md:py-20" style={{ backgroundColor: CREAM }}>
+      <section className="px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: CREAM }}>
         <div className="max-w-5xl mx-auto">
-          {isMobile ? (
-            <div className="flex justify-center">
-              <a
-                href={MEETING_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 font-semibold"
-                style={{ backgroundColor: ACCENT, color: NAVY, borderRadius: 50, padding: "16px 32px", fontSize: 18 }}
-              >
-                {tr("Prendre rendez-vous", "Book a meeting", "Termin vereinbaren")} <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          ) : (
-            <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}` }}>
-              <iframe
-                src={MEETING_URL}
-                title="Prendre rendez-vous"
-                className="w-full block"
-                style={{ height: 750, border: 0, overflow: "hidden" }}
-                scrolling="no"
-                loading="lazy"
-              />
-            </div>
-          )}
+          <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}` }}>
+            <MeetingsEmbed url={MEETING_URL} />
+          </div>
           <p className="text-center mt-6 text-sm" style={{ color: INK_MUTED }}>
             {tr("Une question ?", "Any question?", "Eine Frage?")} <a href="mailto:contact@legmio.com" style={{ color: NAVY }} className="underline">contact@legmio.com</a>
           </p>

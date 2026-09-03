@@ -13,8 +13,8 @@ export const Route = createFileRoute("/confidentialite")({
 
 const TEXT = "#FFFFFF";
 const MUTED = "#A89ED0";
-const BG = "#120B3B";
-const BG_ALT = "#1A1040";
+const BG = "#0D0D29";
+const BG_ALT = "#15122E";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -33,7 +33,7 @@ function Confidentialite() {
         <h1 className="text-4xl sm:text-5xl font-display font-bold" style={{ color: TEXT }}>{tr("Politique de confidentialité", "Privacy policy", "Datenschutzrichtlinie")}</h1>
       </section>
       <section className="px-4 sm:px-6 py-16">
-        <article className="max-w-[680px] mx-auto text-[15px] leading-relaxed space-y-2" style={{ color: "#333" }}>
+        <article className="max-w-[680px] mx-auto text-[15px] leading-relaxed space-y-2" style={{ color: MUTED }}>
           <Section title={tr("1. Responsable du traitement", "1. Data controller", "1. Verantwortlicher für die Datenverarbeitung")}>
             <p>{tr("Le responsable du traitement des données collectées sur legmio.com est :", "The controller responsible for processing data collected on legmio.com is:", "Der Verantwortliche für die Verarbeitung der auf legmio.com erhobenen Daten ist:")}</p>
             <p>{tr("miobility, projet en cours d'immatriculation", "miobility, a project currently being registered", "miobility, ein Projekt, das sich derzeit in der Registrierung befindet")}<br />13-15 Rue Traversière — 75012 Paris<br /><a href="mailto:contact@legmio.com" className="underline">contact@legmio.com</a></p>

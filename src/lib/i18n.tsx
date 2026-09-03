@@ -2,8 +2,10 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 
 export type Lang = "fr" | "en" | "de";
 
+// Formulaires HubSpot, ouverts dans un onglet depuis les boutons du site.
 export const HUBSPOT_FR = "https://fd623.share-eu1.hsforms.com/2TRovgVWcTMydP9AzUTJZUQ";
 export const HUBSPOT_EN = "https://fd623.share-eu1.hsforms.com/2ApzYviPbRnyLmAQh5YUR5Q";
+
 
 export const LANGS: { code: Lang; flag: string; label: string }[] = [
   { code: "fr", flag: "🇫🇷", label: "Français" },
@@ -20,6 +22,7 @@ const fr: Dict = {
   nav_faq: "FAQ",
   nav_blog: "Blog",
   nav_pro: "Espace pro",
+  nav_menu: "Menu",
   cta_interested: "Je suis intéressé(e)",
   footer_tag: "La béquille qui libère les mains.",
   footer_bottom: "legmio © 2026 — Un produit miobility",
@@ -32,6 +35,7 @@ const en: Dict = {
   nav_faq: "FAQ",
   nav_blog: "Blog",
   nav_pro: "Pro space",
+  nav_menu: "Menu",
   cta_interested: "I'm interested",
   footer_tag: "The crutch that frees your hands.",
   footer_bottom: "legmio © 2026 — A miobility product",
@@ -44,6 +48,7 @@ const de: Dict = {
   nav_faq: "FAQ",
   nav_blog: "Blog",
   nav_pro: "Fachbereich",
+  nav_menu: "Menü",
   cta_interested: "Ich bin interessiert",
   footer_tag: "Die Krücke die die Hände befreit.",
   footer_bottom: "legmio © 2026 — Ein Produkt von miobility",
@@ -72,6 +77,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const saved = typeof window !== "undefined" ? (localStorage.getItem("legmio-lang") as Lang | null) : null;
     if (saved === "fr" || saved === "en" || saved === "de") setLangState(saved);
   }, []);
+  useEffect(() => {
+    if (typeof document !== "undefined") document.documentElement.lang = lang;
+  }, [lang]);
   const setLang = (l: Lang) => {
     setLangState(l);
     if (typeof window !== "undefined") localStorage.setItem("legmio-lang", l);

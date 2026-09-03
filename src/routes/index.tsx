@@ -21,16 +21,16 @@ export const Route = createFileRoute("/")({
 });
 
 // Palette
-const NAVY = "#120B3B";
-const NAVY_ALT = "#1A1040";
+const NAVY = "#0D0D29";
+const NAVY_ALT = "#15122E";
 const WHITE = "#FFFFFF";
 const CREAM = "#FAFAF8";
-const INK = "#1A1040";
+const INK = "#15122E";
 const INK_MUTED = "#6B6B6B";
 const BORDER_LIGHT = "#E8E4DC";
-const BORDER_NAVY = "#2A1F6B";
+const BORDER_NAVY = "#252159";
 const MUTED_NAVY = "#A89ED0";
-const ACCENT = "#F5C842";
+const ACCENT = "#FFCA75";
 
 function CTADark({ block }: { block?: boolean }) {
   // For NAVY sections: gold bg, navy text
@@ -52,72 +52,74 @@ function CTALight({ block }: { block?: boolean }) {
   );
 }
 
-// ============= Specs strip pill icons =============
-const IconBalance = ({ size = 28 }: { size?: number }) => (
+// ============= Icones des caracteristiques =============
+// Jeu homogene : viewBox 24, trait 1.6, extremites arrondies, dessin contenu entre 3 et 21
+// pour que toutes les icones aient le meme poids optique a 28px.
+const Ico = ({ size = 28, children }: { size?: number; children: React.ReactNode }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 3v18M4 8h16M6 8l-3 6a3 3 0 006 0L6 8zM18 8l-3 6a3 3 0 006 0l-3-6z" />
-  </svg>
-);
-const IconHandOpen = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M7 11V5a1.5 1.5 0 013 0v6M10 11V4a1.5 1.5 0 013 0v7M13 11V5a1.5 1.5 0 013 0v8M16 11V7a1.5 1.5 0 013 0v9a5 5 0 01-5 5h-2a5 5 0 01-5-5v-2l-2-3a1.5 1.5 0 012-2l2 2" />
-  </svg>
-);
-const IconRulerPill = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 16l5-13 13 5-5 13-13-5z" /><path d="M8 6l1 2M11 8l1 2M14 11l1 2" />
-  </svg>
-);
-const IconShieldPill = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6l8-3z" />
-  </svg>
-);
-const IconRecycle = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M7 19H4l3-5M17 5h3l-3 5M12 4l3 3M8 20l-3-3M20 12l-3 3" />
-  </svg>
-);
-const IconFeather = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 4c-6 0-11 5-11 11v4h4c6 0 11-5 11-11" /><path d="M4 20l9-9" />
-  </svg>
-);
-const IconSliders = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 6h16M4 12h16M4 18h16" /><circle cx="9" cy="6" r="2" fill="currentColor" /><circle cx="15" cy="12" r="2" fill="currentColor" /><circle cx="7" cy="18" r="2" fill="currentColor" />
-  </svg>
-);
-const IconRest = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 18h18M6 18V9a3 3 0 013-3h6a3 3 0 013 3v9" /><path d="M9 12h6" />
-  </svg>
-);
-const IconWall = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 21V4h16M8 21V4M12 21V4M16 21V4" />
-  </svg>
-);
-const IconNerve = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 4c4 0 4 4 8 4s4-4 8-4M4 12c4 0 4 4 8 4s4-4 8-4M4 20c4 0 4-4 8-4s4 4 8 4" />
-  </svg>
-);
-const IconGrip = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M7 3v6M11 3v6M15 3v6M19 3v6M5 9h14a2 2 0 012 2v3a7 7 0 01-14 0v-3a2 2 0 012-2z" />
+    {children}
   </svg>
 );
 
+// Legere — une plume : silhouette pleine + nervure centrale
+const IconFeather = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M19.5 4.5C21 12 15.5 18 8 18H4.5v-3.5C4.5 7 10.5 3 19.5 4.5z" /><path d="M4.5 19.5L13 11" /></Ico>
+);
+
+// Deux modes — un interrupteur a deux positions
+const IconDualMode = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><rect x="2.5" y="7" width="19" height="10" rx="5" /><circle cx="16.5" cy="12" r="2.6" fill="currentColor" stroke="none" /></Ico>
+);
+
+// Robuste — un halterain (charge supportee)
+const IconWeight = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M7.5 12h9" /><rect x="4.5" y="8" width="3.5" height="8" rx="1.2" fill="currentColor" /><rect x="16" y="8" width="3.5" height="8" rx="1.2" fill="currentColor" /><path d="M2.5 10v4M21.5 10v4" /></Ico>
+);
+
+// Ergonomique — des doigts poses sur une poignee rembourree
+const IconGrip = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><rect x="3" y="13.5" width="18" height="6" rx="3" /><path d="M8 13.5V9M12 13.5V7M16 13.5V9" /></Ico>
+);
+
+// Protectrice — un bouclier, avec le trace d'un nerf a l'interieur
+const IconNerve = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M12 3l8 3.2v5.3c0 4.9-3.4 8-8 9.5-4.6-1.5-8-4.6-8-9.5V6.2L12 3z" /><path d="M8.5 12c1.2-1.5 2.3 1.5 3.5 0s2.3 1.5 3.5 0" /></Ico>
+);
+
+// Reglable — deux curseurs, pour les deux points de reglage
+const IconSliders = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M4 8.5h16M4 15.5h16" /><circle cx="9" cy="8.5" r="2.4" fill="currentColor" stroke="none" /><circle cx="15" cy="15.5" r="2.4" fill="currentColor" stroke="none" /></Ico>
+);
+
+// Durable — un cycle ferme (pieces remplacees, pas le produit)
+const IconRecycle = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M4.5 12a7.5 7.5 0 0112.8-5.3L19.5 9" /><path d="M19.5 4.5V9h-4.5" /><path d="M19.5 12a7.5 7.5 0 01-12.8 5.3L4.5 15" /><path d="M4.5 19.5V15H9" /></Ico>
+);
+
+// Universelle — une plage de tailles, bornee en haut et en bas
+const IconRange = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M12 4.5v15" /><path d="M8.8 7.7L12 4.5l3.2 3.2M8.8 16.3L12 19.5l3.2-3.2" /><path d="M5 4.5h3M16 4.5h3M5 19.5h3M16 19.5h3" /></Ico>
+);
+
+// Position de repos — une assise
+const IconRest = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M3 13.5h18" /><path d="M5.5 13.5V19M18.5 13.5V19" /><path d="M6.5 13.5V8a2 2 0 012-2h7a2 2 0 012 2v5.5" /></Ico>
+);
+
+// Tient seule — la bequille appuyee contre un mur
+const IconWall = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M4 3.5v17M4 20.5h16" /><path d="M14.5 4.5L9.5 20.5" /><path d="M12.5 10.5h3" /></Ico>
+);
+
 const specsItems = () => [
-  { icon: <IconFeather />, kFr: "Ultralégère", kEn: "Ultralight", kDe: "Ultraleicht", sFr: "Pèse seulement 850g", sEn: "Weighs only 850g", sDe: "Wiegt nur 850g" },
-  { icon: <IconHandOpen />, kFr: "Mains libres", kEn: "Hands-free", kDe: "Freie Hände", sFr: "Appui sur l'avant-bras", sEn: "Forearm support", sDe: "Unterarmstütze" },
-  { icon: <IconShieldPill />, kFr: "Robuste", kEn: "Robust", kDe: "Robust", sFr: "Supporte jusqu'à 130kg", sEn: "Supports up to 130kg", sDe: "Trägt bis zu 130kg" },
+  { icon: <IconFeather />, kFr: "Légère", kEn: "Light", kDe: "Leicht", sFr: "850 g", sEn: "850 g", sDe: "850 g" },
+  { icon: <IconDualMode />, kFr: "Deux modes d'utilisation", kEn: "Two modes of use", kDe: "Zwei Nutzungsmodi", sFr: "Appui sur le coude quand nécessaire", sEn: "Elbow support when needed", sDe: "Ellbogenstütze bei Bedarf" },
+  { icon: <IconWeight />, kFr: "Robuste", kEn: "Robust", kDe: "Robust", sFr: "Supporte jusqu'à 130kg", sEn: "Supports up to 130kg", sDe: "Trägt bis zu 130kg" },
   { icon: <IconGrip />, kFr: "Ergonomique", kEn: "Ergonomic", kDe: "Ergonomisch", sFr: "Poignée qui redistribue les contraintes d'appui", sEn: "Grip that redistributes load", sDe: "Griff der die Stützbelastung umverteilt" },
   { icon: <IconNerve />, kFr: "Protectrice", kEn: "Protective", kDe: "Schützend", sFr: "Zones d'appui qui protègent les nerfs", sEn: "Support zones that protect nerves", sDe: "Stützzonen die die Nerven schützen" },
   { icon: <IconSliders />, kFr: "Réglable", kEn: "Adjustable", kDe: "Verstellbar", sFr: "Double réglage en longueur et au niveau de la poignée", sEn: "Dual adjustment in length and grip", sDe: "Doppelverstellung in Länge und Griff" },
   { icon: <IconRecycle />, kFr: "Durable", kEn: "Durable", kDe: "Langlebig", sFr: "Embouts, poignée, sangles remplaçables", sEn: "Tips, grip, straps replaceable", sDe: "Aufsätze, Griff, Gurte austauschbar" },
-  { icon: <IconRulerPill />, kFr: "Universelle", kEn: "Universal", kDe: "Universell", sFr: "Convient de 1m50 à 1m95", sEn: "Fits users from 1.50m to 1.95m", sDe: "Geeignet für 1,50m bis 1,95m" },
+  { icon: <IconRange />, kFr: "Universelle", kEn: "Universal", kDe: "Universell", sFr: "Convient de 1m50 à 1m95", sEn: "Fits users from 1.50m to 1.95m", sDe: "Geeignet für 1,50m bis 1,95m" },
 ];
 
 // SpecsStrip on CREAM section: white cards, navy text/icons
@@ -179,7 +181,7 @@ function Landing() {
       {/* 1 — HERO (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[35%_65%] gap-8 md:gap-10 items-center">
-          <div className="w-full max-w-[300px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: "#000" }}>
+          <div className="w-full max-w-[300px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
               <video
                 ref={videoRef}
@@ -220,13 +222,13 @@ function Landing() {
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
             <AutoCarousel>
               {[
-                { img: "/probleme-poignet.jpg", t: tr("Appui concentré sur le poignet et l'épaule.", "Strain concentrated on the wrist and shoulder.", "Belastung konzentriert auf Handgelenk und Schulter."), p: tr("À force d'utilisation, les contraintes s'accumulent sur les mêmes zones articulaires.", "With repeated use, stress builds up in the same joint areas.", "Bei regelmäßiger Nutzung häufen sich die Belastungen an denselben Gelenkzonen an.") },
-                { img: "/probleme-mains.avif", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are needed just to move.", "Beide Hände werden zum Gehen benötigt."), p: tr("Porter, cuisiner, travailler, tenir son enfant — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, holding your child — all things that require stopping.", "Tragen, kochen, arbeiten, ein Kind halten — all das erfordert einen Stopp.") },
-                { img: "/probleme-temps.jpg", t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally changed.", "Das Design hat sich grundlegend nicht verändert."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches are built on the same principles as decades ago.", "Die heute erhältlichen Krücken beruhen seit Jahrzehnten auf denselben Prinzipien.") },
+                { img: "/compression-nerf.jpg", alt: tr("Un soignant examine le coude d'un patient, à l'endroit où le nerf ulnaire est le plus exposé.", "A clinician examines a patient's elbow, where the ulnar nerve is most exposed.", "Eine Fachkraft untersucht den Ellbogen eines Patienten an der Stelle, an der der Ellennerv am stärksten exponiert ist."), t: tr("Les zones de passage des nerfs sont comprimées.", "Nerve pathways get compressed.", "Die Nervenbahnen werden zusammengedrückt."), p: tr("Le nerf ulnaire passe juste sous la peau : une pression répétée au même endroit finit par l'irriter.", "The ulnar nerve runs just beneath the skin: repeated pressure in the same spot ends up irritating it.", "Der Ellennerv verläuft direkt unter der Haut: wiederholter Druck an derselben Stelle reizt ihn mit der Zeit.") },
+                { img: "/probleme-mains.avif", alt: "", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are needed just to move.", "Beide Hände werden zum Gehen benötigt."), p: tr("Porter, cuisiner, travailler, ouvrir une porte — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, opening a door — all things that require stopping.", "Tragen, kochen, arbeiten, eine Tür öffnen — all das erfordert einen Stopp.") },
+                { img: "/canne-anglaise.jpg", alt: tr("Une femme marche avec deux cannes anglaises classiques, les deux mains occupées par les poignées.", "A woman walks with two standard forearm crutches, both hands occupied by the grips.", "Eine Frau geht mit zwei herkömmlichen Unterarmgehstützen, beide Hände an den Griffen."), t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally changed.", "Das Design hat sich grundlegend nicht verändert."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches are built on the same principles as decades ago.", "Die heute erhältlichen Krücken beruhen seit Jahrzehnten auf denselben Prinzipien.") },
               ].map((c, i) => (
-                <div key={i} className="card-cream overflow-hidden w-[320px] md:w-[380px]">
-                  <div className="aspect-[3/2] overflow-hidden">
-                    <img src={c.img} alt="" className="w-full h-full object-cover" loading="lazy" />
+                <div key={i} className="card-cream overflow-hidden w-[320px] md:w-[380px] h-full flex flex-col">
+                  <div className="aspect-[3/2] overflow-hidden" style={{ backgroundColor: WHITE }}>
+                    <img src={c.img} alt={c.alt} className="w-full h-full object-cover" loading="lazy" />
                   </div>
                   <div className="p-6">
                     <h3 className="text-lg" style={{ color: INK }}>{c.t}</h3>
@@ -262,35 +264,28 @@ function Landing() {
               <span className="md:hidden">{tr(<>À chaque fois<br />que tu en as besoin.</>, <>Whenever<br />you need it.</>, <>Wann immer.<br />du sie brauchst.</>)}</span>
             </h2>
           </Reveal>
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" /></svg>
                 ),
-                t: tr("Handicap & quotidien", "Disability & daily life", "Behinderung & Alltag"),
-                p: tr("Pour les béquilles qui font partie de ta vie au long cours.", "For crutches that are a long-term part of your life.", "Für Krücken die langfristig Teil deines Lebens sind."),
-              },
-              {
-                icon: (
-                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z" /></svg>
-                ),
-                t: tr("Post-opératoire", "Post-operative", "Postoperativ"),
-                p: tr("Pour récupérer sans tout sacrifier.", "To recover without giving everything up.", "Um sich zu erholen ohne auf alles verzichten zu müssen."),
+                t: tr("Handicap au quotidien", "Disability & daily life", "Behinderung im Alltag"),
+                p: tr("Sur le long terme, devenir plus autonome et indépendant au quotidien.", "Over the long term, becoming more autonomous and independent day to day.", "Langfristig selbstständiger und unabhängiger im Alltag werden."),
               },
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" /><path d="M3 13h18" /></svg>
                 ),
                 t: tr("Maintien en emploi", "Staying employed", "Beschäftigungserhalt"),
-                p: tr("Pour rester autonome et productif au travail.", "To remain independent and productive at work.", "Um bei der Arbeit selbstständig und produktiv zu bleiben."),
+                p: tr("Récupérer sans tout sacrifier, et rester autonome au travail. Aides RQTH mobilisables.", "Recovering without giving everything up, and staying independent at work.", "Sich erholen ohne auf alles zu verzichten und bei der Arbeit selbstständig bleiben."),
               },
               {
                 icon: (
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="5" r="2.2" /><circle cx="16" cy="8" r="1.6" /><path d="M6 21v-6l-2-4a2 2 0 013.6-1.6L9 12h3l2 3v6" /><path d="M14 21v-5l2-3" /></svg>
                 ),
                 t: tr("Vie parentale", "Parenting", "Elternleben"),
-                p: tr("Porter son enfant, le suivre, être là.", "Carrying your child, keeping up, being there.", "Sein Kind tragen, begleiten, da sein."),
+                p: tr("Gagner en autonomie au quotidien avec des enfants.", "Gaining day-to-day independence with children.", "Im Alltag mit Kindern selbstständiger werden."),
               },
             ].map((c, i) => (
               <div key={i} className="card-cream p-6 flex flex-col items-start gap-3">
@@ -317,12 +312,14 @@ function Landing() {
             <AutoCarousel>
               {[
                 { img: "/pauline.png", n: "Dr Pauline Coignard", p: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "MPR Physician · Kerpape Centre · President APPROCHE · SOFMER", "MPR-Ärztin · Kerpape Zentrum · Präsidentin APPROCHE · SOFMER"), q: tr("Une béquille qui rend les mains au patient : une grande avancée !", "Une béquille qui rend les mains au patient : une grande avancée !", "Une béquille qui rend les mains au patient : une grande avancée !") },
-                { img: "/selim.png", n: "Salim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)") },
-                { img: "/marc.jpg", n: "Marc", p: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), q: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.") },
+                { img: undefined as string | undefined, n: "Salim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)") },
+                { img: undefined as string | undefined, n: "Joachim", p: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), q: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.") },
               ].map((t, i) => (
-                <div key={i} className="card-white p-5 w-[320px] md:w-[380px] flex flex-col">
+                <div key={i} className="card-white p-5 w-[320px] md:w-[380px] h-full flex flex-col">
                   <div className="flex items-center gap-4">
-                    <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
+                    {t.img && (
+                      <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" />
+                    )}
                     <div>
                       <div className="font-bold" style={{ color: INK }}>{t.n}</div>
                       <div className="text-xs" style={{ color: INK_MUTED }}>{t.p}</div>
@@ -376,9 +373,12 @@ function Landing() {
                 ["/logoTF1.png", "TF1"],
                 ["/logofranceTV2.jpg", "France Télévisions"],
                 ["/mediapositif.png", "Le Média Positif"],
+                ["/logofaireface.jpg", "Faire Face"],
+                ["/logohacavie.png", "Hacavie"],
+                ["/logocnrsinnovation.png", "CNRS Innovation"],
               ].map(([src, alt]) => (
-                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 160, height: 72 }}>
-                  <img src={src} alt={alt} className="object-contain" style={{ height: 40 }} />
+                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 170, height: 80 }}>
+                  <img src={src} alt={alt} className="object-contain" style={{ maxHeight: 52, maxWidth: 150 }} />
                 </div>
               ))}
             </AutoCarousel>
@@ -411,7 +411,7 @@ function Landing() {
 
       {/* 10 — ACTUALITÉ + CTA (WHITE) */}
       <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-lg mx-auto text-center">
+        <div className="max-w-xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>
             {tr(<>Suis l'actualité<br />de legmio.</>, <>Follow<br />legmio's news.</>, <>Folge den Neuigkeiten<br />von legmio.</>)}
           </h2>
@@ -462,8 +462,8 @@ function WallOfLove() {
     "Seeing your invention lifts my spirits.",
     "It really seems to give back freedom of movement.",
   ];
-  const row1 = tr(row1Fr, row1Fr, row1Fr);
-  const row2 = tr(row2Fr, row2Fr, row2Fr);
+  const row1 = tr(row1Fr, row1En);
+  const row2 = tr(row2Fr, row2En);
   const dup1 = [...row1, ...row1];
   const dup2 = [...row2, ...row2];
   const Card = ({ q }: { q: string }) => (
@@ -504,7 +504,7 @@ function Roadmap() {
   const currentIdx = steps.findIndex((s) => s.state === "current");
   const progressPct = (currentIdx / (steps.length - 1)) * 100;
   const CIRCLE = 18;
-  const UPCOMING_TEXT = "#A89ED0";
+  const UPCOMING_TEXT = "#686D83";
   return (
     <div className="mt-16">
       <div className="hidden md:block relative pt-16 pb-4">
@@ -528,7 +528,7 @@ function Roadmap() {
                       height: isCurrent ? CIRCLE + 6 : CIRCLE,
                       backgroundColor: (done || isCurrent) ? ACCENT : WHITE,
                       border: `2px solid ${upcoming ? BORDER_LIGHT : ACCENT}`,
-                      boxShadow: isCurrent ? `0 0 0 6px rgba(245,200,66,0.25)` : "none",
+                      boxShadow: isCurrent ? `0 0 0 6px rgba(255,202,117,0.25)` : "none",
                     }}
                   />
                 </div>
@@ -566,9 +566,9 @@ function Roadmap() {
 function InstaCards() {
   const { tr } = useLanguage();
   const items = [
-    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views", "1 Mio. Aufrufe") },
-    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M de vues", "3.6M views", "3,6 Mio. Aufrufe") },
-    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
+    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.jpg", label: tr("1M de vues", "1M views", "1 Mio. Aufrufe") },
+    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.jpg", label: tr("3,6M de vues", "3.6M views", "3,6 Mio. Aufrufe") },
+    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.jpg", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
   ];
   const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -615,11 +615,13 @@ function InstaCards() {
               type="button"
               aria-label={`Slide ${i + 1}`}
               onClick={() => goTo(i)}
-              className="rounded-full transition"
+              className="rounded-full transition flex items-center justify-center"
               style={{
-                width: 8,
-                height: 8,
-                backgroundColor: i === active ? ACCENT : "#4B3C8F",
+                width: 44,
+                height: 44,
+                padding: 18,
+                backgroundClip: "content-box",
+                backgroundColor: i === active ? ACCENT : "#6B66A0",
                 opacity: i === active ? 1 : 0.7,
               }}
             />

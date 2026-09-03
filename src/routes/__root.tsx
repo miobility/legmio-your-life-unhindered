@@ -10,13 +10,17 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+
+// Domaine de production. Les apercus de lien exigent des URL absolues :
+// si le site change de domaine, c'est la seule ligne a modifier.
+const SITE_URL = "https://legmio.com";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LanguageProvider } from "@/lib/i18n";
 import { Header, StickyBanner, Footer } from "@/components/Layout";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#120B3B" }}>
+    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#0D0D29" }}>
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold font-display" style={{ color: "#FFFFFF" }}>404</h1>
         <h2 className="mt-4 text-xl font-semibold" style={{ color: "#FFFFFF" }}>Page not found</h2>
@@ -36,7 +40,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
   return (
-    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#120B3B" }}>
+    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#0D0D29" }}>
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold" style={{ color: "#FFFFFF" }}>This page didn't load</h1>
         <p className="mt-2 text-sm" style={{ color: "#A89ED0" }}>Something went wrong.</p>
@@ -60,10 +64,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "La seule béquille conçue pour durer. Pas juste ta rééducation. Ta vie." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: `${SITE_URL}/og-image.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "legmio — Des mains libres et une autonomie enfin retrouvée." },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:site_name", content: "legmio" },
+      { property: "og:locale", content: "fr_FR" },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.jpg` },
     ],
     links: [
+      { rel: "canonical", href: SITE_URL },
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/only_logo.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/logo_legmio.svg", type: "image/svg+xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" },
@@ -110,7 +123,7 @@ function RootComponent() {
       <LanguageProvider>
         <StickyBanner />
         <Header />
-        <main className="pt-24">
+        <main className="pt-[105px]">
           <Outlet />
         </main>
         <Footer />
