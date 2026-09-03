@@ -250,10 +250,12 @@ export function Produit() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {reviews.map((r, i) => (
-              <div key={i} className="card-white p-5">
+              <div key={i} className="card-white p-5 flex flex-col">
                 <h3 className="font-display font-bold text-lg leading-snug" style={{ color: INK }}>{r.title}</h3>
                 <p className="mt-2 text-sm" style={{ color: INK_MUTED }}>{r.quote}</p>
-                <div className="mt-4 flex items-center gap-3">
+                {/* mt-auto : les trois signatures s'alignent en bas, quelle que
+                    soit la longueur de la citation. */}
+                <div className="mt-auto pt-5 flex items-center gap-3">
                   {r.img && (
                     <img src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover" loading="lazy" width={48} height={48} />
                   )}

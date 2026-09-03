@@ -126,9 +126,9 @@ export function SpecsStrip() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
       {pills.map((p, i) => (
-        <div key={i} className="fade-up carte-survol rounded-2xl p-6 flex flex-col items-start gap-2.5" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
+        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
           <div style={{ color: NAVY }}>{p.icon}</div>
-          <div className="font-display font-bold text-lg leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
+          <div className="font-display font-bold text-base leading-tight text-balance">{tr(p.kFr, p.kEn, p.kDe)}</div>
           <div className="text-sm leading-snug" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
         </div>
       ))}
@@ -148,9 +148,9 @@ export function ProductFeatureGrid() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
       {items.map((p, i) => (
-        <div key={i} className="fade-up carte-survol rounded-2xl p-6 flex flex-col items-start gap-2.5" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
+        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
           <div style={{ color: NAVY }}>{p.icon}</div>
-          <div className="font-display font-bold text-lg leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
+          <div className="font-display font-bold text-base leading-tight text-balance">{tr(p.kFr, p.kEn, p.kDe)}</div>
           <div className="text-sm leading-snug" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
         </div>
       ))}
@@ -539,8 +539,8 @@ function Roadmap() {
   return (
     <div className="mt-12" ref={bloc}>
       <div className="hidden md:block relative pt-16 pb-4">
-        <div className="absolute h-[3px] rounded-full" style={{ left: "10%", right: "10%", top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER_LIGHT }} />
-        <div className="absolute h-[3px] rounded-full ligne-progression" style={{ left: "10%", top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${tracee ? progressPct * 0.8 : 0}%` }} />
+        <div className="absolute h-[3px] rounded-full" style={{ left: "10%", right: "10%", top: "2.25rem", backgroundColor: BORDER_LIGHT }} />
+        <div className="absolute h-[3px] rounded-full ligne-progression" style={{ left: "10%", top: "2.25rem", backgroundColor: ACCENT, width: `${tracee ? progressPct * 0.8 : 0}%` }} />
         <div className="relative grid grid-cols-5 gap-4">
           {steps.map((s, i) => {
             const done = s.state === "done";
@@ -548,7 +548,7 @@ function Roadmap() {
             const upcoming = s.state === "upcoming";
             return (
               <div key={i} className="flex flex-col items-center text-center">
-                <div className="h-12 flex items-end justify-center px-2">
+                <div className="h-16 flex items-end justify-center px-2">
                   <div className="text-base leading-tight font-display" style={{ color: upcoming ? UPCOMING_TEXT : INK, fontWeight: isCurrent ? 700 : 600 }}>{s.t}</div>
                 </div>
                 <div className="my-3 flex items-center justify-center" style={{ height: CIRCLE + 6 }}>
