@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, type ReactNode } from "react";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 
 export type Lang = "fr" | "en" | "de";
 
@@ -62,6 +63,8 @@ type Ctx = {
   t: (k: string) => string;
   tr: <T>(f: T, e: T, d?: T) => T;
   hubspotUrl: string;
+  /** Prefixe un chemin interne de la langue courante. */
+  lien: (chemin: string) => string;
 };
 const LangCtx = createContext<Ctx>({
   lang: "fr",
@@ -69,25 +72,92 @@ const LangCtx = createContext<Ctx>({
   t: (k) => k,
   tr: (f) => f,
   hubspotUrl: HUBSPOT_FR,
+  lien: (c) => c,
 });
 
+export type Page =
+  | "accueil" | "produit" | "faq" | "blog" | "pro" | "mentions" | "confidentialite";
+
+/**
+ * Adresse de chaque page dans chaque langue, sans le prefixe de langue.
+ * Un Allemand cherche « Impressum », pas « mentions legales » : le mot compte
+ * autant pour lui que pour Google.
+ */
+export const CHEMINS: Record<Lang, Record<Page, string>> = {
+  fr: {
+    accueil: "/", produit: "/produit", faq: "/faq", blog: "/blog",
+    pro: "/pro", mentions: "/mentions-legales", confidentialite: "/confidentialite",
+  },
+  en: {
+    accueil: "/", produit: "/crutch", faq: "/faq", blog: "/blog",
+    pro: "/professionals", mentions: "/legal-notice", confidentialite: "/privacy",
+  },
+  de: {
+    accueil: "/", produit: "/kruecke", faq: "/faq", blog: "/blog",
+    pro: "/fachbereich", mentions: "/impressum", confidentialite: "/datenschutz",
+  },
+};
+
+const PAGES = Object.keys(CHEMINS.fr) as Page[];
+
+/** Langue portee par l'adresse : /en/... et /de/..., le francais a la racine. */
+export function langDeChemin(pathname: string): Lang {
+  if (pathname === "/en" || pathname.startsWith("/en/")) return "en";
+  if (pathname === "/de" || pathname.startsWith("/de/")) return "de";
+  return "fr";
+}
+
+/** Chemin sans son prefixe de langue : "/en/crutch" -> "/crutch". */
+export function cheminSansLangue(pathname: string): string {
+  const l = langDeChemin(pathname);
+  if (l === "fr") return pathname;
+  const reste = pathname.slice(3);
+  return reste === "" ? "/" : reste;
+}
+
+/** Adresse complete d'une page : ("de", "produit") -> "/de/kruecke". */
+export function cheminDe(l: Lang, page: Page): string {
+  const base = CHEMINS[l][page];
+  if (l === "fr") return base;
+  return base === "/" ? `/${l}` : `/${l}${base}`;
+}
+
+/** Quelle page sert cette adresse, quelle que soit la langue. */
+export function pageDeChemin(pathname: string): Page {
+  const table = CHEMINS[langDeChemin(pathname)];
+  const reste = cheminSansLangue(pathname).replace(/\/$/, "") || "/";
+  return PAGES.find((k) => table[k] === reste) ?? "accueil";
+}
+
+/** Meme page dans une autre langue : ("/de/kruecke", "en") -> "/en/crutch". */
+export function cheminVers(pathname: string, l: Lang): string {
+  return cheminDe(l, pageDeChemin(pathname));
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("fr");
-  useEffect(() => {
-    const saved = typeof window !== "undefined" ? (localStorage.getItem("legmio-lang") as Lang | null) : null;
-    if (saved === "fr" || saved === "en" || saved === "de") setLangState(saved);
-  }, []);
+  // La langue vient de l'URL, plus du navigateur : sans cela, les robots
+  // (Google, apercus de lien) ne voient jamais que le francais.
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const lang = langDeChemin(pathname);
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (typeof document !== "undefined") document.documentElement.lang = lang;
   }, [lang]);
+
   const setLang = (l: Lang) => {
-    setLangState(l);
-    if (typeof window !== "undefined") localStorage.setItem("legmio-lang", l);
+    if (l === lang) return;
+    navigate({ to: cheminVers(pathname, l) });
   };
   const t = (k: string) => dicts[lang][k] ?? dicts.fr[k] ?? k;
   const tr = <T,>(f: T, e: T, d?: T): T => (lang === "de" ? (d !== undefined ? d : e) : lang === "en" ? e : f);
   const hubspotUrl = lang === "fr" ? HUBSPOT_FR : HUBSPOT_EN;
-  return <LangCtx.Provider value={{ lang, setLang, t, tr, hubspotUrl }}>{children}</LangCtx.Provider>;
+  // Les composants ecrivent le chemin francais ; on le traduit ici.
+  const lien = (cheminFr: string) => {
+    const page = PAGES.find((k) => CHEMINS.fr[k] === cheminFr);
+    return page ? cheminDe(lang, page) : cheminFr;
+  };
+  return <LangCtx.Provider value={{ lang, setLang, t, tr, hubspotUrl, lien }}>{children}</LangCtx.Provider>;
 }
 
 export function useLanguage() {

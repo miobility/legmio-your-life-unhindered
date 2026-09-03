@@ -58,24 +58,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "legmio — La béquille qui libère les mains" },
-      { name: "description", content: "legmio est la première béquille ergonomique avec un mode mains libres. Née de la recherche CNRS/Sorbonne Université. Commercialisation courant 2027." },
       { name: "author", content: "legmio" },
-      { property: "og:title", content: "legmio — La béquille qui libère les mains" },
-      { property: "og:description", content: "La seule béquille conçue pour durer. Pas juste ta rééducation. Ta vie." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: `${SITE_URL}/og-image.jpg` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "legmio — Des mains libres et une autonomie enfin retrouvée." },
-      { property: "og:url", content: SITE_URL },
       { property: "og:site_name", content: "legmio" },
-      { property: "og:locale", content: "fr_FR" },
-      { name: "twitter:image", content: `${SITE_URL}/og-image.jpg` },
     ],
     links: [
-      { rel: "canonical", href: SITE_URL },
       { rel: "stylesheet", href: appCss },
       // favicon.ico : les navigateurs et le robot de Google le demandent a la
       // racine meme sans balise. Il repondait 404.

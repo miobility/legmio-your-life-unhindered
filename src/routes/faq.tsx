@@ -1,17 +1,11 @@
+import { metaDe } from "@/lib/meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { IconChevron } from "@/components/Icons";
 import { useLanguage } from "@/lib/i18n";
 
 export const Route = createFileRoute("/faq")({
-  head: () => ({
-    meta: [
-      { title: "legmio — FAQ" },
-      { name: "description", content: "Toutes les réponses sur legmio : produit, usage, prix, prise en charge, SAV." },
-      { property: "og:title", content: "legmio — FAQ" },
-      { property: "og:description", content: "Tout ce que tu veux savoir sur legmio." },
-    ],
-  }),
+  head: () => metaDe("fr", "faq"),
   component: Faq,
 });
 
@@ -129,7 +123,7 @@ const themes: Theme[] = [
   },
 ];
 
-function Faq() {
+export function Faq() {
   const { lang, tr } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
   const idx = lang === "fr" ? 0 : lang === "de" ? 2 : 1;

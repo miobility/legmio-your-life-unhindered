@@ -1,13 +1,9 @@
+import { metaDe } from "@/lib/meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useLanguage } from "@/lib/i18n";
 
 export const Route = createFileRoute("/confidentialite")({
-  head: () => ({
-    meta: [
-      { title: "legmio — Politique de confidentialité" },
-      { name: "description", content: "Politique de confidentialité du site legmio.com." },
-    ],
-  }),
+  head: () => metaDe("fr", "confidentialite"),
   component: Confidentialite,
 });
 
@@ -25,7 +21,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function Confidentialite() {
+export function Confidentialite() {
   const { tr } = useLanguage();
   return (
     <div style={{ backgroundColor: BG }}>

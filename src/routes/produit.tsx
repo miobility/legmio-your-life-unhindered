@@ -1,3 +1,4 @@
+import { metaDe } from "@/lib/meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { IconChevron, IconCheck, IconArrowRight } from "@/components/Icons";
@@ -15,14 +16,7 @@ const BORDER_LIGHT = "#E8E4DC";
 const ACCENT = "#FFCA75";
 
 export const Route = createFileRoute("/produit")({
-  head: () => ({
-    meta: [
-      { title: "legmio — La béquille" },
-      { name: "description", content: "La béquille legmio, la première béquille ergonomique avec un mode mains libres. Conçue et assemblée en France." },
-      { property: "og:title", content: "legmio — La béquille" },
-      { property: "og:description", content: "La première béquille ergonomique avec un mode mains libres." },
-    ],
-  }),
+  head: () => metaDe("fr", "produit"),
   component: Produit,
 });
 
@@ -55,8 +49,8 @@ function Accordion({ title, children, defaultOpen = false }: { title: string; ch
 
 type Review = { title: string; quote: string; name: string; profile: string; date: string; img?: string };
 
-function Produit() {
-  const { tr, hubspotUrl } = useLanguage();
+export function Produit() {
+  const { tr, hubspotUrl, lien } = useLanguage();
   const gallery = [
     { src: "/bequille.png", alt: tr("La béquille legmio vue de profil.", "The legmio crutch seen from the side.", "Die legmio-Krücke von der Seite.") },
     { src: "/mode-bequille.jpg", alt: tr("Un utilisateur marche avec deux béquilles legmio, les mains posées sur les poignées.", "A user walks with two legmio crutches, hands resting on the grips.", "Ein Nutzer geht mit zwei legmio-Krücken, die Hände auf den Griffen.") },
@@ -280,7 +274,7 @@ function Produit() {
         <div className="max-w-6xl mx-auto">
           <div className="max-w-3xl mx-auto mb-8 text-center">
             <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>{tr("Questions fréquentes", "Frequently asked questions", "Häufig gestellte Fragen")}</h2>
-            <a href="/faq" className="mt-4 inline-block text-sm underline" style={{ color: INK }}>{tr("Voir toutes les questions", "See all questions", "Alle Fragen ansehen")}</a>
+            <a href={lien("/faq")} className="mt-4 inline-block text-sm underline" style={{ color: INK }}>{tr("Voir toutes les questions", "See all questions", "Alle Fragen ansehen")}</a>
           </div>
           <div className="max-w-3xl mx-auto">
             {[
