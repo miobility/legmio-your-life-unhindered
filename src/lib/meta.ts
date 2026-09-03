@@ -1,19 +1,8 @@
-import type { Lang } from "@/lib/i18n";
+import { cheminDe, type Lang, type Page } from "@/lib/i18n";
+
+export type { Page };
 
 export const SITE_URL = "https://legmio.com";
-
-export type Page = "accueil" | "produit" | "faq" | "blog" | "pro" | "mentions" | "confidentialite";
-
-/** Chemin de chaque page, sans prefixe de langue. */
-const CHEMINS: Record<Page, string> = {
-  accueil: "/",
-  produit: "/produit",
-  faq: "/faq",
-  blog: "/blog",
-  pro: "/pro",
-  mentions: "/mentions-legales",
-  confidentialite: "/confidentialite",
-};
 
 type Textes = { titre: string; description: string; ogTitre: string; ogDescription: string };
 
@@ -132,9 +121,8 @@ const ALTS: Record<Lang, string> = {
 const IMAGES: Record<Lang, string> = { fr: "/og-image.jpg", en: "/og-image-en.jpg", de: "/og-image-de.jpg" };
 
 export function urlDe(lang: Lang, page: Page): string {
-  const chemin = CHEMINS[page];
-  if (lang === "fr") return chemin === "/" ? SITE_URL : `${SITE_URL}${chemin}`;
-  return chemin === "/" ? `${SITE_URL}/${lang}` : `${SITE_URL}/${lang}${chemin}`;
+  const chemin = cheminDe(lang, page);
+  return chemin === "/" ? SITE_URL : `${SITE_URL}${chemin}`;
 }
 
 /**

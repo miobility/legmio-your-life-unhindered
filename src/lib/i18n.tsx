@@ -75,6 +75,31 @@ const LangCtx = createContext<Ctx>({
   lien: (c) => c,
 });
 
+export type Page =
+  | "accueil" | "produit" | "faq" | "blog" | "pro" | "mentions" | "confidentialite";
+
+/**
+ * Adresse de chaque page dans chaque langue, sans le prefixe de langue.
+ * Un Allemand cherche « Impressum », pas « mentions legales » : le mot compte
+ * autant pour lui que pour Google.
+ */
+export const CHEMINS: Record<Lang, Record<Page, string>> = {
+  fr: {
+    accueil: "/", produit: "/produit", faq: "/faq", blog: "/blog",
+    pro: "/pro", mentions: "/mentions-legales", confidentialite: "/confidentialite",
+  },
+  en: {
+    accueil: "/", produit: "/crutch", faq: "/faq", blog: "/blog",
+    pro: "/professionals", mentions: "/legal-notice", confidentialite: "/privacy",
+  },
+  de: {
+    accueil: "/", produit: "/kruecke", faq: "/faq", blog: "/blog",
+    pro: "/fachbereich", mentions: "/impressum", confidentialite: "/datenschutz",
+  },
+};
+
+const PAGES = Object.keys(CHEMINS.fr) as Page[];
+
 /** Langue portee par l'adresse : /en/... et /de/..., le francais a la racine. */
 export function langDeChemin(pathname: string): Lang {
   if (pathname === "/en" || pathname.startsWith("/en/")) return "en";
@@ -82,7 +107,7 @@ export function langDeChemin(pathname: string): Lang {
   return "fr";
 }
 
-/** Chemin sans son prefixe de langue : "/en/produit" -> "/produit". */
+/** Chemin sans son prefixe de langue : "/en/crutch" -> "/crutch". */
 export function cheminSansLangue(pathname: string): string {
   const l = langDeChemin(pathname);
   if (l === "fr") return pathname;
@@ -90,11 +115,23 @@ export function cheminSansLangue(pathname: string): string {
   return reste === "" ? "/" : reste;
 }
 
-/** Meme page dans une autre langue : ("/produit", "de") -> "/de/produit". */
-export function cheminVers(pathname: string, l: Lang): string {
-  const base = cheminSansLangue(pathname);
+/** Adresse complete d'une page : ("de", "produit") -> "/de/kruecke". */
+export function cheminDe(l: Lang, page: Page): string {
+  const base = CHEMINS[l][page];
   if (l === "fr") return base;
   return base === "/" ? `/${l}` : `/${l}${base}`;
+}
+
+/** Quelle page sert cette adresse, quelle que soit la langue. */
+export function pageDeChemin(pathname: string): Page {
+  const table = CHEMINS[langDeChemin(pathname)];
+  const reste = cheminSansLangue(pathname).replace(/\/$/, "") || "/";
+  return PAGES.find((k) => table[k] === reste) ?? "accueil";
+}
+
+/** Meme page dans une autre langue : ("/de/kruecke", "en") -> "/en/crutch". */
+export function cheminVers(pathname: string, l: Lang): string {
+  return cheminDe(l, pageDeChemin(pathname));
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -115,7 +152,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const t = (k: string) => dicts[lang][k] ?? dicts.fr[k] ?? k;
   const tr = <T,>(f: T, e: T, d?: T): T => (lang === "de" ? (d !== undefined ? d : e) : lang === "en" ? e : f);
   const hubspotUrl = lang === "fr" ? HUBSPOT_FR : HUBSPOT_EN;
-  const lien = (chemin: string) => (lang === "fr" ? chemin : chemin === "/" ? `/${lang}` : `/${lang}${chemin}`);
+  // Les composants ecrivent le chemin francais ; on le traduit ici.
+  const lien = (cheminFr: string) => {
+    const page = PAGES.find((k) => CHEMINS.fr[k] === cheminFr);
+    return page ? cheminDe(lang, page) : cheminFr;
+  };
   return <LangCtx.Provider value={{ lang, setLang, t, tr, hubspotUrl, lien }}>{children}</LangCtx.Provider>;
 }
 

@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { metaDe } from "@/lib/meta";
-import { MentionsLegales } from "@/routes/mentions-legales";
+import { ProPage } from "@/routes/pro";
 
 // Meme page, autres metadonnees. La langue est deduite de l'adresse
 // par LanguageProvider, le composant n'a rien a savoir.
-export const Route = createFileRoute("/en/mentions-legales")({
-  head: () => metaDe("en", "mentions"),
-  component: MentionsLegales,
+export const Route = createFileRoute("/en/professionals")({
+  head: () => metaDe("en", "pro"),
+  component: ProPage,
 });

@@ -1,16 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { CHEMINS, cheminDe, type Page } from "@/lib/i18n";
 
 // Domaine de repli si l'origine ne peut pas etre deduite de la requete.
 const FALLBACK_ORIGIN = "https://legmio.com";
 
 const LANGS = ["fr", "en", "de"] as const;
-
-// Le francais vit a la racine, les autres langues sous /en et /de.
-function chemin(lang: string, page: string) {
-  if (lang === "fr") return page;
-  return page === "/" ? `/${lang}` : `/${lang}${page}`;
-}
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -23,14 +18,14 @@ export const Route = createFileRoute("/sitemap.xml")({
         } catch {
           // on garde le repli
         }
-        const entries = [
-          { path: "/", changefreq: "weekly", priority: "1.0" },
-          { path: "/produit", changefreq: "monthly", priority: "0.8" },
-          { path: "/faq", changefreq: "monthly", priority: "0.6" },
-          { path: "/blog", changefreq: "weekly", priority: "0.6" },
-          { path: "/pro", changefreq: "monthly", priority: "0.5" },
-          { path: "/mentions-legales", changefreq: "yearly", priority: "0.1" },
-          { path: "/confidentialite", changefreq: "yearly", priority: "0.1" },
+        const entries: { page: Page; changefreq: string; priority: string }[] = [
+          { page: "accueil", changefreq: "weekly", priority: "1.0" },
+          { page: "produit", changefreq: "monthly", priority: "0.8" },
+          { page: "faq", changefreq: "monthly", priority: "0.6" },
+          { page: "blog", changefreq: "weekly", priority: "0.6" },
+          { page: "pro", changefreq: "monthly", priority: "0.5" },
+          { page: "mentions", changefreq: "yearly", priority: "0.1" },
+          { page: "confidentialite", changefreq: "yearly", priority: "0.1" },
         ];
         // Chaque page est declaree une fois par langue, et chaque declaration
         // liste ses trois soeurs : c'est ainsi que Google sert la bonne version
@@ -39,13 +34,13 @@ export const Route = createFileRoute("/sitemap.xml")({
         for (const e of entries) {
           const alternates = LANGS.map(
             (l) =>
-              `    <xhtml:link rel="alternate" hreflang="${l}" href="${origin}${chemin(l, e.path)}"/>`
+              `    <xhtml:link rel="alternate" hreflang="${l}" href="${origin}${cheminDe(l, e.page)}"/>`
           ).concat(
-            `    <xhtml:link rel="alternate" hreflang="x-default" href="${origin}${e.path}"/>`
+            `    <xhtml:link rel="alternate" hreflang="x-default" href="${origin}${CHEMINS.fr[e.page]}"/>`
           ).join("\n");
           for (const l of LANGS) {
             urls.push(
-              `  <url>\n    <loc>${origin}${chemin(l, e.path)}</loc>\n${alternates}\n    <changefreq>${e.changefreq}</changefreq>\n    <priority>${e.priority}</priority>\n  </url>`
+              `  <url>\n    <loc>${origin}${cheminDe(l, e.page)}</loc>\n${alternates}\n    <changefreq>${e.changefreq}</changefreq>\n    <priority>${e.priority}</priority>\n  </url>`
             );
           }
         }

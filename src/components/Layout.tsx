@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { useLanguage, LANGS, type Lang } from "@/lib/i18n";
+import { useLanguage, pageDeChemin, LANGS, type Lang } from "@/lib/i18n";
 import { IconInstagram, IconTiktok, IconLinkedin } from "@/components/Icons";
 
 const SOCIAL = {
@@ -115,11 +115,12 @@ export function Header() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   // Comparaison sur segment complet : "/produit" commencait par "/pro",
   // ce qui allumait l'onglet Espace pro en meme temps que Bequille.
-  const onPath = (p: string) => pathname === p || pathname.startsWith(p + "/");
-  const isProduct = onPath("/produit") || onPath("/bequille");
-  const isFaq = onPath("/faq");
-  const isBlog = onPath("/blog");
-  const isPro = onPath("/pro");
+  // Les adresses changent avec la langue : on compare la page, pas le chemin.
+  const page = pageDeChemin(pathname);
+  const isProduct = page === "produit";
+  const isFaq = page === "faq";
+  const isBlog = page === "blog";
+  const isPro = page === "pro";
   const linkStyle = (active: boolean) => ({ color: active ? ACCENT : WHITE });
   const linkClass = (active: boolean) =>
     `hover:opacity-80 transition ${active ? "font-bold" : ""}`;
