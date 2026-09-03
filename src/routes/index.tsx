@@ -1,3 +1,4 @@
+import { metaDe } from "@/lib/meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
@@ -12,14 +13,7 @@ import { Compteur } from "@/components/Compteur";
 import { MARGE_TEMPS_FORT, SEUIL } from "@/lib/apparition";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "legmio — La béquille qui libère les mains" },
-      { name: "description", content: "legmio est la première béquille ergonomique avec un mode mains libres. Née de la recherche CNRS/Sorbonne Université. Commercialisation courant 2027." },
-      { property: "og:title", content: "legmio — La béquille qui libère les mains" },
-      { property: "og:description", content: "Des mains libres et une autonomie enfin retrouvée." },
-    ],
-  }),
+  head: () => metaDe("fr", "accueil"),
   component: Landing,
 });
 
@@ -164,8 +158,8 @@ export function ProductFeatureGrid() {
   );
 }
 
-function Landing() {
-  const { tr } = useLanguage();
+export function Landing() {
+  const { tr, lien } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -256,7 +250,7 @@ function Landing() {
             <SpecsStrip />
           </div>
           <div className="mt-12 text-center">
-            <Link to="/produit" className="btn-light btn-light-hover">
+            <Link to={lien("/produit")} className="btn-light btn-light-hover">
               {tr("Découvrir la béquille", "Discover the crutch", "Die Krücke entdecken")} <IconArrowRight size={16} />
             </Link>
           </div>
@@ -438,7 +432,7 @@ function Landing() {
           <p className="mt-10 text-base" style={{ color: INK_MUTED }}>
             {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?", "Gesundheitsfachkraft oder Händler?")}
             <br className="sm:hidden" />{" "}
-            <a href="/pro" className="underline" style={{ color: NAVY }}>{tr("Espace pro", "Pro space", "Fachbereich")} →</a>
+            <a href={lien("/pro")} className="underline" style={{ color: NAVY }}>{tr("Espace pro", "Pro space", "Fachbereich")} →</a>
           </p>
         </div>
       </section>

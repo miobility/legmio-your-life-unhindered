@@ -1,13 +1,9 @@
+import { metaDe } from "@/lib/meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useLanguage } from "@/lib/i18n";
 
 export const Route = createFileRoute("/mentions-legales")({
-  head: () => ({
-    meta: [
-      { title: "legmio — Mentions légales" },
-      { name: "description", content: "Mentions légales du site legmio.com." },
-    ],
-  }),
+  head: () => metaDe("fr", "mentions"),
   component: MentionsLegales,
 });
 
@@ -16,7 +12,7 @@ const MUTED = "#A89ED0";
 const BG = "#0D0D29";
 const BG_ALT = "#15122E";
 
-function MentionsLegales() {
+export function MentionsLegales() {
   const { tr } = useLanguage();
   return (
     <div style={{ backgroundColor: BG }}>

@@ -109,7 +109,7 @@ function useRetourHaut() {
 }
 
 export function Header() {
-  const { t, hubspotUrl } = useLanguage();
+  const { t, hubspotUrl, lien } = useLanguage();
   const retourHaut = useRetourHaut();
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -128,15 +128,15 @@ export function Header() {
       className="fixed left-0 right-0 z-40 border-b"
       style={{ top: 40, backgroundColor: NAVY, borderColor: BORDER, boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-6">
-        <Link to="/" onClick={retourHaut} className="font-display font-bold text-2xl shrink-0" style={{ color: WHITE }}>
+        <Link to={lien("/")} onClick={retourHaut} className="font-display font-bold text-2xl shrink-0" style={{ color: WHITE }}>
           <img src={"/logo_legmio.svg"} alt="Legmio" className="h-10 w-auto" />
         </Link>
         <div className="flex-1" />
         <nav className="hidden md:flex items-center gap-6 text-sm">
-          <Link to="/produit" className={linkClass(isProduct)} style={linkStyle(isProduct)}>{t("nav_product")}</Link>
-          <Link to="/faq" className={linkClass(isFaq)} style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
-          <Link to="/blog" className={linkClass(isBlog)} style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
-          <Link to="/pro" className={linkClass(isPro)} style={linkStyle(isPro)}>{t("nav_pro")}</Link>
+          <Link to={lien("/produit")} className={linkClass(isProduct)} style={linkStyle(isProduct)}>{t("nav_product")}</Link>
+          <Link to={lien("/faq")} className={linkClass(isFaq)} style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
+          <Link to={lien("/blog")} className={linkClass(isBlog)} style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
+          <Link to={lien("/pro")} className={linkClass(isPro)} style={linkStyle(isPro)}>{t("nav_pro")}</Link>
         </nav>
         <div className="hidden sm:block"><LangSwitcher /></div>
         <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover hidden sm:inline-flex text-sm px-5 py-2.5 items-center gap-1.5">
@@ -148,10 +148,10 @@ export function Header() {
       </div>
       {open && (
         <div id="menu-mobile" className="md:hidden border-t px-4 py-3 flex flex-col" style={{ backgroundColor: NAVY_ALT, borderColor: BORDER }}>
-          <Link to="/produit" onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isProduct)}>{t("nav_product")}</Link>
-          <Link to="/faq" onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
-          <Link to="/blog" onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
-          <Link to="/pro" onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isPro)}>{t("nav_pro")}</Link>
+          <Link to={lien("/produit")} onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isProduct)}>{t("nav_product")}</Link>
+          <Link to={lien("/faq")} onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
+          <Link to={lien("/blog")} onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
+          <Link to={lien("/pro")} onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isPro)}>{t("nav_pro")}</Link>
           <a href={hubspotUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover text-sm px-5 py-2.5 mt-3 self-start inline-flex items-center gap-1.5">
             {t("cta_interested")} <span aria-hidden="true">→</span>
           </a>
@@ -164,13 +164,13 @@ export function Header() {
 
 
 export function Footer() {
-  const { t, tr } = useLanguage();
+  const { t, tr, lien } = useLanguage();
   const retourHaut = useRetourHaut();
   return (
     <footer style={{ backgroundColor: NAVY, color: WHITE }} className="pt-16 pb-8 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="flex flex-col items-start">
-          <Link to="/" onClick={retourHaut} aria-label="legmio — accueil">
+          <Link to={lien("/")} onClick={retourHaut} aria-label="legmio — accueil">
             <img src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto block" />
           </Link>
           <p className="mt-3 text-sm" style={{ color: MUTED }}>{t("footer_tag")}</p>
@@ -178,18 +178,18 @@ export function Footer() {
         <div>
           <h4 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>Navigation</h4>
           <ul className="space-y-2 text-sm" style={{ color: MUTED }}>
-            <li><Link to="/produit" className="hover:text-white">{t("nav_product")}</Link></li>
-            <li><Link to="/faq" className="hover:text-white">{t("nav_faq")}</Link></li>
-            <li><Link to="/blog" className="hover:text-white">{t("nav_blog")}</Link></li>
-            <li><Link to="/pro" className="hover:text-white">{t("nav_pro")}</Link></li>
+            <li><Link to={lien("/produit")} className="hover:text-white">{t("nav_product")}</Link></li>
+            <li><Link to={lien("/faq")} className="hover:text-white">{t("nav_faq")}</Link></li>
+            <li><Link to={lien("/blog")} className="hover:text-white">{t("nav_blog")}</Link></li>
+            <li><Link to={lien("/pro")} className="hover:text-white">{t("nav_pro")}</Link></li>
             <li><a href="mailto:contact@legmio.com" className="hover:text-white">Contact</a></li>
           </ul>
         </div>
         <div>
           <h4 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>{tr("Légal", "Legal", "Rechtliches")}</h4>
           <ul className="space-y-2 text-sm" style={{ color: MUTED }}>
-            <li><Link to="/mentions-legales" className="hover:text-white">{tr("Mentions légales", "Legal notice", "Impressum")}</Link></li>
-            <li><Link to="/confidentialite" className="hover:text-white">{tr("Politique de confidentialité", "Privacy policy", "Datenschutzrichtlinie")}</Link></li>
+            <li><Link to={lien("/mentions-legales")} className="hover:text-white">{tr("Mentions légales", "Legal notice", "Impressum")}</Link></li>
+            <li><Link to={lien("/confidentialite")} className="hover:text-white">{tr("Politique de confidentialité", "Privacy policy", "Datenschutzrichtlinie")}</Link></li>
           </ul>
         </div>
         <div>

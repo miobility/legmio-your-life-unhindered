@@ -17,6 +17,20 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EnProduitRouteImport } from './routes/en/produit'
+import { Route as EnProRouteImport } from './routes/en/pro'
+import { Route as EnMentionsLegalesRouteImport } from './routes/en/mentions-legales'
+import { Route as EnFaqRouteImport } from './routes/en/faq'
+import { Route as EnConfidentialiteRouteImport } from './routes/en/confidentialite'
+import { Route as EnBlogRouteImport } from './routes/en/blog'
+import { Route as EnIndexRouteImport } from './routes/en/index'
+import { Route as DeProduitRouteImport } from './routes/de/produit'
+import { Route as DeProRouteImport } from './routes/de/pro'
+import { Route as DeMentionsLegalesRouteImport } from './routes/de/mentions-legales'
+import { Route as DeFaqRouteImport } from './routes/de/faq'
+import { Route as DeConfidentialiteRouteImport } from './routes/de/confidentialite'
+import { Route as DeBlogRouteImport } from './routes/de/blog'
+import { Route as DeIndexRouteImport } from './routes/de/index'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -58,11 +72,95 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnProduitRoute = EnProduitRouteImport.update({
+  id: '/en/produit',
+  path: '/en/produit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnProRoute = EnProRouteImport.update({
+  id: '/en/pro',
+  path: '/en/pro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnMentionsLegalesRoute = EnMentionsLegalesRouteImport.update({
+  id: '/en/mentions-legales',
+  path: '/en/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnFaqRoute = EnFaqRouteImport.update({
+  id: '/en/faq',
+  path: '/en/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnConfidentialiteRoute = EnConfidentialiteRouteImport.update({
+  id: '/en/confidentialite',
+  path: '/en/confidentialite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnBlogRoute = EnBlogRouteImport.update({
+  id: '/en/blog',
+  path: '/en/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnIndexRoute = EnIndexRouteImport.update({
+  id: '/en/',
+  path: '/en',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeProduitRoute = DeProduitRouteImport.update({
+  id: '/de/produit',
+  path: '/de/produit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeProRoute = DeProRouteImport.update({
+  id: '/de/pro',
+  path: '/de/pro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeMentionsLegalesRoute = DeMentionsLegalesRouteImport.update({
+  id: '/de/mentions-legales',
+  path: '/de/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeFaqRoute = DeFaqRouteImport.update({
+  id: '/de/faq',
+  path: '/de/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeConfidentialiteRoute = DeConfidentialiteRouteImport.update({
+  id: '/de/confidentialite',
+  path: '/de/confidentialite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeBlogRoute = DeBlogRouteImport.update({
+  id: '/de/blog',
+  path: '/de/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeIndexRoute = DeIndexRouteImport.update({
+  id: '/de/',
+  path: '/de',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/confidentialite': typeof ConfidentialiteRoute
+  '/de': typeof DeIndexRoute
+  '/de/blog': typeof DeBlogRoute
+  '/de/confidentialite': typeof DeConfidentialiteRoute
+  '/de/faq': typeof DeFaqRoute
+  '/de/mentions-legales': typeof DeMentionsLegalesRoute
+  '/de/pro': typeof DeProRoute
+  '/de/produit': typeof DeProduitRoute
+  '/en': typeof EnIndexRoute
+  '/en/blog': typeof EnBlogRoute
+  '/en/confidentialite': typeof EnConfidentialiteRoute
+  '/en/faq': typeof EnFaqRoute
+  '/en/mentions-legales': typeof EnMentionsLegalesRoute
+  '/en/pro': typeof EnProRoute
+  '/en/produit': typeof EnProduitRoute
   '/faq': typeof FaqRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/pro': typeof ProRoute
@@ -73,6 +171,20 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/confidentialite': typeof ConfidentialiteRoute
+  '/de': typeof DeIndexRoute
+  '/de/blog': typeof DeBlogRoute
+  '/de/confidentialite': typeof DeConfidentialiteRoute
+  '/de/faq': typeof DeFaqRoute
+  '/de/mentions-legales': typeof DeMentionsLegalesRoute
+  '/de/pro': typeof DeProRoute
+  '/de/produit': typeof DeProduitRoute
+  '/en': typeof EnIndexRoute
+  '/en/blog': typeof EnBlogRoute
+  '/en/confidentialite': typeof EnConfidentialiteRoute
+  '/en/faq': typeof EnFaqRoute
+  '/en/mentions-legales': typeof EnMentionsLegalesRoute
+  '/en/pro': typeof EnProRoute
+  '/en/produit': typeof EnProduitRoute
   '/faq': typeof FaqRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/pro': typeof ProRoute
@@ -84,6 +196,20 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/confidentialite': typeof ConfidentialiteRoute
+  '/de/': typeof DeIndexRoute
+  '/de/blog': typeof DeBlogRoute
+  '/de/confidentialite': typeof DeConfidentialiteRoute
+  '/de/faq': typeof DeFaqRoute
+  '/de/mentions-legales': typeof DeMentionsLegalesRoute
+  '/de/pro': typeof DeProRoute
+  '/de/produit': typeof DeProduitRoute
+  '/en/': typeof EnIndexRoute
+  '/en/blog': typeof EnBlogRoute
+  '/en/confidentialite': typeof EnConfidentialiteRoute
+  '/en/faq': typeof EnFaqRoute
+  '/en/mentions-legales': typeof EnMentionsLegalesRoute
+  '/en/pro': typeof EnProRoute
+  '/en/produit': typeof EnProduitRoute
   '/faq': typeof FaqRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/pro': typeof ProRoute
@@ -96,6 +222,20 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/confidentialite'
+    | '/de'
+    | '/de/blog'
+    | '/de/confidentialite'
+    | '/de/faq'
+    | '/de/mentions-legales'
+    | '/de/pro'
+    | '/de/produit'
+    | '/en'
+    | '/en/blog'
+    | '/en/confidentialite'
+    | '/en/faq'
+    | '/en/mentions-legales'
+    | '/en/pro'
+    | '/en/produit'
     | '/faq'
     | '/mentions-legales'
     | '/pro'
@@ -106,6 +246,20 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/confidentialite'
+    | '/de'
+    | '/de/blog'
+    | '/de/confidentialite'
+    | '/de/faq'
+    | '/de/mentions-legales'
+    | '/de/pro'
+    | '/de/produit'
+    | '/en'
+    | '/en/blog'
+    | '/en/confidentialite'
+    | '/en/faq'
+    | '/en/mentions-legales'
+    | '/en/pro'
+    | '/en/produit'
     | '/faq'
     | '/mentions-legales'
     | '/pro'
@@ -116,6 +270,20 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/confidentialite'
+    | '/de/'
+    | '/de/blog'
+    | '/de/confidentialite'
+    | '/de/faq'
+    | '/de/mentions-legales'
+    | '/de/pro'
+    | '/de/produit'
+    | '/en/'
+    | '/en/blog'
+    | '/en/confidentialite'
+    | '/en/faq'
+    | '/en/mentions-legales'
+    | '/en/pro'
+    | '/en/produit'
     | '/faq'
     | '/mentions-legales'
     | '/pro'
@@ -127,6 +295,20 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
+  DeIndexRoute: typeof DeIndexRoute
+  DeBlogRoute: typeof DeBlogRoute
+  DeConfidentialiteRoute: typeof DeConfidentialiteRoute
+  DeFaqRoute: typeof DeFaqRoute
+  DeMentionsLegalesRoute: typeof DeMentionsLegalesRoute
+  DeProRoute: typeof DeProRoute
+  DeProduitRoute: typeof DeProduitRoute
+  EnIndexRoute: typeof EnIndexRoute
+  EnBlogRoute: typeof EnBlogRoute
+  EnConfidentialiteRoute: typeof EnConfidentialiteRoute
+  EnFaqRoute: typeof EnFaqRoute
+  EnMentionsLegalesRoute: typeof EnMentionsLegalesRoute
+  EnProRoute: typeof EnProRoute
+  EnProduitRoute: typeof EnProduitRoute
   FaqRoute: typeof FaqRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   ProRoute: typeof ProRoute
@@ -192,6 +374,104 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en/produit': {
+      id: '/en/produit'
+      path: '/en/produit'
+      fullPath: '/en/produit'
+      preLoaderRoute: typeof EnProduitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/pro': {
+      id: '/en/pro'
+      path: '/en/pro'
+      fullPath: '/en/pro'
+      preLoaderRoute: typeof EnProRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/mentions-legales': {
+      id: '/en/mentions-legales'
+      path: '/en/mentions-legales'
+      fullPath: '/en/mentions-legales'
+      preLoaderRoute: typeof EnMentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/faq': {
+      id: '/en/faq'
+      path: '/en/faq'
+      fullPath: '/en/faq'
+      preLoaderRoute: typeof EnFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/confidentialite': {
+      id: '/en/confidentialite'
+      path: '/en/confidentialite'
+      fullPath: '/en/confidentialite'
+      preLoaderRoute: typeof EnConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/blog': {
+      id: '/en/blog'
+      path: '/en/blog'
+      fullPath: '/en/blog'
+      preLoaderRoute: typeof EnBlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/': {
+      id: '/en/'
+      path: '/en'
+      fullPath: '/en'
+      preLoaderRoute: typeof EnIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/produit': {
+      id: '/de/produit'
+      path: '/de/produit'
+      fullPath: '/de/produit'
+      preLoaderRoute: typeof DeProduitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/pro': {
+      id: '/de/pro'
+      path: '/de/pro'
+      fullPath: '/de/pro'
+      preLoaderRoute: typeof DeProRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/mentions-legales': {
+      id: '/de/mentions-legales'
+      path: '/de/mentions-legales'
+      fullPath: '/de/mentions-legales'
+      preLoaderRoute: typeof DeMentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/faq': {
+      id: '/de/faq'
+      path: '/de/faq'
+      fullPath: '/de/faq'
+      preLoaderRoute: typeof DeFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/confidentialite': {
+      id: '/de/confidentialite'
+      path: '/de/confidentialite'
+      fullPath: '/de/confidentialite'
+      preLoaderRoute: typeof DeConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/blog': {
+      id: '/de/blog'
+      path: '/de/blog'
+      fullPath: '/de/blog'
+      preLoaderRoute: typeof DeBlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/': {
+      id: '/de/'
+      path: '/de'
+      fullPath: '/de'
+      preLoaderRoute: typeof DeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -199,6 +479,20 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
+  DeIndexRoute: DeIndexRoute,
+  DeBlogRoute: DeBlogRoute,
+  DeConfidentialiteRoute: DeConfidentialiteRoute,
+  DeFaqRoute: DeFaqRoute,
+  DeMentionsLegalesRoute: DeMentionsLegalesRoute,
+  DeProRoute: DeProRoute,
+  DeProduitRoute: DeProduitRoute,
+  EnIndexRoute: EnIndexRoute,
+  EnBlogRoute: EnBlogRoute,
+  EnConfidentialiteRoute: EnConfidentialiteRoute,
+  EnFaqRoute: EnFaqRoute,
+  EnMentionsLegalesRoute: EnMentionsLegalesRoute,
+  EnProRoute: EnProRoute,
+  EnProduitRoute: EnProduitRoute,
   FaqRoute: FaqRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   ProRoute: ProRoute,

@@ -1,16 +1,10 @@
+import { metaDe } from "@/lib/meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useLanguage } from "@/lib/i18n";
 import { MeetingsEmbed } from "@/components/MeetingsEmbed";
 
 export const Route = createFileRoute("/pro")({
-  head: () => ({
-    meta: [
-      { title: "legmio — Espace pro" },
-      { name: "description", content: "Professionnels de santé et distributeurs : prenez rendez-vous pour une démonstration, un test ou une discussion partenariat legmio." },
-      { property: "og:title", content: "legmio — Espace pro" },
-      { property: "og:description", content: "Démo, test, partenariat : rencontrons-nous." },
-    ],
-  }),
+  head: () => metaDe("fr", "pro"),
   component: ProPage,
 });
 
@@ -23,7 +17,7 @@ const BORDER_LIGHT = "#E8E4DC";
 
 const MEETING_URL = "https://meetings-eu1.hubspot.com/benjamin-rajjou";
 
-function ProPage() {
+export function ProPage() {
   const { tr } = useLanguage();
   return (
     <div style={{ backgroundColor: CREAM }}>

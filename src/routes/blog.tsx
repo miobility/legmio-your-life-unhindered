@@ -1,17 +1,11 @@
+import { metaDe } from "@/lib/meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { IconChevron } from "@/components/Icons";
 import { useLanguage } from "@/lib/i18n";
 
 export const Route = createFileRoute("/blog")({
-  head: () => ({
-    meta: [
-      { title: "legmio — L'histoire de legmio" },
-      { name: "description", content: "En 2020, Nicolas Perrin-Gilbert perd l'usage de ses mains à cause de ses béquilles. Il a inventé legmio." },
-      { property: "og:title", content: "legmio — L'histoire de legmio" },
-      { property: "og:description", content: "Pourquoi cette béquille existe." },
-    ],
-  }),
+  head: () => metaDe("fr", "blog"),
   component: Blog,
 });
 
@@ -144,7 +138,7 @@ function ArticleCard({ a }: { a: Article }) {
   );
 }
 
-function Blog() {
+export function Blog() {
   const { tr } = useLanguage();
   return (
     <div style={{ backgroundColor: WHITE }}>
