@@ -43,9 +43,14 @@ export function Compteur({
     return () => io.disconnect();
   }, [valeur, duree, fini]);
 
+  // Pendant la montee, au moins une decimale : sinon « 1M » sauterait de 0 a 1
+  // sans rien montrer. A l'arrivee, on retombe sur le format demande.
+  const enCours = fini && affiche < valeur;
+  const chiffres = enCours ? Math.max(decimales, 1) : decimales;
+
   return (
     <span ref={ref}>
-      {affiche.toFixed(decimales).replace(".", ",")}
+      {affiche.toFixed(chiffres).replace(".", ",")}
       {suffixe}
     </span>
   );
