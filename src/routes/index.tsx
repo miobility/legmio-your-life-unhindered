@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { SOCIAL } from "@/components/Layout";
 import {
@@ -8,6 +8,7 @@ import {
 import { Reveal } from "@/components/Reveal";
 import { Carousel } from "@/components/Carousel";
 import { Marquee } from "@/components/Marquee";
+import { Compteur } from "@/components/Compteur";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -130,7 +131,7 @@ export function SpecsStrip() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {pills.map((p, i) => (
-        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
+        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
           <div style={{ color: NAVY }}>{p.icon}</div>
           <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
           <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
@@ -152,7 +153,7 @@ export function ProductFeatureGrid() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {items.map((p, i) => (
-        <div key={i} className="rounded-2xl p-5 flex flex-col items-start gap-2 transition hover:-translate-y-0.5" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
+        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
           <div style={{ color: NAVY }}>{p.icon}</div>
           <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
           <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
@@ -180,7 +181,7 @@ function Landing() {
   return (
     <div style={{ backgroundColor: NAVY }}>
       {/* 1 — HERO (NAVY) */}
-      <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
+      <section style={{ backgroundColor: NAVY }} className="halo-or-hero px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[35%_65%] gap-8 md:gap-10 items-center">
           <div className="w-full max-w-[300px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
@@ -227,7 +228,7 @@ function Landing() {
                 { img: "/probleme-mains.avif", alt: "", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are needed just to move.", "Beide Hände werden zum Gehen benötigt."), p: tr("Porter, cuisiner, travailler, ouvrir une porte — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, opening a door — all things that require stopping.", "Tragen, kochen, arbeiten, eine Tür öffnen — all das erfordert einen Stopp.") },
                 { img: "/canne-anglaise.jpg", alt: tr("Une femme marche avec deux cannes anglaises classiques, les deux mains occupées par les poignées.", "A woman walks with two standard forearm crutches, both hands occupied by the grips.", "Eine Frau geht mit zwei herkömmlichen Unterarmgehstützen, beide Hände an den Griffen."), t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally changed.", "Das Design hat sich grundlegend nicht verändert."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches are built on the same principles as decades ago.", "Die heute erhältlichen Krücken beruhen seit Jahrzehnten auf denselben Prinzipien.") },
               ].map((c, i) => (
-                <div key={i} className="card-cream overflow-hidden h-full flex flex-col">
+                <div key={i} className="fade-up card-cream overflow-hidden h-full flex flex-col" style={{ transitionDelay: `${i * 60}ms` }}>
                   <div className="aspect-[3/2] overflow-hidden" style={{ backgroundColor: WHITE }}>
                     <img src={c.img} alt={c.alt} className="w-full h-full object-cover" loading="lazy" />
                   </div>
@@ -289,7 +290,7 @@ function Landing() {
                 p: tr("Gagner en autonomie au quotidien avec des enfants.", "Gaining day-to-day independence with children.", "Im Alltag mit Kindern selbstständiger werden."),
               },
             ].map((c, i) => (
-              <div key={i} className="card-cream p-6 flex flex-col items-start gap-3">
+              <div key={i} className="fade-up carte-survol card-cream p-6 flex flex-col items-start gap-3" style={{ transitionDelay: `${i * 60}ms` }}>
                 <div style={{ color: NAVY }}>{c.icon}</div>
                 <h3 className="font-display font-bold text-lg leading-tight" style={{ color: INK }}>{c.t}</h3>
                 <p className="text-sm" style={{ color: INK_MUTED }}>{c.p}</p>
@@ -316,7 +317,7 @@ function Landing() {
                 { img: undefined as string | undefined, n: "Salim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)") },
                 { img: undefined as string | undefined, n: "Joachim", p: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), q: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.") },
               ].map((t, i) => (
-                <div key={i} className="card-white p-5 h-full flex flex-col">
+                <div key={i} className="fade-up card-white p-5 h-full flex flex-col" style={{ transitionDelay: `${i * 60}ms` }}>
                   <div className="flex items-center gap-4">
                     {t.img && (
                       <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" />
@@ -348,7 +349,7 @@ function Landing() {
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award", "Impact-Preis"), s: "Le Média Positif 2026" },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la Recherche", "Backed by Research", "Unterstützt durch die Forschung"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
             ].map((s, i) => (
-              <div key={i} className="rounded-2xl p-6 flex flex-col items-start gap-3 card-cream">
+              <div key={i} className="fade-up carte-survol rounded-2xl p-6 flex flex-col items-start gap-3 card-cream" style={{ transitionDelay: `${i * 60}ms` }}>
                 <div style={{ color: NAVY }}>{s.icon}</div>
                 <div className="font-display font-bold text-xl leading-tight" style={{ color: INK }}>{s.t}</div>
                 <div className="text-sm" style={{ color: INK_MUTED }}>{s.s}</div>
@@ -359,7 +360,7 @@ function Landing() {
       </section>
 
       {/* 7 — ILS PARLENT DE NOUS (NAVY) */}
-      <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
+      <section style={{ backgroundColor: NAVY }} className="halo-or px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: WHITE }}>
@@ -503,12 +504,26 @@ function Roadmap() {
   const currentIdx = steps.findIndex((s) => s.state === "current");
   const progressPct = (currentIdx / (steps.length - 1)) * 100;
   const CIRCLE = 18;
+  // Le trait se remplit quand la section entre a l'ecran : la progression
+  // se raconte au lieu de s'afficher deja faite.
+  const bloc = useRef<HTMLDivElement>(null);
+  const [tracee, setTracee] = useState(false);
+  useEffect(() => {
+    const el = bloc.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setTracee(true); return; }
+    const io = new IntersectionObserver((e) => {
+      if (e[0].isIntersecting) { setTracee(true); io.disconnect(); }
+    }, { threshold: 0.35 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   const UPCOMING_TEXT = "#686D83";
   return (
-    <div className="mt-16">
+    <div className="mt-16" ref={bloc}>
       <div className="hidden md:block relative pt-16 pb-4">
         <div className="absolute h-px" style={{ left: "10%", right: "10%", top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER_LIGHT }} />
-        <div className="absolute h-[2px]" style={{ left: "10%", top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${progressPct * 0.8}%` }} />
+        <div className="absolute h-[2px] ligne-progression" style={{ left: "10%", top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${tracee ? progressPct * 0.8 : 0}%` }} />
         <div className="relative grid grid-cols-5 gap-4">
           {steps.map((s, i) => {
             const done = s.state === "done";
@@ -521,13 +536,13 @@ function Roadmap() {
                 </div>
                 <div className="my-3 flex items-center justify-center" style={{ height: CIRCLE + 6 }}>
                   <div
-                    className="rounded-full"
+                    className={`rounded-full ${isCurrent ? "etape-active" : ""}`}
                     style={{
                       width: isCurrent ? CIRCLE + 6 : CIRCLE,
                       height: isCurrent ? CIRCLE + 6 : CIRCLE,
                       backgroundColor: (done || isCurrent) ? ACCENT : WHITE,
                       border: `2px solid ${upcoming ? BORDER_LIGHT : ACCENT}`,
-                      boxShadow: isCurrent ? `0 0 0 6px rgba(255,202,117,0.25)` : "none",
+                      boxShadow: isCurrent ? `0 0 0 5px rgba(255,202,117,0.28)` : "none",
                     }}
                   />
                 </div>
@@ -564,10 +579,11 @@ function Roadmap() {
 
 function InstaCards() {
   const { tr } = useLanguage();
+  // Les vues sont l'argument de cette section : elles se comptent a l'ecran.
   const items = [
-    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.jpg", label: tr("1M de vues", "1M views", "1 Mio. Aufrufe") },
-    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.jpg", label: tr("3,6M de vues", "3.6M views", "3,6 Mio. Aufrufe") },
-    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.jpg", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
+    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.jpg", vues: 1, decimales: 0, label: tr("de vues", "views", "Aufrufe") },
+    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.jpg", vues: 3.6, decimales: 1, label: tr("de vues", "views", "Aufrufe") },
+    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.jpg", vues: null, decimales: 0, label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
   ];
   // Meme mecanique que les autres carrousels de contenu du site.
   return (
@@ -581,15 +597,23 @@ function InstaCards() {
   );
 }
 
-function InstaCard({ r }: { r: { url: string; img: string; label: string } }) {
+function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: number | null; decimales: number } }) {
   const { tr } = useLanguage();
   return (
-    <div className="rounded-2xl overflow-hidden flex flex-col card-soft w-full max-w-[350px] mx-auto">
+    <div className="fade-up rounded-2xl overflow-hidden flex flex-col card-soft w-full max-w-[350px] mx-auto">
       <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: NAVY_ALT }}>
         <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
       </div>
       <div className="p-5 flex flex-col gap-3">
-        <div className="text-base font-semibold" style={{ color: WHITE }}>{r.label}</div>
+        <div className="text-base font-semibold" style={{ color: WHITE }}>
+          {r.vues !== null ? (
+            <>
+              <Compteur valeur={r.vues} suffixe="M" decimales={r.decimales} /> {r.label}
+            </>
+          ) : (
+            r.label
+          )}
+        </div>
         <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
           {tr("Voir sur Instagram", "View on Instagram", "Auf Instagram ansehen")} <IconArrowRight size={14} />
         </a>

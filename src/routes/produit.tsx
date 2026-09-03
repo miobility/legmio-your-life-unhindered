@@ -164,10 +164,10 @@ function Produit() {
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: WHITE }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: WHITE }}>
               {tr("Deux modes d'utilisation.", "Two modes of use.", "Zwei Nutzungsmodi.")}
             </h2>
-            <p className="mt-5 text-base max-w-xl" style={{ color: MUTED_NAVY }}>
+            <p className="mt-5 text-base max-w-xl mx-auto text-center" style={{ color: MUTED_NAVY }}>
               {tr(
                 "Tu marches normalement, et tu libères les mains lorsque nécessaire.",
                 "You walk normally, and free your hands when needed.",
@@ -208,7 +208,7 @@ function Produit() {
                 ),
               },
             ].map((m, i) => (
-              <figure key={i} className="card-soft overflow-hidden w-full max-w-[340px]">
+              <figure key={i} className="card-soft overflow-hidden w-full max-w-[340px] mx-auto">
                 <div className="w-full overflow-hidden" style={{ aspectRatio: "9/16" }}>
                   <img src={m.img} alt={m.alt} className="w-full h-full object-cover" loading="lazy" width={900} height={1600} />
                 </div>
@@ -227,7 +227,7 @@ function Produit() {
       <section id="features" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>{tr("Fonctionnalités", "Features", "Funktionen")}</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>{tr("Fonctionnalités", "Features", "Funktionen")}</h2>
           </Reveal>
           <div className="mt-10">
             <ProductFeatureGrid />
@@ -238,7 +238,7 @@ function Produit() {
       {/* SECTION 4 — TÉMOIGNAGES (CREAM) */}
       <section id="reviews" style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>{tr("Témoignages", "Testimonials", "Erfahrungsberichte")}</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>{tr("Témoignages", "Testimonials", "Erfahrungsberichte")}</h2>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {reviews.map((r, i) => (
@@ -264,11 +264,11 @@ function Produit() {
       {/* SECTION 5 — FAQ PRODUIT (WHITE) */}
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-baseline justify-between gap-4 mb-6 max-w-3xl">
+          <div className="max-w-3xl mx-auto mb-8 text-center">
             <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>{tr("Questions fréquentes", "Frequently asked questions", "Häufig gestellte Fragen")}</h2>
-            <a href="/faq" className="text-sm underline whitespace-nowrap" style={{ color: INK }}>{tr("Voir toutes les questions", "See all questions", "Alle Fragen ansehen")}</a>
+            <a href="/faq" className="mt-4 inline-block text-sm underline" style={{ color: INK }}>{tr("Voir toutes les questions", "See all questions", "Alle Fragen ansehen")}</a>
           </div>
-          <div className="max-w-3xl">
+          <div className="max-w-3xl mx-auto">
             {[
               [tr("legmio est-elle réglable ?", "Is legmio adjustable?", "Ist legmio verstellbar?"), tr("Oui. Deux points de réglage indépendants : la poignée et l'appui coude. Universelle de 1m50 à 1m95.", "Yes. Two independent adjustment points: grip and elbow rest. Universal from 1m50 to 1m95.", "Ja. Zwei unabhängige Einstellpunkte: Griff und Ellbogenstütze. Universell von 1,50m bis 1,95m.")],
               [tr("Faut-il de la force dans les mains ?", "Do I need hand strength?", "Braucht man Kraft in den Händen?"), tr("Un peu, mais la poignée réduit le besoin en force de préhension.", "A little, but the grip reduces the need for gripping strength.", "Ein wenig, aber der Griff verringert den Bedarf an Greifkraft.")],
