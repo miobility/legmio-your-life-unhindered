@@ -195,9 +195,9 @@ export function Produit() {
                 ),
                 t: tr("Mode classique", "Classic mode", "Klassischer Modus"),
                 p: tr(
-                  "Les mains sur les poignées, l'appui réparti sur l'avant-bras.",
-                  "Hands on the grips, load spread across the forearm.",
-                  "Die Hände auf den Griffen, die Last auf dem Unterarm verteilt."
+                  "Les appuis sont répartis sur l'avant et l'arrière du bras.",
+                  "The load is spread across the front and the back of the arm.",
+                  "Die Last verteilt sich auf die Vorder- und Rückseite des Arms."
                 ),
               },
               {
