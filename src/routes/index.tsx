@@ -9,6 +9,7 @@ import { Reveal } from "@/components/Reveal";
 import { Carousel } from "@/components/Carousel";
 import { Marquee } from "@/components/Marquee";
 import { Compteur } from "@/components/Compteur";
+import { MARGE_TEMPS_FORT, SEUIL } from "@/lib/apparition";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -522,7 +523,7 @@ function Roadmap() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setTracee(true); return; }
     const io = new IntersectionObserver((e) => {
       if (e[0].isIntersecting) { setTracee(true); io.disconnect(); }
-    }, { threshold: 0.35 });
+    }, { threshold: SEUIL, rootMargin: MARGE_TEMPS_FORT });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -613,15 +614,18 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
         <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
       </div>
       <div className="p-5 flex flex-col gap-3">
-        <div className="text-base font-semibold" style={{ color: WHITE }}>
-          {r.vues !== null ? (
-            <>
-              <Compteur valeur={r.vues} suffixe="M" decimales={r.decimales} /> {r.label}
-            </>
-          ) : (
-            r.label
-          )}
-        </div>
+        {r.vues !== null ? (
+          // Le chiffre est l'argument : il prend la taille d'un chiffre-cle,
+          // pas celle d'une legende.
+          <div>
+            <div className="font-display font-bold text-4xl leading-none" style={{ color: ACCENT }}>
+              <Compteur valeur={r.vues} suffixe="M" decimales={r.decimales} />
+            </div>
+            <div className="mt-1.5 text-sm" style={{ color: MUTED_NAVY }}>{r.label}</div>
+          </div>
+        ) : (
+          <div className="text-base font-semibold" style={{ color: WHITE }}>{r.label}</div>
+        )}
         <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
           {tr("Voir sur Instagram", "View on Instagram", "Auf Instagram ansehen")} <IconArrowRight size={14} />
         </a>

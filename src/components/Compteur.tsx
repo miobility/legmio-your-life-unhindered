@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { MARGE_TEMPS_FORT, SEUIL } from "@/lib/apparition";
 
 /**
  * Compte jusqu'a la valeur cible quand le bloc entre a l'ecran.
@@ -8,7 +9,7 @@ export function Compteur({
   valeur,
   suffixe = "",
   decimales = 0,
-  duree = 900,
+  duree = 1600,
 }: {
   valeur: number;
   suffixe?: string;
@@ -37,7 +38,7 @@ export function Compteur({
         if (p < 1) requestAnimationFrame(pas);
       };
       requestAnimationFrame(pas);
-    }, { threshold: 0.4 });
+    }, { threshold: SEUIL, rootMargin: MARGE_TEMPS_FORT });
     io.observe(el);
     return () => io.disconnect();
   }, [valeur, duree, fini]);
