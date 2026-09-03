@@ -58,7 +58,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "legmio — La béquille qui libère les mains" },
-      { name: "description", content: "legmio est la seule béquille ergonomique conçue pour durer. Née de la recherche CNRS/Sorbonne Université. Commercialisation 2027." },
+      { name: "description", content: "legmio est la première béquille ergonomique avec un mode mains libres. Née de la recherche CNRS/Sorbonne Université. Commercialisation courant 2027." },
       { name: "author", content: "legmio" },
       { property: "og:title", content: "legmio — La béquille qui libère les mains" },
       { property: "og:description", content: "La seule béquille conçue pour durer. Pas juste ta rééducation. Ta vie." },
@@ -76,7 +76,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "canonical", href: SITE_URL },
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/logo_legmio.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/only_logo.svg", type: "image/svg+xml" },
+      { rel: "apple-touch-icon", href: "/only_logo.svg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" },
