@@ -77,7 +77,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "canonical", href: SITE_URL },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/only_logo.svg", type: "image/svg+xml" },
-      { rel: "apple-touch-icon", href: "/only_logo.svg" },
+      // PNG 48px : format que le robot a favicons de Google privilegie.
+      { rel: "icon", href: "/icon-48.png", type: "image/png", sizes: "48x48" },
+      { rel: "apple-touch-icon", href: "/icon-180.png", sizes: "180x180" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" },
@@ -89,10 +91,55 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+// Donnees structurees : elles indiquent explicitement a Google le nom de la
+// marque, le logo et les comptes officiels, au lieu de le laisser deviner.
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "legmio",
+      url: SITE_URL,
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/icon-512.png`, width: 512, height: 512 },
+      image: `${SITE_URL}/og-image.jpg`,
+      description:
+        "legmio est la première béquille ergonomique avec un mode mains libres, née de la recherche CNRS/Sorbonne Université.",
+      email: "contact@legmio.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "13-15 rue Traversière",
+        postalCode: "75012",
+        addressLocality: "Paris",
+        addressCountry: "FR",
+      },
+      sameAs: [
+        "https://www.instagram.com/legmio.official",
+        "https://www.tiktok.com/@legmio",
+        "https://www.linkedin.com/in/nicolas-perrin-gilbert-2815a4179/",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "legmio",
+      inLanguage: "fr-FR",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
+};
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="fr">
-      <head><HeadContent /></head>
+      <head>
+        <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+        />
+      </head>
       <body>{children}<Scripts /></body>
     </html>
   );
