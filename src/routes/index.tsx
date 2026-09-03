@@ -256,7 +256,7 @@ function Landing() {
           </div>
           <div className="mt-12 text-center">
             <Link to="/produit" className="btn-light btn-light-hover">
-              {tr("Découvrir la béquille en détail", "Explore the crutch in detail", "Die Krücke im Detail entdecken")} <IconArrowRight size={16} />
+              {tr("Découvrir la béquille", "Discover the crutch", "Die Krücke entdecken")} <IconArrowRight size={16} />
             </Link>
           </div>
         </div>
