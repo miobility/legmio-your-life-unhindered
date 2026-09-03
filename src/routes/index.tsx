@@ -52,73 +52,74 @@ function CTALight({ block }: { block?: boolean }) {
   );
 }
 
-// ============= Specs strip pill icons =============
-const IconBalance = ({ size = 28 }: { size?: number }) => (
+// ============= Icones des caracteristiques =============
+// Jeu homogene : viewBox 24, trait 1.6, extremites arrondies, dessin contenu entre 3 et 21
+// pour que toutes les icones aient le meme poids optique a 28px.
+const Ico = ({ size = 28, children }: { size?: number; children: React.ReactNode }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 3v18M4 8h16M6 8l-3 6a3 3 0 006 0L6 8zM18 8l-3 6a3 3 0 006 0l-3-6z" />
+    {children}
   </svg>
 );
-const IconRulerPill = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 16l5-13 13 5-5 13-13-5z" /><path d="M8 6l1 2M11 8l1 2M14 11l1 2" />
-  </svg>
-);
-const IconShieldPill = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6l8-3z" />
-  </svg>
-);
-const IconRecycle = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M7 19H4l3-5M17 5h3l-3 5M12 4l3 3M8 20l-3-3M20 12l-3 3" />
-  </svg>
-);
+
+// Legere — une plume : silhouette pleine + nervure centrale
 const IconFeather = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 4c-6 0-11 5-11 11v4h4c6 0 11-5 11-11" /><path d="M4 20l9-9" />
-  </svg>
+  <Ico size={size}><path d="M19.5 4.5C21 12 15.5 18 8 18H4.5v-3.5C4.5 7 10.5 3 19.5 4.5z" /><path d="M4.5 19.5L13 11" /></Ico>
 );
-const IconSliders = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 6h16M4 12h16M4 18h16" /><circle cx="9" cy="6" r="2" fill="currentColor" /><circle cx="15" cy="12" r="2" fill="currentColor" /><circle cx="7" cy="18" r="2" fill="currentColor" />
-  </svg>
-);
-const IconRest = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 18h18M6 18V9a3 3 0 013-3h6a3 3 0 013 3v9" /><path d="M9 12h6" />
-  </svg>
-);
-const IconWall = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 21V4h16M8 21V4M12 21V4M16 21V4" />
-  </svg>
-);
-const IconNerve = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 4c4 0 4 4 8 4s4-4 8-4M4 12c4 0 4 4 8 4s4-4 8-4M4 20c4 0 4-4 8-4s4 4 8 4" />
-  </svg>
-);
+
+// Deux modes — un interrupteur a deux positions
 const IconDualMode = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="7" height="7" rx="2" /><rect x="14" y="13" width="7" height="7" rx="2" />
-    <path d="M10 7.5h4a3 3 0 013 3v1M14 16.5h-4a3 3 0 01-3-3v-1" />
-  </svg>
+  <Ico size={size}><rect x="2.5" y="7" width="19" height="10" rx="5" /><circle cx="16.5" cy="12" r="2.6" fill="currentColor" stroke="none" /></Ico>
 );
+
+// Robuste — un halterain (charge supportee)
+const IconWeight = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M7.5 12h9" /><rect x="4.5" y="8" width="3.5" height="8" rx="1.2" fill="currentColor" /><rect x="16" y="8" width="3.5" height="8" rx="1.2" fill="currentColor" /><path d="M2.5 10v4M21.5 10v4" /></Ico>
+);
+
+// Ergonomique — des doigts poses sur une poignee rembourree
 const IconGrip = ({ size = 28 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M7 3v6M11 3v6M15 3v6M19 3v6M5 9h14a2 2 0 012 2v3a7 7 0 01-14 0v-3a2 2 0 012-2z" />
-  </svg>
+  <Ico size={size}><rect x="3" y="13.5" width="18" height="6" rx="3" /><path d="M8 13.5V9M12 13.5V7M16 13.5V9" /></Ico>
+);
+
+// Protectrice — un bouclier, avec le trace d'un nerf a l'interieur
+const IconNerve = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M12 3l8 3.2v5.3c0 4.9-3.4 8-8 9.5-4.6-1.5-8-4.6-8-9.5V6.2L12 3z" /><path d="M8.5 12c1.2-1.5 2.3 1.5 3.5 0s2.3 1.5 3.5 0" /></Ico>
+);
+
+// Reglable — deux curseurs, pour les deux points de reglage
+const IconSliders = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M4 8.5h16M4 15.5h16" /><circle cx="9" cy="8.5" r="2.4" fill="currentColor" stroke="none" /><circle cx="15" cy="15.5" r="2.4" fill="currentColor" stroke="none" /></Ico>
+);
+
+// Durable — un cycle ferme (pieces remplacees, pas le produit)
+const IconRecycle = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M4.5 12a7.5 7.5 0 0112.8-5.3L19.5 9" /><path d="M19.5 4.5V9h-4.5" /><path d="M19.5 12a7.5 7.5 0 01-12.8 5.3L4.5 15" /><path d="M4.5 19.5V15H9" /></Ico>
+);
+
+// Universelle — une plage de tailles, bornee en haut et en bas
+const IconRange = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M12 4.5v15" /><path d="M8.8 7.7L12 4.5l3.2 3.2M8.8 16.3L12 19.5l3.2-3.2" /><path d="M5 4.5h3M16 4.5h3M5 19.5h3M16 19.5h3" /></Ico>
+);
+
+// Position de repos — une assise
+const IconRest = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M3 13.5h18" /><path d="M5.5 13.5V19M18.5 13.5V19" /><path d="M6.5 13.5V8a2 2 0 012-2h7a2 2 0 012 2v5.5" /></Ico>
+);
+
+// Tient seule — la bequille appuyee contre un mur
+const IconWall = ({ size = 28 }: { size?: number }) => (
+  <Ico size={size}><path d="M4 3.5v17M4 20.5h16" /><path d="M14.5 4.5L9.5 20.5" /><path d="M12.5 10.5h3" /></Ico>
 );
 
 const specsItems = () => [
   { icon: <IconFeather />, kFr: "Légère", kEn: "Light", kDe: "Leicht", sFr: "850 g", sEn: "850 g", sDe: "850 g" },
   { icon: <IconDualMode />, kFr: "Deux modes d'utilisation", kEn: "Two modes of use", kDe: "Zwei Nutzungsmodi", sFr: "Appui sur le coude quand nécessaire", sEn: "Elbow support when needed", sDe: "Ellbogenstütze bei Bedarf" },
-  { icon: <IconShieldPill />, kFr: "Robuste", kEn: "Robust", kDe: "Robust", sFr: "Supporte jusqu'à 130kg", sEn: "Supports up to 130kg", sDe: "Trägt bis zu 130kg" },
+  { icon: <IconWeight />, kFr: "Robuste", kEn: "Robust", kDe: "Robust", sFr: "Supporte jusqu'à 130kg", sEn: "Supports up to 130kg", sDe: "Trägt bis zu 130kg" },
   { icon: <IconGrip />, kFr: "Ergonomique", kEn: "Ergonomic", kDe: "Ergonomisch", sFr: "Poignée qui redistribue les contraintes d'appui", sEn: "Grip that redistributes load", sDe: "Griff der die Stützbelastung umverteilt" },
   { icon: <IconNerve />, kFr: "Protectrice", kEn: "Protective", kDe: "Schützend", sFr: "Zones d'appui qui protègent les nerfs", sEn: "Support zones that protect nerves", sDe: "Stützzonen die die Nerven schützen" },
   { icon: <IconSliders />, kFr: "Réglable", kEn: "Adjustable", kDe: "Verstellbar", sFr: "Double réglage en longueur et au niveau de la poignée", sEn: "Dual adjustment in length and grip", sDe: "Doppelverstellung in Länge und Griff" },
   { icon: <IconRecycle />, kFr: "Durable", kEn: "Durable", kDe: "Langlebig", sFr: "Embouts, poignée, sangles remplaçables", sEn: "Tips, grip, straps replaceable", sDe: "Aufsätze, Griff, Gurte austauschbar" },
-  { icon: <IconRulerPill />, kFr: "Universelle", kEn: "Universal", kDe: "Universell", sFr: "Convient de 1m50 à 1m95", sEn: "Fits users from 1.50m to 1.95m", sDe: "Geeignet für 1,50m bis 1,95m" },
+  { icon: <IconRange />, kFr: "Universelle", kEn: "Universal", kDe: "Universell", sFr: "Convient de 1m50 à 1m95", sEn: "Fits users from 1.50m to 1.95m", sDe: "Geeignet für 1,50m bis 1,95m" },
 ];
 
 // SpecsStrip on CREAM section: white cards, navy text/icons
@@ -503,7 +504,7 @@ function Roadmap() {
   const currentIdx = steps.findIndex((s) => s.state === "current");
   const progressPct = (currentIdx / (steps.length - 1)) * 100;
   const CIRCLE = 18;
-  const UPCOMING_TEXT = "#A89ED0";
+  const UPCOMING_TEXT = "#686D83";
   return (
     <div className="mt-16">
       <div className="hidden md:block relative pt-16 pb-4">

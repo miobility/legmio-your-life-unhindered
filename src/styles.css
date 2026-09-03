@@ -163,21 +163,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  /* 44px : cible tactile minimale recommandee */
+  width: 44px;
+  height: 44px;
   border-radius: 9999px;
-  background-color: rgba(245,200,66,0.20);
-  color: #F5C842;
+  /* navy plein : lisible sur les sections claires comme sur navy */
+  background-color: #120B3B;
+  color: #FFFFFF;
   z-index: 10;
   transition: background-color 0.2s ease, transform 0.2s ease;
   cursor: pointer;
-  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
 @utility carousel-arrow-hover {
   &:hover { background-color: rgba(245,200,66,0.40); }
 }
 
-.carousel-arrow:hover { background-color: rgba(245,200,66,0.40); }
+.carousel-arrow:hover { background-color: #F5C842; color: #120B3B; }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
