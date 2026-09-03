@@ -614,18 +614,21 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
         <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
       </div>
       <div className="p-5 flex flex-col gap-3 flex-1">
-        {r.vues !== null ? (
-          // Le chiffre est l'argument : il prend la taille d'un chiffre-cle,
-          // pas celle d'une legende.
-          <div>
-            <div className="font-display font-bold text-4xl leading-none" style={{ color: ACCENT }}>
+        {/* Une information forte, sa legende, puis le bouton : les trois cartes
+            partagent la meme structure, qu'il s'agisse d'un chiffre ou d'une chaine. */}
+        <div>
+          <div
+            className={`font-display font-bold leading-none ${r.vues !== null ? "text-4xl" : "text-3xl"}`}
+            style={{ color: ACCENT }}
+          >
+            {r.vues !== null ? (
               <Compteur valeur={r.vues} suffixe="M" decimales={r.decimales} />
-            </div>
-            <div className="mt-1.5 text-sm" style={{ color: MUTED_NAVY }}>{r.label}</div>
+            ) : (
+              r.titre
+            )}
           </div>
-        ) : (
-          <div className="text-base font-semibold" style={{ color: WHITE }}>{r.label}</div>
-        )}
+          <div className="mt-1.5 text-sm" style={{ color: MUTED_NAVY }}>{r.label}</div>
+        </div>
         <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm mt-auto self-start">
           {tr("Voir sur Instagram", "View on Instagram", "Auf Instagram ansehen")} <IconArrowRight size={14} />
         </a>
