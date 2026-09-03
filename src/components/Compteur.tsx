@@ -9,7 +9,7 @@ export function Compteur({
   valeur,
   suffixe = "",
   decimales = 0,
-  duree = 1600,
+  duree = 2400,
 }: {
   valeur: number;
   suffixe?: string;
@@ -33,8 +33,11 @@ export function Compteur({
       const t0 = performance.now();
       const pas = (now: number) => {
         const p = Math.min(1, (now - t0) / duree);
-        // sortie douce
-        setAffiche(valeur * (1 - Math.pow(1 - p, 3)));
+        // Courbe en S : depart doux, progression reguliere au milieu, arrivee
+        // douce. Une sortie cubique classique parcourait les deux tiers du
+        // chemin en un tiers du temps — le chiffre bondissait puis rampait.
+        const adouci = p * p * (3 - 2 * p);
+        setAffiche(valeur * adouci);
         if (p < 1) requestAnimationFrame(pas);
       };
       requestAnimationFrame(pas);
