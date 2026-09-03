@@ -194,6 +194,23 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@utility marquee-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6B7490;
+  background: transparent;
+  border: 1px solid #E8E4DC;
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  min-height: 44px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  &:hover { color: #0D0D29; border-color: #C9C4DA; }
+}
+
 @utility marquee-left { animation: marquee-left 40s linear infinite; }
 @utility marquee-right { animation: marquee-right 40s linear infinite; }
 
@@ -215,4 +232,12 @@
 @media (prefers-reduced-motion: reduce) {
   .marquee-left, .marquee-right { animation: none; }
   .reveal, .fade-up { opacity: 1; transform: none; transition: none; }
+}
+
+/* Focus clavier visible : sans cette regle, personne ne sait ou il se trouve
+   en naviguant au clavier. */
+:focus-visible {
+  outline: 3px solid #FFCA75;
+  outline-offset: 3px;
+  border-radius: 4px;
 }
