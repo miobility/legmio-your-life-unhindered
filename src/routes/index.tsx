@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { SOCIAL } from "@/components/Layout";
@@ -253,6 +253,11 @@ function Landing() {
           </Reveal>
           <div className="mt-12">
             <SpecsStrip />
+          </div>
+          <div className="mt-12 text-center">
+            <Link to="/produit" className="btn-light btn-light-hover">
+              {tr("Découvrir la béquille en détail", "Explore the crutch in detail", "Die Krücke im Detail entdecken")} <IconArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>
