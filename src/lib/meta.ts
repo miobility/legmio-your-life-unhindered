@@ -150,10 +150,10 @@ export function metaDe(lang: Lang, page: Page) {
     ],
     links: [
       { rel: "canonical", href: url },
-      { rel: "alternate", hrefLang: "fr", href: urlDe("fr", page) },
-      { rel: "alternate", hrefLang: "en", href: urlDe("en", page) },
-      { rel: "alternate", hrefLang: "de", href: urlDe("de", page) },
-      { rel: "alternate", hrefLang: "x-default", href: urlDe("fr", page) },
+      { rel: "alternate", hreflang: "fr", href: urlDe("fr", page) },
+      { rel: "alternate", hreflang: "en", href: urlDe("en", page) },
+      { rel: "alternate", hreflang: "de", href: urlDe("de", page) },
+      { rel: "alternate", hreflang: "x-default", href: urlDe("fr", page) },
     ],
   };
 }
