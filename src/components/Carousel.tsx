@@ -50,8 +50,19 @@ export function Carousel({
         role="group"
         aria-roledescription="carrousel"
         aria-label={label}
-        className="flex gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none no-scrollbar -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className="flex gap-6 overflow-x-auto overflow-y-hidden md:overflow-visible snap-x snap-mandatory md:snap-none no-scrollbar -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          // Des que overflow-x vaut auto, overflow-y ne peut plus valoir visible :
+          // il devient auto, et le bloc se laissait tirer verticalement au doigt.
+          // overflow-y-hidden suffit a l'empecher, et le geste vertical remonte
+          // alors naturellement a la page.
+          // Surtout pas de touch-action ici : « pan-x » interdirait le geste
+          // vertical sur toute la chaine, page comprise — on ne pourrait plus
+          // descendre en posant le doigt sur un carrousel.
+          overscrollBehaviorX: "contain",
+        }}
       >
         {items.map((c, i) => (
           // 86 % sur mobile : la carte suivante depasse toujours, quel que soit l'ecran

@@ -17,7 +17,6 @@ const SITE_URL = "https://legmio.com";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LanguageProvider } from "@/lib/i18n";
 import { Header, StickyBanner, Footer } from "@/components/Layout";
-import { BarreLecture } from "@/components/BarreLecture";
 
 function NotFoundComponent() {
   return (
@@ -172,7 +171,6 @@ function RootComponent() {
       <LanguageProvider>
         <StickyBanner />
         <Header />
-        <BarreLecture />
         <main className="pt-[105px]">
           <Outlet />
         </main>

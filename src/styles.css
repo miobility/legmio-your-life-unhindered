@@ -234,6 +234,7 @@
 .reveal.in { opacity: 1; transform: translateY(0); }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .marquee-left, .marquee-right { animation: none; }
   .reveal, .fade-up { opacity: 1; transform: none; transition: none; }
 }
@@ -272,17 +273,6 @@
 }
 @utility etape-active { animation: pulsation-etape 2.8s ease-in-out infinite; }
 
-/* ── Barre de progression de lecture ─────────────────────── */
-@utility barre-lecture {
-  position: fixed;
-  left: 0;
-  height: 2px;
-  background: #FFCA75;
-  z-index: 45;
-  transition: width 0.12s linear;
-  pointer-events: none;
-}
-
 /* ── Liseret dore au survol des cartes ───────────────────── */
 @utility carte-survol {
   /* `translate` et non `transform` : la revelation utilise deja `transform`,
@@ -304,6 +294,5 @@
 @media (prefers-reduced-motion: reduce) {
   .ligne-progression { transition: none; }
   .etape-active { animation: none; }
-  .barre-lecture { transition: none; }
   .carte-survol { transition: none; &:hover { translate: none; } }
 }

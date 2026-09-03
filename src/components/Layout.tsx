@@ -96,8 +96,21 @@ function LangSwitcher({ onPick }: { onPick?: () => void }) {
   );
 }
 
+/** Sur l'accueil, cliquer le logo ne faisait rien : on y est deja.
+ *  Il ramene desormais en haut de page. */
+function useRetourHaut() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  return (e: React.MouseEvent) => {
+    if (pathname !== "/") return;
+    e.preventDefault();
+    const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: doux ? "smooth" : "auto" });
+  };
+}
+
 export function Header() {
   const { t, hubspotUrl } = useLanguage();
+  const retourHaut = useRetourHaut();
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   // Comparaison sur segment complet : "/produit" commencait par "/pro",
@@ -115,7 +128,7 @@ export function Header() {
       className="fixed left-0 right-0 z-40 border-b"
       style={{ top: 40, backgroundColor: NAVY, borderColor: BORDER, boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-6">
-        <Link to="/" className="font-display font-bold text-2xl shrink-0" style={{ color: WHITE }}>
+        <Link to="/" onClick={retourHaut} className="font-display font-bold text-2xl shrink-0" style={{ color: WHITE }}>
           <img src={"/logo_legmio.svg"} alt="Legmio" className="h-10 w-auto" />
         </Link>
         <div className="flex-1" />
@@ -152,11 +165,12 @@ export function Header() {
 
 export function Footer() {
   const { t, tr } = useLanguage();
+  const retourHaut = useRetourHaut();
   return (
     <footer style={{ backgroundColor: NAVY, color: WHITE }} className="pt-16 pb-8 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="flex flex-col items-start">
-          <Link to="/" aria-label="legmio — accueil">
+          <Link to="/" onClick={retourHaut} aria-label="legmio — accueil">
             <img src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto block" />
           </Link>
           <p className="mt-3 text-sm" style={{ color: MUTED }}>{t("footer_tag")}</p>
