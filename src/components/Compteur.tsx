@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { MARGE_TEMPS_FORT, SEUIL } from "@/lib/apparition";
 
 /**
  * Compte jusqu'a la valeur cible quand le bloc entre a l'ecran.
@@ -8,7 +9,7 @@ export function Compteur({
   valeur,
   suffixe = "",
   decimales = 0,
-  duree = 900,
+  duree = 2400,
 }: {
   valeur: number;
   suffixe?: string;
@@ -32,19 +33,27 @@ export function Compteur({
       const t0 = performance.now();
       const pas = (now: number) => {
         const p = Math.min(1, (now - t0) / duree);
-        // sortie douce
-        setAffiche(valeur * (1 - Math.pow(1 - p, 3)));
+        // Courbe en S : depart doux, progression reguliere au milieu, arrivee
+        // douce. Une sortie cubique classique parcourait les deux tiers du
+        // chemin en un tiers du temps — le chiffre bondissait puis rampait.
+        const adouci = p * p * (3 - 2 * p);
+        setAffiche(valeur * adouci);
         if (p < 1) requestAnimationFrame(pas);
       };
       requestAnimationFrame(pas);
-    }, { threshold: 0.4 });
+    }, { threshold: SEUIL, rootMargin: MARGE_TEMPS_FORT });
     io.observe(el);
     return () => io.disconnect();
   }, [valeur, duree, fini]);
 
+  // Pendant la montee, au moins une decimale : sinon « 1M » sauterait de 0 a 1
+  // sans rien montrer. A l'arrivee, on retombe sur le format demande.
+  const enCours = fini && affiche < valeur;
+  const chiffres = enCours ? Math.max(decimales, 1) : decimales;
+
   return (
     <span ref={ref}>
-      {affiche.toFixed(decimales).replace(".", ",")}
+      {affiche.toFixed(chiffres).replace(".", ",")}
       {suffixe}
     </span>
   );

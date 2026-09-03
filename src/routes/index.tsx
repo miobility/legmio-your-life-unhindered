@@ -9,6 +9,7 @@ import { Reveal } from "@/components/Reveal";
 import { Carousel } from "@/components/Carousel";
 import { Marquee } from "@/components/Marquee";
 import { Compteur } from "@/components/Compteur";
+import { MARGE_TEMPS_FORT, SEUIL } from "@/lib/apparition";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -376,19 +377,22 @@ function Landing() {
           <div className="mt-12">
             <Marquee
               label={tr("Médias qui parlent de legmio", "Media covering legmio", "Medien über legmio")}
-              seconds={45}
+              seconds={30}
               tone="light"
               rows={[[
-                ["/logoparisien.png", "Le Parisien"],
-                ["/logoTF1.png", "TF1"],
-                ["/logofranceTV2.jpg", "France Télévisions"],
-                ["/mediapositif.png", "Le Média Positif"],
-                ["/logofaireface.jpg", "Faire Face"],
-                ["/logohacavie.png", "Hacavie"],
-                ["/logocnrsinnovation.png", "CNRS Innovation"],
-              ].map(([src, alt]) => (
-                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 170, height: 80 }}>
-                  <img src={src} alt={alt} className="object-contain" style={{ maxHeight: 52, maxWidth: 150 }} />
+                // `h` : hauteur propre a chaque logo. A hauteur egale, un logo
+                // empile (CNRS Innovation) parait deux fois plus petit qu'un
+                // logo en bandeau (Hacavie).
+                { src: "/logoparisien.png", alt: "Le Parisien", h: 46 },
+                { src: "/logoTF1.png", alt: "TF1", h: 52 },
+                { src: "/logofranceTV2.jpg", alt: "France Télévisions", h: 52 },
+                { src: "/mediapositif.png", alt: "Le Média Positif", h: 52 },
+                { src: "/logofaireface.jpg", alt: "Faire Face", h: 46 },
+                { src: "/logohacavie.png", alt: "Hacavie", h: 44 },
+                { src: "/logocnrsinnovation.png", alt: "CNRS Innovation", h: 70 },
+              ].map(({ src, alt, h }) => (
+                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 170, height: 88 }}>
+                  <img src={src} alt={alt} className="object-contain" style={{ maxHeight: h, maxWidth: 150 }} />
                 </div>
               ))]}
             />
@@ -519,7 +523,7 @@ function Roadmap() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setTracee(true); return; }
     const io = new IntersectionObserver((e) => {
       if (e[0].isIntersecting) { setTracee(true); io.disconnect(); }
-    }, { threshold: 0.35 });
+    }, { threshold: SEUIL, rootMargin: MARGE_TEMPS_FORT });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -605,21 +609,27 @@ function InstaCards() {
 function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: number | null; decimales: number } }) {
   const { tr } = useLanguage();
   return (
-    <div className="fade-up rounded-2xl overflow-hidden flex flex-col card-soft w-full max-w-[350px] mx-auto">
+    <div className="fade-up rounded-2xl overflow-hidden flex flex-col h-full card-soft w-full max-w-[350px] mx-auto">
       <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: NAVY_ALT }}>
         <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
       </div>
-      <div className="p-5 flex flex-col gap-3">
-        <div className="text-base font-semibold" style={{ color: WHITE }}>
-          {r.vues !== null ? (
-            <>
-              <Compteur valeur={r.vues} suffixe="M" decimales={r.decimales} /> {r.label}
-            </>
-          ) : (
-            r.label
-          )}
+      <div className="p-5 flex flex-col gap-3 flex-1">
+        {/* Une information forte, sa legende, puis le bouton : les trois cartes
+            partagent la meme structure, qu'il s'agisse d'un chiffre ou d'une chaine. */}
+        <div>
+          <div
+            className={`font-display font-bold leading-none ${r.vues !== null ? "text-4xl" : "text-3xl"}`}
+            style={{ color: ACCENT }}
+          >
+            {r.vues !== null ? (
+              <Compteur valeur={r.vues} suffixe="M" decimales={r.decimales} />
+            ) : (
+              r.titre
+            )}
+          </div>
+          <div className="mt-1.5 text-sm" style={{ color: MUTED_NAVY }}>{r.label}</div>
         </div>
-        <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm">
+        <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm mt-auto self-start">
           {tr("Voir sur Instagram", "View on Instagram", "Auf Instagram ansehen")} <IconArrowRight size={14} />
         </a>
       </div>

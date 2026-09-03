@@ -16,6 +16,7 @@ import appCss from "../styles.css?url";
 const SITE_URL = "https://legmio.com";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LanguageProvider } from "@/lib/i18n";
+import { MARGE_CARTES, SEUIL } from "@/lib/apparition";
 import { Header, StickyBanner, Footer } from "@/components/Layout";
 
 function NotFoundComponent() {
@@ -161,7 +162,7 @@ function RootComponent() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: SEUIL, rootMargin: MARGE_CARTES }
     );
     const scan = () => document.querySelectorAll(".fade-up:not(.animate-in)").forEach((el) => io.observe(el));
     scan();

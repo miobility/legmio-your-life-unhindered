@@ -50,7 +50,7 @@ export function Carousel({
         role="group"
         aria-roledescription="carrousel"
         aria-label={label}
-        className="flex gap-6 overflow-x-auto overflow-y-hidden md:overflow-visible snap-x snap-mandatory md:snap-none no-scrollbar -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0"
+        className="flex items-stretch gap-6 overflow-x-auto overflow-y-hidden md:overflow-visible snap-x snap-mandatory md:snap-none no-scrollbar -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",

@@ -1,4 +1,5 @@
 import { useEffect, useRef, type ReactNode } from "react";
+import { MARGE_CARTES, SEUIL } from "@/lib/apparition";
 
 export function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -14,7 +15,7 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: SEUIL, rootMargin: MARGE_CARTES }
     );
     io.observe(el);
     return () => io.disconnect();

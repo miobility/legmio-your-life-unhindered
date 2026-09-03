@@ -187,9 +187,9 @@ function Produit() {
                 ),
                 t: tr("Mode classique", "Classic mode", "Klassischer Modus"),
                 p: tr(
-                  "Les mains sur les poignées, l'appui réparti sur l'avant-bras — comme une canne anglaise.",
-                  "Hands on the grips, load spread across the forearm — like a standard forearm crutch.",
-                  "Die Hände auf den Griffen, die Last auf dem Unterarm verteilt — wie bei einer herkömmlichen Unterarmgehstütze."
+                  "Les mains sur les poignées, l'appui réparti sur l'avant-bras.",
+                  "Hands on the grips, load spread across the forearm.",
+                  "Die Hände auf den Griffen, die Last auf dem Unterarm verteilt."
                 ),
               },
               {
