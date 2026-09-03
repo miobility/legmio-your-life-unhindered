@@ -178,12 +178,18 @@ export function Landing() {
       {/* 1 — HERO (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="halo-or-hero px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[35%_65%] gap-8 md:gap-10 items-center">
-          <div className="w-full max-w-[300px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
+          {/* Sur mobile le titre passe devant : la video seule occupait tout le
+              premier ecran, le visiteur n'y lisait aucune promesse. */}
+          <div className="order-2 md:order-1 w-full max-w-[300px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
               <video
                 ref={videoRef}
                 className="absolute inset-0 w-full h-full object-cover"
                 autoPlay muted loop playsInline
+                poster="/hero-poster.jpg"
+                preload="metadata"
+                width={1080}
+                height={1920}
               >
                 <source src="/hero-video.mp4" type="video/mp4" />
                 <track src="/subtitles_fr.vtt" kind="subtitles" srcLang="fr" label="Français" />
@@ -191,7 +197,7 @@ export function Landing() {
               </video>
             </div>
           </div>
-          <div className="space-y-6 fade-up order-2" style={{ color: WHITE }}>
+          <div className="order-1 md:order-2 space-y-6 fade-up" style={{ color: WHITE }}>
             <div className="text-xs tracking-[0.2em] uppercase" style={{ color: MUTED_NAVY }}>
               {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT GENERATION CRUTCH", "DIE KRÜCKE DER NEUEN GENERATION")}
             </div>
@@ -225,7 +231,7 @@ export function Landing() {
               ].map((c, i) => (
                 <div key={i} className="fade-up card-cream overflow-hidden h-full flex flex-col" style={{ transitionDelay: `${i * 60}ms` }}>
                   <div className="aspect-[3/2] overflow-hidden" style={{ backgroundColor: WHITE }}>
-                    <img src={c.img} alt={c.alt} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={c.img} alt={c.alt} className="w-full h-full object-cover" loading="lazy" width={600} height={400} />
                   </div>
                   <div className="p-6">
                     <h3 className="text-lg" style={{ color: INK }}>{c.t}</h3>
@@ -320,7 +326,7 @@ export function Landing() {
                 <div key={i} className="fade-up card-white p-5 h-full flex flex-col" style={{ transitionDelay: `${i * 60}ms` }}>
                   <div className="flex items-center gap-4">
                     {t.img && (
-                      <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" />
+                      <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" loading="lazy" width={64} height={64} />
                     )}
                     <div>
                       <div className="font-bold" style={{ color: INK }}>{t.n}</div>
@@ -388,7 +394,7 @@ export function Landing() {
                 { src: "/logocnrsinnovation.png", alt: "CNRS Innovation", h: 70 },
               ].map(({ src, alt, h }) => (
                 <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 170, height: 88 }}>
-                  <img src={src} alt={alt} className="object-contain" style={{ maxHeight: h, maxWidth: 150 }} />
+                  <img src={src} alt={alt} className="object-contain" style={{ maxHeight: h, maxWidth: 150 }} loading="lazy" width={150} height={h} />
                 </div>
               ))]}
             />

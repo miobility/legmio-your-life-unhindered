@@ -184,8 +184,11 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
         <StickyBanner />
+        {/* Premier arret du clavier : sans lui, il faut traverser la banniere,
+            le menu et le selecteur de langue avant chaque contenu. */}
+        <a href="#contenu" className="evitement">Aller au contenu</a>
         <Header />
-        <main className="pt-[105px]">
+        <main id="contenu" className="pt-[105px]">
           <Outlet />
         </main>
         <Footer />
