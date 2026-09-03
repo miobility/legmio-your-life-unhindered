@@ -285,9 +285,17 @@
 
 /* ── Liseret dore au survol des cartes ───────────────────── */
 @utility carte-survol {
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  /* `translate` et non `transform` : la revelation utilise deja `transform`,
+     et deux regles qui declarent `transition` s'ecrasent. Les deux proprietes
+     se composent, chacune avec sa propre duree. */
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out,
+    translate 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
   &:hover {
-    transform: translateY(-3px);
+    translate: 0 -3px;
     border-color: rgba(255, 202, 117, 0.75);
     box-shadow: 0 8px 24px -12px rgba(13, 13, 41, 0.28);
   }
@@ -297,5 +305,5 @@
   .ligne-progression { transition: none; }
   .etape-active { animation: none; }
   .barre-lecture { transition: none; }
-  .carte-survol { transition: none; &:hover { transform: none; } }
+  .carte-survol { transition: none; &:hover { translate: none; } }
 }
