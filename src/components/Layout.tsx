@@ -130,7 +130,7 @@ export function Header() {
       style={{ top: 40, backgroundColor: NAVY, borderColor: BORDER, boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-6">
         <Link to={lien("/")} onClick={retourHaut} className="font-display font-bold text-2xl shrink-0" style={{ color: WHITE }}>
-          <img src={"/logo_legmio.svg"} alt="Legmio" className="h-10 w-auto" />
+          <img src={"/logo_legmio.svg"} alt="Legmio" className="h-10 w-auto" width={160} height={40} />
         </Link>
         <div className="flex-1" />
         <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -172,13 +172,13 @@ export function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="flex flex-col items-start">
           <Link to={lien("/")} onClick={retourHaut} aria-label="legmio — accueil">
-            <img src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto block" />
+            <img src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto block" loading="lazy" width={160} height={40} />
           </Link>
           <p className="mt-3 text-sm" style={{ color: MUTED }}>{t("footer_tag")}</p>
         </div>
         <div>
-          <h4 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>Navigation</h4>
-          <ul className="space-y-2 text-sm" style={{ color: MUTED }}>
+          <h3 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>Navigation</h3>
+          <ul className="space-y-1 text-sm [&_a]:inline-block [&_a]:py-1.5" style={{ color: MUTED }}>
             <li><Link to={lien("/produit")} className="hover:text-white">{t("nav_product")}</Link></li>
             <li><Link to={lien("/faq")} className="hover:text-white">{t("nav_faq")}</Link></li>
             <li><Link to={lien("/blog")} className="hover:text-white">{t("nav_blog")}</Link></li>
@@ -187,15 +187,15 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>{tr("Légal", "Legal", "Rechtliches")}</h4>
-          <ul className="space-y-2 text-sm" style={{ color: MUTED }}>
+          <h3 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>{tr("Légal", "Legal", "Rechtliches")}</h3>
+          <ul className="space-y-1 text-sm [&_a]:inline-block [&_a]:py-1.5" style={{ color: MUTED }}>
             <li><Link to={lien("/mentions-legales")} className="hover:text-white">{tr("Mentions légales", "Legal notice", "Impressum")}</Link></li>
             <li><Link to={lien("/confidentialite")} className="hover:text-white">{tr("Politique de confidentialité", "Privacy policy", "Datenschutzrichtlinie")}</Link></li>
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>{tr("Réseaux", "Social", "Soziale Netzwerke")}</h4>
-          <ul className="space-y-3 text-sm" style={{ color: MUTED }}>
+          <h3 className="text-sm font-bold mb-4 font-sans" style={{ color: WHITE }}>{tr("Réseaux", "Social", "Soziale Netzwerke")}</h3>
+          <ul className="space-y-1 text-sm [&_a]:py-1.5" style={{ color: MUTED }}>
             <li><a href={SOCIAL.instagram} target="_blank" rel="noreferrer" className="hover:text-white inline-flex items-center gap-2"><IconInstagram size={16} /> Instagram</a></li>
             <li><a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" className="hover:text-white inline-flex items-center gap-2"><IconTiktok size={16} /> TikTok</a></li>
             <li><a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" className="hover:text-white inline-flex items-center gap-2"><IconLinkedin size={16} /> LinkedIn</a></li>

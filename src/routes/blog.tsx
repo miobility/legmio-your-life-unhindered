@@ -103,7 +103,7 @@ function ArticleCard({ a }: { a: Article }) {
     <article className="card-white overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="aspect-video md:aspect-auto md:h-full overflow-hidden" style={{ backgroundColor: CREAM }}>
-          <img src={a.cover} alt={title} className="w-full h-full object-cover" onError={(e) => (e.currentTarget.src = "/usecase-quotidien.jpg")} />
+          <img src={a.cover} alt={title} className="w-full h-full object-cover" loading="lazy" width={600} height={400} onError={(e) => (e.currentTarget.src = "/usecase-quotidien.jpg")} />
         </div>
         <div className="p-8">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: ACCENT, color: NAVY }}>{tag}</span>

@@ -73,7 +73,7 @@ export function Produit() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
             <div className="relative rounded-2xl overflow-hidden aspect-[3/4]" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}` }}>
-              <img src={gallery[sel].src} alt={gallery[sel].alt} className="w-full h-full object-contain" />
+              <img src={gallery[sel].src} alt={gallery[sel].alt} className="w-full h-full object-contain" width={900} height={900} />
               <button aria-label="Previous" onClick={galleryPrev} className="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: NAVY, color: WHITE }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
@@ -91,7 +91,7 @@ export function Produit() {
                   aria-label={g.alt}
                   aria-current={sel === i}
                 >
-                  <img src={g.src} alt="" className="w-full h-full object-contain" />
+                  <img src={g.src} alt="" className="w-full h-full object-contain" loading="lazy" width={160} height={160} />
                 </button>
               ))}
             </div>
@@ -255,7 +255,7 @@ export function Produit() {
                 <p className="mt-2 text-sm" style={{ color: INK_MUTED }}>{r.quote}</p>
                 <div className="mt-4 flex items-center gap-3">
                   {r.img && (
-                    <img src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover" />
+                    <img src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover" loading="lazy" width={48} height={48} />
                   )}
                   <div className="text-sm">
                     <div className="font-bold" style={{ color: INK }}>{r.name}</div>
