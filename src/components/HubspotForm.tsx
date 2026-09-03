@@ -40,9 +40,14 @@ export function HubspotForm({ className = "" }: { className?: string }) {
         data-portal-id={HUBSPOT_PORTAL_ID}
       />
       {failed && (
-        <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-light btn-light-hover">
-          {tr("Ouvrir le formulaire", "Open the form", "Formular öffnen")}
-        </a>
+        <div className="text-center">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold" style={{ color: "#15122E" }}>
+            {tr("Rejoins la liste d'attente", "Join the waiting list", "Zur Warteliste anmelden")}
+          </h2>
+          <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-light btn-light-hover mt-6">
+            {tr("Ouvrir le formulaire", "Open the form", "Formular öffnen")}
+          </a>
+        </div>
       )}
     </div>
   );
