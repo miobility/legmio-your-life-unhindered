@@ -10,6 +10,10 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+
+// Domaine de production. Les apercus de lien exigent des URL absolues :
+// si le site change de domaine, c'est la seule ligne a modifier.
+const SITE_URL = "https://legmio.com";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LanguageProvider } from "@/lib/i18n";
 import { Header, StickyBanner, Footer } from "@/components/Layout";
@@ -60,8 +64,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "La seule béquille conçue pour durer. Pas juste ta rééducation. Ta vie." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: `${SITE_URL}/og-image.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "legmio — Des mains libres et une autonomie enfin retrouvée." },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:site_name", content: "legmio" },
+      { property: "og:locale", content: "fr_FR" },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.jpg` },
     ],
     links: [
+      { rel: "canonical", href: SITE_URL },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/logo_legmio.svg", type: "image/svg+xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
