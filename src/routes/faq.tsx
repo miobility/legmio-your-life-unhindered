@@ -55,7 +55,7 @@ const themes: Theme[] = [
   {
     title: ["Livraison internationale", "International shipping", "Internationaler Versand"],
     items: [
-      { q: ["legmio est-elle disponible à l'international ?", "Is legmio available internationally?", "Ist legmio international verfügbar?"], a: ["Oui. Vous pouvez commander depuis votre pays directement sur notre site. Les frais de douane et taxes locales éventuels sont à votre charge à la réception.", "Yes. You can order from your country directly on our website. Any customs fees and local taxes are your responsibility upon receipt.", "Ja. Sie können aus Ihrem Land direkt auf unserer Website bestellen. Eventuell anfallende Zoll- und lokale Steuern gehen bei Erhalt zu Ihren Lasten."] },
+      { q: ["legmio est-elle disponible à l'international ?", "Is legmio available internationally?", "Ist legmio international verfügbar?"], a: ["Ce sera possible au lancement : la commande se fera depuis votre pays directement sur notre site. Les frais de douane et taxes locales éventuels resteront à votre charge à la réception.", "This will be possible at launch: you will be able to order from your country directly on our website. Any customs fees and local taxes will remain your responsibility upon receipt.", "Das wird zum Marktstart möglich sein: Sie werden aus Ihrem Land direkt auf unserer Website bestellen können. Eventuell anfallende Zoll- und lokale Steuern gehen bei Erhalt zu Ihren Lasten."] },
     ],
   },
   {
@@ -71,14 +71,14 @@ const themes: Theme[] = [
   {
     title: ["SAV et garantie", "After-sales & warranty", "Kundendienst & Garantie"],
     items: [
-      { q: ["Comment fonctionne le service après-vente à l'international ?", "How does after-sales service work internationally?", "Wie funktioniert der Kundendienst international?"], a: ["Notre SAV opère depuis la France. Tout retour ou échange se fait par voie postale internationale, aux frais de l'acheteur.", "Our after-sales service operates from France. Any return or exchange is done via international mail, at the buyer's expense.", "Unser Kundendienst arbeitet von Frankreich aus. Jede Rücksendung oder jeder Umtausch erfolgt per internationalem Postweg auf Kosten des Käufers."] },
-      { q: ["Peut-on commander des pièces détachées ou des embouts de remplacement ?", "Can spare parts or replacement tips be ordered?", "Können Ersatzteile oder Ersatzaufsätze bestellt werden?"], a: ["Oui.", "Yes.", "Ja."] },
+      { q: ["Comment fonctionne le service après-vente à l'international ?", "How does after-sales service work internationally?", "Wie funktioniert der Kundendienst international?"], a: ["Notre SAV opérera depuis la France. Tout retour ou échange se fera par voie postale internationale, aux frais de l'acheteur.", "Our after-sales service will operate from France. Any return or exchange will be done via international mail, at the buyer's expense.", "Unser Kundendienst wird von Frankreich aus arbeiten. Jede Rücksendung oder jeder Umtausch erfolgt per internationalem Postweg auf Kosten des Käufers."] },
+      { q: ["Peut-on commander des pièces détachées ou des embouts de remplacement ?", "Can spare parts or replacement tips be ordered?", "Können Ersatzteile oder Ersatzaufsätze bestellt werden?"], a: ["Oui, ce sera possible au lancement.", "Yes, this will be possible at launch.", "Ja, das wird zum Marktstart möglich sein."] },
     ],
   },
   {
     title: ["Tester legmio", "Testing legmio", "legmio testen"],
     items: [
-      { q: ["Peut-on tester legmio avant d'acheter ?", "Can legmio be tested before buying?", "Kann legmio vor dem Kauf getestet werden?"], a: ["Oui, chez nos différents revendeurs physiques.", "Yes, at our various physical retailers.", "Ja, bei unseren verschiedenen stationären Händlern."] },
+      { q: ["Peut-on tester legmio avant d'acheter ?", "Can legmio be tested before buying?", "Kann legmio vor dem Kauf getestet werden?"], a: ["Ce sera possible au lancement, chez nos futurs revendeurs physiques.", "This will be possible at launch, at our future physical retailers.", "Das wird zum Marktstart bei unseren künftigen stationären Händlern möglich sein."] },
     ],
   },
   {
@@ -114,7 +114,7 @@ const themes: Theme[] = [
     items: [
       { q: ["Quel est le prix de legmio ?", "What is the price of legmio?", "Was kostet legmio?"], a: ["Le prix sera communiqué au lancement.", "The price will be announced at launch.", "Der Preis wird zum Marktstart bekannt gegeben."] },
       { q: ["Où acheter legmio ?", "Where can I buy legmio?", "Wo kann man legmio kaufen?"], a: ["Directement sur legmio.com ou auprès de nos futurs revendeurs partenaires.", "Directly on legmio.com or from our future partner retailers.", "Direkt auf legmio.com oder bei unseren zukünftigen Partnerhändlern."] },
-      { q: ["Quels sont les délais de livraison ?", "What are the delivery times?", "Wie lange dauert die Lieferung?"], a: ["Livraison standard en 3 à 5 jours ouvrés. Une option express 24-48h sera disponible.", "Standard delivery within 3 to 5 business days. An express 24-48h option will be available.", "Standardlieferung innerhalb von 3 bis 5 Werktagen. Eine Express-Option (24-48 Std.) wird verfügbar sein."] },
+      { q: ["Quels sont les délais de livraison ?", "What are the delivery times?", "Wie lange dauert die Lieferung?"], a: ["Nous visons une livraison standard en 3 à 5 jours ouvrés, avec une option express 24-48h.", "We are aiming for standard delivery within 3 to 5 business days, with an express 24-48h option.", "Wir streben eine Standardlieferung innerhalb von 3 bis 5 Werktagen an, mit einer Express-Option (24-48 Std.)."] },
       { q: ["Quels sont les frais de livraison ?", "What are the shipping costs?", "Wie hoch sind die Versandkosten?"], a: ["La livraison sera a priori gratuite pour toute commande en France métropolitaine.", "Shipping will most likely be free for any order within mainland France.", "Der Versand wird voraussichtlich für alle Bestellungen innerhalb des französischen Mutterlandes kostenlos sein."] },
       { q: ["Est-il possible de louer legmio ?", "Is it possible to rent legmio?", "Kann man legmio mieten?"], a: ["La location est en cours de réflexion avec nos revendeurs/distributeurs physiques.", "Rental is currently under consideration with our physical retailers/distributors.", "Die Vermietung wird derzeit gemeinsam mit unseren stationären Händlern/Vertriebspartnern geprüft."] },
     ],
