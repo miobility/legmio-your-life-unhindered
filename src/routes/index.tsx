@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { SOCIAL } from "@/components/Layout";
 import {
   IconArrowRight, IconInstagram, IconTiktok, IconLinkedin,
 } from "@/components/Icons";
 import { Reveal } from "@/components/Reveal";
-import { AutoCarousel } from "@/components/AutoCarousel";
+import { Carousel } from "@/components/Carousel";
+import { Marquee } from "@/components/Marquee";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -219,14 +220,14 @@ function Landing() {
               {tr("Les béquilles classiques ont leurs limites.", "Classic crutches have their limits.", "Herkömmliche Krücken haben ihre Grenzen.")}
             </h2>
           </Reveal>
-          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
-            <AutoCarousel>
+          <div className="mt-14">
+            <Carousel label={tr("Les limites des béquilles classiques", "The limits of classic crutches", "Die Grenzen herkömmlicher Krücken")}>
               {[
                 { img: "/compression-nerf.jpg", alt: tr("Un soignant examine le coude d'un patient, à l'endroit où le nerf ulnaire est le plus exposé.", "A clinician examines a patient's elbow, where the ulnar nerve is most exposed.", "Eine Fachkraft untersucht den Ellbogen eines Patienten an der Stelle, an der der Ellennerv am stärksten exponiert ist."), t: tr("Les zones de passage des nerfs sont comprimées.", "Nerve pathways get compressed.", "Die Nervenbahnen werden zusammengedrückt."), p: tr("Le nerf ulnaire passe juste sous la peau : une pression répétée au même endroit finit par l'irriter.", "The ulnar nerve runs just beneath the skin: repeated pressure in the same spot ends up irritating it.", "Der Ellennerv verläuft direkt unter der Haut: wiederholter Druck an derselben Stelle reizt ihn mit der Zeit.") },
                 { img: "/probleme-mains.avif", alt: "", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are needed just to move.", "Beide Hände werden zum Gehen benötigt."), p: tr("Porter, cuisiner, travailler, ouvrir une porte — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, opening a door — all things that require stopping.", "Tragen, kochen, arbeiten, eine Tür öffnen — all das erfordert einen Stopp.") },
                 { img: "/canne-anglaise.jpg", alt: tr("Une femme marche avec deux cannes anglaises classiques, les deux mains occupées par les poignées.", "A woman walks with two standard forearm crutches, both hands occupied by the grips.", "Eine Frau geht mit zwei herkömmlichen Unterarmgehstützen, beide Hände an den Griffen."), t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally changed.", "Das Design hat sich grundlegend nicht verändert."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches are built on the same principles as decades ago.", "Die heute erhältlichen Krücken beruhen seit Jahrzehnten auf denselben Prinzipien.") },
               ].map((c, i) => (
-                <div key={i} className="card-cream overflow-hidden w-[320px] md:w-[380px] h-full flex flex-col">
+                <div key={i} className="card-cream overflow-hidden h-full flex flex-col">
                   <div className="aspect-[3/2] overflow-hidden" style={{ backgroundColor: WHITE }}>
                     <img src={c.img} alt={c.alt} className="w-full h-full object-cover" loading="lazy" />
                   </div>
@@ -236,7 +237,7 @@ function Landing() {
                   </div>
                 </div>
               ))}
-            </AutoCarousel>
+            </Carousel>
           </div>
         </div>
       </section>
@@ -308,14 +309,14 @@ function Landing() {
               {tr("Testée et approuvée.", "Tested and approved.", "Getestet und bewährt.")}
             </h2>
           </Reveal>
-          <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
-            <AutoCarousel>
+          <div className="mt-14">
+            <Carousel label={tr("Témoignages", "Testimonials", "Erfahrungsberichte")}>
               {[
                 { img: "/pauline.png", n: "Dr Pauline Coignard", p: tr("Médecin MPR · Centre de Kerpape · Présidente APPROCHE · SOFMER", "MPR Physician · Kerpape Centre · President APPROCHE · SOFMER", "MPR-Ärztin · Kerpape Zentrum · Präsidentin APPROCHE · SOFMER"), q: tr("Une béquille qui rend les mains au patient : une grande avancée !", "Une béquille qui rend les mains au patient : une grande avancée !", "Une béquille qui rend les mains au patient : une grande avancée !") },
                 { img: undefined as string | undefined, n: "Salim", p: tr("Rupture du ligament · 2 mois d'utilisation", "Ligament tear · 2 months of use", "Bänderriss · 2 Monate Nutzung"), q: tr("legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)", "legmio m'a permis de retrouver une certaine autonomie au quotidien, notamment au travail. J'ai pu me déplacer plus facilement et réaliser seul des tâches simples mais essentielles, comme aller me faire un café :)") },
                 { img: undefined as string | undefined, n: "Joachim", p: tr("Post-opératoire ménisque · Convalescence à domicile", "Post-operative meniscus · Home recovery", "Postoperativer Meniskus · Genesung zu Hause"), q: tr("Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.", "Après mon opération du ménisque, legmio m'a permis d'être autonome chez moi pendant toute ma convalescence. Se déplacer, porter des affaires, faire les choses seul — ça change tout quand on est immobilisé.") },
               ].map((t, i) => (
-                <div key={i} className="card-white p-5 w-[320px] md:w-[380px] h-full flex flex-col">
+                <div key={i} className="card-white p-5 h-full flex flex-col">
                   <div className="flex items-center gap-4">
                     {t.img && (
                       <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" />
@@ -328,7 +329,7 @@ function Landing() {
                   <p className="mt-5 italic text-sm" style={{ color: INK_MUTED }}>"{t.q}"</p>
                 </div>
               ))}
-            </AutoCarousel>
+            </Carousel>
           </div>
         </div>
       </section>
@@ -366,9 +367,12 @@ function Landing() {
             </h2>
           </Reveal>
 
-          <div className="mt-12 -mx-4 sm:-mx-6 px-4 sm:px-6">
-            <AutoCarousel>
-              {[
+          <div className="mt-12">
+            <Marquee
+              label={tr("Médias qui parlent de legmio", "Media covering legmio", "Medien über legmio")}
+              seconds={45}
+              tone="light"
+              rows={[[
                 ["/logoparisien.png", "Le Parisien"],
                 ["/logoTF1.png", "TF1"],
                 ["/logofranceTV2.jpg", "France Télévisions"],
@@ -380,8 +384,8 @@ function Landing() {
                 <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 170, height: 80 }}>
                   <img src={src} alt={alt} className="object-contain" style={{ maxHeight: 52, maxWidth: 150 }} />
                 </div>
-              ))}
-            </AutoCarousel>
+              ))]}
+            />
           </div>
 
           <InstaCards />
@@ -464,25 +468,20 @@ function WallOfLove() {
   ];
   const row1 = tr(row1Fr, row1En);
   const row2 = tr(row2Fr, row2En);
-  const dup1 = [...row1, ...row1];
-  const dup2 = [...row2, ...row2];
   const Card = ({ q }: { q: string }) => (
     <div className="rounded-2xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
       <p className="italic text-sm">"{q}"</p>
     </div>
   );
   return (
-    <div className="mt-14 space-y-6 marquee-pause">
-      <div className="overflow-hidden">
-        <div className="flex gap-4 marquee-left" style={{ width: "max-content" }}>
-          {dup1.map((q, i) => <Card key={`a${i}`} q={q} />)}
-        </div>
-      </div>
-      <div className="overflow-hidden">
-        <div className="flex gap-4 marquee-right" style={{ width: "max-content" }}>
-          {dup2.map((q, i) => <Card key={`b${i}`} q={q} />)}
-        </div>
-      </div>
+    <div className="mt-14">
+      <Marquee
+        label={tr("Ce qu'on nous écrit", "What people write to us", "Was man uns schreibt")}
+        rows={[
+          row1.map((q, i) => <Card key={`a${i}`} q={q} />),
+          row2.map((q, i) => <Card key={`b${i}`} q={q} />),
+        ]}
+      />
     </div>
   );
 }
@@ -508,8 +507,8 @@ function Roadmap() {
   return (
     <div className="mt-16">
       <div className="hidden md:block relative pt-16 pb-4">
-        <div className="absolute left-0 right-0 h-px" style={{ top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER_LIGHT }} />
-        <div className="absolute left-0 h-[2px]" style={{ top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${progressPct}%` }} />
+        <div className="absolute h-px" style={{ left: "10%", right: "10%", top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER_LIGHT }} />
+        <div className="absolute h-[2px]" style={{ left: "10%", top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${progressPct * 0.8}%` }} />
         <div className="relative grid grid-cols-5 gap-4">
           {steps.map((s, i) => {
             const done = s.state === "done";
@@ -570,64 +569,14 @@ function InstaCards() {
     { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.jpg", label: tr("3,6M de vues", "3.6M views", "3,6 Mio. Aufrufe") },
     { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.jpg", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
   ];
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const idx = Math.round(el.scrollLeft / el.clientWidth);
-      setActive(Math.max(0, Math.min(items.length - 1, idx)));
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [items.length]);
-  const goTo = (i: number) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollTo({ left: i * el.clientWidth, behavior: "smooth" });
-  };
+  // Meme mecanique que les autres carrousels de contenu du site.
   return (
     <div className="mt-16 max-w-6xl mx-auto">
-      {/* Desktop: grid */}
-      <div className="hidden md:grid grid-cols-3 gap-6">
+      <Carousel label={tr("Nos vidéos les plus vues", "Our most watched videos", "Unsere meistgesehenen Videos")}>
         {items.map((r, i) => (
           <InstaCard key={i} r={r} />
         ))}
-      </div>
-      {/* Mobile: snap carousel + dots */}
-      <div className="md:hidden -mx-4 sm:-mx-6">
-        <div
-          ref={scrollRef}
-          className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {items.map((r, i) => (
-            <div key={i} className="snap-center shrink-0 w-full flex justify-center px-4 sm:px-6">
-              <InstaCard r={r} />
-            </div>
-          ))}
-        </div>
-        <div className="mt-4 flex items-center justify-center gap-2">
-          {items.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`Slide ${i + 1}`}
-              onClick={() => goTo(i)}
-              className="rounded-full transition flex items-center justify-center"
-              style={{
-                width: 44,
-                height: 44,
-                padding: 18,
-                backgroundClip: "content-box",
-                backgroundColor: i === active ? ACCENT : "#6B66A0",
-                opacity: i === active ? 1 : 0.7,
-              }}
-            />
-          ))}
-        </div>
-      </div>
+      </Carousel>
     </div>
   );
 }

@@ -194,6 +194,27 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@utility marquee-toggle {
+  /* Discret : une cible de 44px pour le doigt, mais un disque de 26px a l'oeil. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+  &:hover { opacity: 0.9; }
+  & > svg {
+    box-sizing: content-box;
+    padding: 7px;
+    border: 1px solid currentColor;
+    border-radius: 50px;
+  }
+}
+
 @utility marquee-left { animation: marquee-left 40s linear infinite; }
 @utility marquee-right { animation: marquee-right 40s linear infinite; }
 
@@ -215,4 +236,12 @@
 @media (prefers-reduced-motion: reduce) {
   .marquee-left, .marquee-right { animation: none; }
   .reveal, .fade-up { opacity: 1; transform: none; transition: none; }
+}
+
+/* Focus clavier visible : sans cette regle, personne ne sait ou il se trouve
+   en naviguant au clavier. */
+:focus-visible {
+  outline: 3px solid #FFCA75;
+  outline-offset: 3px;
+  border-radius: 4px;
 }
