@@ -43,7 +43,11 @@ type Review = { stars: number; title: string; quote: string; name: string; profi
 
 function Produit() {
   const { tr, hubspotUrl } = useLanguage();
-  const gallery = ["/bequille.png", "/usecase-quotidien.png", "/usecase-reeducation.png", "/usecase-emploi.png", "/usecase-parental.png"];
+  const gallery = [
+    { src: "/bequille.png", alt: tr("La béquille legmio vue de profil.", "The legmio crutch seen from the side.", "Die legmio-Krücke von der Seite.") },
+    { src: "/mode-bequille.jpg", alt: tr("Un utilisateur marche avec deux béquilles legmio, les mains posées sur les poignées.", "A user walks with two legmio crutches, hands resting on the grips.", "Ein Nutzer geht mit zwei legmio-Krücken, die Hände auf den Griffen.") },
+    { src: "/mode-mains-libres.jpg", alt: tr("Le même utilisateur, les béquilles maintenues par les coudes, se sert un verre à deux mains.", "The same user, crutches held by the elbows, pours a drink using both hands.", "Derselbe Nutzer hält die Krücken mit den Ellbogen und schenkt sich mit beiden Händen ein.") },
+  ];
   const [sel, setSel] = useState(0);
 
   const reviews: Review[] = [
@@ -60,8 +64,8 @@ function Produit() {
       <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
-            <div className="relative rounded-2xl overflow-hidden aspect-square" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}` }}>
-              <img src={gallery[sel]} alt="" className="w-full h-full object-contain" />
+            <div className="relative rounded-2xl overflow-hidden aspect-[3/4]" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}` }}>
+              <img src={gallery[sel].src} alt={gallery[sel].alt} className="w-full h-full object-contain" />
               <button aria-label="Previous" onClick={galleryPrev} className="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: NAVY, color: WHITE }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
@@ -76,9 +80,10 @@ function Produit() {
                   onClick={() => setSel(i)}
                   className="shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition"
                   style={{ borderColor: sel === i ? NAVY : BORDER_LIGHT, backgroundColor: WHITE }}
-                  aria-label={`Image ${i + 1}`}
+                  aria-label={g.alt}
+                  aria-current={sel === i}
                 >
-                  <img src={g} alt="" className="w-full h-full object-contain" />
+                  <img src={g.src} alt="" className="w-full h-full object-contain" />
                 </button>
               ))}
             </div>
