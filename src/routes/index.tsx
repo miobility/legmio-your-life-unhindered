@@ -590,9 +590,11 @@ function InstaCards() {
   const { tr } = useLanguage();
   // Les vues sont l'argument de cette section : elles se comptent a l'ecran.
   const items = [
-    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.jpg", vues: 1, decimales: 0, label: tr("de vues", "views", "Aufrufe") },
-    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.jpg", vues: 3.6, decimales: 1, label: tr("de vues", "views", "Aufrufe") },
-    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.jpg", vues: null, decimales: 0, label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
+    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.jpg", vues: 1, decimales: 0, titre: null, label: tr("de vues", "views", "Aufrufe") },
+    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.jpg", vues: 3.6, decimales: 1, titre: null, label: tr("de vues", "views", "Aufrufe") },
+    // Pas de chiffre ici : c'est la chaine qui fait la preuve, l'emission tient
+    // la place de la legende. Meme structure que les deux autres cartes.
+    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.jpg", vues: null, decimales: 0, titre: "France TV", label: "Le Mag de la Santé" },
   ];
   // Meme mecanique que les autres carrousels de contenu du site.
   return (
@@ -606,7 +608,7 @@ function InstaCards() {
   );
 }
 
-function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: number | null; decimales: number } }) {
+function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: number | null; decimales: number; titre: string | null } }) {
   const { tr } = useLanguage();
   return (
     <div className="fade-up rounded-2xl overflow-hidden flex flex-col h-full card-soft w-full max-w-[350px] mx-auto">
