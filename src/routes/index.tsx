@@ -371,6 +371,7 @@ function Landing() {
             <Marquee
               label={tr("Médias qui parlent de legmio", "Media covering legmio", "Medien über legmio")}
               seconds={45}
+              tone="light"
               rows={[[
                 ["/logoparisien.png", "Le Parisien"],
                 ["/logoTF1.png", "TF1"],

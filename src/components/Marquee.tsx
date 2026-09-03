@@ -10,10 +10,13 @@ export function Marquee({
   rows,
   label,
   seconds = 40,
+  tone = "dark",
 }: {
   rows: ReactNode[][];
   label: string;
   seconds?: number;
+  /** « light » sur fond sombre, « dark » sur fond clair. */
+  tone?: "light" | "dark";
 }) {
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
@@ -53,24 +56,19 @@ export function Marquee({
       </div>
 
       {!reduced && (
-        <div className="mt-6 flex justify-center">
+        <div className="mt-3 flex justify-center">
           <button
             type="button"
             onClick={() => setPaused((p) => !p)}
             aria-pressed={paused}
+            aria-label={paused ? "Relancer le défilement" : "Arrêter le défilement"}
+            title={paused ? "Relancer le défilement" : "Arrêter le défilement"}
             className="marquee-toggle"
+            style={{ color: tone === "light" ? "#FFFFFF" : "#0D0D29" }}
           >
-            {paused ? (
-              <>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg>
-                Relancer le défilement
-              </>
-            ) : (
-              <>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4h4v16H7zM13 4h4v16h-4z" /></svg>
-                Arrêter le défilement
-              </>
-            )}
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              {paused ? <path d="M7 4l13 8-13 8z" /> : <path d="M7 4h4v16H7zM13 4h4v16h-4z" />}
+            </svg>
           </button>
         </div>
       )}
