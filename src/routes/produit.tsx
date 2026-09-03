@@ -185,11 +185,11 @@ function Produit() {
                   "A user walks with two legmio crutches, hands resting on the grips.",
                   "Ein Nutzer geht mit zwei legmio-Krücken, die Hände auf den Griffen."
                 ),
-                t: tr("Mode marche", "Walking mode", "Gehmodus"),
+                t: tr("Mode classique", "Classic mode", "Klassischer Modus"),
                 p: tr(
-                  "Les mains sur les poignées, l'appui réparti sur l'avant-bras.",
-                  "Hands on the grips, load spread across the forearm.",
-                  "Die Hände auf den Griffen, die Last auf dem Unterarm verteilt."
+                  "Les mains sur les poignées, l'appui réparti sur l'avant-bras — comme une canne anglaise.",
+                  "Hands on the grips, load spread across the forearm — like a standard forearm crutch.",
+                  "Die Hände auf den Griffen, die Last auf dem Unterarm verteilt — wie bei einer herkömmlichen Unterarmgehstütze."
                 ),
               },
               {
