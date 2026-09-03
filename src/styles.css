@@ -68,7 +68,7 @@
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }
-  /* Les ancres (#waitlist) doivent s'arreter sous la banniere + le header fixes. */
+  /* Les ancres internes doivent s'arreter sous la banniere + le header fixes. */
   section[id], [id]:target { scroll-margin-top: 115px; }
   body {
     background-color: #0D0D29;

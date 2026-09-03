@@ -7,7 +7,6 @@ import {
 } from "@/components/Icons";
 import { Reveal } from "@/components/Reveal";
 import { AutoCarousel } from "@/components/AutoCarousel";
-import { HubspotForm } from "@/components/HubspotForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -35,9 +34,9 @@ const ACCENT = "#FFCA75";
 
 function CTADark({ block }: { block?: boolean }) {
   // For NAVY sections: gold bg, navy text
-  const { t } = useLanguage();
+  const { t, hubspotUrl } = useLanguage();
   return (
-    <a href="#waitlist" className={`btn-dark btn-dark-hover ${block ? "w-full" : ""}`}>
+    <a href={hubspotUrl} target="_blank" rel="noreferrer" className={`btn-dark btn-dark-hover ${block ? "w-full" : ""}`}>
       {t("cta_interested")} <IconArrowRight size={16} />
     </a>
   );
@@ -45,9 +44,9 @@ function CTADark({ block }: { block?: boolean }) {
 
 function CTALight({ block }: { block?: boolean }) {
   // For WHITE/CREAM sections: navy bg, white text
-  const { t } = useLanguage();
+  const { t, hubspotUrl } = useLanguage();
   return (
-    <a href="#waitlist" className={`btn-light btn-light-hover ${block ? "w-full" : ""}`}>
+    <a href={hubspotUrl} target="_blank" rel="noreferrer" className={`btn-light btn-light-hover ${block ? "w-full" : ""}`}>
       {t("cta_interested")} <IconArrowRight size={16} />
     </a>
   );
@@ -413,19 +412,15 @@ function Landing() {
       {/* 10 — ACTUALITÉ + CTA (WHITE) */}
       <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-xl mx-auto text-center">
-          {/* Le formulaire HubSpot porte son propre titre : en ajouter un ici
-              produisait deux titres empiles. Le formulaire ouvre la section. */}
-          <HubspotForm className="text-left" />
-          <div className="mt-14 pt-10 border-t" style={{ borderColor: BORDER_LIGHT }}>
-            <p className="text-sm" style={{ color: INK_MUTED }}>
-              {tr("Suis l'actualité de legmio", "Follow legmio's news", "Folge den Neuigkeiten von legmio")}
-            </p>
-            <div className="mt-4 flex items-center justify-center gap-6" style={{ color: INK }}>
-              <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="opacity-80 hover:opacity-100"><IconInstagram size={28} /></a>
-              <a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" aria-label="TikTok" className="opacity-80 hover:opacity-100"><IconTiktok size={28} /></a>
-              <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="opacity-80 hover:opacity-100"><IconLinkedin size={28} /></a>
-            </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>
+            {tr(<>Suis l'actualité<br />de legmio.</>, <>Follow<br />legmio's news.</>, <>Folge den Neuigkeiten<br />von legmio.</>)}
+          </h2>
+          <div className="mt-8 flex items-center justify-center gap-6" style={{ color: INK }}>
+            <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="opacity-80 hover:opacity-100"><IconInstagram size={28} /></a>
+            <a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" aria-label="TikTok" className="opacity-80 hover:opacity-100"><IconTiktok size={28} /></a>
+            <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="opacity-80 hover:opacity-100"><IconLinkedin size={28} /></a>
           </div>
+          <div className="mt-10"><CTALight /></div>
           <p className="mt-10 text-base" style={{ color: INK_MUTED }}>
             {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?", "Gesundheitsfachkraft oder Händler?")}
             <br className="sm:hidden" />{" "}

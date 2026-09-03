@@ -2,15 +2,10 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 
 export type Lang = "fr" | "en" | "de";
 
-// Pages HubSpot autonomes, conservees en repli si le formulaire integre ne charge pas.
+// Formulaires HubSpot, ouverts dans un onglet depuis les boutons du site.
 export const HUBSPOT_FR = "https://fd623.share-eu1.hsforms.com/2TRovgVWcTMydP9AzUTJZUQ";
 export const HUBSPOT_EN = "https://fd623.share-eu1.hsforms.com/2ApzYviPbRnyLmAQh5YUR5Q";
 
-// Formulaire integre a la page (section « Suis l'actualite »).
-export const HUBSPOT_PORTAL_ID = "25808619";
-export const HUBSPOT_REGION = "eu1";
-const HUBSPOT_FORM_FR = "4d1a2f81-559c-4ccc-9d3f-d03351325951";
-const HUBSPOT_FORM_EN = "029cd8be-23db-467c-8b98-0421e58511e5";
 
 export const LANGS: { code: Lang; flag: string; label: string }[] = [
   { code: "fr", flag: "🇫🇷", label: "Français" },
@@ -67,7 +62,6 @@ type Ctx = {
   t: (k: string) => string;
   tr: <T>(f: T, e: T, d?: T) => T;
   hubspotUrl: string;
-  hubspotFormId: string;
 };
 const LangCtx = createContext<Ctx>({
   lang: "fr",
@@ -75,7 +69,6 @@ const LangCtx = createContext<Ctx>({
   t: (k) => k,
   tr: (f) => f,
   hubspotUrl: HUBSPOT_FR,
-  hubspotFormId: HUBSPOT_FORM_FR,
 });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -94,8 +87,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const t = (k: string) => dicts[lang][k] ?? dicts.fr[k] ?? k;
   const tr = <T,>(f: T, e: T, d?: T): T => (lang === "de" ? (d !== undefined ? d : e) : lang === "en" ? e : f);
   const hubspotUrl = lang === "fr" ? HUBSPOT_FR : HUBSPOT_EN;
-  const hubspotFormId = lang === "fr" ? HUBSPOT_FORM_FR : HUBSPOT_FORM_EN;
-  return <LangCtx.Provider value={{ lang, setLang, t, tr, hubspotUrl, hubspotFormId }}>{children}</LangCtx.Provider>;
+  return <LangCtx.Provider value={{ lang, setLang, t, tr, hubspotUrl }}>{children}</LangCtx.Provider>;
 }
 
 export function useLanguage() {

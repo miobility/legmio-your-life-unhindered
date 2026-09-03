@@ -17,7 +17,7 @@ const MUTED = "#A89ED0";
 const BORDER = "#252159";
 
 export function StickyBanner() {
-  const { t } = useLanguage();
+  const { t, hubspotUrl } = useLanguage();
   const [idx, setIdx] = useState(0);
   useEffect(() => {
     const id = setInterval(() => setIdx((v) => (v + 1) % 2), 3000);
@@ -26,7 +26,9 @@ export function StickyBanner() {
   const msg = idx === 0 ? t("banner_a") : t("banner_b");
   return (
     <a
-      href="/#waitlist"
+      href={hubspotUrl}
+      target="_blank"
+      rel="noreferrer"
       className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center text-xs sm:text-sm font-medium px-4 hover:opacity-90 overflow-hidden"
       style={{ backgroundColor: ACCENT, color: NAVY }}
     >
@@ -95,7 +97,7 @@ function LangSwitcher({ onPick }: { onPick?: () => void }) {
 }
 
 export function Header() {
-  const { t } = useLanguage();
+  const { t, hubspotUrl } = useLanguage();
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   // Comparaison sur segment complet : "/produit" commencait par "/pro",
@@ -124,7 +126,7 @@ export function Header() {
           <Link to="/pro" className={linkClass(isPro)} style={linkStyle(isPro)}>{t("nav_pro")}</Link>
         </nav>
         <div className="hidden sm:block"><LangSwitcher /></div>
-        <a href="/#waitlist" className="btn-dark btn-dark-hover hidden sm:inline-flex text-sm px-5 py-2.5 items-center gap-1.5">
+        <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover hidden sm:inline-flex text-sm px-5 py-2.5 items-center gap-1.5">
           {t("cta_interested")} <span aria-hidden="true">→</span>
         </a>
         <button className="md:hidden p-2" style={{ color: WHITE }} onClick={() => setOpen(!open)} aria-label={t("nav_menu")} aria-expanded={open} aria-controls="menu-mobile">
@@ -137,7 +139,7 @@ export function Header() {
           <Link to="/faq" onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
           <Link to="/blog" onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
           <Link to="/pro" onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isPro)}>{t("nav_pro")}</Link>
-          <a href="/#waitlist" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover text-sm px-5 py-2.5 mt-3 self-start inline-flex items-center gap-1.5">
+          <a href={hubspotUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover text-sm px-5 py-2.5 mt-3 self-start inline-flex items-center gap-1.5">
             {t("cta_interested")} <span aria-hidden="true">→</span>
           </a>
           <div className="mt-4 pt-3 border-t" style={{ borderColor: BORDER }}><LangSwitcher onPick={() => setOpen(false)} /></div>
