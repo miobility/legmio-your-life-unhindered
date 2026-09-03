@@ -376,19 +376,22 @@ function Landing() {
           <div className="mt-12">
             <Marquee
               label={tr("Médias qui parlent de legmio", "Media covering legmio", "Medien über legmio")}
-              seconds={45}
+              seconds={30}
               tone="light"
               rows={[[
-                ["/logoparisien.png", "Le Parisien"],
-                ["/logoTF1.png", "TF1"],
-                ["/logofranceTV2.jpg", "France Télévisions"],
-                ["/mediapositif.png", "Le Média Positif"],
-                ["/logofaireface.jpg", "Faire Face"],
-                ["/logohacavie.png", "Hacavie"],
-                ["/logocnrsinnovation.png", "CNRS Innovation"],
-              ].map(([src, alt]) => (
-                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 170, height: 80 }}>
-                  <img src={src} alt={alt} className="object-contain" style={{ maxHeight: 52, maxWidth: 150 }} />
+                // `h` : hauteur propre a chaque logo. A hauteur egale, un logo
+                // empile (CNRS Innovation) parait deux fois plus petit qu'un
+                // logo en bandeau (Hacavie).
+                { src: "/logoparisien.png", alt: "Le Parisien", h: 46 },
+                { src: "/logoTF1.png", alt: "TF1", h: 52 },
+                { src: "/logofranceTV2.jpg", alt: "France Télévisions", h: 52 },
+                { src: "/mediapositif.png", alt: "Le Média Positif", h: 52 },
+                { src: "/logofaireface.jpg", alt: "Faire Face", h: 46 },
+                { src: "/logohacavie.png", alt: "Hacavie", h: 44 },
+                { src: "/logocnrsinnovation.png", alt: "CNRS Innovation", h: 70 },
+              ].map(({ src, alt, h }) => (
+                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 170, height: 88 }}>
+                  <img src={src} alt={alt} className="object-contain" style={{ maxHeight: h, maxWidth: 150 }} />
                 </div>
               ))]}
             />

@@ -20,6 +20,8 @@ export function Marquee({
 }) {
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
+  // Le doigt pose sur la frise la fige, pour pouvoir la pousser soi-meme.
+  const [manipule, setManipule] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -29,15 +31,29 @@ export function Marquee({
     return () => mq.removeEventListener("change", sync);
   }, []);
 
-  const arrete = paused || reduced;
+  const arrete = paused || reduced || manipule;
 
   return (
-    <div role="group" aria-roledescription="bandeau défilant" aria-label={label}>
+    <div
+      role="group"
+      aria-roledescription="bandeau défilant"
+      aria-label={label}
+      onPointerDown={() => setManipule(true)}
+      onPointerUp={() => setManipule(false)}
+      onPointerCancel={() => setManipule(false)}
+      onPointerLeave={() => setManipule(false)}
+    >
       <div className="space-y-6 marquee-pause">
         {rows.map((row, r) => {
           const doubled = [...Children.toArray(row), ...Children.toArray(row)];
           return (
-            <div key={r} className="overflow-hidden">
+            <div
+              key={r}
+              // Defilement a la main : on peut pousser la frise pour aller plus vite.
+              // overflow-y-hidden, sinon overflow-x auto le rendrait defilable en vertical.
+              className="overflow-x-auto overflow-y-hidden no-scrollbar"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none", overscrollBehaviorX: "contain" }}
+            >
               <div
                 className={`flex gap-4 ${r % 2 === 0 ? "marquee-left" : "marquee-right"}`}
                 style={{
