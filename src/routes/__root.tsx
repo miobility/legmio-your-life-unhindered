@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -15,7 +16,7 @@ import appCss from "../styles.css?url";
 // si le site change de domaine, c'est la seule ligne a modifier.
 const SITE_URL = "https://legmio.com";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { LanguageProvider } from "@/lib/i18n";
+import { LanguageProvider, langDeChemin, type Lang } from "@/lib/i18n";
 import { MARGE_CARTES, SEUIL } from "@/lib/apparition";
 import { Header, StickyBanner, Footer } from "@/components/Layout";
 
@@ -87,51 +88,70 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 // Donnees structurees : elles indiquent explicitement a Google le nom de la
 // marque, le logo et les comptes officiels, au lieu de le laisser deviner.
-const JSON_LD = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${SITE_URL}/#organization`,
-      name: "legmio",
-      url: SITE_URL,
-      logo: { "@type": "ImageObject", url: `${SITE_URL}/icon-512.png`, width: 512, height: 512 },
-      image: `${SITE_URL}/og-image.jpg`,
-      description:
-        "legmio est la première béquille ergonomique avec un mode mains libres, née de la recherche CNRS/Sorbonne Université.",
-      email: "contact@legmio.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "13-15 rue Traversière",
-        postalCode: "75012",
-        addressLocality: "Paris",
-        addressCountry: "FR",
-      },
-      sameAs: [
-        "https://www.instagram.com/legmio.official",
-        "https://www.tiktok.com/@legmio",
-        "https://www.linkedin.com/in/nicolas-perrin-gilbert-2815a4179/",
-      ],
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${SITE_URL}/#website`,
-      url: SITE_URL,
-      name: "legmio",
-      inLanguage: "fr-FR",
-      publisher: { "@id": `${SITE_URL}/#organization` },
-    },
-  ],
+// Elles suivent la langue de la page, sinon un Allemand voit une fiche
+// d'entreprise redigee en francais.
+const DESCRIPTIONS: Record<Lang, string> = {
+  fr: "legmio est la première béquille ergonomique avec un mode mains libres, née de la recherche CNRS/Sorbonne Université.",
+  en: "legmio is the first ergonomic crutch with a hands-free mode, born from CNRS/Sorbonne University research.",
+  de: "legmio ist die erste ergonomische Krücke mit Freihand-Modus, entstanden aus der Forschung von CNRS und Sorbonne Université.",
 };
+const IMAGES: Record<Lang, string> = {
+  fr: "/og-image.jpg",
+  en: "/og-image-en.jpg",
+  de: "/og-image-de.jpg",
+};
+const LOCALES: Record<Lang, string> = { fr: "fr-FR", en: "en-GB", de: "de-DE" };
+
+function donneesStructurees(lang: Lang) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: "legmio",
+        url: SITE_URL,
+        logo: { "@type": "ImageObject", url: `${SITE_URL}/icon-512.png`, width: 512, height: 512 },
+        image: `${SITE_URL}${IMAGES[lang]}`,
+        description: DESCRIPTIONS[lang],
+        email: "contact@legmio.com",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "13-15 rue Traversière",
+          postalCode: "75012",
+          addressLocality: "Paris",
+          addressCountry: "FR",
+        },
+        sameAs: [
+          "https://www.instagram.com/legmio.official",
+          "https://www.tiktok.com/@legmio",
+          "https://www.linkedin.com/in/nicolas-perrin-gilbert-2815a4179/",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: "legmio",
+        inLanguage: LOCALES[lang],
+        publisher: { "@id": `${SITE_URL}/#organization` },
+      },
+    ],
+  };
+}
 
 function RootShell({ children }: { children: ReactNode }) {
+  // La langue doit etre dans le HTML servi, pas posee apres coup par le
+  // navigateur : Google et les lecteurs d'ecran ne lisent que le premier.
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const lang = langDeChemin(pathname);
   return (
-    <html lang="fr">
+    <html lang={lang}>
       <head>
         <HeadContent />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesStructurees(lang)) }}
         />
       </head>
       <body>{children}<Scripts /></body>
