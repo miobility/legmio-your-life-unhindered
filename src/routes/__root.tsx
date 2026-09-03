@@ -76,6 +76,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "canonical", href: SITE_URL },
       { rel: "stylesheet", href: appCss },
+      // favicon.ico : les navigateurs et le robot de Google le demandent a la
+      // racine meme sans balise. Il repondait 404.
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", href: "/only_logo.svg", type: "image/svg+xml" },
       // PNG 48px : format que le robot a favicons de Google privilegie.
       { rel: "icon", href: "/icon-48.png", type: "image/png", sizes: "48x48" },
