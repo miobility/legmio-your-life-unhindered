@@ -462,8 +462,8 @@ function WallOfLove() {
     "Seeing your invention lifts my spirits.",
     "It really seems to give back freedom of movement.",
   ];
-  const row1 = tr(row1Fr, row1Fr, row1Fr);
-  const row2 = tr(row2Fr, row2Fr, row2Fr);
+  const row1 = tr(row1Fr, row1En);
+  const row2 = tr(row2Fr, row2En);
   const dup1 = [...row1, ...row1];
   const dup2 = [...row2, ...row2];
   const Card = ({ q }: { q: string }) => (
@@ -566,9 +566,9 @@ function Roadmap() {
 function InstaCards() {
   const { tr } = useLanguage();
   const items = [
-    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.png", label: tr("1M de vues", "1M views", "1 Mio. Aufrufe") },
-    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.png", label: tr("3,6M de vues", "3.6M views", "3,6 Mio. Aufrufe") },
-    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.png", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
+    { url: "https://www.instagram.com/reel/DYCL7AGKGrK/", img: "/insta5.jpg", label: tr("1M de vues", "1M views", "1 Mio. Aufrufe") },
+    { url: "https://www.instagram.com/reel/DX_Qqp9tbvg/", img: "/insta1.jpg", label: tr("3,6M de vues", "3.6M views", "3,6 Mio. Aufrufe") },
+    { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.jpg", label: tr("Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV", "Le Mag de la Santé — France TV") },
   ];
   const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);

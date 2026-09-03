@@ -72,6 +72,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const saved = typeof window !== "undefined" ? (localStorage.getItem("legmio-lang") as Lang | null) : null;
     if (saved === "fr" || saved === "en" || saved === "de") setLangState(saved);
   }, []);
+  useEffect(() => {
+    if (typeof document !== "undefined") document.documentElement.lang = lang;
+  }, [lang]);
   const setLang = (l: Lang) => {
     setLangState(l);
     if (typeof window !== "undefined") localStorage.setItem("legmio-lang", l);

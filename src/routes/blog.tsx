@@ -83,7 +83,7 @@ type Article = {
 const articles: Article[] = [
   {
     id: "genese",
-    cover: "/usecase-quotidien.png",
+    cover: "/usecase-quotidien.jpg",
     tag: "Genèse",
     tagEn: "Origin",
     tagDe: "Geschichte",
@@ -230,13 +230,13 @@ function ArticleCard({ a }: { a: Article }) {
   const [open, setOpen] = useState(false);
   const title = lang === "en" ? a.titleEn : lang === "de" ? a.titleDe : a.titleFr;
   const excerpt = lang === "en" ? a.excerptEn : a.excerptFr;
-  const body = a.bodyFr;
+  const body = lang === "en" ? a.bodyEn : a.bodyFr;
   const tag = lang === "en" ? a.tagEn : lang === "de" ? a.tagDe : a.tag;
   return (
     <article className="card-white overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="aspect-video md:aspect-auto md:h-full overflow-hidden" style={{ backgroundColor: CREAM }}>
-          <img src={a.cover} alt={title} className="w-full h-full object-cover" onError={(e) => (e.currentTarget.src = "/usecase-quotidien.png")} />
+          <img src={a.cover} alt={title} className="w-full h-full object-cover" onError={(e) => (e.currentTarget.src = "/usecase-quotidien.jpg")} />
         </div>
         <div className="p-8">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: ACCENT, color: NAVY }}>{tag}</span>
@@ -248,11 +248,9 @@ function ArticleCard({ a }: { a: Article }) {
           </button>
           {open && (
             <div className="mt-6 space-y-4 text-sm leading-relaxed" style={{ color: INK_MUTED }}>
-              {lang !== "fr" && (
+              {lang === "de" && (
                 <div className="rounded-xl p-4" style={{ backgroundColor: CREAM, color: INK }}>
-                  {lang === "en"
-                    ? "This article is currently only available in French. English version coming soon."
-                    : "Dieser Artikel ist derzeit nur auf Französisch verfügbar. Deutsche Version folgt in Kürze."}
+                  Dieser Artikel ist derzeit nur auf Französisch verfügbar. Deutsche Version folgt in Kürze.
                 </div>
               )}
               {body.split("\n\n").map((p, i) => <p key={i}>{p}</p>)}
