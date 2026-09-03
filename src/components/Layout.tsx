@@ -100,10 +100,13 @@ export function Header() {
   const { t, hubspotUrl } = useLanguage();
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isProduct = pathname.startsWith("/produit") || pathname.startsWith("/bequille");
-  const isFaq = pathname.startsWith("/faq");
-  const isBlog = pathname.startsWith("/blog");
-  const isPro = pathname.startsWith("/pro");
+  // Comparaison sur segment complet : "/produit" commencait par "/pro",
+  // ce qui allumait l'onglet Espace pro en meme temps que Bequille.
+  const onPath = (p: string) => pathname === p || pathname.startsWith(p + "/");
+  const isProduct = onPath("/produit") || onPath("/bequille");
+  const isFaq = onPath("/faq");
+  const isBlog = onPath("/blog");
+  const isPro = onPath("/pro");
   const linkStyle = (active: boolean) => ({ color: active ? ACCENT : WHITE });
   const linkClass = (active: boolean) =>
     `hover:opacity-80 transition ${active ? "font-bold" : ""}`;
@@ -126,20 +129,20 @@ export function Header() {
         <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover hidden sm:inline-flex text-sm px-5 py-2.5 items-center gap-1.5">
           {t("cta_interested")} <span aria-hidden="true">→</span>
         </a>
-        <button className="md:hidden p-2" style={{ color: WHITE }} onClick={() => setOpen(!open)} aria-label="Menu">
+        <button className="md:hidden p-2" style={{ color: WHITE }} onClick={() => setOpen(!open)} aria-label={t("nav_menu")} aria-expanded={open} aria-controls="menu-mobile">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d={open ? "M6 6l12 12M6 18L18 6" : "M4 6h16M4 12h16M4 18h16"} /></svg>
         </button>
       </div>
       {open && (
-        <div className="md:hidden border-t px-4 py-4 flex flex-col gap-4" style={{ backgroundColor: NAVY_ALT, borderColor: BORDER }}>
-          <Link to="/produit" onClick={() => setOpen(false)} style={linkStyle(isProduct)}>{t("nav_product")}</Link>
-          <Link to="/faq" onClick={() => setOpen(false)} style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
-          <Link to="/blog" onClick={() => setOpen(false)} style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
-          <Link to="/pro" onClick={() => setOpen(false)} style={linkStyle(isPro)}>{t("nav_pro")}</Link>
-          <div className="flex items-center gap-3 pt-2"><LangSwitcher /></div>
-          <a href={hubspotUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover text-sm px-5 py-2.5 mt-2 self-start inline-flex items-center gap-1.5">
+        <div id="menu-mobile" className="md:hidden border-t px-4 py-3 flex flex-col" style={{ backgroundColor: NAVY_ALT, borderColor: BORDER }}>
+          <Link to="/produit" onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isProduct)}>{t("nav_product")}</Link>
+          <Link to="/faq" onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
+          <Link to="/blog" onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
+          <Link to="/pro" onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isPro)}>{t("nav_pro")}</Link>
+          <a href={hubspotUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover text-sm px-5 py-2.5 mt-3 self-start inline-flex items-center gap-1.5">
             {t("cta_interested")} <span aria-hidden="true">→</span>
           </a>
+          <div className="mt-4 pt-3 border-t" style={{ borderColor: BORDER }}><LangSwitcher onPick={() => setOpen(false)} /></div>
         </div>
       )}
     </header>

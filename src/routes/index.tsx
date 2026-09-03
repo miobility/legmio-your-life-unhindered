@@ -222,7 +222,7 @@ function Landing() {
           <div className="mt-14 -mx-4 sm:-mx-6 px-4 sm:px-6">
             <AutoCarousel>
               {[
-                { img: "/compression-nerf.jpg", alt: tr("Un soignant examine le coude d'un patient, à l'endroit où le nerf ulnaire est le plus exposé.", "A clinician examines a patient's elbow, where the ulnar nerve is most exposed.", "Eine Fachkraft untersucht den Ellbogen eines Patienten an der Stelle, an der der Ellennerv am stärksten exponiert ist."), t: tr("Les zones de passage des nerfs sont comprimées.", "Nerve pathways get compressed.", "Die Nervenbahnen werden zusammengedrückt."), p: tr("Le nerf ulnaire chemine juste sous la peau. Une pression répétée au même endroit peut provoquer engourdissements et fourmillements dans la main.", "The ulnar nerve runs just beneath the skin. Repeated pressure at the same spot can cause numbness and tingling in the hand.", "Der Ellennerv verläuft direkt unter der Haut. Wiederholter Druck an derselben Stelle kann zu Taubheit und Kribbeln in der Hand führen.") },
+                { img: "/compression-nerf.jpg", alt: tr("Un soignant examine le coude d'un patient, à l'endroit où le nerf ulnaire est le plus exposé.", "A clinician examines a patient's elbow, where the ulnar nerve is most exposed.", "Eine Fachkraft untersucht den Ellbogen eines Patienten an der Stelle, an der der Ellennerv am stärksten exponiert ist."), t: tr("Les zones de passage des nerfs sont comprimées.", "Nerve pathways get compressed.", "Die Nervenbahnen werden zusammengedrückt."), p: tr("Le nerf ulnaire passe juste sous la peau : une pression répétée au même endroit finit par l'irriter.", "The ulnar nerve runs just beneath the skin: repeated pressure in the same spot ends up irritating it.", "Der Ellennerv verläuft direkt unter der Haut: wiederholter Druck an derselben Stelle reizt ihn mit der Zeit.") },
                 { img: "/probleme-mains.avif", alt: "", t: tr("Les deux mains sont mobilisées pour se déplacer.", "Both hands are needed just to move.", "Beide Hände werden zum Gehen benötigt."), p: tr("Porter, cuisiner, travailler, ouvrir une porte — autant de gestes qui nécessitent de s'arrêter.", "Carrying, cooking, working, opening a door — all things that require stopping.", "Tragen, kochen, arbeiten, eine Tür öffnen — all das erfordert einen Stopp.") },
                 { img: "/canne-anglaise.jpg", alt: tr("Une femme marche avec deux cannes anglaises classiques, les deux mains occupées par les poignées.", "A woman walks with two standard forearm crutches, both hands occupied by the grips.", "Eine Frau geht mit zwei herkömmlichen Unterarmgehstützen, beide Hände an den Griffen."), t: tr("La conception n'a pas fondamentalement évolué.", "The design hasn't fundamentally changed.", "Das Design hat sich grundlegend nicht verändert."), p: tr("Les béquilles disponibles aujourd'hui reposent sur les mêmes principes depuis des décennies.", "Today's crutches are built on the same principles as decades ago.", "Die heute erhältlichen Krücken beruhen seit Jahrzehnten auf denselben Prinzipien.") },
               ].map((c, i) => (
@@ -615,10 +615,12 @@ function InstaCards() {
               type="button"
               aria-label={`Slide ${i + 1}`}
               onClick={() => goTo(i)}
-              className="rounded-full transition"
+              className="rounded-full transition flex items-center justify-center"
               style={{
-                width: 8,
-                height: 8,
+                width: 44,
+                height: 44,
+                padding: 18,
+                backgroundClip: "content-box",
                 backgroundColor: i === active ? ACCENT : "#6B66A0",
                 opacity: i === active ? 1 : 0.7,
               }}
