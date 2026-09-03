@@ -149,6 +149,11 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang={lang}>
       <head>
         <HeadContent />
+        {/* Sans JavaScript, les blocs d'apparition restaient a opacity 0 :
+            la page n'affichait que son hero. */}
+        <noscript>
+          <style>{".fade-up,.reveal{opacity:1!important;transform:none!important}"}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesStructurees(lang)) }}

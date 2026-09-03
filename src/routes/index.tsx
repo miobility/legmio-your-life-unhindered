@@ -124,12 +124,12 @@ export function SpecsStrip() {
   const { tr } = useLanguage();
   const pills = specsItems();
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
       {pills.map((p, i) => (
-        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
+        <div key={i} className="fade-up carte-survol rounded-2xl p-6 flex flex-col items-start gap-2.5" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
           <div style={{ color: NAVY }}>{p.icon}</div>
-          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
-          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
+          <div className="font-display font-bold text-lg leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
+          <div className="text-sm leading-snug" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
         </div>
       ))}
     </div>
@@ -146,12 +146,12 @@ export function ProductFeatureGrid() {
     { icon: <IconWall />, kFr: "Tient seule", kEn: "Stands alone", kDe: "Steht allein", sFr: "legmio tient debout contre un mur sans tomber", sEn: "legmio stands against a wall without falling", sDe: "legmio steht gegen eine Wand ohne umzufallen" },
   ];
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
       {items.map((p, i) => (
-        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
+        <div key={i} className="fade-up carte-survol rounded-2xl p-6 flex flex-col items-start gap-2.5" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
           <div style={{ color: NAVY }}>{p.icon}</div>
-          <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
-          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
+          <div className="font-display font-bold text-lg leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
+          <div className="text-sm leading-snug" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
         </div>
       ))}
     </div>
@@ -408,7 +408,9 @@ export function Landing() {
       </section>
 
       {/* 8 — WALL OF LOVE (WHITE) */}
-      <section style={{ backgroundColor: WHITE }} className="py-20 md:py-28 overflow-hidden">
+      {/* Les trois dernieres sections portent un contenu plus leger : elles
+          gardaient la respiration du haut de page, la descente s'essoufflait. */}
+      <section style={{ backgroundColor: WHITE }} className="py-16 md:py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>
             {tr("Bientôt disponible.", "Coming soon.", "Bald verfügbar.")}
@@ -418,7 +420,7 @@ export function Landing() {
       </section>
 
       {/* 9 — ROADMAP (CREAM) */}
-      <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
+      <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-16 md:py-20">
         <div className="max-w-5xl mx-auto">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>{tr("Où en sommes-nous ?", "Where are we?", "Wo stehen wir?")}</h2>
@@ -428,7 +430,7 @@ export function Landing() {
       </section>
 
       {/* 10 — ACTUALITÉ + CTA (WHITE) */}
-      <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
+      <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-16 md:py-20">
         <div className="max-w-xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>
             {tr(<>Suis l'actualité<br />de legmio.</>, <>Follow<br />legmio's news.</>, <>Folge den Neuigkeiten<br />von legmio.</>)}
@@ -482,8 +484,10 @@ function WallOfLove() {
   ];
   const row1 = tr(row1Fr, row1En);
   const row2 = tr(row2Fr, row2En);
+  // Largeur fixe : a largeurs libres, le ruban defilait de facon si irreguliere
+  // qu'il se lisait comme une mise en page cassee plutot que comme un mur.
   const Card = ({ q }: { q: string }) => (
-    <div className="rounded-2xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
+    <div className="rounded-2xl px-6 py-5 shrink-0 w-[272px] sm:w-[300px] flex items-center" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
       <p className="italic text-sm">"{q}"</p>
     </div>
   );
@@ -516,7 +520,7 @@ function Roadmap() {
   ];
   const currentIdx = steps.findIndex((s) => s.state === "current");
   const progressPct = (currentIdx / (steps.length - 1)) * 100;
-  const CIRCLE = 18;
+  const CIRCLE = 24;
   // Le trait se remplit quand la section entre a l'ecran : la progression
   // se raconte au lieu de s'afficher deja faite.
   const bloc = useRef<HTMLDivElement>(null);
@@ -533,10 +537,10 @@ function Roadmap() {
   }, []);
   const UPCOMING_TEXT = "#686D83";
   return (
-    <div className="mt-16" ref={bloc}>
+    <div className="mt-12" ref={bloc}>
       <div className="hidden md:block relative pt-16 pb-4">
-        <div className="absolute h-px" style={{ left: "10%", right: "10%", top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER_LIGHT }} />
-        <div className="absolute h-[2px] ligne-progression" style={{ left: "10%", top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${tracee ? progressPct * 0.8 : 0}%` }} />
+        <div className="absolute h-[3px] rounded-full" style={{ left: "10%", right: "10%", top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER_LIGHT }} />
+        <div className="absolute h-[3px] rounded-full ligne-progression" style={{ left: "10%", top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${tracee ? progressPct * 0.8 : 0}%` }} />
         <div className="relative grid grid-cols-5 gap-4">
           {steps.map((s, i) => {
             const done = s.state === "done";
@@ -545,7 +549,7 @@ function Roadmap() {
             return (
               <div key={i} className="flex flex-col items-center text-center">
                 <div className="h-12 flex items-end justify-center px-2">
-                  <div className="text-sm leading-tight" style={{ color: upcoming ? UPCOMING_TEXT : INK, fontWeight: isCurrent ? 700 : 500 }}>{s.t}</div>
+                  <div className="text-base leading-tight font-display" style={{ color: upcoming ? UPCOMING_TEXT : INK, fontWeight: isCurrent ? 700 : 600 }}>{s.t}</div>
                 </div>
                 <div className="my-3 flex items-center justify-center" style={{ height: CIRCLE + 6 }}>
                   <div
