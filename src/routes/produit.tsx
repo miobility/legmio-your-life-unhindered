@@ -204,7 +204,7 @@ export function Produit() {
             </h2>
             <p className="mt-5 text-base max-w-xl mx-auto text-center" style={{ color: MUTED_NAVY }}>
               {tr(
-                "Tu marches normalement, et tu libères les mains lorsque nécessaire.",
+                "Vous marchez normalement, et vous libérez les mains lorsque nécessaire.",
                 "You walk normally, and free your hands when needed.",
                 "Du gehst normal und machst die Hände frei, wenn nötig."
               )}
@@ -323,7 +323,7 @@ export function Produit() {
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="titre-section" style={{ color: WHITE }}>
-            {tr(<>Prêt à retrouver<br />tes mains libres ?</>, <>Ready to get<br />your hands back?</>, <>Bereit deine<br />Hände zurückzubekommen?</>)}
+            {tr(<>Prêt à retrouver<br />vos mains libres ?</>, <>Ready to get<br />your hands back?</>, <>Bereit, Ihre<br />Hände zurückzubekommen?</>)}
           </h2>
           <div className="mt-8">
             <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover inline-flex">
