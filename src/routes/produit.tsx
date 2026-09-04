@@ -1,8 +1,8 @@
-import { metaDe } from "@/lib/meta";
+import { metaDe, SITE_URL } from "@/lib/meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { IconChevron, IconCheck, IconArrowRight } from "@/components/Icons";
-import { useLanguage } from "@/lib/i18n";
+import { useLanguage, cheminDe } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { ProductFeatureGrid } from "@/routes/index";
 
@@ -50,7 +50,7 @@ function Accordion({ title, children, defaultOpen = false }: { title: string; ch
 type Review = { title: string; quote: string; name: string; profile: string; date: string; img?: string };
 
 export function Produit() {
-  const { tr, hubspotUrl, lien } = useLanguage();
+  const { tr, hubspotUrl, lien, lang } = useLanguage();
   const gallery = [
     { src: "/bequille.png", alt: tr("La béquille legmio vue de profil.", "The legmio crutch seen from the side.", "Die legmio-Krücke von der Seite.") },
     { src: "/mode-bequille.jpg", alt: tr("Un utilisateur marche avec deux béquilles legmio, les mains posées sur les poignées.", "A user walks with two legmio crutches, hands resting on the grips.", "Ein Nutzer geht mit zwei legmio-Krücken, die Hände auf den Griffen.") },
@@ -66,8 +66,38 @@ export function Produit() {
   const galleryPrev = () => setSel((s) => (s - 1 + gallery.length) % gallery.length);
   const galleryNext = () => setSel((s) => (s + 1) % gallery.length);
 
+  // Aucun moteur ne savait qu'il y a un produit sur cette page : elle ne
+  // declarait que l'organisation et le site. Les valeurs viennent de la FAQ.
+  const donneesProduit = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: "legmio",
+    url: `${SITE_URL}${cheminDe(lang, "produit")}`,
+    image: `${SITE_URL}/bequille.png`,
+    description: tr(
+      "La premiere bequille ergonomique avec un mode mains libres : l'appui passe au coude, les deux mains redeviennent disponibles.",
+      "The first ergonomic crutch with a hands-free mode: the load shifts to the elbow and both hands become available again.",
+      "Die erste ergonomische Kruecke mit Freihand-Modus: Die Stuetze wandert zum Ellbogen, beide Haende werden wieder frei."
+    ),
+    brand: { "@type": "Brand", name: "legmio" },
+    manufacturer: { "@type": "Organization", name: "miobility", "@id": `${SITE_URL}/#organization` },
+    countryOfAssembly: "FR",
+    material: "Aluminium",
+    weight: { "@type": "QuantitativeValue", value: 850, unitCode: "GRM" },
+    category: tr("Aide a la marche", "Walking aid", "Gehhilfe"),
+    additionalProperty: [
+      { "@type": "PropertyValue", name: tr("Charge maximale", "Maximum load", "Maximale Belastung"), value: "130 kg" },
+      { "@type": "PropertyValue", name: tr("Taille utilisateur", "User height", "Koerpergroesse"), value: "1,50 m - 1,95 m" },
+      { "@type": "PropertyValue", name: tr("Hauteur reglable", "Adjustable height", "Verstellbare Hoehe"), value: "1,10 m - 1,40 m" },
+      { "@type": "PropertyValue", name: tr("Embouts", "Tips", "Aufsaetze"), value: tr("interchangeables 18/19 mm", "interchangeable 18/19 mm", "austauschbar 18/19 mm") },
+      { "@type": "PropertyValue", name: tr("Certification", "Certification", "Zertifizierung"), value: tr("CE classe I en cours - MDR 2017/745", "CE class I in progress - MDR 2017/745", "CE Klasse I in Arbeit - MDR 2017/745") },
+      { "@type": "PropertyValue", name: tr("Brevet", "Patent", "Patent"), value: "FR2411206" },
+    ],
+  };
+
   return (
     <div style={{ backgroundColor: CREAM }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesProduit) }} />
       {/* SECTION 1 — HERO PRODUIT (CREAM) */}
       <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-12">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">

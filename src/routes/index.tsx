@@ -211,6 +211,16 @@ export function Landing() {
               )}
             </h1>
             <div className="pt-2"><CTADark /></div>
+              {/* La medaille compte, mais le Concours Lepine ne voyage pas :
+                  hors de France, le nom seul ne dit rien, d'ou la glose. */}
+              <p className="pt-1 text-sm" style={{ color: MUTED_NAVY }}>
+                <span style={{ color: ACCENT }}>&#9679;</span>{" "}
+                {tr(
+                  <>Médaille d'or du <strong style={{ color: WHITE, fontWeight: 600 }}>Concours Lépine 2026</strong></>,
+                  <>Gold medal, <strong style={{ color: WHITE, fontWeight: 600 }}>Concours Lépine 2026</strong> — France's national inventors' award</>,
+                  <>Goldmedaille des <strong style={{ color: WHITE, fontWeight: 600 }}>Concours Lépine 2026</strong> — Frankreichs nationaler Erfinderpreis</>
+                )}
+              </p>
           </div>
         </div>
       </section>

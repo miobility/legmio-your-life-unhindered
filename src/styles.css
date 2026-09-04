@@ -327,3 +327,21 @@
   transition: top 0.15s ease;
 }
 .evitement:focus { top: 8px; }
+
+/* Sous-titres de la video du hero. Sans cette regle, le navigateur les rend
+   en blanc sur des boites noires par mot : c'est le detail le plus voyant du
+   site, et il est dans la premiere chose qu'on voit sur telephone. */
+video::cue {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.82em;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #FFFFFF;
+  background: rgba(13, 13, 41, 0.82);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+/* Safari applique le fond au conteneur, pas a chaque mot. */
+video::-webkit-media-text-track-display {
+  border-radius: 8px;
+  padding: 2px 10px;
+}

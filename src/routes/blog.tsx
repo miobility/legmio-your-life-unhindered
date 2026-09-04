@@ -1,8 +1,8 @@
-import { metaDe } from "@/lib/meta";
+import { metaDe, SITE_URL } from "@/lib/meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { IconChevron } from "@/components/Icons";
-import { useLanguage } from "@/lib/i18n";
+import { useLanguage, cheminDe } from "@/lib/i18n";
 
 export const Route = createFileRoute("/blog")({
   head: () => metaDe("fr", "blog"),
@@ -139,9 +139,42 @@ function ArticleCard({ a }: { a: Article }) {
 }
 
 export function Blog() {
-  const { tr } = useLanguage();
+  const { tr, lang } = useLanguage();
+  // Le blog ne declarait rien : ni article, ni auteur. Or c'est la page qui
+  // rattache legmio a une personne reelle et a ses travaux — exactement ce
+  // qu'un moteur cherche pour reconnaitre une entite.
+  const nicolas = {
+    "@type": "Person",
+    "@id": `${SITE_URL}/#nicolas`,
+    name: "Nicolas Perrin-Gilbert",
+    jobTitle: tr("Co-fondateur & CEO, chercheur CNRS", "Co-founder & CEO, CNRS researcher", "Mitgruender & CEO, CNRS-Forscher"),
+    affiliation: [
+      { "@type": "Organization", name: "CNRS" },
+      { "@type": "Organization", name: "ISIR, Sorbonne Universite" },
+      { "@type": "Organization", "@id": `${SITE_URL}/#organization` },
+    ],
+    url: `${SITE_URL}${cheminDe(lang, "blog")}`,
+  };
+  const donneesBlog = {
+    "@context": "https://schema.org",
+    "@graph": [
+      nicolas,
+      ...articles.map((a) => ({
+        "@type": "Article",
+        "@id": `${SITE_URL}${cheminDe(lang, "blog")}#${a.id}`,
+        headline: lang === "en" ? a.titleEn : lang === "de" ? a.titleDe : a.titleFr,
+        description: lang === "en" ? a.excerptEn : a.excerptFr,
+        image: `${SITE_URL}${a.cover}`,
+        datePublished: "2026-06-01",
+        author: { "@id": `${SITE_URL}/#nicolas` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        inLanguage: lang,
+      })),
+    ],
+  };
   return (
     <div style={{ backgroundColor: WHITE }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesBlog) }} />
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28 text-center">
         <h1 className="text-4xl sm:text-5xl md:text-6xl" style={{ color: WHITE }}>{tr("L'histoire de legmio", "The legmio story", "Die Geschichte von legmio")}</h1>
         <p className="mt-4" style={{ color: MUTED_NAVY }}>{tr("Pourquoi cette béquille existe.", "Why this crutch exists.", "Warum es diese Krücke gibt.")}</p>
