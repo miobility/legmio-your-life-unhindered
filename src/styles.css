@@ -333,24 +333,32 @@
    site, et il est dans la premiere chose qu'on voit sur telephone. */
 video::cue {
   font-family: "Inter", system-ui, sans-serif;
-  font-size: 0.82em;
+  /* 0.82em les rendait plus petits que le rendu par defaut du navigateur :
+     ils devenaient illisibles sur une video de 380 px de large. */
+  font-size: 1.08em;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.4;
   color: #FFFFFF;
-  background: rgba(13, 13, 41, 0.82);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  background: rgba(13, 13, 41, 0.9);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 /* Safari applique le fond au conteneur, pas a chaque mot. */
 video::-webkit-media-text-track-display {
-  border-radius: 8px;
-  padding: 2px 10px;
+  border-radius: 10px;
+  padding: 4px 12px;
 }
 
 /* ── Echelle typographique ───────────────────────────────────
    Un seul endroit definit la taille des titres. Avant, chaque page
    composait la sienne : le titre d'article du blog etait plus petit
    qu'un titre de section, et les pages legales plafonnaient a 48 px
-   la ou les autres montaient a 60. */
+   la ou les autres montaient a 60.
+
+   Deux niveaux seulement pour les sections : la these et le reste.
+   Un troisieme, plus petit, revenait a decreter que « Une innovation
+   recompensee » et « Ils parlent de nous » comptaient moins — alors
+   que ce sont les sections de preuve. `titre-appui` ne sert plus qu'a
+   la page d'erreur. */
 .titre-page    { font-size: 2.25rem;  line-height: 1.05; }
 .titre-these   { font-size: 2.25rem;  line-height: 1.08; }
 .titre-section { font-size: 1.875rem; line-height: 1.12; }

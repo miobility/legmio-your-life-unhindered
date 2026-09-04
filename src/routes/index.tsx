@@ -159,17 +159,21 @@ export function ProductFeatureGrid() {
 }
 
 export function Landing() {
-  const { tr, lien } = useLanguage();
+  const { tr, lien, lang } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // La piste se choisissait par index : « fr » donnait 0, tout le reste 1.
+  // Un visiteur allemand recevait donc les sous-titres anglais. On compare
+  // desormais le code de langue. C'est aussi ce qui permet de changer de
+  // piste apres le chargement : l'attribut `default` n'est lu qu'une fois.
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     const tracks = video.textTracks;
-    for (let i = 0; i < tracks.length; i++) tracks[i].mode = "disabled";
-    const trackIndex = tr("fr", "en", "de") === "fr" ? 0 : 1;
-    if (tracks[trackIndex]) tracks[trackIndex].mode = "showing";
-  });
+    for (let i = 0; i < tracks.length; i++) {
+      tracks[i].mode = tracks[i].language === lang ? "showing" : "disabled";
+    }
+  }, [lang]);
 
   
 
@@ -177,10 +181,10 @@ export function Landing() {
     <div style={{ backgroundColor: NAVY }}>
       {/* 1 — HERO (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="grain relative jonction-bas halo-or-hero px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[340px_1fr] gap-8 md:gap-12 items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[380px_1fr] gap-8 md:gap-24 items-center">
           {/* Sur mobile le titre passe devant : la video seule occupait tout le
               premier ecran, le visiteur n'y lisait aucune promesse. */}
-          <div className="order-2 md:order-1 w-full max-w-[300px] md:max-w-[340px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
+          <div className="order-2 md:order-1 w-full max-w-[300px] md:max-w-[380px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
               <video
                 ref={videoRef}
@@ -192,8 +196,12 @@ export function Landing() {
                 height={1920}
               >
                 <source src="/hero-video.mp4" type="video/mp4" />
-                <track src="/subtitles_fr.vtt" kind="subtitles" srcLang="fr" label="Français" />
-                <track src="/subtitles_en.vtt" kind="subtitles" srcLang="en" label="English" />
+                {/* Aucune piste ne portait `default` : le navigateur choisissait,
+                    et un visiteur allemand pouvait ne rien voir du tout. */}
+                {[["fr", "Français"], ["en", "English"], ["de", "Deutsch"]].map(([code, nom]) => (
+                  <track key={code} src={`/subtitles_${code}.vtt`} kind="subtitles"
+                         srcLang={code} label={nom} default={code === lang} />
+                ))}
               </video>
             </div>
           </div>
@@ -364,19 +372,20 @@ export function Landing() {
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="titre-appui text-center max-w-4xl mx-auto" style={{ color: INK }}>
+            <h2 className="titre-section text-center max-w-4xl mx-auto" style={{ color: INK }}>
               {tr("Une innovation récompensée.", "An award-winning innovation.", "Eine ausgezeichnete Innovation.")}
             </h2>
           </Reveal>
-          {/* Sans cadre : le contenu tenait sur un tiers de sa carte, et le
-              vide autour se lisait comme une page inachevee. */}
-          <div className="mt-12 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-y-10 gap-x-6 divide-y md:divide-y-0 md:divide-x" style={{ borderColor: BORDER_LIGHT }}>
+            {/* Ni cadre ni filet : le contenu tenait sur un tiers de sa carte,
+                et un filet aurait ete le seul de son espece sur le site. C'est
+                l'espacement qui groupe, comme partout ailleurs. */}
+          <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-8">
             {[
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'Or", "Gold Medal", "Goldmedaille"), s: "Concours Lépine 2026" },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award", "Impact-Preis"), s: "Le Média Positif 2026" },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la recherche", "Backed by Research", "Unterstützt durch die Forschung"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
             ].map((s, i) => (
-              <div key={i} className="fade-up flex flex-col items-center text-center gap-2 px-6 pt-8 md:pt-0" style={{ transitionDelay: `${i * 60}ms` }}>
+              <div key={i} className="fade-up flex flex-col items-center text-center gap-2.5 md:px-4" style={{ transitionDelay: `${i * 60}ms` }}>
                 <div style={{ color: NAVY }}>{s.icon}</div>
                 <div className="font-display font-bold text-lg leading-tight" style={{ color: INK }}>{s.t}</div>
                 <div className="text-sm" style={{ color: INK_MUTED }}>{s.s}</div>
@@ -390,7 +399,7 @@ export function Landing() {
       <section style={{ backgroundColor: NAVY }} className="grain relative jonction-haut jonction-bas halo-or px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="titre-appui text-center" style={{ color: WHITE }}>
+            <h2 className="titre-section text-center" style={{ color: WHITE }}>
               {tr("Ils parlent de nous.", "They talk about us.", "Sie berichten über uns.")}
             </h2>
           </Reveal>
