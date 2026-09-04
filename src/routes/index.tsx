@@ -401,6 +401,7 @@ export function Landing() {
                 { src: "/mediapositif.png", alt: "Le Média Positif", h: 52 },
                 { src: "/logohospimedia.png", alt: "Hospimedia", h: 40 },
                 { src: "/logoautonomia.png", alt: "Autonomia", h: 46 },
+                { src: "/logoAPF.jpg", alt: "APF France handicap", h: 62 },
                 { src: "/logofaireface.jpg", alt: "Faire Face", h: 46 },
                 { src: "/logohacavie.png", alt: "Hacavie", h: 44 },
                 { src: "/logocnrsinnovation.png", alt: "CNRS Innovation", h: 70 },
