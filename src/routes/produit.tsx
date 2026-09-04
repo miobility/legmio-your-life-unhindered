@@ -119,9 +119,6 @@ export function Produit() {
             </div>
 
             <div className="mt-8">
-              <Accordion title={tr("Taille", "Size", "Größe")}>
-                {tr("legmio convient aux utilisateurs mesurant entre 1m50 et 1m95, pour un poids jusqu'à 130 kg.", "legmio is suitable for users between 1.50m and 1.95m tall, weighing up to 130 kg.", "legmio ist für Nutzer zwischen 1,50m und 1,95m geeignet, mit einem Gewicht bis zu 130 kg.")}
-              </Accordion>
               <Accordion title={tr("Caractéristiques", "Specifications", "Eigenschaften")}>
                 <ul className="space-y-2">
                   {[
@@ -130,7 +127,7 @@ export function Produit() {
                     [tr("Hauteur réglable", "Adjustable height", "Verstellbare Höhe"), tr("1m10 à 1m40", "1.10m to 1.40m", "1,10m bis 1,40m")],
                     [tr("Pour", "For", "Für"), tr("utilisateurs 1m50 à 1m95", "users 1m50 to 1m95", "Nutzer 1,50m bis 1,95m")],
                     [tr("Charge max", "Max load", "Maximallast"), "130kg"],
-                    [tr("Embouts", "Tips", "Aufsätze"), tr("interchangeables 16mm", "interchangeable 16mm", "austauschbar 16mm")],
+                    [tr("Embouts", "Tips", "Aufsätze"), tr("interchangeables 19mm", "interchangeable 19mm", "austauschbar 19mm")],
                     [tr("Assemblage", "Assembly", "Montage"), tr("France", "France", "Frankreich")],
                     [tr("Brevet", "Patent", "Patent"), "FR2411206"],
                     [tr("Certification", "Certification", "Zertifizierung"), tr("CE Classe I en cours · MDR 2017/745", "CE Class I in progress · MDR 2017/745", "CE Klasse I ausstehend · MDR 2017/745")],
