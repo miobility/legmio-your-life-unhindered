@@ -159,7 +159,7 @@ export function ProductFeatureGrid() {
 }
 
 export function Landing() {
-  const { tr, lien } = useLanguage();
+  const { tr, lien, lang } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -192,8 +192,12 @@ export function Landing() {
                 height={1920}
               >
                 <source src="/hero-video.mp4" type="video/mp4" />
-                <track src="/subtitles_fr.vtt" kind="subtitles" srcLang="fr" label="Français" />
-                <track src="/subtitles_en.vtt" kind="subtitles" srcLang="en" label="English" />
+                {/* Aucune piste ne portait `default` : le navigateur choisissait,
+                    et un visiteur allemand pouvait ne rien voir du tout. */}
+                {[["fr", "Français"], ["en", "English"], ["de", "Deutsch"]].map(([code, nom]) => (
+                  <track key={code} src={`/subtitles_${code}.vtt`} kind="subtitles"
+                         srcLang={code} label={nom} default={code === lang} />
+                ))}
               </video>
             </div>
           </div>
