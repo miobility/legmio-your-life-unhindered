@@ -370,13 +370,15 @@ export function Landing() {
           </Reveal>
           {/* Sans cadre : le contenu tenait sur un tiers de sa carte, et le
               vide autour se lisait comme une page inachevee. */}
-          <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 md:gap-x-6 divide-y md:divide-y-0 md:divide-x" style={{ borderColor: BORDER_LIGHT }}>
+          {/* Ni cadre ni filet : c'est l'espacement qui groupe, comme partout
+              ailleurs sur le site. Un filet etait le seul de son espece. */}
+          <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 gap-7 md:grid-cols-3 md:gap-8">
             {[
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'Or", "Gold Medal", "Goldmedaille"), s: "Concours Lépine 2026" },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award", "Impact-Preis"), s: "Le Média Positif 2026" },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la recherche", "Backed by Research", "Unterstützt durch die Forschung"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
             ].map((s, i) => (
-              <div key={i} className="fade-up flex items-center gap-4 py-5 md:flex-col md:items-center md:text-center md:gap-2 md:py-0 md:px-6" style={{ transitionDelay: `${i * 60}ms` }}>
+              <div key={i} className="fade-up flex items-center gap-4 md:flex-col md:items-center md:text-center md:gap-2.5 md:px-4" style={{ transitionDelay: `${i * 60}ms` }}>
                 <div className="shrink-0" style={{ color: NAVY }}>{s.icon}</div>
                 {/* md:contents : sur telephone le titre et sa legende forment
                     un bloc a droite de l'icone ; sur grand ecran ils
