@@ -142,7 +142,7 @@ export function ProductFeatureGrid() {
   const base = specsItems();
   const items = [
     ...base,
-    { icon: <IconRest />, kFr: "Position de repos", kEn: "Rest position", kDe: "Ruheposition", sFr: "Tu peux t'appuyer sur legmio pour récupérer", sEn: "You can lean on legmio to rest", sDe: "Du kannst dich zum Ausruhen auf legmio stützen" },
+    { icon: <IconRest />, kFr: "Position de repos", kEn: "Rest position", kDe: "Ruheposition", sFr: "Vous pouvez vous appuyer sur legmio pour récupérer", sEn: "You can lean on legmio to rest", sDe: "Sie können sich zum Ausruhen auf legmio stützen" },
     { icon: <IconWall />, kFr: "Tient seule", kEn: "Stands alone", kDe: "Steht allein", sFr: "legmio tient debout contre un mur sans tomber", sEn: "legmio stands against a wall without falling", sDe: "legmio steht gegen eine Wand ohne umzufallen" },
   ];
   return (
@@ -280,8 +280,8 @@ export function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="titre-section text-center max-w-3xl mx-auto" style={{ color: INK }}>
-              <span className="hidden md:inline">{tr("À chaque fois que tu en as besoin.", "Whenever you need it.", "Wann immer du sie brauchst.")}</span>
-              <span className="md:hidden">{tr(<>À chaque fois<br />que tu en as besoin.</>, <>Whenever<br />you need it.</>, <>Wann immer.<br />du sie brauchst.</>)}</span>
+              <span className="hidden md:inline">{tr("À chaque fois que vous en avez besoin.", "Whenever you need it.", "Wann immer Sie sie brauchen.")}</span>
+              <span className="md:hidden">{tr(<>À chaque fois<br />que vous en avez besoin.</>, <>Whenever<br />you need it.</>, <>Wann immer<br />Sie sie brauchen.</>)}</span>
             </h2>
           </Reveal>
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
