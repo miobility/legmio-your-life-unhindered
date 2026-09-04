@@ -121,7 +121,7 @@ export function ProPage() {
                tr("Marquage CE classe I visé, conformément au règlement (UE) 2017/745.",
                   "CE class I marking targeted, under Regulation (EU) 2017/745.",
                   "CE-Kennzeichnung Klasse I angestrebt, gemäß Verordnung (EU) 2017/745.")],
-              [tr("Fin 2027 – début 2028", "Late 2027 – early 2028", "Ende 2027 – Anfang 2028"),
+              [tr("Fin 2027", "Late 2027", "Ende 2027"),
                tr("Première mise à disposition, en direct puis via nos revendeurs partenaires.",
                   "First availability, directly and then through our reseller partners.",
                   "Erste Verfügbarkeit, direkt und anschließend über unsere Vertriebspartner.")],
