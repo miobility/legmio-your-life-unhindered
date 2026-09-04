@@ -162,14 +162,18 @@ export function Landing() {
   const { tr, lien, lang } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // La piste se choisissait par index : « fr » donnait 0, tout le reste 1.
+  // Un visiteur allemand recevait donc les sous-titres anglais. On compare
+  // desormais le code de langue. C'est aussi ce qui permet de changer de
+  // piste apres le chargement : l'attribut `default` n'est lu qu'une fois.
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     const tracks = video.textTracks;
-    for (let i = 0; i < tracks.length; i++) tracks[i].mode = "disabled";
-    const trackIndex = tr("fr", "en", "de") === "fr" ? 0 : 1;
-    if (tracks[trackIndex]) tracks[trackIndex].mode = "showing";
-  });
+    for (let i = 0; i < tracks.length; i++) {
+      tracks[i].mode = tracks[i].language === lang ? "showing" : "disabled";
+    }
+  }, [lang]);
 
   
 
