@@ -15,7 +15,7 @@ const BG_ALT = "#15122E";
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="font-display text-2xl font-bold mt-6 mb-3" style={{ color: TEXT }}>{title}</h2>
+      <h2 className="titre-section font-display font-bold mt-6 mb-3" style={{ color: TEXT }}>{title}</h2>
       <div className="space-y-3">{children}</div>
     </div>
   );
@@ -26,7 +26,7 @@ export function Confidentialite() {
   return (
     <div style={{ backgroundColor: BG }}>
       <section style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-16 text-center">
-        <h1 className="text-4xl sm:text-5xl font-display font-bold" style={{ color: TEXT }}>{tr("Politique de confidentialité", "Privacy policy", "Datenschutzrichtlinie")}</h1>
+        <h1 className="titre-page font-display font-bold" style={{ color: TEXT }}>{tr("Politique de confidentialité", "Privacy policy", "Datenschutzrichtlinie")}</h1>
       </section>
       <section className="px-4 sm:px-6 py-16">
         <article className="max-w-[680px] mx-auto text-[15px] leading-relaxed space-y-2" style={{ color: MUTED }}>
