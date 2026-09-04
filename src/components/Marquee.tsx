@@ -1,4 +1,5 @@
-import { Children, useEffect, useState, type ReactNode } from "react";
+import { Children, useEffect, useRef, useState, type ReactNode } from "react";
+import { SEUIL } from "@/lib/apparition";
 
 /**
  * Bandeau defilant, pour les elements decoratifs : logos presse, mur d'avis.
@@ -19,6 +20,12 @@ export function Marquee({
   tone?: "light" | "dark";
 }) {
   const [paused, setPaused] = useState(false);
+  // L'animation partait au chargement de la page : quand on arrivait sur la
+  // section, elle tournait deja depuis longtemps et le premier logo etait
+  // coupe. Elle ne demarre plus qu'a l'entree dans l'ecran, donc toujours
+  // au debut de la frise.
+  const bloc = useRef<HTMLDivElement>(null);
+  const [demarre, setDemarre] = useState(false);
   const [reduced, setReduced] = useState(false);
   // Le doigt pose sur la frise la fige, pour pouvoir la pousser soi-meme.
   const [manipule, setManipule] = useState(false);
@@ -31,10 +38,26 @@ export function Marquee({
     return () => mq.removeEventListener("change", sync);
   }, []);
 
-  const arrete = paused || reduced || manipule;
+  useEffect(() => {
+    const el = bloc.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        setDemarre(true);
+        io.disconnect();
+      },
+      { threshold: SEUIL, rootMargin: "0px 0px -15% 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const arrete = paused || reduced || manipule || !demarre;
 
   return (
     <div
+      ref={bloc}
       role="group"
       aria-roledescription="bandeau défilant"
       aria-label={label}
