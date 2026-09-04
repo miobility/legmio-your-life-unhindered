@@ -364,7 +364,7 @@ export function Landing() {
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="titre-appui text-center max-w-4xl mx-auto" style={{ color: INK }}>
+            <h2 className="titre-section text-center max-w-4xl mx-auto" style={{ color: INK }}>
               {tr("Une innovation récompensée.", "An award-winning innovation.", "Eine ausgezeichnete Innovation.")}
             </h2>
           </Reveal>
@@ -397,7 +397,7 @@ export function Landing() {
       <section style={{ backgroundColor: NAVY }} className="grain relative jonction-haut jonction-bas halo-or px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="titre-appui text-center" style={{ color: WHITE }}>
+            <h2 className="titre-section text-center" style={{ color: WHITE }}>
               {tr("Ils parlent de nous.", "They talk about us.", "Sie berichten über uns.")}
             </h2>
           </Reveal>

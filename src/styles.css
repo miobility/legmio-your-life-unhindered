@@ -350,7 +350,13 @@ video::-webkit-media-text-track-display {
    Un seul endroit definit la taille des titres. Avant, chaque page
    composait la sienne : le titre d'article du blog etait plus petit
    qu'un titre de section, et les pages legales plafonnaient a 48 px
-   la ou les autres montaient a 60. */
+   la ou les autres montaient a 60.
+
+   Deux niveaux seulement pour les sections : la these et le reste.
+   Un troisieme, plus petit, revenait a decreter que « Une innovation
+   recompensee » et « Ils parlent de nous » comptaient moins — alors
+   que ce sont les sections de preuve. `titre-appui` ne sert plus qu'a
+   la page d'erreur. */
 .titre-page    { font-size: 2.25rem;  line-height: 1.05; }
 .titre-these   { font-size: 2.25rem;  line-height: 1.08; }
 .titre-section { font-size: 1.875rem; line-height: 1.12; }
