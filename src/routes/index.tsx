@@ -220,8 +220,8 @@ export function Landing() {
                   <circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" />
                 </svg>
                 {tr(
-                  <>Médaille d'or du <strong style={{ color: WHITE, fontWeight: 600 }}>Concours Lépine 2026</strong></>,
-                  <>Gold medal, <strong style={{ color: WHITE, fontWeight: 600 }}>Concours Lépine 2026</strong> — France's national inventors' award</>,
+                  <>Médaille d'Or du <strong style={{ color: WHITE, fontWeight: 600 }}>Concours Lépine 2026</strong></>,
+                  <>Gold Medal, <strong style={{ color: WHITE, fontWeight: 600 }}>Concours Lépine 2026</strong> — France's national inventors' award</>,
                   <>Goldmedaille des <strong style={{ color: WHITE, fontWeight: 600 }}>Concours Lépine 2026</strong> — Frankreichs nationaler Erfinderpreis</>
                 )}
               </p>
@@ -367,7 +367,7 @@ export function Landing() {
           </Reveal>
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'or", "Gold medal", "Goldmedaille"), s: "Concours Lépine 2026" },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'Or", "Gold Medal", "Goldmedaille"), s: "Concours Lépine 2026" },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award", "Impact-Preis"), s: "Le Média Positif 2026" },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la recherche", "Backed by Research", "Unterstützt durch die Forschung"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
             ].map((s, i) => (
