@@ -176,7 +176,7 @@ export function Landing() {
   return (
     <div style={{ backgroundColor: NAVY }}>
       {/* 1 — HERO (NAVY) */}
-      <section style={{ backgroundColor: NAVY }} className="halo-or-hero px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
+      <section style={{ backgroundColor: NAVY }} className="grain relative jonction-bas halo-or-hero px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[35%_65%] gap-8 md:gap-10 items-center">
           {/* Sur mobile le titre passe devant : la video seule occupait tout le
               premier ecran, le visiteur n'y lisait aucune promesse. */}
@@ -382,7 +382,7 @@ export function Landing() {
       </section>
 
       {/* 7 — ILS PARLENT DE NOUS (NAVY) */}
-      <section style={{ backgroundColor: NAVY }} className="halo-or px-4 sm:px-6 py-20 md:py-28">
+      <section style={{ backgroundColor: NAVY }} className="grain relative jonction-haut jonction-bas halo-or px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="titre-appui text-center" style={{ color: WHITE }}>
