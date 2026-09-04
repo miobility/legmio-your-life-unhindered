@@ -20,7 +20,25 @@ import { LanguageProvider, langDeChemin, type Lang } from "@/lib/i18n";
 import { MARGE_CARTES, SEUIL } from "@/lib/apparition";
 import { Header, StickyBanner, Footer } from "@/components/Layout";
 
+function textesErreur(pathname: string) {
+  // Ces deux ecrans vivent hors du fournisseur de langue : on relit donc
+  // l'adresse directement. Un visiteur allemand qui se trompe d'URL lisait
+  // « Page not found ».
+  const l = langDeChemin(pathname);
+  const T = {
+    fr: { t: "Page introuvable", d: "La page que vous cherchez n'existe pas.", b: "Retour à l'accueil",
+          e: "Cette page n'a pas pu se charger", ed: "Quelque chose s'est mal passé.", r: "Réessayer" },
+    en: { t: "Page not found", d: "The page you're looking for doesn't exist.", b: "Go home",
+          e: "This page didn't load", ed: "Something went wrong.", r: "Try again" },
+    de: { t: "Seite nicht gefunden", d: "Die gesuchte Seite existiert nicht.", b: "Zur Startseite",
+          e: "Diese Seite konnte nicht geladen werden", ed: "Etwas ist schiefgelaufen.", r: "Erneut versuchen" },
+  };
+  return { ...T[l], racine: l === "fr" ? "/" : `/${l}` };
+}
+
 function NotFoundComponent() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const txt = textesErreur(pathname);
   return (
     <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#0D0D29" }}>
       <div className="max-w-md text-center">
@@ -38,6 +56,8 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const txt = textesErreur(pathname);
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
@@ -47,7 +67,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <h1 className="titre-appui font-semibold" style={{ color: "#FFFFFF" }}>This page didn't load</h1>
         <p className="mt-2 text-sm" style={{ color: "#A89ED0" }}>Something went wrong.</p>
         <div className="mt-6 flex justify-center gap-2">
-          <button onClick={() => { router.invalidate(); reset(); }} className="btn-dark btn-dark-hover">Try again</button>
+          <button onClick={() => { router.invalidate(); reset(); }} className="btn-dark btn-dark-hover">{txt.r}</button>
         </div>
       </div>
     </div>
