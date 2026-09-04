@@ -43,10 +43,10 @@ function NotFoundComponent() {
     <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#0D0D29" }}>
       <div className="max-w-md text-center">
         <h1 className="titre-page font-bold font-display" style={{ color: "#FFFFFF" }}>404</h1>
-        <h2 className="mt-4 text-xl font-semibold" style={{ color: "#FFFFFF" }}>Page not found</h2>
-        <p className="mt-2 text-sm" style={{ color: "#A89ED0" }}>The page you're looking for doesn't exist.</p>
+        <h2 className="mt-4 text-xl font-semibold" style={{ color: "#FFFFFF" }}>{txt.t}</h2>
+        <p className="mt-2 text-sm" style={{ color: "#A89ED0" }}>{txt.d}</p>
         <div className="mt-6">
-          <Link to="/" className="btn-dark btn-dark-hover">Go home</Link>
+          <Link to={txt.racine} className="btn-dark btn-dark-hover">{txt.b}</Link>
         </div>
       </div>
     </div>
@@ -64,8 +64,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#0D0D29" }}>
       <div className="max-w-md text-center">
-        <h1 className="titre-appui font-semibold" style={{ color: "#FFFFFF" }}>This page didn't load</h1>
-        <p className="mt-2 text-sm" style={{ color: "#A89ED0" }}>Something went wrong.</p>
+        <h1 className="titre-appui font-semibold" style={{ color: "#FFFFFF" }}>{txt.e}</h1>
+        <p className="mt-2 text-sm" style={{ color: "#A89ED0" }}>{txt.ed}</p>
         <div className="mt-6 flex justify-center gap-2">
           <button onClick={() => { router.invalidate(); reset(); }} className="btn-dark btn-dark-hover">{txt.r}</button>
         </div>
