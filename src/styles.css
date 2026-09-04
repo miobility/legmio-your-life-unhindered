@@ -369,3 +369,56 @@ video::-webkit-media-text-track-display {
   .titre-section { font-size: 2.75rem; }   /* 44 */
   .titre-appui   { font-size: 2.25rem; }   /* 36 */
 }
+
+/* ── En-tete ─────────────────────────────────────────────────
+   Il etait identique en haut de page et six mille pixels plus bas.
+   Desormais il se fond dans le hero navy, puis se materialise. */
+.entete {
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+              box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+.entete-pose {
+  background-color: rgba(13, 13, 41, 0.82);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-bottom-color: rgba(255, 202, 117, 0.22);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+/* Sans flou d'arriere-plan (Firefox ancien), on garde le navy opaque
+   plutot qu'un fond translucide illisible. */
+@supports not (backdrop-filter: blur(1px)) {
+  .entete-pose { background-color: #0D0D29; }
+}
+
+/* ── Jonctions de sections ───────────────────────────────────
+   Quatorze changements de fond se succedaient en coupes franches.
+   Le navy s'eclaircit sur 90 px a l'approche d'une section claire :
+   la coupe devient une transition, et le blanc reste intact. */
+.jonction-bas::after,
+.jonction-haut::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 90px;
+  pointer-events: none;
+  z-index: 0;
+}
+.jonction-bas::after   { bottom: 0; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.055) 100%); }
+.jonction-haut::before { top: 0;    background: linear-gradient(0deg,   rgba(255,255,255,0) 0%, rgba(255,255,255,0.045) 100%); }
+
+/* ── Grain ───────────────────────────────────────────────────
+   Les grands aplats navy n'avaient aucune matiere, et bandaient sur
+   les ecrans bon marche. Trois pour cent de bruit suffisent. */
+.grain { position: relative; }
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23b)'/%3E%3C/svg%3E");
+}
+.grain > * { position: relative; }

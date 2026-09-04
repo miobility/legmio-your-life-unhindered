@@ -112,6 +112,16 @@ export function Header() {
   const { t, hubspotUrl, lien } = useLanguage();
   const retourHaut = useRetourHaut();
   const [open, setOpen] = useState(false);
+  // En haut de page, l'en-tete se fond dans le hero navy : ni bordure ni
+  // ombre. Des qu'on defile, il se materialise sur fond translucide et
+  // laisse voir le contenu passer derriere, adouci.
+  const [defile, setDefile] = useState(false);
+  useEffect(() => {
+    const surDefilement = () => setDefile(window.scrollY > 24);
+    surDefilement();
+    window.addEventListener("scroll", surDefilement, { passive: true });
+    return () => window.removeEventListener("scroll", surDefilement);
+  }, []);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   // Comparaison sur segment complet : "/produit" commencait par "/pro",
   // ce qui allumait l'onglet Espace pro en meme temps que Bequille.
@@ -126,8 +136,8 @@ export function Header() {
     `hover:opacity-80 transition ${active ? "font-bold" : ""}`;
   return (
     <header
-      className="fixed left-0 right-0 z-40 border-b"
-      style={{ top: 40, backgroundColor: NAVY, borderColor: BORDER, boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }}>
+      className={`entete fixed left-0 right-0 z-40 ${defile || open ? "entete-pose" : ""}`}
+      style={{ top: 40 }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-6">
         <Link to={lien("/")} onClick={retourHaut} className="font-display font-bold text-2xl shrink-0" style={{ color: WHITE }}>
           <img src={"/logo_legmio.svg"} alt="Legmio" className="h-10 w-auto" width={160} height={40} />

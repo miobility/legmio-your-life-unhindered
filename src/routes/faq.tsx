@@ -155,7 +155,7 @@ export function Faq() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesFaq) }}
       />
-      <section className="px-4 sm:px-6 py-20" style={{ backgroundColor: NAVY }}>
+      <section className="grain relative jonction-bas px-4 sm:px-6 py-20" style={{ backgroundColor: NAVY }}>
         <h1 className="titre-page text-center" style={{ color: WHITE }}>
           {tr("Tout ce que vous voulez savoir.", "Everything you want to know.", "Alles was Sie wissen möchten.")}
         </h1>

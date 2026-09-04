@@ -21,7 +21,7 @@ export function ProPage() {
   const { tr } = useLanguage();
   return (
     <div style={{ backgroundColor: CREAM }}>
-      <section className="px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: NAVY }}>
+      <section className="grain relative jonction-bas px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: NAVY }}>
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="titre-page leading-tight" style={{ color: WHITE }}>
             {tr(

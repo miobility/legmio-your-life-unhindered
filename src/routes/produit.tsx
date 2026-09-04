@@ -196,7 +196,7 @@ export function Produit() {
       </section>
 
       {/* SECTION 2 — DEUX MODES (NAVY) */}
-      <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
+      <section style={{ backgroundColor: NAVY }} className="grain relative jonction-haut jonction-bas px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <h2 className="titre-section text-center" style={{ color: WHITE }}>
@@ -320,7 +320,7 @@ export function Produit() {
       </section>
 
       {/* SECTION 6 — CTA FINAL (NAVY) */}
-      <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
+      <section style={{ backgroundColor: NAVY }} className="grain relative px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="titre-section" style={{ color: WHITE }}>
             {tr(<>Prêt à retrouver<br />vos mains libres ?</>, <>Ready to get<br />your hands back?</>, <>Bereit, Ihre<br />Hände zurückzubekommen?</>)}
