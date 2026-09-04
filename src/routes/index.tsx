@@ -442,7 +442,7 @@ export function Landing() {
       <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-xl mx-auto text-center">
           <h2 className="titre-section" style={{ color: INK }}>
-            {tr(<>Suis l'actualité<br />de legmio.</>, <>Follow<br />legmio's news.</>, <>Folge den Neuigkeiten<br />von legmio.</>)}
+            {tr(<>Suivez l'actualité<br />de legmio.</>, <>Follow<br />legmio's news.</>, <>Folgen Sie den<br />Neuigkeiten von legmio.</>)}
           </h2>
           <div className="mt-8 flex items-center justify-center gap-6" style={{ color: INK }}>
             <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="opacity-80 hover:opacity-100"><IconInstagram size={28} /></a>
