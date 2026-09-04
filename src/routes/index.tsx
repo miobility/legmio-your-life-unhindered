@@ -177,10 +177,10 @@ export function Landing() {
     <div style={{ backgroundColor: NAVY }}>
       {/* 1 — HERO (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="grain relative jonction-bas halo-or-hero px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[340px_1fr] gap-8 md:gap-12 items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[380px_1fr] gap-8 md:gap-24 items-center">
           {/* Sur mobile le titre passe devant : la video seule occupait tout le
               premier ecran, le visiteur n'y lisait aucune promesse. */}
-          <div className="order-2 md:order-1 w-full max-w-[300px] md:max-w-[340px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
+          <div className="order-2 md:order-1 w-full max-w-[300px] md:max-w-[380px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
               <video
                 ref={videoRef}
