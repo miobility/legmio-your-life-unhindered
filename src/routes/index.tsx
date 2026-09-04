@@ -177,10 +177,10 @@ export function Landing() {
     <div style={{ backgroundColor: NAVY }}>
       {/* 1 — HERO (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="grain relative jonction-bas halo-or-hero px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[35%_65%] gap-8 md:gap-10 items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[340px_1fr] gap-8 md:gap-12 items-center">
           {/* Sur mobile le titre passe devant : la video seule occupait tout le
               premier ecran, le visiteur n'y lisait aucune promesse. */}
-          <div className="order-2 md:order-1 w-full max-w-[300px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
+          <div className="order-2 md:order-1 w-full max-w-[300px] md:max-w-[340px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
               <video
                 ref={videoRef}
@@ -213,8 +213,8 @@ export function Landing() {
             <div className="pt-2"><CTADark /></div>
               {/* La medaille compte, mais le Concours Lepine ne voyage pas :
                   hors de France, le nom seul ne dit rien, d'ou la glose. */}
-              <p className="pt-1 text-sm" style={{ color: MUTED_NAVY }}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={ACCENT}
+              <p className="pt-1 text-base" style={{ color: MUTED_NAVY }}>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke={ACCENT}
                      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
                      className="inline-block align-[-2px] mr-1.5" aria-hidden="true">
                   <circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" />
@@ -349,7 +349,10 @@ export function Landing() {
                       <div className="text-xs" style={{ color: INK_MUTED }}>{t.p}</div>
                     </div>
                   </div>
-                  <p className="mt-5 italic text-sm" style={{ color: INK_MUTED }}>"{t.q}"</p>
+                  {/* mt-auto : la citation tombe en bas de carte. Sans cela,
+                      celle du Dr Coignard, deux fois plus courte, laissait un
+                      tiers de vide sous elle. */}
+                  <p className="mt-5 md:mt-auto md:pt-6 italic text-sm" style={{ color: INK_MUTED }}>"{t.q}"</p>
                 </div>
               ))}
             </Carousel>
@@ -365,15 +368,17 @@ export function Landing() {
               {tr("Une innovation récompensée.", "An award-winning innovation.", "Eine ausgezeichnete Innovation.")}
             </h2>
           </Reveal>
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Sans cadre : le contenu tenait sur un tiers de sa carte, et le
+              vide autour se lisait comme une page inachevee. */}
+          <div className="mt-12 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-y-10 gap-x-6 divide-y md:divide-y-0 md:divide-x" style={{ borderColor: BORDER_LIGHT }}>
             {[
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'Or", "Gold Medal", "Goldmedaille"), s: "Concours Lépine 2026" },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award", "Impact-Preis"), s: "Le Média Positif 2026" },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la recherche", "Backed by Research", "Unterstützt durch die Forschung"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
             ].map((s, i) => (
-              <div key={i} className="fade-up carte-survol rounded-2xl p-6 flex flex-col items-start gap-3 card-cream" style={{ transitionDelay: `${i * 60}ms` }}>
+              <div key={i} className="fade-up flex flex-col items-center text-center gap-2 px-6 pt-8 md:pt-0" style={{ transitionDelay: `${i * 60}ms` }}>
                 <div style={{ color: NAVY }}>{s.icon}</div>
-                <div className="font-display font-bold text-xl leading-tight" style={{ color: INK }}>{s.t}</div>
+                <div className="font-display font-bold text-lg leading-tight" style={{ color: INK }}>{s.t}</div>
                 <div className="text-sm" style={{ color: INK_MUTED }}>{s.s}</div>
               </div>
             ))}
@@ -639,7 +644,9 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
             partagent la meme structure, qu'il s'agisse d'un chiffre ou d'une chaine. */}
         <div>
           <div
-            className={`font-display font-bold leading-none ${r.vues !== null ? "text-4xl" : "text-3xl"}`}
+            /* Meme calibre pour les trois : la carte France TV etait d'un cran
+               plus petite, ce qui la faisait lire comme une anomalie. */
+            className="font-display font-bold leading-none text-4xl"
             style={{ color: ACCENT }}
           >
             {r.vues !== null ? (
