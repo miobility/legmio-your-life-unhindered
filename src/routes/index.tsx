@@ -214,7 +214,11 @@ export function Landing() {
               {/* La medaille compte, mais le Concours Lepine ne voyage pas :
                   hors de France, le nom seul ne dit rien, d'ou la glose. */}
               <p className="pt-1 text-sm" style={{ color: MUTED_NAVY }}>
-                <span style={{ color: ACCENT }}>&#9679;</span>{" "}
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={ACCENT}
+                     strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
+                     className="inline-block align-[-2px] mr-1.5" aria-hidden="true">
+                  <circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" />
+                </svg>
                 {tr(
                   <>Médaille d'or du <strong style={{ color: WHITE, fontWeight: 600 }}>Concours Lépine 2026</strong></>,
                   <>Gold medal, <strong style={{ color: WHITE, fontWeight: 600 }}>Concours Lépine 2026</strong> — France's national inventors' award</>,
@@ -363,9 +367,9 @@ export function Landing() {
           </Reveal>
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'Or", "Gold Medal", "Goldmedaille"), s: "Concours Lépine 2026" },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'or", "Gold medal", "Goldmedaille"), s: "Concours Lépine 2026" },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award", "Impact-Preis"), s: "Le Média Positif 2026" },
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la Recherche", "Backed by Research", "Unterstützt durch die Forschung"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la recherche", "Backed by Research", "Unterstützt durch die Forschung"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
             ].map((s, i) => (
               <div key={i} className="fade-up carte-survol rounded-2xl p-6 flex flex-col items-start gap-3 card-cream" style={{ transitionDelay: `${i * 60}ms` }}>
                 <div style={{ color: NAVY }}>{s.icon}</div>
