@@ -23,7 +23,7 @@ export function ProPage() {
     <div style={{ backgroundColor: CREAM }}>
       <section className="px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: NAVY }}>
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight" style={{ color: WHITE }}>
+          <h1 className="titre-page leading-tight" style={{ color: WHITE }}>
             {tr(
               "Vous êtes professionnel de santé ou distributeur\u00a0?",
               "Are you a healthcare professional or distributor?",

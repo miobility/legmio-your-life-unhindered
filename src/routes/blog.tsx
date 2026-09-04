@@ -107,7 +107,7 @@ function ArticleCard({ a }: { a: Article }) {
         </div>
         <div className="p-8">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: ACCENT, color: NAVY }}>{tag}</span>
-          <h2 className="mt-4 text-2xl md:text-3xl font-display font-bold" style={{ color: INK }}>{title}</h2>
+          <h2 className="titre-section mt-4 font-display font-bold" style={{ color: INK }}>{title}</h2>
           <p className="mt-4 text-sm" style={{ color: INK_MUTED }}>{excerpt}</p>
           <button onClick={() => setOpen(!open)} className="mt-4 inline-flex items-center gap-1 text-sm font-bold" style={{ color: NAVY }}>
             {open ? tr("Réduire", "Collapse", "Zuklappen") : tr("Lire l'article", "Read article", "Artikel lesen")}
@@ -176,8 +176,8 @@ export function Blog() {
     <div style={{ backgroundColor: WHITE }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesBlog) }} />
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28 text-center">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl" style={{ color: WHITE }}>{tr("L'histoire de legmio", "The legmio story", "Die Geschichte von legmio")}</h1>
-        <p className="mt-4" style={{ color: MUTED_NAVY }}>{tr("Pourquoi cette béquille existe.", "Why this crutch exists.", "Warum es diese Krücke gibt.")}</p>
+        <h1 className="titre-page" style={{ color: WHITE }}>{tr("L'histoire de legmio", "The legmio story", "Die Geschichte von legmio")}</h1>
+        <p className="sous-titre mt-4" style={{ color: MUTED_NAVY }}>{tr("Pourquoi cette béquille existe.", "Why this crutch exists.", "Warum es diese Krücke gibt.")}</p>
       </section>
 
       <section className="px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: WHITE }}>

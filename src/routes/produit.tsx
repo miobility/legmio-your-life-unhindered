@@ -128,7 +128,7 @@ export function Produit() {
           </div>
 
           <div className="md:sticky md:top-32 md:self-start">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold" style={{ color: INK }}>
+            <h1 className="titre-page font-display font-bold" style={{ color: INK }}>
               {tr("Béquille legmio", "legmio crutch", "legmio Krücke")}
             </h1>
             <p className="mt-4 text-base leading-relaxed" style={{ color: INK_MUTED }}>
@@ -199,7 +199,7 @@ export function Produit() {
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: WHITE }}>
+            <h2 className="titre-section text-center" style={{ color: WHITE }}>
               {tr("Deux modes d'utilisation.", "Two modes of use.", "Zwei Nutzungsmodi.")}
             </h2>
             <p className="mt-5 text-base max-w-xl mx-auto text-center" style={{ color: MUTED_NAVY }}>
@@ -249,7 +249,7 @@ export function Produit() {
                 </div>
                 <figcaption className="p-6">
                   <div className="text-xs font-bold tracking-[0.18em]" style={{ color: ACCENT }}>{m.n}</div>
-                  <h3 className="mt-2 font-display font-bold text-xl leading-tight" style={{ color: WHITE }}>{m.t}</h3>
+                  <h3 className="mt-2 font-display font-bold text-lg leading-tight" style={{ color: WHITE }}>{m.t}</h3>
                   <p className="mt-2 text-sm" style={{ color: MUTED_NAVY }}>{m.p}</p>
                 </figcaption>
               </figure>
@@ -262,7 +262,7 @@ export function Produit() {
       <section id="features" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>{tr("Fonctionnalités", "Features", "Funktionen")}</h2>
+            <h2 className="titre-section text-center" style={{ color: INK }}>{tr("Fonctionnalités", "Features", "Funktionen")}</h2>
           </Reveal>
           <div className="mt-10">
             <ProductFeatureGrid />
@@ -273,7 +273,7 @@ export function Produit() {
       {/* SECTION 4 — TÉMOIGNAGES (CREAM) */}
       <section id="reviews" style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-center" style={{ color: INK }}>{tr("Témoignages", "Testimonials", "Erfahrungsberichte")}</h2>
+          <h2 className="titre-section text-center" style={{ color: INK }}>{tr("Témoignages", "Testimonials", "Erfahrungsberichte")}</h2>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {reviews.map((r, i) => (
@@ -300,7 +300,7 @@ export function Produit() {
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <div className="max-w-3xl mx-auto mb-8 text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: INK }}>{tr("Questions fréquentes", "Frequently asked questions", "Häufig gestellte Fragen")}</h2>
+            <h2 className="titre-section" style={{ color: INK }}>{tr("Questions fréquentes", "Frequently asked questions", "Häufig gestellte Fragen")}</h2>
             <a href={lien("/faq")} className="mt-4 inline-block text-sm underline" style={{ color: INK }}>{tr("Voir toutes les questions", "See all questions", "Alle Fragen ansehen")}</a>
           </div>
           <div className="max-w-3xl mx-auto">
@@ -322,7 +322,7 @@ export function Produit() {
       {/* SECTION 6 — CTA FINAL (NAVY) */}
       <section style={{ backgroundColor: NAVY }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl" style={{ color: WHITE }}>
+          <h2 className="titre-section" style={{ color: WHITE }}>
             {tr(<>Prêt à retrouver<br />tes mains libres ?</>, <>Ready to get<br />your hands back?</>, <>Bereit deine<br />Hände zurückzubekommen?</>)}
           </h2>
           <div className="mt-8">

@@ -345,3 +345,27 @@ video::-webkit-media-text-track-display {
   border-radius: 8px;
   padding: 2px 10px;
 }
+
+/* ── Echelle typographique ───────────────────────────────────
+   Un seul endroit definit la taille des titres. Avant, chaque page
+   composait la sienne : le titre d'article du blog etait plus petit
+   qu'un titre de section, et les pages legales plafonnaient a 48 px
+   la ou les autres montaient a 60. */
+.titre-page    { font-size: 2.25rem;  line-height: 1.05; }
+.titre-these   { font-size: 2.25rem;  line-height: 1.08; }
+.titre-section { font-size: 1.875rem; line-height: 1.12; }
+.titre-appui   { font-size: 1.5rem;   line-height: 1.2;  }
+.sous-titre    { font-size: 1rem;     line-height: 1.6;  }
+
+@media (min-width: 640px) {
+  .titre-page    { font-size: 3rem; }
+  .titre-these   { font-size: 3rem; }
+  .titre-section { font-size: 2.25rem; }
+  .titre-appui   { font-size: 1.875rem; }
+}
+@media (min-width: 768px) {
+  .titre-page    { font-size: 3.75rem; }   /* 60 */
+  .titre-these   { font-size: 3.25rem; }   /* 52 */
+  .titre-section { font-size: 2.75rem; }   /* 44 */
+  .titre-appui   { font-size: 2.25rem; }   /* 36 */
+}

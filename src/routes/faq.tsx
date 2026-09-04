@@ -156,10 +156,10 @@ export function Faq() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesFaq) }}
       />
       <section className="px-4 sm:px-6 py-20" style={{ backgroundColor: NAVY }}>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl text-center" style={{ color: WHITE }}>
+        <h1 className="titre-page text-center" style={{ color: WHITE }}>
           {tr("Tout ce que tu veux savoir.", "Everything you want to know.", "Alles was du wissen möchtest.")}
         </h1>
-        <p className="mt-4 text-center text-sm" style={{ color: MUTED_NAVY }}>
+        <p className="sous-titre mt-4 text-center" style={{ color: MUTED_NAVY }}>
           {tr("Toutes les réponses en un seul endroit.", "All the answers in one place.", "Alle Antworten an einem Ort.")}
         </p>
       </section>
