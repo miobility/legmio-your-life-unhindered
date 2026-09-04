@@ -119,9 +119,6 @@ export function Produit() {
             </div>
 
             <div className="mt-8">
-              <Accordion title={tr("Taille", "Size", "Größe")}>
-                {tr("legmio convient aux utilisateurs mesurant entre 1m50 et 1m95, pour un poids jusqu'à 130 kg.", "legmio is suitable for users between 1.50m and 1.95m tall, weighing up to 130 kg.", "legmio ist für Nutzer zwischen 1,50m und 1,95m geeignet, mit einem Gewicht bis zu 130 kg.")}
-              </Accordion>
               <Accordion title={tr("Caractéristiques", "Specifications", "Eigenschaften")}>
                 <ul className="space-y-2">
                   {[
