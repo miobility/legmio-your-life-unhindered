@@ -54,17 +54,6 @@ export function ProPage() {
     },
   ];
 
-  const caracteristiques = [
-    [tr("Poids", "Weight", "Gewicht"), "850 g"],
-    [tr("Charge maximale", "Maximum load", "Maximallast"), "130 kg"],
-    [tr("Taille utilisateur", "User height", "Körpergröße"), "1,50 m – 1,95 m"],
-    [tr("Hauteur réglable", "Adjustable height", "Verstellbare Höhe"), "1,10 m – 1,40 m"],
-    [tr("Structure", "Frame", "Struktur"), tr("Aluminium", "Aluminium", "Aluminium")],
-    [tr("Embouts", "Tips", "Aufsätze"), tr("interchangeables 18/19 mm", "interchangeable 18/19 mm", "austauschbar 18/19 mm")],
-    [tr("Réglages", "Adjustments", "Einstellungen"), tr("poignée et appui coude", "handle and elbow rest", "Griff und Ellenbogenstütze")],
-    [tr("Pièces d'usure", "Wear parts", "Verschleißteile"), tr("embout, poignée, sangle remplaçables", "tip, handle and strap replaceable", "Aufsatz, Griff und Gurt austauschbar")],
-  ];
-
   const indications = [
     tr("Fractures, entorses, suites opératoires des membres inférieurs.",
        "Fractures, sprains, post-operative care of the lower limbs.",
@@ -132,13 +121,6 @@ export function ProPage() {
               </div>
             ))}
           </div>
-          <p className="mt-8 text-sm text-center" style={{ color: INK_MUTED }}>
-            {tr(
-              "Ces échéances sont celles que nous visons. Nous les tenons à jour ici plutôt que de les promettre ailleurs.",
-              "These are the milestones we are aiming for. We keep them up to date here rather than promising them elsewhere.",
-              "Dies sind die angestrebten Termine. Wir halten sie hier aktuell, statt sie anderswo zu versprechen."
-            )}
-          </p>
         </div>
       </section>
 
@@ -168,33 +150,24 @@ export function ProPage() {
       </section>
 
       <section className="px-4 sm:px-6 py-16 md:py-20" style={{ backgroundColor: WHITE }}>
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div>
-            <h2 className="titre-appui" style={{ color: INK }}>
-              {tr("Indications", "Indications", "Indikationen")}
-            </h2>
-            <p className="mt-3 text-sm" style={{ color: INK_MUTED }}>
-              {tr("Les mêmes que pour une béquille classique.", "The same as for a standard crutch.", "Dieselben wie bei einer gewöhnlichen Krücke.")}
-            </p>
-            <ul className="mt-5 space-y-3 text-sm" style={{ color: INK_MUTED }}>
-              {indications.map((i) => (
-                <li key={i} className="pl-4 border-l-2" style={{ borderColor: ACCENT }}>{i}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h2 className="titre-appui" style={{ color: INK }}>
-              {tr("Caractéristiques", "Specifications", "Technische Daten")}
-            </h2>
-            <ul className="mt-5 space-y-2 text-sm">
-              {caracteristiques.map(([k, v]) => (
-                <li key={k as string} className="flex justify-between gap-4 pb-2 border-b" style={{ borderColor: BORDER_LIGHT }}>
-                  <span style={{ color: INK_MUTED }}>{k}</span>
-                  <span style={{ color: INK }}>{v}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="max-w-3xl mx-auto">
+          <h2 className="titre-section text-center" style={{ color: INK }}>
+            {tr("Indications", "Indications", "Indikationen")}
+          </h2>
+          <p className="mt-4 text-center text-sm" style={{ color: INK_MUTED }}>
+            {tr("Les mêmes que pour une béquille classique.", "The same as for a standard crutch.", "Dieselben wie bei einer gewöhnlichen Krücke.")}
+          </p>
+          <ul className="mt-8 space-y-3 text-sm" style={{ color: INK_MUTED }}>
+            {indications.map((i) => (
+              <li key={i} className="pl-4 border-l-2" style={{ borderColor: ACCENT }}>{i}</li>
+            ))}
+          </ul>
+          {/* Les chiffres vivent sur la fiche : les recopier ici obligeait a
+              les corriger a trois endroits, et on s'y est deja fait prendre. */}
+          <p className="mt-10 text-center text-sm" style={{ color: INK_MUTED }}>
+            {tr("Poids, charge admissible, réglages, embouts : tout est sur la ", "Weight, load, adjustments, tips: everything is on the ", "Gewicht, Belastung, Einstellungen, Aufsätze: alles auf der ")}
+            <a href={lien("/produit")} className="underline" style={{ color: NAVY }}>{tr("fiche béquille", "crutch page", "Krücken-Seite")}</a>.
+          </p>
         </div>
       </section>
 
@@ -226,9 +199,9 @@ export function ProPage() {
           </h2>
           <p className="mt-4 text-center text-sm max-w-2xl mx-auto" style={{ color: INK_MUTED }}>
             {tr(
-              "Trente minutes en visio, avec le fondateur. Que vous vouliez faire tester la béquille à vos patients, en discuter pour votre centre, ou parler distribution : c'est le moment où votre avis pèse le plus, avant que le produit soit figé.",
-              "Thirty minutes by video, with the founder. Whether you want your patients to try the crutch, discuss it for your centre, or talk distribution: this is when your input carries the most weight, before the product is finalised.",
-              "Dreißig Minuten per Video, mit dem Gründer. Ob Sie die Krücke von Ihren Patienten testen lassen, sie für Ihr Zentrum besprechen oder über den Vertrieb sprechen möchten: Jetzt zählt Ihre Rückmeldung am meisten, bevor das Produkt feststeht."
+              "Trente minutes en visio, avec le fondateur. Le produit n'est pas encore figé : c'est le moment où votre avis pèse le plus.",
+              "Thirty minutes by video, with the founder. The product is not finalised yet: this is when your input carries the most weight.",
+              "Dreißig Minuten per Video, mit dem Gründer. Das Produkt steht noch nicht fest: Jetzt zählt Ihre Rückmeldung am meisten."
             )}
           </p>
           <div className="mt-10 rounded-2xl overflow-hidden" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}` }}>
