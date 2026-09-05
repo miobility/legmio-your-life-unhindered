@@ -163,7 +163,7 @@
   /* 44px : cible tactile minimale recommandee */
   width: 44px;
   height: 44px;
-  border-radius: 9999px;
+  border-radius: 999px;
   /* encre pleine : lisible sur les sections claires comme sur l'encre */
   background-color: var(--ink);
   color: var(--color-white);
@@ -239,7 +239,7 @@
 :focus-visible {
   outline: 3px solid var(--cta);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 /* ── Profondeur ──────────────────────────────────────────────

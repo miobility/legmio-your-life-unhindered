@@ -161,7 +161,7 @@ export function Faq() {
         const isCream = ti % 2 === 1;
         const bg = isCream ? SAND : WHITE;
         return (
-          <section key={ti} className="px-4 sm:px-6 py-14" style={{ backgroundColor: bg }}>
+          <section key={ti} className="px-4 sm:px-6 py-16" style={{ backgroundColor: bg }}>
             <div className="max-w-3xl mx-auto">
               <h2 className="text-xl mb-4 font-display font-bold" style={{ color: INK }}>{th.title[idx]}</h2>
               <div>

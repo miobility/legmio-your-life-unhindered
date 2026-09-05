@@ -99,10 +99,10 @@ function ArticleCard({ a }: { a: Article }) {
           <img src={a.cover} alt={title} className="w-full h-full object-cover" loading="lazy" width={600} height={400} onError={(e) => (e.currentTarget.src = "/usecase-quotidien.jpg")} />
         </div>
         <div className="p-8">
-          <span className="inline-block px-3 py-1 rounded-full mention font-bold" style={{ backgroundColor: CTA, color: INK }}>{tag}</span>
+          <span className="inline-block px-4 py-2 rounded-full mention font-bold" style={{ backgroundColor: CTA, color: INK }}>{tag}</span>
           <h2 className="titre-section mt-4 font-display font-bold" style={{ color: INK }}>{title}</h2>
           <p className="mt-4 legende" style={{ color: MUTED }}>{excerpt}</p>
-          <button onClick={() => setOpen(!open)} className="mt-4 inline-flex items-center gap-1 legende font-bold" style={{ color: INK }}>
+          <button onClick={() => setOpen(!open)} className="mt-4 inline-flex items-center gap-2 legende font-bold" style={{ color: INK }}>
             {open ? tr("Réduire", "Collapse", "Zuklappen") : tr("Lire l'article", "Read article", "Artikel lesen")}
             <span className={`transition-transform ${open ? "rotate-180" : ""}`}><IconChevron size={16} /></span>
           </button>

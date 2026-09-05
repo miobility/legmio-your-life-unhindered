@@ -37,7 +37,7 @@ export function ProPage() {
 
       <section className="px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: SAND }}>
         <div className="max-w-5xl mx-auto">
-          <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}` }}>
+          <div className="rounded-xl overflow-hidden" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}` }}>
             <MeetingsEmbed url={MEETING_URL} />
           </div>
           <p className="text-center mt-6 legende" style={{ color: MUTED }}>

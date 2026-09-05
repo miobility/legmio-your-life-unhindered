@@ -73,7 +73,7 @@ export function Marquee({
       </div>
 
       {!reduced && (
-        <div className="mt-3 flex justify-center">
+        <div className="mt-4 flex justify-center">
           <button
             type="button"
             onClick={() => setPaused((p) => !p)}

@@ -57,7 +57,7 @@ function LangSwitcher({ onPick }: { onPick?: () => void }) {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label="Language"
-        className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg legende transition hover:opacity-80"
+        className="flex items-center gap-2 px-2 py-2 rounded-xl legende transition hover:opacity-80"
         style={{ color: WHITE }}
       >
         <span aria-hidden="true">{active.flag}</span>
@@ -67,7 +67,7 @@ function LangSwitcher({ onPick }: { onPick?: () => void }) {
       {open && (
         <div
           role="listbox"
-          className="absolute mt-2 py-1 z-50 overflow-hidden left-0 right-auto max-w-[180px] sm:right-0 sm:left-auto sm:min-w-[170px] sm:max-w-none"
+          className="absolute mt-2 py-2 z-50 overflow-hidden left-0 right-auto max-w-[180px] sm:right-0 sm:left-auto sm:min-w-[170px] sm:max-w-none"
           style={{ backgroundColor: INK, border: `1px solid ${LINE_INK}`, borderRadius: 8, color: WHITE }}
         >
           {LANGS.map((l) => (
@@ -76,7 +76,7 @@ function LangSwitcher({ onPick }: { onPick?: () => void }) {
               role="option"
               aria-selected={l.code === lang}
               onClick={() => pick(l.code)}
-              className="w-full text-left px-3 py-2 legende flex items-center gap-2 transition"
+              className="w-full text-left px-4 py-2 legende flex items-center gap-2 transition"
               style={{ fontWeight: l.code === lang ? 700 : 400 }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = INK_SOFT)}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
@@ -145,23 +145,23 @@ export function Header() {
           <Link to={lien("/pro")} className={linkClass(isPro)} style={linkStyle(isPro)}>{t("nav_pro")}</Link>
         </nav>
         <div className="hidden sm:block"><LangSwitcher /></div>
-        <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover hidden sm:inline-flex legende px-5 py-2.5 items-center gap-1.5">
+        <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover hidden sm:inline-flex legende px-6 py-2 items-center gap-2">
           {t("cta_interested")} <span aria-hidden="true">→</span>
         </a>
-        <button className="md:hidden p-2" style={{ color: WHITE }} onClick={() => setOpen(!open)} aria-label={t("nav_menu")} aria-expanded={open} aria-controls="menu-mobile">
+        <button className="md:hidden w-11 h-11 flex items-center justify-center" style={{ color: WHITE }} onClick={() => setOpen(!open)} aria-label={t("nav_menu")} aria-expanded={open} aria-controls="menu-mobile">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d={open ? "M6 6l12 12M6 18L18 6" : "M4 6h16M4 12h16M4 18h16"} /></svg>
         </button>
       </div>
       {open && (
-        <div id="menu-mobile" className="md:hidden border-t px-4 py-3 flex flex-col" style={{ backgroundColor: INK_SOFT, borderColor: LINE_INK }}>
-          <Link to={lien("/produit")} onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isProduct)}>{t("nav_product")}</Link>
-          <Link to={lien("/faq")} onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
-          <Link to={lien("/blog")} onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
-          <Link to={lien("/pro")} onClick={() => setOpen(false)} className="text-[15px] py-2.5" style={linkStyle(isPro)}>{t("nav_pro")}</Link>
-          <a href={hubspotUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover legende px-5 py-2.5 mt-3 self-start inline-flex items-center gap-1.5">
+        <div id="menu-mobile" className="md:hidden border-t px-4 py-4 flex flex-col" style={{ backgroundColor: INK_SOFT, borderColor: LINE_INK }}>
+          <Link to={lien("/produit")} onClick={() => setOpen(false)} className="text-[15px] py-2" style={linkStyle(isProduct)}>{t("nav_product")}</Link>
+          <Link to={lien("/faq")} onClick={() => setOpen(false)} className="text-[15px] py-2" style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
+          <Link to={lien("/blog")} onClick={() => setOpen(false)} className="text-[15px] py-2" style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
+          <Link to={lien("/pro")} onClick={() => setOpen(false)} className="text-[15px] py-2" style={linkStyle(isPro)}>{t("nav_pro")}</Link>
+          <a href={hubspotUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover legende px-6 py-2 mt-4 self-start inline-flex items-center gap-2">
             {t("cta_interested")} <span aria-hidden="true">→</span>
           </a>
-          <div className="mt-4 pt-3 border-t" style={{ borderColor: LINE_INK }}><LangSwitcher onPick={() => setOpen(false)} /></div>
+          <div className="mt-4 pt-4 border-t" style={{ borderColor: LINE_INK }}><LangSwitcher onPick={() => setOpen(false)} /></div>
         </div>
       )}
     </header>
@@ -179,11 +179,11 @@ export function Footer() {
           <Link to={lien("/")} onClick={retourHaut} aria-label="legmio — accueil">
             <img src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto block" loading="lazy" width={160} height={40} />
           </Link>
-          <p className="mt-3 legende" style={{ color: MUTED_INK }}>{t("footer_tag")}</p>
+          <p className="mt-4 legende" style={{ color: MUTED_INK }}>{t("footer_tag")}</p>
         </div>
         <div>
           <h3 className="legende font-bold mb-4 font-sans" style={{ color: WHITE }}>Navigation</h3>
-          <ul className="space-y-1 legende [&_a]:inline-block [&_a]:py-1.5" style={{ color: MUTED_INK }}>
+          <ul className="space-y-2 legende [&_a]:inline-block [&_a]:py-2" style={{ color: MUTED_INK }}>
             <li><Link to={lien("/produit")} className="hover:text-white">{t("nav_product")}</Link></li>
             <li><Link to={lien("/faq")} className="hover:text-white">{t("nav_faq")}</Link></li>
             <li><Link to={lien("/blog")} className="hover:text-white">{t("nav_blog")}</Link></li>
@@ -193,14 +193,14 @@ export function Footer() {
         </div>
         <div>
           <h3 className="legende font-bold mb-4 font-sans" style={{ color: WHITE }}>{tr("Légal", "Legal", "Rechtliches")}</h3>
-          <ul className="space-y-1 legende [&_a]:inline-block [&_a]:py-1.5" style={{ color: MUTED_INK }}>
+          <ul className="space-y-2 legende [&_a]:inline-block [&_a]:py-2" style={{ color: MUTED_INK }}>
             <li><Link to={lien("/mentions-legales")} className="hover:text-white">{tr("Mentions légales", "Legal notice", "Impressum")}</Link></li>
             <li><Link to={lien("/confidentialite")} className="hover:text-white">{tr("Politique de confidentialité", "Privacy policy", "Datenschutzrichtlinie")}</Link></li>
           </ul>
         </div>
         <div>
           <h3 className="legende font-bold mb-4 font-sans" style={{ color: WHITE }}>{tr("Réseaux", "Social", "Soziale Netzwerke")}</h3>
-          <ul className="space-y-1 legende [&_a]:py-1.5" style={{ color: MUTED_INK }}>
+          <ul className="space-y-2 legende [&_a]:py-2" style={{ color: MUTED_INK }}>
             <li><a href={SOCIAL.instagram} target="_blank" rel="noreferrer" className="hover:text-white inline-flex items-center gap-2"><IconInstagram size={16} /> Instagram</a></li>
             <li><a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" className="hover:text-white inline-flex items-center gap-2"><IconTiktok size={16} /> TikTok</a></li>
             <li><a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" className="hover:text-white inline-flex items-center gap-2"><IconLinkedin size={16} /> LinkedIn</a></li>

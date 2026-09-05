@@ -33,7 +33,7 @@ function Accordion({ title, children, defaultOpen = false }: { title: string; ch
       {/* Contenu replie, pas retire : sans cela il est absent du HTML servi. */}
       <div id={id} role="region" className={`repli ${open ? "repli-ouvert" : ""}`}>
         <div>
-          <div className="pb-5 legende" style={{ color: MUTED }}>{children}</div>
+          <div className="pb-6 legende" style={{ color: MUTED }}>{children}</div>
         </div>
       </div>
     </div>
@@ -95,21 +95,21 @@ export function Produit() {
       <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-12">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
-            <div className="relative rounded-2xl overflow-hidden aspect-[3/4]" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}` }}>
+            <div className="relative rounded-xl overflow-hidden aspect-[3/4]" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}` }}>
               <img src={gallery[sel].src} alt={gallery[sel].alt} className="w-full h-full object-contain" width={900} height={900} />
-              <button aria-label="Previous" onClick={galleryPrev} className="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: INK, color: WHITE }}>
+              <button aria-label="Previous" onClick={galleryPrev} className="carousel-arrow absolute top-1/2 left-3 -translate-y-1/2">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
-              <button aria-label="Next" onClick={galleryNext} className="absolute top-1/2 right-3 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: INK, color: WHITE }}>
+              <button aria-label="Next" onClick={galleryNext} className="carousel-arrow absolute top-1/2 right-3 -translate-y-1/2">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
               </button>
             </div>
-            <div className="mt-4 flex gap-3 overflow-x-auto overflow-y-hidden" style={{ overscrollBehaviorX: "contain" }}>
+            <div className="mt-4 flex gap-4 overflow-x-auto overflow-y-hidden" style={{ overscrollBehaviorX: "contain" }}>
               {gallery.map((g, i) => (
                 <button
                   key={i}
                   onClick={() => setSel(i)}
-                  className="shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition"
+                  className="shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition"
                   style={{ borderColor: sel === i ? INK : LINE, backgroundColor: WHITE }}
                   aria-label={g.alt}
                   aria-current={sel === i}
@@ -137,7 +137,7 @@ export function Produit() {
                 "Komfortabler befreit sie die Hände wenn nötig."
               )}
             </p>
-            <div className="mt-4 inline-block px-3 py-1 rounded-full mention" style={{ backgroundColor: WHITE, color: INK, border: `1px solid ${LINE}` }}>
+            <div className="mt-4 inline-block px-4 py-2 rounded-full mention" style={{ backgroundColor: WHITE, color: INK, border: `1px solid ${LINE}` }}>
               {tr("Dispositif médical CE Classe I (en cours)", "CE Class I Medical Device (pending)", "CE Medizinprodukt Klasse I (ausstehend)")}
             </div>
 
@@ -172,7 +172,7 @@ export function Produit() {
                 </ul>
               </Accordion>
               <Accordion title={tr("Ce qui est inclus", "What's included", "Lieferumfang")}>
-                <ul className="space-y-1" style={{ color: MUTED }}>
+                <ul className="space-y-2" style={{ color: MUTED }}>
                   <li>· {tr("1 béquille legmio (disponible pour main droite ou gauche)", "1 legmio crutch (right or left)", "1 legmio Krücke (rechts oder links)")}</li>
                   <li>· {tr("1 embout (remplaçable)", "1 tip (replaceable)", "1 Aufsatz (austauschbar)")}</li>
                   <li>· {tr("1 notice de réglage", "1 adjustment guide", "1 Einstellungsanleitung")}</li>
@@ -195,7 +195,7 @@ export function Produit() {
             <h2 className="titre-section text-center" style={{ color: WHITE }}>
               {tr("Deux modes d'utilisation.", "Two modes of use.", "Zwei Nutzungsmodi.")}
             </h2>
-            <p className="mt-5 text-base max-w-xl mx-auto text-center" style={{ color: MUTED_INK }}>
+            <p className="mt-6 text-base max-w-xl mx-auto text-center" style={{ color: MUTED_INK }}>
               {tr(
                 "Vous marchez normalement, et vous libérez les mains lorsque nécessaire.",
                 "You walk normally, and free your hands when needed.",
@@ -203,7 +203,7 @@ export function Produit() {
               )}
             </p>
           </Reveal>
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8">
             {[
               {
                 img: "/mode-bequille.jpg",
@@ -270,10 +270,10 @@ export function Produit() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {reviews.map((r, i) => (
-              <div key={i} className="card-white p-5">
+              <div key={i} className="card-white p-6">
                 <h3 className="font-display font-bold text-lg leading-snug" style={{ color: INK }}>{r.title}</h3>
                 <p className="mt-2 legende" style={{ color: MUTED }}>{r.quote}</p>
-                <div className="mt-4 flex items-center gap-3">
+                <div className="mt-4 flex items-center gap-4">
                   {r.img && (
                     <img src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover" loading="lazy" width={48} height={48} />
                   )}

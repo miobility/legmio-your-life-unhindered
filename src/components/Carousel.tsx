@@ -75,7 +75,7 @@ export function Carousel({
 
       {/* Pastilles : utiles seulement la ou ca defile */}
       {items.length > 1 && (
-        <div className="mt-6 flex items-center justify-center gap-1 md:hidden">
+        <div className="mt-6 flex items-center justify-center gap-2 md:hidden">
           {items.map((_, i) => (
             <button
               key={i}
