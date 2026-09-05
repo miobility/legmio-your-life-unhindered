@@ -80,7 +80,7 @@ export function Marquee({
             aria-label={paused ? "Relancer le défilement" : "Arrêter le défilement"}
             title={paused ? "Relancer le défilement" : "Arrêter le défilement"}
             className="marquee-toggle"
-            style={{ color: tone === "light" ? "#FFFFFF" : "#0D0D29" }}
+            style={{ color: tone === "light" ? WHITE : INK }}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               {paused ? <path d="M7 4l13 8-13 8z" /> : <path d="M7 4h4v16H7zM13 4h4v16h-4z" />}

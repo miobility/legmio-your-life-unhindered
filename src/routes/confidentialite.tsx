@@ -1,21 +1,18 @@
 import { metaDe } from "@/lib/meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useLanguage } from "@/lib/i18n";
+import { INK, INK_SOFT, MUTED_INK, WHITE } from "@/lib/couleurs";
 
 export const Route = createFileRoute("/confidentialite")({
   head: () => metaDe("fr", "confidentialite"),
   component: Confidentialite,
 });
 
-const TEXT = "#FFFFFF";
-const MUTED = "#A89ED0";
-const BG = "#0D0D29";
-const BG_ALT = "#15122E";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="titre-section font-display font-bold mt-6 mb-3" style={{ color: TEXT }}>{title}</h2>
+      <h2 className="titre-section font-display font-bold mt-6 mb-3" style={{ color: WHITE }}>{title}</h2>
       <div className="space-y-3">{children}</div>
     </div>
   );
@@ -24,12 +21,12 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 export function Confidentialite() {
   const { tr } = useLanguage();
   return (
-    <div style={{ backgroundColor: BG }}>
-      <section style={{ backgroundColor: BG_ALT }} className="px-4 sm:px-6 py-16 text-center">
-        <h1 className="titre-page font-display font-bold" style={{ color: TEXT }}>{tr("Politique de confidentialité", "Privacy policy", "Datenschutzrichtlinie")}</h1>
+    <div style={{ backgroundColor: INK }}>
+      <section style={{ backgroundColor: INK_SOFT }} className="px-4 sm:px-6 py-16 text-center">
+        <h1 className="titre-page font-display font-bold" style={{ color: WHITE }}>{tr("Politique de confidentialité", "Privacy policy", "Datenschutzrichtlinie")}</h1>
       </section>
       <section className="px-4 sm:px-6 py-16">
-        <article className="max-w-[680px] mx-auto text-[15px] leading-relaxed space-y-2" style={{ color: MUTED }}>
+        <article className="max-w-[680px] mx-auto text-[15px] leading-relaxed space-y-2" style={{ color: MUTED_INK }}>
           <Section title={tr("1. Responsable du traitement", "1. Data controller", "1. Verantwortlicher für die Datenverarbeitung")}>
             <p>{tr("Le responsable du traitement des données collectées sur legmio.com est :", "The controller responsible for processing data collected on legmio.com is:", "Der Verantwortliche für die Verarbeitung der auf legmio.com erhobenen Daten ist:")}</p>
             <p>{tr("miobility, projet en cours d'immatriculation", "miobility, a project currently being registered", "miobility, ein Projekt, das sich derzeit in der Registrierung befindet")}<br />13-15 Rue Traversière — 75012 Paris<br /><a href="mailto:contact@legmio.com" className="underline">contact@legmio.com</a></p>
@@ -94,7 +91,7 @@ export function Confidentialite() {
             <p>{tr("La présente politique de confidentialité peut être mise à jour. La date de dernière mise à jour est indiquée en bas de page.", "This privacy policy may be updated. The date of the last update is indicated at the bottom of the page.", "Diese Datenschutzrichtlinie kann aktualisiert werden. Das Datum der letzten Aktualisierung wird am Ende der Seite angegeben.")}</p>
           </Section>
 
-          <p className="text-xs pt-6" style={{ color: MUTED }}>{tr("Dernière mise à jour : juillet 2026", "Last updated: July 2026", "Letzte Aktualisierung: Juli 2026")}</p>
+          <p className="mention pt-6" style={{ color: MUTED_INK }}>{tr("Dernière mise à jour : juillet 2026", "Last updated: July 2026", "Letzte Aktualisierung: Juli 2026")}</p>
         </article>
       </section>
     </div>

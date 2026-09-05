@@ -9,61 +9,53 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
 
-  --font-display: "Syne", system-ui, sans-serif;
+  --font-display: "Outfit", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
-:root {
-  --radius: 0.625rem;
-  --background: #0D0D29;
-  --foreground: #FFFFFF;
-  --card: #15122E;
-  --card-foreground: #FFFFFF;
-  --popover: #15122E;
-  --popover-foreground: #FFFFFF;
-  --primary: #FFCA75;
-  --primary-foreground: #0D0D29;
-  --secondary: #15122E;
-  --secondary-foreground: #FFFFFF;
-  --muted: #15122E;
-  --muted-foreground: #A89ED0;
-  --accent: #FFCA75;
-  --accent-foreground: #0D0D29;
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: #FFFFFF;
-  --border: #252159;
-  --input: #252159;
-  --ring: #FFCA75;
 
-  --legmio-bg: #0D0D29;
-  --legmio-bg-alt: #15122E;
-  --legmio-text: #FFFFFF;
-  --legmio-muted: #A89ED0;
-  --legmio-accent: #FFCA75;
-  --legmio-accent-hover: #E5B569;
-  --legmio-border: #252159;
-  --legmio-footer: #0D0D29;
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-accent: var(--accent-c);
+  --color-accent-deep: var(--accent-deep);
+  --color-sand: var(--sand);
+  --color-line: var(--line);
+  --color-line-ink: var(--line-ink);
+  --color-muted: var(--muted-c);
+  --color-muted-ink: var(--muted-ink);
+  --color-award: var(--award);
+  --color-white: #FFFFFF;
 }
+
+:root {
+  --radius: 12px;
+
+  /* ── Charte miobility ─────────────────────────────────────
+     60 % blanc et sable, 30 % encre, 10 % vert. Le vert ponctue,
+     il ne remplit jamais une grande surface. */
+  --ink:          #10263A;  /* titres, fonds sombres, texte principal */
+  --sand:         #EFEAE3;  /* sections « quotidien », alternance */
+  --line:         #E3E7EA;  /* separateurs et bordures sur fond clair */
+  --muted-c:      #5A6872;  /* ardoise : legendes, metadonnees */
+  --award:        #B8874A;  /* or Lepine : distinctions seulement */
+
+  /* Deux verts, et le partage entre eux est dicte par le contraste.
+     #0E9B8A sur blanc ne donne que 3,46:1 : il echoue au critere AA
+     des que du texte le porte. Il reste donc aux pictos, soulignements
+     et survols — usages ou seul le seuil 3:1 s'applique. Le vert
+     profond, a 6,06:1, porte les boutons et les liens. */
+  --accent:       #0E9B8A;  /* pictos, soulignements, survol */
+  --accent-deep:  #0A6F63;  /* boutons, liens, etats actifs */
+
+  /* La charte ne couvre que les fonds clairs. Trois tokens de plus,
+     derives, pour ce qui vit sur l'encre. */
+  --ink-soft:     #16324B;  /* surface sombre secondaire */
+  --muted-ink:    #A5B6C1;  /* ardoise sur encre — 7,40:1, AAA */
+  --line-ink:     #22394C;  /* filet sur encre */
+}
+
 
 @layer base {
   * { border-color: var(--color-border); }
@@ -71,12 +63,16 @@
   /* Les ancres internes doivent s'arreter sous la banniere + le header fixes. */
   section[id], [id]:target { scroll-margin-top: 115px; }
   body {
-    background-color: #0D0D29;
+    background-color: var(--ink);
     color: #FFFFFF;
     font-family: var(--font-sans);
+    font-size: 1.125rem;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; }
+  h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.015em; line-height: 1.15; }
+  /* Chiffres de specifications : colonnes alignees. */
+  .tabulaire { font-variant-numeric: tabular-nums; }
 }
 
 @utility btn-dark {
@@ -84,11 +80,11 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #FFCA75;
-  color: #0D0D29;
+  background-color: var(--accent-deep);
+  color: var(--ink);
   font-weight: 600;
   padding: 0.875rem 1.75rem;
-  border-radius: 50px;
+  border-radius: 999px;
   transition: all 0.2s ease;
   cursor: pointer;
 }
@@ -100,11 +96,11 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #0D0D29;
+  background-color: var(--ink);
   color: #FFFFFF;
   font-weight: 600;
   padding: 0.875rem 1.75rem;
-  border-radius: 50px;
+  border-radius: 999px;
   transition: all 0.2s ease;
   cursor: pointer;
 }
@@ -117,14 +113,14 @@
   justify-content: center;
   gap: 0.5rem;
   background-color: transparent;
-  color: #FFCA75;
+  color: var(--accent-deep);
   font-weight: 600;
   padding: 0.875rem 1.75rem;
-  border-radius: 50px;
-  border: 1px solid #FFCA75;
+  border-radius: 999px;
+  border: 1px solid var(--accent-deep);
   transition: all 0.2s ease;
   cursor: pointer;
-  &:hover { background-color: #FFCA75; color: #0D0D29; }
+  &:hover { background-color: var(--accent-deep); color: var(--ink); }
 }
 @utility btn-outline-light {
   display: inline-flex;
@@ -132,33 +128,33 @@
   justify-content: center;
   gap: 0.5rem;
   background-color: transparent;
-  color: #0D0D29;
+  color: var(--ink);
   font-weight: 600;
   padding: 0.875rem 1.75rem;
-  border-radius: 50px;
-  border: 1px solid #0D0D29;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
   transition: all 0.2s ease;
   cursor: pointer;
-  &:hover { background-color: #0D0D29; color: #FFFFFF; }
+  &:hover { background-color: var(--ink); color: #FFFFFF; }
 }
 
 @utility card-soft {
   background-color: #15122E;
   border: 1px solid #252159;
-  border-radius: 1rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(16, 38, 58, 0.06);
 }
 @utility card-white {
   background-color: #FFFFFF;
   border: 1px solid #E8E4DC;
-  border-radius: 1rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(16, 38, 58, 0.06);
 }
 @utility card-cream {
   background-color: #FAFAF8;
   border: 1px solid #E8E4DC;
-  border-radius: 1rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(16, 38, 58, 0.06);
 }
 
 @utility carousel-arrow {
@@ -170,14 +166,14 @@
   height: 44px;
   border-radius: 9999px;
   /* navy plein : lisible sur les sections claires comme sur navy */
-  background-color: #0D0D29;
+  background-color: var(--ink);
   color: #FFFFFF;
   z-index: 10;
   transition: background-color 0.2s ease, transform 0.2s ease;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  box-shadow: 0 1px 2px rgba(16, 38, 58, 0.06);
 }
-.carousel-arrow:hover { background-color: #FFCA75; color: #0D0D29; }
+.carousel-arrow:hover { background-color: var(--accent-deep); color: var(--ink); }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
@@ -211,7 +207,7 @@
     box-sizing: content-box;
     padding: 7px;
     border: 1px solid currentColor;
-    border-radius: 50px;
+    border-radius: 999px;
   }
 }
 
@@ -242,7 +238,7 @@
 /* Focus clavier visible : sans cette regle, personne ne sait ou il se trouve
    en naviguant au clavier. */
 :focus-visible {
-  outline: 3px solid #FFCA75;
+  outline: 3px solid var(--accent-deep);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -251,11 +247,11 @@
    Le navy etait parfaitement plat. Un halo dore tres diffus lui donne
    de la profondeur sans ajouter de couleur. */
 @utility halo-or {
-  background-image: radial-gradient(60% 70% at 50% 0%, rgba(255, 202, 117, 0.10) 0%, rgba(255, 202, 117, 0) 70%);
+  background-image: radial-gradient(60% 70% at 50% 0%, rgba(14, 155, 138, 0.08) 0%, rgba(14, 155, 138, 0) 70%);
 }
 @utility halo-or-hero {
   background-image:
-    radial-gradient(46% 62% at 22% 34%, rgba(255, 202, 117, 0.16) 0%, rgba(255, 202, 117, 0) 68%),
+    radial-gradient(46% 62% at 22% 34%, rgba(14, 155, 138, 0.12) 0%, rgba(14, 155, 138, 0) 68%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0) 42%);
 }
 
@@ -268,8 +264,8 @@
 /* ── Roadmap ─────────────────────────────────────────────── */
 .ligne-progression { transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1); }
 @keyframes pulsation-etape {
-  0%, 100% { box-shadow: 0 0 0 5px rgba(255, 202, 117, 0.28); }
-  50%      { box-shadow: 0 0 0 11px rgba(255, 202, 117, 0.06); }
+  0%, 100% { box-shadow: 0 0 0 5px rgba(14, 155, 138, 0.26); }
+  50%      { box-shadow: 0 0 0 11px rgba(14, 155, 138, 0.06); }
 }
 @utility etape-active { animation: pulsation-etape 2.8s ease-in-out infinite; }
 
@@ -286,8 +282,8 @@
     box-shadow 0.25s ease;
   &:hover {
     translate: 0 -3px;
-    border-color: rgba(255, 202, 117, 0.75);
-    box-shadow: 0 8px 24px -12px rgba(13, 13, 41, 0.28);
+    border-color: rgba(14, 155, 138, 0.75);
+    box-shadow: 0 1px 2px rgba(16, 38, 58, 0.06);
   }
 }
 
@@ -320,9 +316,9 @@
   top: -60px;
   z-index: 100;
   padding: 10px 18px;
-  border-radius: 8px;
-  background: #FFCA75;
-  color: #130B3C;
+  border-radius: 12px;
+  background: var(--accent-deep);
+  color: var(--ink);
   font-weight: 700;
   transition: top 0.15s ease;
 }
@@ -339,43 +335,38 @@ video::cue {
   font-weight: 600;
   line-height: 1.4;
   color: #FFFFFF;
-  background: rgba(13, 13, 41, 0.9);
+  background: rgba(16, 38, 58, 0.92);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 /* Safari applique le fond au conteneur, pas a chaque mot. */
 video::-webkit-media-text-track-display {
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 4px 12px;
 }
 
 /* ── Echelle typographique ───────────────────────────────────
-   Un seul endroit definit la taille des titres. Avant, chaque page
-   composait la sienne : le titre d'article du blog etait plus petit
-   qu'un titre de section, et les pages legales plafonnaient a 48 px
-   la ou les autres montaient a 60.
-
-   Deux niveaux seulement pour les sections : la these et le reste.
-   Un troisieme, plus petit, revenait a decreter que « Une innovation
-   recompensee » et « Ils parlent de nous » comptaient moins — alors
-   que ce sont les sections de preuve. `titre-appui` ne sert plus qu'a
-   la page d'erreur. */
-.titre-page    { font-size: 2.25rem;  line-height: 1.05; }
-.titre-these   { font-size: 2.25rem;  line-height: 1.08; }
-.titre-section { font-size: 1.875rem; line-height: 1.12; }
-.titre-appui   { font-size: 1.5rem;   line-height: 1.2;  }
-.sous-titre    { font-size: 1rem;     line-height: 1.6;  }
+   H1 56-64 · H2 40 · H3 24 · corps 18 · legende 15 · mention 13.
+   Interlignage 1,15 sur les titres, 1,6 sur le corps.
+   Un seul niveau de H2, comme demande par la charte. */
+.titre-page    { font-size: 2.5rem;  line-height: 1.15; }
+.titre-section { font-size: 1.875rem; line-height: 1.15; }
+.titre-appui   { font-size: 1.375rem; line-height: 1.2; }
+.sous-titre    { font-size: 1.125rem; line-height: 1.6; }
+.legende       { font-size: 0.9375rem; line-height: 1.6; }   /* 15 */
+.mention       { font-size: 0.8125rem; line-height: 1.5; }   /* 13 */
 
 @media (min-width: 640px) {
-  .titre-page    { font-size: 3rem; }
-  .titre-these   { font-size: 3rem; }
+  .titre-page    { font-size: 3.25rem; }
   .titre-section { font-size: 2.25rem; }
-  .titre-appui   { font-size: 1.875rem; }
+  .titre-appui   { font-size: 1.5rem; }
 }
 @media (min-width: 768px) {
-  .titre-page    { font-size: 3.75rem; }   /* 60 */
-  .titre-these   { font-size: 3.25rem; }   /* 52 */
-  .titre-section { font-size: 2.75rem; }   /* 44 */
-  .titre-appui   { font-size: 2.25rem; }   /* 36 */
+  .titre-page    { font-size: 4rem;   }   /* 64 */
+  .titre-section { font-size: 2.5rem; }   /* 40 */
+  .titre-appui   { font-size: 1.5rem; }   /* 24 */
+}
+
+ /* 36 */
 }
 
 /* ── En-tete ─────────────────────────────────────────────────
@@ -389,16 +380,16 @@ video::-webkit-media-text-track-display {
               box-shadow 0.3s ease, backdrop-filter 0.3s ease;
 }
 .entete-pose {
-  background-color: rgba(13, 13, 41, 0.82);
+  background-color: rgba(16, 38, 58, 0.9);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   backdrop-filter: blur(14px) saturate(140%);
-  border-bottom-color: rgba(255, 202, 117, 0.22);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  border-bottom-color: rgba(14, 155, 138, 0.28);
+  box-shadow: 0 1px 2px rgba(16, 38, 58, 0.06);
 }
 /* Sans flou d'arriere-plan (Firefox ancien), on garde le navy opaque
    plutot qu'un fond translucide illisible. */
 @supports not (backdrop-filter: blur(1px)) {
-  .entete-pose { background-color: #0D0D29; }
+  .entete-pose { background-color: var(--ink); }
 }
 
 /* ── Jonctions de sections ───────────────────────────────────

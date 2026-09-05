@@ -11,6 +11,7 @@ import { Carousel } from "@/components/Carousel";
 import { Marquee } from "@/components/Marquee";
 import { Compteur } from "@/components/Compteur";
 import { MARGE_TEMPS_FORT, SEUIL } from "@/lib/apparition";
+import { ACCENT_DEEP, INK, INK_SOFT, LINE, LINE_INK, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
 
 export const Route = createFileRoute("/")({
   head: () => metaDe("fr", "accueil"),
@@ -18,19 +19,9 @@ export const Route = createFileRoute("/")({
 });
 
 // Palette
-const NAVY = "#0D0D29";
-const NAVY_ALT = "#15122E";
-const WHITE = "#FFFFFF";
-const CREAM = "#FAFAF8";
-const INK = "#15122E";
-const INK_MUTED = "#6B6B6B";
-const BORDER_LIGHT = "#E8E4DC";
-const BORDER_NAVY = "#252159";
-const MUTED_NAVY = "#A89ED0";
-const ACCENT = "#FFCA75";
 
 function CTADark({ block }: { block?: boolean }) {
-  // For NAVY sections: gold bg, navy text
+  // For INK sections: gold bg, navy text
   const { t, hubspotUrl } = useLanguage();
   return (
     <a href={hubspotUrl} target="_blank" rel="noreferrer" className={`btn-dark btn-dark-hover ${block ? "w-full" : ""}`}>
@@ -40,7 +31,7 @@ function CTADark({ block }: { block?: boolean }) {
 }
 
 function CTALight({ block }: { block?: boolean }) {
-  // For WHITE/CREAM sections: navy bg, white text
+  // For WHITE/SAND sections: navy bg, white text
   const { t, hubspotUrl } = useLanguage();
   return (
     <a href={hubspotUrl} target="_blank" rel="noreferrer" className={`btn-light btn-light-hover ${block ? "w-full" : ""}`}>
@@ -119,17 +110,17 @@ const specsItems = () => [
   { icon: <IconRange />, kFr: "Universelle", kEn: "Universal", kDe: "Universell", sFr: "Convient de 1m50 à 1m95", sEn: "Fits users from 1.50m to 1.95m", sDe: "Geeignet für 1,50m bis 1,95m" },
 ];
 
-// SpecsStrip on CREAM section: white cards, navy text/icons
+// SpecsStrip on SAND section: white cards, navy text/icons
 export function SpecsStrip() {
   const { tr } = useLanguage();
   const pills = specsItems();
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {pills.map((p, i) => (
-        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
-          <div style={{ color: NAVY }}>{p.icon}</div>
+        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
+          <div style={{ color: INK }}>{p.icon}</div>
           <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
-          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
+          <div className="mention" style={{ color: MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
         </div>
       ))}
     </div>
@@ -148,10 +139,10 @@ export function ProductFeatureGrid() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {items.map((p, i) => (
-        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
-          <div style={{ color: NAVY }}>{p.icon}</div>
+        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: SAND, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
+          <div style={{ color: INK }}>{p.icon}</div>
           <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
-          <div className="text-xs" style={{ color: INK_MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
+          <div className="mention" style={{ color: MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
         </div>
       ))}
     </div>
@@ -178,13 +169,13 @@ export function Landing() {
   
 
   return (
-    <div style={{ backgroundColor: NAVY }}>
-      {/* 1 — HERO (NAVY) */}
-      <section style={{ backgroundColor: NAVY }} className="grain relative jonction-bas halo-or-hero px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
+    <div style={{ backgroundColor: INK }}>
+      {/* 1 — HERO (INK) */}
+      <section style={{ backgroundColor: INK }} className="grain relative jonction-bas halo-or-hero px-4 sm:px-6 pt-8 pb-16 md:pt-12 md:pb-24">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[380px_1fr] gap-8 md:gap-24 items-center">
           {/* Sur mobile le titre passe devant : la video seule occupait tout le
               premier ecran, le visiteur n'y lisait aucune promesse. */}
-          <div className="order-2 md:order-1 w-full max-w-[300px] md:max-w-[380px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: NAVY_ALT }}>
+          <div className="order-2 md:order-1 w-full max-w-[300px] md:max-w-[380px] mx-auto md:mx-0 rounded-2xl overflow-hidden" style={{ backgroundColor: INK_SOFT }}>
             <div className="relative w-full" style={{ aspectRatio: "9/16", maxHeight: "80vh" }}>
               <video
                 ref={videoRef}
@@ -208,7 +199,7 @@ export function Landing() {
           {/* Centre sur mobile : la grille a deux colonnes disparait, et tout
               le reste de la page est centre. A gauche, le bloc detonnait. */}
           <div className="order-1 md:order-2 space-y-6 fade-up text-center md:text-left" style={{ color: WHITE }}>
-            <div className="text-xs tracking-[0.2em] uppercase" style={{ color: MUTED_NAVY }}>
+            <div className="mention tracking-[0.2em] uppercase" style={{ color: MUTED_INK }}>
               {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT GENERATION CRUTCH", "DIE KRÜCKE DER NEUEN GENERATION")}
             </div>
             <h1 className="titre-page leading-[1.05]" style={{ color: WHITE }}>
@@ -221,8 +212,8 @@ export function Landing() {
             <div className="pt-2"><CTADark /></div>
               {/* La medaille compte, mais le Concours Lepine ne voyage pas :
                   hors de France, le nom seul ne dit rien, d'ou la glose. */}
-              <p className="pt-1 text-base" style={{ color: MUTED_NAVY }}>
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke={ACCENT}
+              <p className="pt-1 text-base" style={{ color: MUTED_INK }}>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke={ACCENT_DEEP}
                      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
                      className="inline-block align-[-2px] mr-1.5" aria-hidden="true">
                   <circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" />
@@ -242,7 +233,7 @@ export function Landing() {
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="titre-these text-center max-w-3xl mx-auto" style={{ color: INK }}>
+            <h2 className="titre-section text-center max-w-3xl mx-auto" style={{ color: INK }}>
               {tr("Les béquilles classiques ont leurs limites.", "Classic crutches have their limits.", "Herkömmliche Krücken haben ihre Grenzen.")}
             </h2>
           </Reveal>
@@ -259,7 +250,7 @@ export function Landing() {
                   </div>
                   <div className="p-6">
                     <h3 className="text-lg" style={{ color: INK }}>{c.t}</h3>
-                    <p className="mt-3 text-sm" style={{ color: INK_MUTED }}>{c.p}</p>
+                    <p className="mt-3 legende" style={{ color: MUTED }}>{c.p}</p>
                   </div>
                 </div>
               ))}
@@ -268,11 +259,11 @@ export function Landing() {
         </div>
       </section>
 
-      {/* 3 — FONCTIONNALITÉS (CREAM) */}
-      <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 3 — FONCTIONNALITÉS (SAND) */}
+      <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="titre-these text-center" style={{ color: INK }}>
+            <h2 className="titre-section text-center" style={{ color: INK }}>
               {tr("legmio a tout repensé.", "legmio rethought everything.", "legmio hat alles neu gedacht.")}
             </h2>
           </Reveal>
@@ -321,9 +312,9 @@ export function Landing() {
               },
             ].map((c, i) => (
               <div key={i} className="fade-up carte-survol card-cream p-6 flex flex-col items-start gap-3" style={{ transitionDelay: `${i * 60}ms` }}>
-                <div style={{ color: NAVY }}>{c.icon}</div>
+                <div style={{ color: INK }}>{c.icon}</div>
                 <h3 className="font-display font-bold text-lg leading-tight" style={{ color: INK }}>{c.t}</h3>
-                <p className="text-sm" style={{ color: INK_MUTED }}>{c.p}</p>
+                <p className="legende" style={{ color: MUTED }}>{c.p}</p>
               </div>
             ))}
           </div>
@@ -332,8 +323,8 @@ export function Landing() {
 
 
 
-      {/* 5 — TÉMOIGNAGES (CREAM) */}
-      <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 5 — TÉMOIGNAGES (SAND) */}
+      <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="titre-section text-center" style={{ color: INK }}>
@@ -354,13 +345,13 @@ export function Landing() {
                     )}
                     <div>
                       <div className="font-bold" style={{ color: INK }}>{t.n}</div>
-                      <div className="text-xs" style={{ color: INK_MUTED }}>{t.p}</div>
+                      <div className="mention" style={{ color: MUTED }}>{t.p}</div>
                     </div>
                   </div>
                   {/* mt-auto : la citation tombe en bas de carte. Sans cela,
                       celle du Dr Coignard, deux fois plus courte, laissait un
                       tiers de vide sous elle. */}
-                  <p className="mt-5 md:mt-auto md:pt-6 italic text-sm" style={{ color: INK_MUTED }}>"{t.q}"</p>
+                  <p className="mt-5 md:mt-auto md:pt-6 italic legende" style={{ color: MUTED }}>"{t.q}"</p>
                 </div>
               ))}
             </Carousel>
@@ -386,17 +377,17 @@ export function Landing() {
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la recherche", "Backed by Research", "Unterstützt durch die Forschung"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
             ].map((s, i) => (
               <div key={i} className="fade-up flex flex-col items-center text-center gap-2.5 md:px-4" style={{ transitionDelay: `${i * 60}ms` }}>
-                <div style={{ color: NAVY }}>{s.icon}</div>
+                <div style={{ color: INK }}>{s.icon}</div>
                 <div className="font-display font-bold text-lg leading-tight" style={{ color: INK }}>{s.t}</div>
-                <div className="text-sm" style={{ color: INK_MUTED }}>{s.s}</div>
+                <div className="legende" style={{ color: MUTED }}>{s.s}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 7 — ILS PARLENT DE NOUS (NAVY) */}
-      <section style={{ backgroundColor: NAVY }} className="grain relative jonction-haut jonction-bas halo-or px-4 sm:px-6 py-20 md:py-28">
+      {/* 7 — ILS PARLENT DE NOUS (INK) */}
+      <section style={{ backgroundColor: INK }} className="grain relative jonction-haut jonction-bas halo-or px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="titre-section text-center" style={{ color: WHITE }}>
@@ -424,7 +415,7 @@ export function Landing() {
                 { src: "/logohacavie.png", alt: "Hacavie", h: 44 },
                 { src: "/logocnrsinnovation.png", alt: "CNRS Innovation", h: 70 },
               ].map(({ src, alt, h }) => (
-                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER_NAVY}`, minWidth: 170, height: 88 }}>
+                <div key={alt} className="rounded-lg px-6 py-3 flex items-center justify-center" style={{ backgroundColor: WHITE, border: `1px solid ${LINE_INK}`, minWidth: 170, height: 88 }}>
                   <img src={src} alt={alt} className="object-contain" style={{ maxHeight: h, maxWidth: 150 }} loading="lazy" width={150} height={h} />
                 </div>
               ))]}
@@ -446,8 +437,8 @@ export function Landing() {
         <WallOfLove />
       </section>
 
-      {/* 9 — ROADMAP (CREAM) */}
-      <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 9 — ROADMAP (SAND) */}
+      <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-5xl mx-auto">
           <Reveal>
             <h2 className="titre-section text-center" style={{ color: INK }}>{tr("Où en sommes-nous ?", "Where are we?", "Wo stehen wir?")}</h2>
@@ -468,10 +459,10 @@ export function Landing() {
             <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="opacity-80 hover:opacity-100"><IconLinkedin size={28} /></a>
           </div>
           <div className="mt-10"><CTALight /></div>
-          <p className="mt-10 text-base" style={{ color: INK_MUTED }}>
+          <p className="mt-10 text-base" style={{ color: MUTED }}>
             {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?", "Gesundheitsfachkraft oder Händler?")}
             <br className="sm:hidden" />{" "}
-            <a href={lien("/pro")} className="underline" style={{ color: NAVY }}>{tr("Espace pro", "Pro space", "Fachbereich")} →</a>
+            <a href={lien("/pro")} className="underline" style={{ color: INK }}>{tr("Espace pro", "Pro space", "Fachbereich")} →</a>
           </p>
         </div>
       </section>
@@ -512,8 +503,8 @@ function WallOfLove() {
   const row1 = tr(row1Fr, row1En);
   const row2 = tr(row2Fr, row2En);
   const Card = ({ q }: { q: string }) => (
-    <div className="rounded-2xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: CREAM, border: `1px solid ${BORDER_LIGHT}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
-      <p className="italic text-sm">"{q}"</p>
+    <div className="rounded-2xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: SAND, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
+      <p className="italic legende">"{q}"</p>
     </div>
   );
   return (
@@ -560,12 +551,11 @@ function Roadmap() {
     io.observe(el);
     return () => io.disconnect();
   }, []);
-  const UPCOMING_TEXT = "#686D83";
-  return (
+    return (
     <div className="mt-16" ref={bloc}>
       <div className="hidden md:block relative pt-16 pb-4">
-        <div className="absolute h-px" style={{ left: "10%", right: "10%", top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: BORDER_LIGHT }} />
-        <div className="absolute h-[2px] ligne-progression" style={{ left: "10%", top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT, width: `${tracee ? progressPct * 0.8 : 0}%` }} />
+        <div className="absolute h-px" style={{ left: "10%", right: "10%", top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: LINE }} />
+        <div className="absolute h-[2px] ligne-progression" style={{ left: "10%", top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT_DEEP, width: `${tracee ? progressPct * 0.8 : 0}%` }} />
         <div className="relative grid grid-cols-5 gap-4">
           {steps.map((s, i) => {
             const done = s.state === "done";
@@ -574,7 +564,7 @@ function Roadmap() {
             return (
               <div key={i} className="flex flex-col items-center text-center">
                 <div className="h-12 flex items-end justify-center px-2">
-                  <div className="text-sm leading-tight" style={{ color: upcoming ? UPCOMING_TEXT : INK, fontWeight: isCurrent ? 700 : 500 }}>{s.t}</div>
+                  <div className="legende leading-tight" style={{ color: upcoming ? MUTED : INK, fontWeight: isCurrent ? 700 : 500 }}>{s.t}</div>
                 </div>
                 <div className="my-3 flex items-center justify-center" style={{ height: CIRCLE + 6 }}>
                   <div
@@ -582,13 +572,13 @@ function Roadmap() {
                     style={{
                       width: isCurrent ? CIRCLE + 6 : CIRCLE,
                       height: isCurrent ? CIRCLE + 6 : CIRCLE,
-                      backgroundColor: (done || isCurrent) ? ACCENT : WHITE,
-                      border: `2px solid ${upcoming ? BORDER_LIGHT : ACCENT}`,
+                      backgroundColor: (done || isCurrent) ? ACCENT_DEEP : WHITE,
+                      border: `2px solid ${upcoming ? LINE : ACCENT_DEEP}`,
                       boxShadow: isCurrent ? `0 0 0 5px rgba(255,202,117,0.28)` : "none",
                     }}
                   />
                 </div>
-                <div className="text-xs px-2 leading-snug mt-2" style={{ color: upcoming ? UPCOMING_TEXT : INK_MUTED, fontWeight: isCurrent ? 600 : 400 }}>{s.s}</div>
+                <div className="mention px-2 leading-snug mt-2" style={{ color: upcoming ? MUTED : MUTED, fontWeight: isCurrent ? 600 : 400 }}>{s.s}</div>
               </div>
             );
           })}
@@ -604,12 +594,12 @@ function Roadmap() {
               <div className="mt-1 rounded-full shrink-0" style={{
                 width: isCurrent ? 18 : 12,
                 height: isCurrent ? 18 : 12,
-                backgroundColor: isCurrent || done ? ACCENT : WHITE,
-                border: `2px solid ${upcoming ? BORDER_LIGHT : ACCENT}`,
+                backgroundColor: isCurrent || done ? ACCENT_DEEP : WHITE,
+                border: `2px solid ${upcoming ? LINE : ACCENT_DEEP}`,
               }} />
               <div>
-                <div className="text-sm" style={{ color: upcoming ? UPCOMING_TEXT : INK, fontWeight: isCurrent ? 700 : 500 }}>{s.t}</div>
-                <div className="text-xs" style={{ color: upcoming ? UPCOMING_TEXT : INK_MUTED }}>{s.s}</div>
+                <div className="legende" style={{ color: upcoming ? MUTED : INK, fontWeight: isCurrent ? 700 : 500 }}>{s.t}</div>
+                <div className="mention" style={{ color: upcoming ? MUTED : MUTED }}>{s.s}</div>
               </div>
             </div>
           );
@@ -645,7 +635,7 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
   const { tr } = useLanguage();
   return (
     <div className="fade-up rounded-2xl overflow-hidden flex flex-col h-full card-soft w-full max-w-[350px] mx-auto">
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: NAVY_ALT }}>
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: INK_SOFT }}>
         <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
       </div>
       <div className="p-5 flex flex-col gap-3 flex-1">
@@ -656,7 +646,7 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
             /* Meme calibre pour les trois : la carte France TV etait d'un cran
                plus petite, ce qui la faisait lire comme une anomalie. */
             className="font-display font-bold leading-none text-4xl"
-            style={{ color: ACCENT }}
+            style={{ color: ACCENT_DEEP }}
           >
             {r.vues !== null ? (
               <Compteur valeur={r.vues} suffixe="M" decimales={r.decimales} />
@@ -664,9 +654,9 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
               r.titre
             )}
           </div>
-          <div className="mt-1.5 text-sm" style={{ color: MUTED_NAVY }}>{r.label}</div>
+          <div className="mt-1.5 legende" style={{ color: MUTED_INK }}>{r.label}</div>
         </div>
-        <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex text-sm mt-auto self-start">
+        <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex legende mt-auto self-start">
           {tr("Voir sur Instagram", "View on Instagram", "Auf Instagram ansehen")} <IconArrowRight size={14} />
         </a>
       </div>

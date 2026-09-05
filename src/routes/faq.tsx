@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { IconChevron } from "@/components/Icons";
 import { useLanguage } from "@/lib/i18n";
+import { INK, LINE, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
 
 export const Route = createFileRoute("/faq")({
   head: () => metaDe("fr", "faq"),
@@ -127,14 +128,7 @@ export function Faq() {
   const { lang, tr } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
   const idx = lang === "fr" ? 0 : lang === "de" ? 2 : 1;
-  const NAVY = "#0D0D29";
-  const WHITE = "#FFFFFF";
-  const CREAM = "#FAFAF8";
-  const INK = "#15122E";
-  const INK_MUTED = "#6B6B6B";
-  const MUTED_NAVY = "#A89ED0";
-  const BORDER_LIGHT = "#E8E4DC";
-  // Donnees structurees FAQPage : possibles seulement parce que les reponses
+                // Donnees structurees FAQPage : possibles seulement parce que les reponses
   // sont desormais presentes dans le HTML servi. Google exige que le contenu
   // balise soit reellement dans la page.
   const donneesFaq = {
@@ -155,17 +149,17 @@ export function Faq() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesFaq) }}
       />
-      <section className="grain relative jonction-bas px-4 sm:px-6 py-20" style={{ backgroundColor: NAVY }}>
+      <section className="grain relative jonction-bas px-4 sm:px-6 py-20" style={{ backgroundColor: INK }}>
         <h1 className="titre-page text-center" style={{ color: WHITE }}>
           {tr("Tout ce que vous voulez savoir.", "Everything you want to know.", "Alles was Sie wissen möchten.")}
         </h1>
-        <p className="sous-titre mt-4 text-center" style={{ color: MUTED_NAVY }}>
+        <p className="sous-titre mt-4 text-center" style={{ color: MUTED_INK }}>
           {tr("Toutes les réponses en un seul endroit.", "All the answers in one place.", "Alle Antworten an einem Ort.")}
         </p>
       </section>
       {themes.map((th, ti) => {
         const isCream = ti % 2 === 1;
-        const bg = isCream ? CREAM : WHITE;
+        const bg = isCream ? SAND : WHITE;
         return (
           <section key={ti} className="px-4 sm:px-6 py-14" style={{ backgroundColor: bg }}>
             <div className="max-w-3xl mx-auto">
@@ -175,7 +169,7 @@ export function Faq() {
                   const key = `${ti}-${ii}`;
                   const isOpen = open === key;
                   return (
-                    <div key={ii} className="border-b" style={{ borderColor: BORDER_LIGHT }}>
+                    <div key={ii} className="border-b" style={{ borderColor: LINE }}>
                       <button
                         onClick={() => setOpen(isOpen ? null : key)}
                         aria-expanded={isOpen}
@@ -184,12 +178,12 @@ export function Faq() {
                         style={{ color: INK }}
                       >
                         <span>{it.q[idx]}</span>
-                        <span className={`shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} style={{ color: NAVY }}><IconChevron size={18} /></span>
+                        <span className={`shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} style={{ color: INK }}><IconChevron size={18} /></span>
                       </button>
                       {/* La reponse reste dans le HTML : repliee, pas retiree. */}
                       <div id={`reponse-${key}`} role="region" className={`repli ${isOpen ? "repli-ouvert" : ""}`}>
                         <div>
-                          <div className="pb-4 text-sm" style={{ color: INK_MUTED }}>{it.a[idx]}</div>
+                          <div className="pb-4 legende" style={{ color: MUTED }}>{it.a[idx]}</div>
                         </div>
                       </div>
                     </div>

@@ -17,6 +17,7 @@ import appCss from "../styles.css?url";
 const SITE_URL = "https://legmio.com";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LanguageProvider, langDeChemin, type Lang } from "@/lib/i18n";
+import { INK, MUTED_INK, WHITE } from "@/lib/couleurs";
 import { MARGE_CARTES, SEUIL } from "@/lib/apparition";
 import { Header, StickyBanner, Footer } from "@/components/Layout";
 
@@ -40,11 +41,11 @@ function NotFoundComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const txt = textesErreur(pathname);
   return (
-    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#0D0D29" }}>
+    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: INK }}>
       <div className="max-w-md text-center">
-        <h1 className="titre-page font-bold font-display" style={{ color: "#FFFFFF" }}>404</h1>
-        <h2 className="mt-4 text-xl font-semibold" style={{ color: "#FFFFFF" }}>{txt.t}</h2>
-        <p className="mt-2 text-sm" style={{ color: "#A89ED0" }}>{txt.d}</p>
+        <h1 className="titre-page font-bold font-display" style={{ color: WHITE }}>404</h1>
+        <h2 className="mt-4 text-xl font-semibold" style={{ color: WHITE }}>{txt.t}</h2>
+        <p className="mt-2 legende" style={{ color: MUTED_INK }}>{txt.d}</p>
         <div className="mt-6">
           <Link to={txt.racine} className="btn-dark btn-dark-hover">{txt.b}</Link>
         </div>
@@ -62,10 +63,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
   return (
-    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: "#0D0D29" }}>
+    <div className="flex min-h-screen items-center justify-center px-4" style={{ backgroundColor: INK }}>
       <div className="max-w-md text-center">
-        <h1 className="titre-appui font-semibold" style={{ color: "#FFFFFF" }}>{txt.e}</h1>
-        <p className="mt-2 text-sm" style={{ color: "#A89ED0" }}>{txt.ed}</p>
+        <h1 className="titre-appui font-semibold" style={{ color: WHITE }}>{txt.e}</h1>
+        <p className="mt-2 legende" style={{ color: MUTED_INK }}>{txt.ed}</p>
         <div className="mt-6 flex justify-center gap-2">
           <button onClick={() => { router.invalidate(); reset(); }} className="btn-dark btn-dark-hover">{txt.r}</button>
         </div>
@@ -97,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "apple-touch-icon", href: "/icon-180.png", sizes: "180x180" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600&family=Inter:wght@400;500&display=swap" },
     ],
   }),
   shellComponent: RootShell,
