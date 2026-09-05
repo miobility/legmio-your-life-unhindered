@@ -193,7 +193,10 @@ export function Footer() {
             <li><Link to={lien("/faq")} className="hover:text-white">{t("nav_faq")}</Link></li>
             <li><Link to={lien("/blog")} className="hover:text-white">{t("nav_blog")}</Link></li>
             <li><Link to={lien("/pro")} className="hover:text-white">{t("nav_pro")}</Link></li>
-            <li><a href="mailto:contact@legmio.com" className="hover:text-white">Contact</a></li>
+            {/* L'adresse est ecrite en clair : un lien mailto ne fait rien chez
+                qui n'a pas de logiciel de messagerie configure — c'est-a-dire
+                chez beaucoup de monde. Ecrite, elle se copie. */}
+            <li><a href="mailto:contact@legmio.com" className="hover:text-white">contact@legmio.com</a></li>
           </ul>
         </div>
         <div>
