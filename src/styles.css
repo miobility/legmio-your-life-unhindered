@@ -63,7 +63,7 @@
   section[id], [id]:target { scroll-margin-top: 115px; }
   body {
     background-color: var(--ink);
-    color: #FFFFFF;
+    color: var(--color-white);
     font-family: var(--font-sans);
     font-size: 1.125rem;
     line-height: 1.6;
@@ -134,24 +134,24 @@
   border: 1px solid var(--ink);
   transition: all 0.2s ease;
   cursor: pointer;
-  &:hover { background-color: var(--ink); color: #FFFFFF; }
+  &:hover { background-color: var(--ink); color: var(--color-white); }
 }
 
 @utility card-soft {
-  background-color: #15122E;
-  border: 1px solid #252159;
+  background-color: var(--ink-soft);
+  border: 1px solid var(--line-ink);
   border-radius: 12px;
   box-shadow: 0 1px 2px rgba(16, 38, 58, 0.06);
 }
 @utility card-white {
-  background-color: #FFFFFF;
-  border: 1px solid #E8E4DC;
+  background-color: var(--color-white);
+  border: 1px solid var(--line);
   border-radius: 12px;
   box-shadow: 0 1px 2px rgba(16, 38, 58, 0.06);
 }
 @utility card-cream {
-  background-color: #FAFAF8;
-  border: 1px solid #E8E4DC;
+  background-color: var(--sand);
+  border: 1px solid var(--line);
   border-radius: 12px;
   box-shadow: 0 1px 2px rgba(16, 38, 58, 0.06);
 }
@@ -164,9 +164,9 @@
   width: 44px;
   height: 44px;
   border-radius: 9999px;
-  /* navy plein : lisible sur les sections claires comme sur navy */
+  /* encre pleine : lisible sur les sections claires comme sur l'encre */
   background-color: var(--ink);
-  color: #FFFFFF;
+  color: var(--color-white);
   z-index: 10;
   transition: background-color 0.2s ease, transform 0.2s ease;
   cursor: pointer;
@@ -333,7 +333,7 @@ video::cue {
   font-size: 1.08em;
   font-weight: 600;
   line-height: 1.4;
-  color: #FFFFFF;
+  color: var(--color-white);
   background: rgba(16, 38, 58, 0.92);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }

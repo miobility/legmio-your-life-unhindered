@@ -117,7 +117,7 @@ export function SpecsStrip() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {pills.map((p, i) => (
-        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
+        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 1px 2px rgba(16,38,58,0.06)", transitionDelay: `${i * 60}ms` }}>
           <div style={{ color: INK }}>{p.icon}</div>
           <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
           <div className="mention" style={{ color: MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
@@ -139,7 +139,7 @@ export function ProductFeatureGrid() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {items.map((p, i) => (
-        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: SAND, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)", transitionDelay: `${i * 60}ms` }}>
+        <div key={i} className="fade-up carte-survol rounded-2xl p-5 flex flex-col items-start gap-2" style={{ backgroundColor: SAND, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 1px 2px rgba(16,38,58,0.06)", transitionDelay: `${i * 60}ms` }}>
           <div style={{ color: INK }}>{p.icon}</div>
           <div className="font-display font-bold text-base leading-tight">{tr(p.kFr, p.kEn, p.kDe)}</div>
           <div className="mention" style={{ color: MUTED }}>{tr(p.sFr, p.sEn, p.sDe)}</div>
@@ -503,7 +503,7 @@ function WallOfLove() {
   const row1 = tr(row1Fr, row1En);
   const row2 = tr(row2Fr, row2En);
   const Card = ({ q }: { q: string }) => (
-    <div className="rounded-2xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: SAND, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
+    <div className="rounded-2xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: SAND, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 1px 2px rgba(16,38,58,0.06)" }}>
       <p className="italic legende">"{q}"</p>
     </div>
   );
@@ -572,7 +572,9 @@ function Roadmap() {
                     style={{
                       width: isCurrent ? CIRCLE + 6 : CIRCLE,
                       height: isCurrent ? CIRCLE + 6 : CIRCLE,
-                      backgroundColor: (done || isCurrent) ? INK : WHITE,
+                      // Pastille jaune cerclee d'encre : le jaune donne la couleur de marque,
+                      // l'anneau donne le contraste que le jaune n'a pas sur du sable (1,60:1).
+                      backgroundColor: (done || isCurrent) ? CTA : WHITE,
                       border: `2px solid ${upcoming ? LINE : INK}`,
                       boxShadow: isCurrent ? `0 0 0 5px rgba(255,202,117,0.28)` : "none",
                     }}
@@ -594,7 +596,7 @@ function Roadmap() {
               <div className="mt-1 rounded-full shrink-0" style={{
                 width: isCurrent ? 18 : 12,
                 height: isCurrent ? 18 : 12,
-                backgroundColor: isCurrent || done ? INK : WHITE,
+                backgroundColor: isCurrent || done ? CTA : WHITE,
                 border: `2px solid ${upcoming ? LINE : INK}`,
               }} />
               <div>
