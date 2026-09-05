@@ -6,6 +6,7 @@ import { useLanguage, cheminDe } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { ProductFeatureGrid } from "@/routes/index";
 import { CTA, INK, LINE, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
+import { Image } from "@/components/Image";
 
 
 export const Route = createFileRoute("/produit")({
@@ -96,7 +97,7 @@ export function Produit() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
             <div className="relative rounded-xl overflow-hidden aspect-[3/4]" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}` }}>
-              <img src={gallery[sel].src} alt={gallery[sel].alt} className="w-full h-full object-contain" width={900} height={900} />
+              <Image src={gallery[sel].src} alt={gallery[sel].alt} className="w-full h-full object-contain" width={900} height={900} />
               <button aria-label="Previous" onClick={galleryPrev} className="carousel-arrow absolute top-1/2 left-3 -translate-y-1/2">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
@@ -114,7 +115,7 @@ export function Produit() {
                   aria-label={g.alt}
                   aria-current={sel === i}
                 >
-                  <img src={g.src} alt="" className="w-full h-full object-contain" loading="lazy" width={160} height={160} />
+                  <Image src={g.src} alt="" className="w-full h-full object-contain" loading="lazy" width={160} height={160} />
                 </button>
               ))}
             </div>
@@ -238,7 +239,7 @@ export function Produit() {
             ].map((m, i) => (
               <figure key={i} className="card-soft overflow-hidden w-full max-w-[340px] mx-auto">
                 <div className="w-full overflow-hidden" style={{ aspectRatio: "9/16" }}>
-                  <img src={m.img} alt={m.alt} className="w-full h-full object-cover" loading="lazy" width={900} height={1600} />
+                  <Image src={m.img} alt={m.alt} className="w-full h-full object-cover" loading="lazy" width={900} height={1600} />
                 </div>
                 <figcaption className="p-6">
                   <div className="mention font-bold tracking-[0.18em]" style={{ color: CTA }}>{m.n}</div>
@@ -275,7 +276,7 @@ export function Produit() {
                 <p className="mt-2 legende" style={{ color: MUTED }}>{r.quote}</p>
                 <div className="mt-4 flex items-center gap-4">
                   {r.img && (
-                    <img src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover" loading="lazy" width={48} height={48} />
+                    <Image src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover" loading="lazy" width={48} height={48} />
                   )}
                   <div className="legende">
                     <div className="font-bold" style={{ color: INK }}>{r.name}</div>

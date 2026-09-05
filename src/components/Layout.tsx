@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLanguage, pageDeChemin, LANGS, type Lang } from "@/lib/i18n";
 import { IconInstagram, IconTiktok, IconLinkedin } from "@/components/Icons";
 import { CTA, INK, INK_SOFT, LINE_INK, MUTED_INK, WHITE } from "@/lib/couleurs";
+import { Image } from "@/components/Image";
 
 const SOCIAL = {
   instagram: "https://www.instagram.com/legmio.official",
@@ -135,7 +136,7 @@ export function Header() {
       style={{ top: 40 }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-6">
         <Link to={lien("/")} onClick={retourHaut} className="font-display font-bold text-2xl shrink-0" style={{ color: WHITE }}>
-          <img src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto" width={160} height={40} />
+          <Image src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto" width={160} height={40} />
         </Link>
         <div className="flex-1" />
         <nav className="hidden md:flex items-center gap-6 legende">
@@ -177,7 +178,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="flex flex-col items-start">
           <Link to={lien("/")} onClick={retourHaut} aria-label="legmio — accueil">
-            <img src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto block" loading="lazy" width={160} height={40} />
+            <Image src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto block" loading="lazy" width={160} height={40} />
           </Link>
           <p className="mt-4 legende" style={{ color: MUTED_INK }}>{t("footer_tag")}</p>
         </div>

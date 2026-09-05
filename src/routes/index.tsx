@@ -12,6 +12,7 @@ import { Marquee } from "@/components/Marquee";
 import { Compteur } from "@/components/Compteur";
 import { MARGE_TEMPS_FORT, SEUIL } from "@/lib/apparition";
 import { AWARD, CTA, INK, INK_SOFT, LINE, LINE_INK, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
+import { Image } from "@/components/Image";
 
 export const Route = createFileRoute("/")({
   head: () => metaDe("fr", "accueil"),
@@ -246,7 +247,7 @@ export function Landing() {
               ].map((c, i) => (
                 <div key={i} className="fade-up card-cream overflow-hidden h-full flex flex-col" style={{ transitionDelay: `${i * 60}ms` }}>
                   <div className="aspect-[3/2] overflow-hidden" style={{ backgroundColor: WHITE }}>
-                    <img src={c.img} alt={c.alt} className="w-full h-full object-cover" loading="lazy" width={600} height={400} />
+                    <Image src={c.img} alt={c.alt} className="w-full h-full object-cover" loading="lazy" width={600} height={400} />
                   </div>
                   <div className="p-6">
                     <h3 className="text-lg" style={{ color: INK }}>{c.t}</h3>
@@ -341,7 +342,7 @@ export function Landing() {
                 <div key={i} className="fade-up card-white p-6 h-full flex flex-col" style={{ transitionDelay: `${i * 60}ms` }}>
                   <div className="flex items-center gap-4">
                     {t.img && (
-                      <img src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" loading="lazy" width={64} height={64} />
+                      <Image src={t.img} alt={t.n} className="w-16 h-16 rounded-full object-cover shrink-0" loading="lazy" width={64} height={64} />
                     )}
                     <div>
                       <div className="font-bold" style={{ color: INK }}>{t.n}</div>
@@ -416,7 +417,7 @@ export function Landing() {
                 { src: "/logocnrsinnovation.png", alt: "CNRS Innovation", h: 70 },
               ].map(({ src, alt, h }) => (
                 <div key={alt} className="rounded-xl px-6 py-4 flex items-center justify-center" style={{ backgroundColor: WHITE, border: `1px solid ${LINE_INK}`, minWidth: 170, height: 88 }}>
-                  <img src={src} alt={alt} className="object-contain" style={{ maxHeight: h, maxWidth: 150 }} loading="lazy" width={150} height={h} />
+                  <Image src={src} alt={alt} className="object-contain" style={{ maxHeight: h, maxWidth: 150 }} loading="lazy" width={150} height={h} />
                 </div>
               ))]}
             />
@@ -453,10 +454,11 @@ export function Landing() {
           <h2 className="titre-section" style={{ color: INK }}>
             {tr(<>Suivez l'actualité<br />de legmio.</>, <>Follow<br />legmio's news.</>, <>Folgen Sie den<br />Neuigkeiten von legmio.</>)}
           </h2>
-          <div className="mt-8 flex items-center justify-center gap-6" style={{ color: INK }}>
-            <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="opacity-80 hover:opacity-100"><IconInstagram size={28} /></a>
-            <a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" aria-label="TikTok" className="opacity-80 hover:opacity-100"><IconTiktok size={28} /></a>
-            <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="opacity-80 hover:opacity-100"><IconLinkedin size={28} /></a>
+          {/* 44 x 44 : les icones faisaient 28 px, sous la cible tactile minimale. */}
+            <div className="mt-8 flex items-center justify-center gap-2" style={{ color: INK }}>
+            <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="w-11 h-11 flex items-center justify-center opacity-80 hover:opacity-100"><IconInstagram size={28} /></a>
+            <a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" aria-label="TikTok" className="w-11 h-11 flex items-center justify-center opacity-80 hover:opacity-100"><IconTiktok size={28} /></a>
+            <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-11 h-11 flex items-center justify-center opacity-80 hover:opacity-100"><IconLinkedin size={28} /></a>
           </div>
           <div className="mt-10"><CTALight /></div>
           <p className="mt-10 text-base" style={{ color: MUTED }}>
@@ -639,7 +641,7 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
   return (
     <div className="fade-up rounded-xl overflow-hidden flex flex-col h-full card-soft w-full max-w-[350px] mx-auto">
       <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: INK_SOFT }}>
-        <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" width={400} height={500} onError={(e) => (e.currentTarget.style.display = 'none')} />
+        <Image src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" width={400} height={500} onError={(e) => (e.currentTarget.style.display = 'none')} />
       </div>
       <div className="p-6 flex flex-col gap-4 flex-1">
         {/* Une information forte, sa legende, puis le bouton : les trois cartes
