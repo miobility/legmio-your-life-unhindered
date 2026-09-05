@@ -5,7 +5,7 @@ import { IconChevron, IconCheck, IconArrowRight } from "@/components/Icons";
 import { useLanguage, cheminDe } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { ProductFeatureGrid } from "@/routes/index";
-import { ACCENT_DEEP, INK, LINE, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
+import { CTA, INK, LINE, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
 
 
 export const Route = createFileRoute("/produit")({
@@ -241,7 +241,7 @@ export function Produit() {
                   <img src={m.img} alt={m.alt} className="w-full h-full object-cover" loading="lazy" width={900} height={1600} />
                 </div>
                 <figcaption className="p-6">
-                  <div className="mention font-bold tracking-[0.18em]" style={{ color: ACCENT_DEEP }}>{m.n}</div>
+                  <div className="mention font-bold tracking-[0.18em]" style={{ color: CTA }}>{m.n}</div>
                   <h3 className="mt-2 font-display font-bold text-lg leading-tight" style={{ color: WHITE }}>{m.t}</h3>
                   <p className="mt-2 legende" style={{ color: MUTED_INK }}>{m.p}</p>
                 </figcaption>

@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage, pageDeChemin, LANGS, type Lang } from "@/lib/i18n";
 import { IconInstagram, IconTiktok, IconLinkedin } from "@/components/Icons";
-import { ACCENT_DEEP, INK, INK_SOFT, LINE_INK, MUTED_INK, WHITE } from "@/lib/couleurs";
+import { CTA, INK, INK_SOFT, LINE_INK, MUTED_INK, WHITE } from "@/lib/couleurs";
 
 const SOCIAL = {
   instagram: "https://www.instagram.com/legmio.official",
@@ -25,7 +25,7 @@ export function StickyBanner() {
       target="_blank"
       rel="noreferrer"
       className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center mention font-medium px-4 hover:opacity-90 overflow-hidden"
-      style={{ backgroundColor: ACCENT_DEEP, color: INK }}
+      style={{ backgroundColor: CTA, color: INK }}
     >
       <span key={idx} className="truncate fade-up">{msg}</span>
     </a>
@@ -126,7 +126,7 @@ export function Header() {
   const isFaq = page === "faq";
   const isBlog = page === "blog";
   const isPro = page === "pro";
-  const linkStyle = (active: boolean) => ({ color: active ? ACCENT_DEEP : WHITE });
+  const linkStyle = (active: boolean) => ({ color: active ? CTA : WHITE });
   const linkClass = (active: boolean) =>
     `hover:opacity-80 transition ${active ? "font-bold" : ""}`;
   return (

@@ -26,6 +26,8 @@
   --color-muted: var(--muted-c);
   --color-muted-ink: var(--muted-ink);
   --color-award: var(--award);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
   --color-white: #FFFFFF;
 }
 
@@ -47,7 +49,12 @@
      et survols — usages ou seul le seuil 3:1 s'applique. Le vert
      profond, a 6,06:1, porte les boutons et les liens. */
   --accent:       #0E9B8A;  /* pictos, soulignements, survol */
-  --accent-deep:  #0A6F63;  /* boutons, liens, etats actifs */
+  --accent-deep:  #0A6F63;  /* liens et etats actifs sur fond clair */
+
+  /* Le jaune de marque reprend les boutons. Sur encre il donne 10,26:1,
+     la ou du blanc sur vert plafonnait a 3,46 et echouait AA. */
+  --cta:          #FFCA75;
+  --cta-hover:    #E5B569;
 
   /* La charte ne couvre que les fonds clairs. Trois tokens de plus,
      derives, pour ce qui vit sur l'encre. */
@@ -80,7 +87,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: var(--accent-deep);
+  background-color: var(--cta);
   color: var(--ink);
   font-weight: 600;
   padding: 0.875rem 1.75rem;
@@ -89,7 +96,7 @@
   cursor: pointer;
 }
 @utility btn-dark-hover {
-  &:hover { background-color: #E5B569; transform: translateY(-1px); }
+  &:hover { background-color: var(--cta-hover); transform: translateY(-1px); }
 }
 @utility btn-light {
   display: inline-flex;
@@ -97,7 +104,7 @@
   justify-content: center;
   gap: 0.5rem;
   background-color: var(--ink);
-  color: #FFFFFF;
+  color: var(--color-white);
   font-weight: 600;
   padding: 0.875rem 1.75rem;
   border-radius: 999px;
@@ -105,7 +112,7 @@
   cursor: pointer;
 }
 @utility btn-light-hover {
-  &:hover { background-color: #15122E; transform: translateY(-1px); }
+  &:hover { background-color: var(--ink-soft); transform: translateY(-1px); }
 }
 @utility btn-outline-dark {
   display: inline-flex;
@@ -238,7 +245,7 @@
 /* Focus clavier visible : sans cette regle, personne ne sait ou il se trouve
    en naviguant au clavier. */
 :focus-visible {
-  outline: 3px solid var(--accent-deep);
+  outline: 3px solid var(--cta);
   outline-offset: 3px;
   border-radius: 4px;
 }

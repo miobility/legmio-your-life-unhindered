@@ -11,7 +11,7 @@ import { Carousel } from "@/components/Carousel";
 import { Marquee } from "@/components/Marquee";
 import { Compteur } from "@/components/Compteur";
 import { MARGE_TEMPS_FORT, SEUIL } from "@/lib/apparition";
-import { ACCENT_DEEP, INK, INK_SOFT, LINE, LINE_INK, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
+import { ACCENT_DEEP, AWARD, CTA, INK, INK_SOFT, LINE, LINE_INK, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
 
 export const Route = createFileRoute("/")({
   head: () => metaDe("fr", "accueil"),
@@ -213,7 +213,7 @@ export function Landing() {
               {/* La medaille compte, mais le Concours Lepine ne voyage pas :
                   hors de France, le nom seul ne dit rien, d'ou la glose. */}
               <p className="pt-1 text-base" style={{ color: MUTED_INK }}>
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke={ACCENT_DEEP}
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke={AWARD}
                      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
                      className="inline-block align-[-2px] mr-1.5" aria-hidden="true">
                   <circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" />
@@ -646,7 +646,7 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
             /* Meme calibre pour les trois : la carte France TV etait d'un cran
                plus petite, ce qui la faisait lire comme une anomalie. */
             className="font-display font-bold leading-none text-4xl"
-            style={{ color: ACCENT_DEEP }}
+            style={{ color: CTA }}
           >
             {r.vues !== null ? (
               <Compteur valeur={r.vues} suffixe="M" decimales={r.decimales} />
