@@ -24,7 +24,7 @@ export function StickyBanner() {
       href={hubspotUrl}
       target="_blank"
       rel="noreferrer"
-      className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center mention sm:legende font-medium px-4 hover:opacity-90 overflow-hidden"
+      className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center mention font-medium px-4 hover:opacity-90 overflow-hidden"
       style={{ backgroundColor: ACCENT_DEEP, color: INK }}
     >
       <span key={idx} className="truncate fade-up">{msg}</span>
