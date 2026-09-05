@@ -1,4 +1,5 @@
 import { Children, useEffect, useRef, useState, type ReactNode } from "react";
+import { INK, LINE } from "@/lib/couleurs";
 
 /**
  * Carrousel de contenu, mecanique unique pour tout le site.
@@ -74,7 +75,7 @@ export function Carousel({
 
       {/* Pastilles : utiles seulement la ou ca defile */}
       {items.length > 1 && (
-        <div className="mt-6 flex items-center justify-center gap-1 md:hidden">
+        <div className="mt-6 flex items-center justify-center gap-2 md:hidden">
           {items.map((_, i) => (
             <button
               key={i}
@@ -90,7 +91,7 @@ export function Carousel({
                 style={{
                   width: i === active ? 22 : 8,
                   height: 8,
-                  backgroundColor: i === active ? "#FFCA75" : "#C9C4DA",
+                  backgroundColor: i === active ? INK : LINE,
                 }}
               />
             </button>

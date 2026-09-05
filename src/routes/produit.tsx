@@ -5,15 +5,9 @@ import { IconChevron, IconCheck, IconArrowRight } from "@/components/Icons";
 import { useLanguage, cheminDe } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { ProductFeatureGrid } from "@/routes/index";
+import { CTA, INK, LINE, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
+import { Image } from "@/components/Image";
 
-const NAVY = "#0D0D29";
-const WHITE = "#FFFFFF";
-const CREAM = "#FAFAF8";
-const INK = "#15122E";
-const INK_MUTED = "#6B6B6B";
-const MUTED_NAVY = "#A89ED0";
-const BORDER_LIGHT = "#E8E4DC";
-const ACCENT = "#FFCA75";
 
 export const Route = createFileRoute("/produit")({
   head: () => metaDe("fr", "produit"),
@@ -26,7 +20,7 @@ function Accordion({ title, children, defaultOpen = false }: { title: string; ch
   const [open, setOpen] = useState(defaultOpen);
   const [id] = useState(() => `accordeon-${++compteurAccordeon}`);
   return (
-    <div className="border-b" style={{ borderColor: BORDER_LIGHT }}>
+    <div className="border-b" style={{ borderColor: LINE }}>
       <button
         onClick={() => setOpen(!open)}
         aria-expanded={open}
@@ -40,7 +34,7 @@ function Accordion({ title, children, defaultOpen = false }: { title: string; ch
       {/* Contenu replie, pas retire : sans cela il est absent du HTML servi. */}
       <div id={id} role="region" className={`repli ${open ? "repli-ouvert" : ""}`}>
         <div>
-          <div className="pb-5 text-sm" style={{ color: INK_MUTED }}>{children}</div>
+          <div className="pb-6 legende" style={{ color: MUTED }}>{children}</div>
         </div>
       </div>
     </div>
@@ -96,32 +90,32 @@ export function Produit() {
   };
 
   return (
-    <div style={{ backgroundColor: CREAM }}>
+    <div style={{ backgroundColor: SAND }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesProduit) }} />
-      {/* SECTION 1 — HERO PRODUIT (CREAM) */}
-      <section style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-12">
+      {/* SECTION 1 — HERO PRODUIT (SAND) */}
+      <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-12">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
-            <div className="relative rounded-2xl overflow-hidden aspect-[3/4]" style={{ backgroundColor: WHITE, border: `1px solid ${BORDER_LIGHT}` }}>
-              <img src={gallery[sel].src} alt={gallery[sel].alt} className="w-full h-full object-contain" width={900} height={900} />
-              <button aria-label="Previous" onClick={galleryPrev} className="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: NAVY, color: WHITE }}>
+            <div className="relative rounded-xl overflow-hidden aspect-[3/4]" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}` }}>
+              <Image src={gallery[sel].src} alt={gallery[sel].alt} className="w-full h-full object-contain" width={900} height={900} />
+              <button aria-label="Previous" onClick={galleryPrev} className="carousel-arrow absolute top-1/2 left-3 -translate-y-1/2">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
-              <button aria-label="Next" onClick={galleryNext} className="absolute top-1/2 right-3 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: NAVY, color: WHITE }}>
+              <button aria-label="Next" onClick={galleryNext} className="carousel-arrow absolute top-1/2 right-3 -translate-y-1/2">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
               </button>
             </div>
-            <div className="mt-4 flex gap-3 overflow-x-auto overflow-y-hidden" style={{ overscrollBehaviorX: "contain" }}>
+            <div className="mt-4 flex gap-4 overflow-x-auto overflow-y-hidden" style={{ overscrollBehaviorX: "contain" }}>
               {gallery.map((g, i) => (
                 <button
                   key={i}
                   onClick={() => setSel(i)}
-                  className="shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition"
-                  style={{ borderColor: sel === i ? NAVY : BORDER_LIGHT, backgroundColor: WHITE }}
+                  className="shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition"
+                  style={{ borderColor: sel === i ? INK : LINE, backgroundColor: WHITE }}
                   aria-label={g.alt}
                   aria-current={sel === i}
                 >
-                  <img src={g.src} alt="" className="w-full h-full object-contain" loading="lazy" width={160} height={160} />
+                  <Image src={g.src} alt="" className="w-full h-full object-contain" loading="lazy" width={160} height={160} />
                 </button>
               ))}
             </div>
@@ -131,7 +125,7 @@ export function Produit() {
             <h1 className="titre-page font-display font-bold" style={{ color: INK }}>
               {tr("Béquille legmio", "legmio crutch", "legmio Krücke")}
             </h1>
-            <p className="mt-4 text-base leading-relaxed" style={{ color: INK_MUTED }}>
+            <p className="mt-4 text-base leading-relaxed" style={{ color: MUTED }}>
               {tr(
                 "La première béquille ergonomique avec un mode mains libres.",
                 "The first ergonomic crutch with a hands-free mode.",
@@ -144,7 +138,7 @@ export function Produit() {
                 "Komfortabler befreit sie die Hände wenn nötig."
               )}
             </p>
-            <div className="mt-4 inline-block px-3 py-1 rounded-full text-xs" style={{ backgroundColor: WHITE, color: INK, border: `1px solid ${BORDER_LIGHT}` }}>
+            <div className="mt-4 inline-block px-4 py-2 rounded-full mention" style={{ backgroundColor: WHITE, color: INK, border: `1px solid ${LINE}` }}>
               {tr("Dispositif médical CE Classe I (en cours)", "CE Class I Medical Device (pending)", "CE Medizinprodukt Klasse I (ausstehend)")}
             </div>
 
@@ -162,7 +156,7 @@ export function Produit() {
                     [tr("Brevet", "Patent", "Patent"), "FR2411206"],
                     [tr("Certification", "Certification", "Zertifizierung"), tr("CE Classe I en cours · MDR 2017/745", "CE Class I in progress · MDR 2017/745", "CE Klasse I ausstehend · MDR 2017/745")],
                   ].map(([k, v]) => (
-                    <li key={k} className="flex justify-between gap-4"><span style={{ color: INK_MUTED }}>{k}</span><span style={{ color: INK }}>{v}</span></li>
+                    <li key={k} className="flex justify-between gap-4"><span style={{ color: MUTED }}>{k}</span><span style={{ color: INK }}>{v}</span></li>
                   ))}
                 </ul>
               </Accordion>
@@ -174,12 +168,12 @@ export function Produit() {
                     tr("Maintenir son autonomie en famille, au travail, en déplacement", "Maintaining independence in daily life, at work, and with family", "Selbstständigkeit im Alltag, bei der Arbeit und in der Familie erhalten"),
                     tr("Rééducation post-opératoire sans contrainte", "Post-operative recovery without constraints", "Postoperative Genesung ohne Einschränkungen"),
                   ].map((i) => (
-                    <li key={i} className="flex gap-2" style={{ color: NAVY }}><IconCheck size={16} /> <span style={{ color: INK_MUTED }}>{i}</span></li>
+                    <li key={i} className="flex gap-2" style={{ color: INK }}><IconCheck size={16} /> <span style={{ color: MUTED }}>{i}</span></li>
                   ))}
                 </ul>
               </Accordion>
               <Accordion title={tr("Ce qui est inclus", "What's included", "Lieferumfang")}>
-                <ul className="space-y-1" style={{ color: INK_MUTED }}>
+                <ul className="space-y-2" style={{ color: MUTED }}>
                   <li>· {tr("1 béquille legmio (disponible pour main droite ou gauche)", "1 legmio crutch (right or left)", "1 legmio Krücke (rechts oder links)")}</li>
                   <li>· {tr("1 embout (remplaçable)", "1 tip (replaceable)", "1 Aufsatz (austauschbar)")}</li>
                   <li>· {tr("1 notice de réglage", "1 adjustment guide", "1 Einstellungsanleitung")}</li>
@@ -195,14 +189,14 @@ export function Produit() {
         </div>
       </section>
 
-      {/* SECTION 2 — DEUX MODES (NAVY) */}
-      <section style={{ backgroundColor: NAVY }} className="grain relative jonction-haut jonction-bas px-4 sm:px-6 py-20 md:py-28">
+      {/* SECTION 2 — DEUX MODES (INK) */}
+      <section style={{ backgroundColor: INK }} className="grain relative jonction-haut jonction-bas px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <h2 className="titre-section text-center" style={{ color: WHITE }}>
               {tr("Deux modes d'utilisation.", "Two modes of use.", "Zwei Nutzungsmodi.")}
             </h2>
-            <p className="mt-5 text-base max-w-xl mx-auto text-center" style={{ color: MUTED_NAVY }}>
+            <p className="mt-6 text-base max-w-xl mx-auto text-center" style={{ color: MUTED_INK }}>
               {tr(
                 "Vous marchez normalement, et vous libérez les mains lorsque nécessaire.",
                 "You walk normally, and free your hands when needed.",
@@ -210,7 +204,7 @@ export function Produit() {
               )}
             </p>
           </Reveal>
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8">
             {[
               {
                 img: "/mode-bequille.jpg",
@@ -245,12 +239,12 @@ export function Produit() {
             ].map((m, i) => (
               <figure key={i} className="card-soft overflow-hidden w-full max-w-[340px] mx-auto">
                 <div className="w-full overflow-hidden" style={{ aspectRatio: "9/16" }}>
-                  <img src={m.img} alt={m.alt} className="w-full h-full object-cover" loading="lazy" width={900} height={1600} />
+                  <Image src={m.img} alt={m.alt} className="w-full h-full object-cover" loading="lazy" width={900} height={1600} />
                 </div>
                 <figcaption className="p-6">
-                  <div className="text-xs font-bold tracking-[0.18em]" style={{ color: ACCENT }}>{m.n}</div>
+                  <div className="mention font-bold tracking-[0.18em]" style={{ color: CTA }}>{m.n}</div>
                   <h3 className="mt-2 font-display font-bold text-lg leading-tight" style={{ color: WHITE }}>{m.t}</h3>
-                  <p className="mt-2 text-sm" style={{ color: MUTED_NAVY }}>{m.p}</p>
+                  <p className="mt-2 legende" style={{ color: MUTED_INK }}>{m.p}</p>
                 </figcaption>
               </figure>
             ))}
@@ -270,23 +264,26 @@ export function Produit() {
         </div>
       </section>
 
-      {/* SECTION 4 — TÉMOIGNAGES (CREAM) */}
-      <section id="reviews" style={{ backgroundColor: CREAM }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* SECTION 4 — TÉMOIGNAGES (SAND) */}
+      <section id="reviews" style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <h2 className="titre-section text-center" style={{ color: INK }}>{tr("Témoignages", "Testimonials", "Erfahrungsberichte")}</h2>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {reviews.map((r, i) => (
-              <div key={i} className="card-white p-5">
+              <div key={i} className="card-white p-6">
                 <h3 className="font-display font-bold text-lg leading-snug" style={{ color: INK }}>{r.title}</h3>
-                <p className="mt-2 text-sm" style={{ color: INK_MUTED }}>{r.quote}</p>
-                <div className="mt-4 flex items-center gap-3">
+                <p className="mt-2 legende" style={{ color: MUTED }}>{r.quote}</p>
+                {/* Le portrait passe au-dessus du nom : a cote, il decalait
+                    l'attribution de Pauline vers la droite pendant que celles
+                    de Salim et Joachim partaient du bord de la carte. */}
+                <div className="mt-4">
                   {r.img && (
-                    <img src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover" loading="lazy" width={48} height={48} />
+                    <Image src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover mb-2" loading="lazy" width={48} height={48} />
                   )}
-                  <div className="text-sm">
+                  <div className="legende">
                     <div className="font-bold" style={{ color: INK }}>{r.name}</div>
-                    <div style={{ color: INK_MUTED }}>{r.profile}{r.profile ? " · " : ""}{r.date}</div>
+                    <div style={{ color: MUTED }}>{r.profile}{r.profile ? " · " : ""}{r.date}</div>
                   </div>
                 </div>
               </div>
@@ -301,7 +298,7 @@ export function Produit() {
         <div className="max-w-6xl mx-auto">
           <div className="max-w-3xl mx-auto mb-8 text-center">
             <h2 className="titre-section" style={{ color: INK }}>{tr("Questions fréquentes", "Frequently asked questions", "Häufig gestellte Fragen")}</h2>
-            <a href={lien("/faq")} className="mt-4 inline-block text-sm underline" style={{ color: INK }}>{tr("Voir toutes les questions", "See all questions", "Alle Fragen ansehen")}</a>
+            <a href={lien("/faq")} className="mt-4 inline-block legende underline" style={{ color: INK }}>{tr("Voir toutes les questions", "See all questions", "Alle Fragen ansehen")}</a>
           </div>
           <div className="max-w-3xl mx-auto">
             {[
@@ -319,8 +316,8 @@ export function Produit() {
         </div>
       </section>
 
-      {/* SECTION 6 — CTA FINAL (NAVY) */}
-      <section style={{ backgroundColor: NAVY }} className="grain relative px-4 sm:px-6 py-20 md:py-28">
+      {/* SECTION 6 — CTA FINAL (INK) */}
+      <section style={{ backgroundColor: INK }} className="grain relative px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="titre-section" style={{ color: WHITE }}>
             {tr(<>Prêt à retrouver<br />vos mains libres ?</>, <>Ready to get<br />your hands back?</>, <>Bereit, Ihre<br />Hände zurückzubekommen?</>)}

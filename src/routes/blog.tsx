@@ -3,20 +3,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { IconChevron } from "@/components/Icons";
 import { useLanguage, cheminDe } from "@/lib/i18n";
+import { CTA, INK, LINE, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
+import { Image } from "@/components/Image";
 
 export const Route = createFileRoute("/blog")({
   head: () => metaDe("fr", "blog"),
   component: Blog,
 });
 
-const NAVY = "#0D0D29";
-const WHITE = "#FFFFFF";
-const CREAM = "#FAFAF8";
-const INK = "#15122E";
-const INK_MUTED = "#6B6B6B";
-const MUTED_NAVY = "#A89ED0";
-const BORDER_LIGHT = "#E8E4DC";
-const ACCENT = "#FFCA75";
 
 const genesisFr = `En 2020, j'ai subi une lourde opération pour retirer le cancer des os qui rongeait mon bassin. Elle fut un succès — et le début d'un nouveau parcours, à la fois difficile et joyeux.
 
@@ -102,31 +96,31 @@ function ArticleCard({ a }: { a: Article }) {
   return (
     <article className="card-white overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="aspect-video md:aspect-auto md:h-full overflow-hidden" style={{ backgroundColor: CREAM }}>
-          <img src={a.cover} alt={title} className="w-full h-full object-cover" loading="lazy" width={600} height={400} onError={(e) => (e.currentTarget.src = "/usecase-quotidien.jpg")} />
+        <div className="aspect-video md:aspect-auto md:h-full overflow-hidden" style={{ backgroundColor: SAND }}>
+          <Image src={a.cover} alt={title} className="w-full h-full object-cover" loading="lazy" width={600} height={400} onError={(e) => (e.currentTarget.src = "/usecase-quotidien.jpg")} />
         </div>
         <div className="p-8">
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: ACCENT, color: NAVY }}>{tag}</span>
+          <span className="inline-block px-4 py-2 rounded-full mention font-bold" style={{ backgroundColor: CTA, color: INK }}>{tag}</span>
           <h2 className="titre-section mt-4 font-display font-bold" style={{ color: INK }}>{title}</h2>
-          <p className="mt-4 text-sm" style={{ color: INK_MUTED }}>{excerpt}</p>
-          <button onClick={() => setOpen(!open)} className="mt-4 inline-flex items-center gap-1 text-sm font-bold" style={{ color: NAVY }}>
+          <p className="mt-4 legende" style={{ color: MUTED }}>{excerpt}</p>
+          <button onClick={() => setOpen(!open)} className="mt-4 inline-flex items-center gap-2 legende font-bold" style={{ color: INK }}>
             {open ? tr("Réduire", "Collapse", "Zuklappen") : tr("Lire l'article", "Read article", "Artikel lesen")}
             <span className={`transition-transform ${open ? "rotate-180" : ""}`}><IconChevron size={16} /></span>
           </button>
           {/* Le corps reste dans le HTML : replie, pas retire. */}
           <div className={`repli ${open ? "repli-ouvert" : ""}`}>
            <div>
-            <div className="mt-6 space-y-4 text-sm leading-relaxed" style={{ color: INK_MUTED }}>
+            <div className="mt-6 space-y-4 legende leading-relaxed" style={{ color: MUTED }}>
               {lang === "de" && (
-                <div className="rounded-xl p-4" style={{ backgroundColor: CREAM, color: INK }}>
+                <div className="rounded-xl p-4" style={{ backgroundColor: SAND, color: INK }}>
                   Dieser Artikel ist derzeit nur auf Französisch verfügbar. Deutsche Version folgt in Kürze.
                 </div>
               )}
               {body.split("\n\n").map((p, i) => <p key={i}>{p}</p>)}
               {a.id === "genese" && (
-                <div className="pt-4 border-t" style={{ borderColor: BORDER_LIGHT }}>
+                <div className="pt-4 border-t" style={{ borderColor: LINE }}>
                   <div className="font-bold" style={{ color: INK }}>Nicolas Perrin-Gilbert</div>
-                  <div style={{ color: INK_MUTED }}>{tr("Co-fondateur & CEO · Chercheur CNRS, ISIR Sorbonne Université", "Co-founder & CEO · CNRS researcher, ISIR Sorbonne Université", "Mitgründer & CEO · CNRS-Forscher, ISIR Sorbonne Université")}</div>
+                  <div style={{ color: MUTED }}>{tr("Co-fondateur & CEO · Chercheur CNRS, ISIR Sorbonne Université", "Co-founder & CEO · CNRS researcher, ISIR Sorbonne Université", "Mitgründer & CEO · CNRS-Forscher, ISIR Sorbonne Université")}</div>
                 </div>
               )}
             </div>
@@ -175,9 +169,9 @@ export function Blog() {
   return (
     <div style={{ backgroundColor: WHITE }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesBlog) }} />
-      <section style={{ backgroundColor: NAVY }} className="grain relative jonction-bas px-4 sm:px-6 py-20 md:py-28 text-center">
+      <section style={{ backgroundColor: INK }} className="grain relative jonction-bas px-4 sm:px-6 py-20 md:py-28 text-center">
         <h1 className="titre-page" style={{ color: WHITE }}>{tr("L'histoire de legmio", "The legmio story", "Die Geschichte von legmio")}</h1>
-        <p className="sous-titre mt-4" style={{ color: MUTED_NAVY }}>{tr("Pourquoi cette béquille existe.", "Why this crutch exists.", "Warum es diese Krücke gibt.")}</p>
+        <p className="sous-titre mt-4" style={{ color: MUTED_INK }}>{tr("Pourquoi cette béquille existe.", "Why this crutch exists.", "Warum es diese Krücke gibt.")}</p>
       </section>
 
       <section className="px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: WHITE }}>
