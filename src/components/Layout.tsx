@@ -194,6 +194,13 @@ export function Footer() {
             <li><Link to={lien("/blog")} className="hover:text-white">{t("nav_blog")}</Link></li>
             <li><Link to={lien("/pro")} className="hover:text-white">{t("nav_pro")}</Link></li>
             <li><a href="mailto:contact@legmio.com" className="hover:text-white">Contact</a></li>
+            {/* Un libelle, pas une annonce : ni montant, ni valorisation, ni
+                promesse. Une invitation a prendre contact n'est pas une offre
+                au public de titres financiers. */}
+            <li>
+              <a href={`mailto:contact@legmio.com?subject=${encodeURIComponent(tr("Investisseur — prise de contact", "Investor — getting in touch", "Investor — Kontaktaufnahme"))}`}
+                 className="hover:text-white">{tr("Investisseurs", "Investors", "Investoren")}</a>
+            </li>
           </ul>
         </div>
         <div>
