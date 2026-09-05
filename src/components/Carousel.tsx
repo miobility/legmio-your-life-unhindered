@@ -1,5 +1,5 @@
 import { Children, useEffect, useRef, useState, type ReactNode } from "react";
-import { ACCENT_DEEP, LINE } from "@/lib/couleurs";
+import { INK, LINE } from "@/lib/couleurs";
 
 /**
  * Carrousel de contenu, mecanique unique pour tout le site.
@@ -91,7 +91,7 @@ export function Carousel({
                 style={{
                   width: i === active ? 22 : 8,
                   height: 8,
-                  backgroundColor: i === active ? ACCENT_DEEP : LINE,
+                  backgroundColor: i === active ? INK : LINE,
                 }}
               />
             </button>

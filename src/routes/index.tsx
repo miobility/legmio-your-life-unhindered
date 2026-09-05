@@ -11,7 +11,7 @@ import { Carousel } from "@/components/Carousel";
 import { Marquee } from "@/components/Marquee";
 import { Compteur } from "@/components/Compteur";
 import { MARGE_TEMPS_FORT, SEUIL } from "@/lib/apparition";
-import { ACCENT_DEEP, AWARD, CTA, INK, INK_SOFT, LINE, LINE_INK, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
+import { AWARD, CTA, INK, INK_SOFT, LINE, LINE_INK, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
 
 export const Route = createFileRoute("/")({
   head: () => metaDe("fr", "accueil"),
@@ -555,7 +555,7 @@ function Roadmap() {
     <div className="mt-16" ref={bloc}>
       <div className="hidden md:block relative pt-16 pb-4">
         <div className="absolute h-px" style={{ left: "10%", right: "10%", top: `calc(4rem + ${CIRCLE / 2}px)`, backgroundColor: LINE }} />
-        <div className="absolute h-[2px] ligne-progression" style={{ left: "10%", top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: ACCENT_DEEP, width: `${tracee ? progressPct * 0.8 : 0}%` }} />
+        <div className="absolute h-[2px] ligne-progression" style={{ left: "10%", top: `calc(4rem + ${CIRCLE / 2 - 1}px)`, backgroundColor: INK, width: `${tracee ? progressPct * 0.8 : 0}%` }} />
         <div className="relative grid grid-cols-5 gap-4">
           {steps.map((s, i) => {
             const done = s.state === "done";
@@ -572,8 +572,8 @@ function Roadmap() {
                     style={{
                       width: isCurrent ? CIRCLE + 6 : CIRCLE,
                       height: isCurrent ? CIRCLE + 6 : CIRCLE,
-                      backgroundColor: (done || isCurrent) ? ACCENT_DEEP : WHITE,
-                      border: `2px solid ${upcoming ? LINE : ACCENT_DEEP}`,
+                      backgroundColor: (done || isCurrent) ? INK : WHITE,
+                      border: `2px solid ${upcoming ? LINE : INK}`,
                       boxShadow: isCurrent ? `0 0 0 5px rgba(255,202,117,0.28)` : "none",
                     }}
                   />
@@ -594,8 +594,8 @@ function Roadmap() {
               <div className="mt-1 rounded-full shrink-0" style={{
                 width: isCurrent ? 18 : 12,
                 height: isCurrent ? 18 : 12,
-                backgroundColor: isCurrent || done ? ACCENT_DEEP : WHITE,
-                border: `2px solid ${upcoming ? LINE : ACCENT_DEEP}`,
+                backgroundColor: isCurrent || done ? INK : WHITE,
+                border: `2px solid ${upcoming ? LINE : INK}`,
               }} />
               <div>
                 <div className="legende" style={{ color: upcoming ? MUTED : INK, fontWeight: isCurrent ? 700 : 500 }}>{s.t}</div>

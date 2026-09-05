@@ -15,10 +15,6 @@ export const LINE_INK = "var(--line-ink)";
 export const MUTED = "var(--muted-c)";
 export const MUTED_INK = "var(--muted-ink)";
 
-/** Boutons, liens, etats actifs : le seul vert qui passe AA sur fond clair. */
-export const ACCENT_DEEP = "var(--accent-deep)";
-/** Pictos, soulignements, survols : jamais sous du texte sur fond clair. */
-export const ACCENT = "var(--accent)";
 /** Or Lepine. Distinctions uniquement, jamais un bouton, jamais un fond. */
 export const AWARD = "var(--award)";
 
