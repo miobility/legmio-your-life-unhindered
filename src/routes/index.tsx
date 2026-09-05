@@ -636,7 +636,7 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
   return (
     <div className="fade-up rounded-2xl overflow-hidden flex flex-col h-full card-soft w-full max-w-[350px] mx-auto">
       <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: INK_SOFT }}>
-        <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" onError={(e) => (e.currentTarget.style.display = 'none')} />
+        <img src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" width={400} height={500} onError={(e) => (e.currentTarget.style.display = 'none')} />
       </div>
       <div className="p-5 flex flex-col gap-3 flex-1">
         {/* Une information forte, sa legende, puis le bouton : les trois cartes

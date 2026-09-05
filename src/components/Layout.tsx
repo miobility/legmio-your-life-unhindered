@@ -135,7 +135,7 @@ export function Header() {
       style={{ top: 40 }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-6">
         <Link to={lien("/")} onClick={retourHaut} className="font-display font-bold text-2xl shrink-0" style={{ color: WHITE }}>
-          <img src={"/logo_legmio.svg"} alt="Legmio" className="h-10 w-auto" width={160} height={40} />
+          <img src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto" width={160} height={40} />
         </Link>
         <div className="flex-1" />
         <nav className="hidden md:flex items-center gap-6 legende">
