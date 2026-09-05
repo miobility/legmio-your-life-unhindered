@@ -1,4 +1,5 @@
 import { Children, useEffect, useState, type ReactNode } from "react";
+import { INK, WHITE } from "@/lib/couleurs";
 
 /**
  * Bandeau defilant, pour les elements decoratifs : logos presse, mur d'avis.
