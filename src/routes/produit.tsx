@@ -274,9 +274,12 @@ export function Produit() {
               <div key={i} className="card-white p-6">
                 <h3 className="font-display font-bold text-lg leading-snug" style={{ color: INK }}>{r.title}</h3>
                 <p className="mt-2 legende" style={{ color: MUTED }}>{r.quote}</p>
-                <div className="mt-4 flex items-center gap-4">
+                {/* Le portrait passe au-dessus du nom : a cote, il decalait
+                    l'attribution de Pauline vers la droite pendant que celles
+                    de Salim et Joachim partaient du bord de la carte. */}
+                <div className="mt-4">
                   {r.img && (
-                    <Image src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover" loading="lazy" width={48} height={48} />
+                    <Image src={r.img} alt={r.name} className="w-12 h-12 rounded-full object-cover mb-2" loading="lazy" width={48} height={48} />
                   )}
                   <div className="legende">
                     <div className="font-bold" style={{ color: INK }}>{r.name}</div>
