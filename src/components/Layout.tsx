@@ -193,14 +193,10 @@ export function Footer() {
             <li><Link to={lien("/faq")} className="hover:text-white">{t("nav_faq")}</Link></li>
             <li><Link to={lien("/blog")} className="hover:text-white">{t("nav_blog")}</Link></li>
             <li><Link to={lien("/pro")} className="hover:text-white">{t("nav_pro")}</Link></li>
-            <li><a href="mailto:contact@legmio.com" className="hover:text-white">Contact</a></li>
-            {/* Un libelle, pas une annonce : ni montant, ni valorisation, ni
-                promesse. Une invitation a prendre contact n'est pas une offre
-                au public de titres financiers. */}
-            <li>
-              <a href={`mailto:contact@legmio.com?subject=${encodeURIComponent(tr("Investisseur — prise de contact", "Investor — getting in touch", "Investor — Kontaktaufnahme"))}`}
-                 className="hover:text-white">{tr("Investisseurs", "Investors", "Investoren")}</a>
-            </li>
+            {/* L'adresse est ecrite en clair : un lien mailto ne fait rien chez
+                qui n'a pas de logiciel de messagerie configure — c'est-a-dire
+                chez beaucoup de monde. Ecrite, elle se copie. */}
+            <li><a href="mailto:contact@legmio.com" className="hover:text-white">contact@legmio.com</a></li>
           </ul>
         </div>
         <div>
