@@ -94,7 +94,10 @@ const articles: Article[] = [
 
 function ArticleCard({ a }: { a: Article }) {
   const { tr, lang } = useLanguage();
-  const [open, setOpen] = useState(false);
+  // Un accordeon n'a d'interet que pour une liste. Avec un seul article,
+  // il ajoutait un clic devant le contenu le plus persuasif du site.
+  // Des qu'il y en aura deux, ils se replieront d'eux-memes.
+  const [open, setOpen] = useState(articles.length === 1);
   const title = lang === "en" ? a.titleEn : lang === "de" ? a.titleDe : a.titleFr;
   const excerpt = lang === "en" ? a.excerptEn : a.excerptFr;
   const body = lang === "en" ? a.bodyEn : a.bodyFr;
