@@ -242,7 +242,7 @@ export function Landing() {
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 pt-10 pb-6 md:pt-14 md:pb-8">
         <div className="max-w-7xl mx-auto">
           <p className="mention text-center uppercase tracking-[0.14em] font-semibold" style={{ color: MUTED }}>
-            {tr("Vu dans", "As seen in", "Bekannt aus")}
+            {tr("Ils parlent de nous", "They talk about us", "Sie berichten über uns")}
           </p>
           <div className="mt-6">
             <Marquee
@@ -436,12 +436,12 @@ export function Landing() {
         </div>
       </section>
 
-      {/* 7 — ILS PARLENT DE NOUS (INK) */}
+      {/* 7 — DES MILLIONS DE VUES (INK) */}
       <section style={{ backgroundColor: INK }} className="grain relative jonction-haut jonction-bas halo-or px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="titre-section text-center" style={{ color: WHITE }}>
-              {tr("Ils parlent de nous.", "They talk about us.", "Sie berichten über uns.")}
+              {tr("Des millions de vues.", "Millions of views.", "Millionen Aufrufe.")}
             </h2>
           </Reveal>
 
