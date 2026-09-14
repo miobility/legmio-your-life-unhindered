@@ -1,6 +1,6 @@
 import { metaDe } from "@/lib/meta";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IconChevron } from "@/components/Icons";
 import { useLanguage } from "@/lib/i18n";
 import { INK, LINE, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
@@ -10,10 +10,54 @@ export const Route = createFileRoute("/faq")({
   component: Faq,
 });
 
-type Item = { q: [string, string, string]; a: [string, string, string] };
+/** `vers` : "attente" pour la liste d'attente, "#ancre" pour un theme de la page, sinon un chemin francais. */
+type Lien = { vers: string; texte: [string, string, string] };
+type Item = { q: [string, string, string]; a: [string, string, string]; liens?: Lien[] };
 type Theme = { title: [string, string, string]; items: Item[] };
 
 const themes: Theme[] = [
+  // Ordre : ce qu'on nous demande le plus sur Instagram passe en premier —
+  // prix et commande, remboursement, essai, usage.
+  {
+    title: ["Commande et prix", "Order and price", "Bestellung und Preis"],
+    items: [
+      { q: ["Quel est le prix de legmio ?", "What is the price of legmio?", "Was kostet legmio?"], a: ["Le prix sera communiqué au lancement.", "The price will be announced at launch.", "Der Preis wird zum Marktstart bekannt gegeben."], liens: [{ vers: "#remboursement-et-prise-en-charge", texte: ["Voir le remboursement et la prise en charge", "See reimbursement and coverage", "Erstattung und Kostenübernahme ansehen"] }] },
+      { q: ["Où acheter legmio ?", "Where can I buy legmio?", "Wo kann man legmio kaufen?"], a: ["Directement sur legmio.com ou auprès de nos futurs revendeurs partenaires.", "Directly on legmio.com or from our future partner retailers.", "Direkt auf legmio.com oder bei unseren zukünftigen Partnerhändlern."], liens: [{ vers: "attente", texte: ["Rejoindre la liste d'attente", "Join the waiting list", "Zur Warteliste anmelden"] }] },
+      { q: ["Quels sont les délais de livraison ?", "What are the delivery times?", "Wie lange dauert die Lieferung?"], a: ["Nous visons une livraison standard en 3 à 5 jours ouvrés, avec une option express 24-48h.", "We are aiming for standard delivery within 3 to 5 business days, with an express 24-48h option.", "Wir streben eine Standardlieferung innerhalb von 3 bis 5 Werktagen an, mit einer Express-Option (24-48 Std.)."] },
+      { q: ["Quels sont les frais de livraison ?", "What are the shipping costs?", "Wie hoch sind die Versandkosten?"], a: ["La livraison sera a priori gratuite pour toute commande en France métropolitaine.", "Shipping will most likely be free for any order within mainland France.", "Der Versand wird voraussichtlich für alle Bestellungen innerhalb des französischen Mutterlandes kostenlos sein."] },
+      { q: ["Est-il possible de louer legmio ?", "Is it possible to rent legmio?", "Kann man legmio mieten?"], a: ["La location est en cours de réflexion avec nos revendeurs/distributeurs physiques.", "Rental is currently under consideration with our physical retailers/distributors.", "Die Vermietung wird derzeit gemeinsam mit unseren stationären Händlern/Vertriebspartnern geprüft."] },
+    ],
+  },
+  {
+    title: ["Remboursement et prise en charge", "Reimbursement and coverage", "Erstattung und Kostenübernahme"],
+    items: [
+      { q: ["legmio est-elle remboursée par la Sécurité Sociale ?", "Is legmio reimbursed by Social Security?", "Wird legmio von der Sozialversicherung erstattet?"], a: ["Pas encore : legmio n'est pas commercialisée et sa certification est en cours. Ce que nous visons se fera en deux temps. D'abord une prise en charge partielle sur prescription médicale, au titre de la nomenclature béquille (LPP), dont le tarif de remboursement se situe aujourd'hui entre 12,20 € et 18,29 €. Ensuite, une ligne de remboursement propre à legmio, mieux ajustée à ce qu'elle apporte.", "Not yet: legmio is not on sale and its certification is under way. What we are aiming for will come in two stages. First, partial coverage on medical prescription under the French crutch nomenclature (LPP), whose reimbursement rate currently sits between €12.20 and €18.29. Then a reimbursement line of its own, better matched to what legmio brings.", "Noch nicht: legmio ist nicht im Handel und die Zertifizierung läuft. Unser Ziel besteht aus zwei Schritten. Zuerst eine teilweise Kostenübernahme auf ärztliche Verordnung im Rahmen der französischen Krücken-Nomenklatur (LPP), deren Erstattungssatz derzeit zwischen 12,20 € und 18,29 € liegt. Danach eine eigene Erstattungsposition für legmio."] },
+      { q: ["Ma mutuelle peut-elle compléter le remboursement ?", "Can my supplementary insurance top up the reimbursement?", "Kann meine Zusatzversicherung die Erstattung ergänzen?"], a: ["Oui, selon votre contrat de mutuelle ou d'assurance. Vous pouvez aussi vous rapprocher d'une équipe locale d'accompagnement aides techniques (EqLAAT) : elle réalise une évaluation et vous aide à monter un dossier PCH ou MDPH.", "Yes, depending on your supplementary health insurance policy. In France you can also contact a local assistive-technology support team (EqLAAT): it carries out an assessment and helps you build a PCH or MDPH application.", "Ja, je nach Vertrag Ihrer Zusatzversicherung. In Frankreich können Sie sich zudem an ein lokales Beratungsteam für Hilfsmittel (EqLAAT) wenden: Es führt eine Bewertung durch und hilft beim Antrag auf PCH oder MDPH."] },
+      { q: ["Existe-t-il une prise en charge dans le cadre professionnel ?", "Is there any coverage available in a professional context?", "Gibt es eine Kostenübernahme im beruflichen Kontext?"], a: ["C'est la voie que nous visons, et c'est de loin la plus favorable. En contexte professionnel, l'Agefiph (secteur privé, sous condition de RQTH) et le FIPHFP (fonction publique) financent les aides techniques jusqu'à 90 %, ce qui ramènerait le reste à charge à presque rien. Ces dispositifs existent déjà : il nous reste à y faire entrer legmio.", "This is the route we are aiming for, and by far the most favourable one. At work, France's Agefiph (private sector, with recognised disabled-worker status) and FIPHFP (public sector) fund assistive devices up to 90%, which would leave almost nothing to pay. These schemes already exist; what remains is to get legmio into them.", "Das ist der Weg, den wir anstreben, und der mit Abstand günstigste. Im Beruf fördern die französischen Einrichtungen Agefiph (Privatsektor, mit anerkanntem Behindertenstatus) und FIPHFP (öffentlicher Dienst) Hilfsmittel mit bis zu 90 %, sodass fast nichts zu zahlen bliebe. Diese Programme bestehen bereits; legmio muss noch aufgenommen werden."], liens: [{ vers: "/pro", texte: ["Voir l'espace pro", "See the professionals area", "Zum Fachbereich"] }] },
+    ],
+  },
+  {
+    title: ["Tester legmio", "Testing legmio", "legmio testen"],
+    items: [
+      { q: ["Peut-on tester legmio avant d'acheter ?", "Can legmio be tested before buying?", "Kann legmio vor dem Kauf getestet werden?"], a: ["Au lancement, chez nos revendeurs. D'ici là, en rejoignant la liste d'attente, vous pouvez indiquer que vous souhaitez tester legmio : nous vous contacterons en priorité lors des prochains essais.", "At launch, at our retailers. Until then, when you join the waiting list, you can let us know you would like to test legmio: we will contact you first for upcoming trials.", "Zum Marktstart bei unseren Händlern. Bis dahin können Sie bei der Anmeldung zur Warteliste angeben, dass Sie legmio testen möchten: Wir melden uns bei den nächsten Tests zuerst bei Ihnen."], liens: [{ vers: "attente", texte: ["Rejoindre la liste d'attente", "Join the waiting list", "Zur Warteliste anmelden"] }] },
+    ],
+  },
+  {
+    title: ["Usage & activité", "Use & activity", "Nutzung & Aktivität"],
+    items: [
+      { q: ["Quelle est la différence entre legmio et une béquille à appui antébrachial, dite « arthritique » ?", "What is the difference between legmio and a forearm platform crutch, often called an “arthritic” crutch?", "Was unterscheidet legmio von einer Arthritis-Gehstütze mit Unterarmauflage?"], a: ["Une béquille à appui antébrachial fait reposer l'avant-bras sur une gouttière et s'utilise en tenant la poignée. legmio propose deux modes : un mode classique, avec la poignée, et un mode mains libres, où l'appui passe sur le coude. Dans ce mode, l'avant-bras garde sa liberté d'inclinaison par rapport à la béquille : vous pouvez attraper quelque chose dans votre poche ou lever un objet sans que la béquille bascule. legmio ne remplace pas les béquilles existantes, elle ajoute un nouveau type, pour que chacun ait plus de chances de trouver celle qui lui convient. Votre kinésithérapeute ou votre médecin reste le mieux placé pour vous orienter.", "A platform crutch rests the forearm on a trough and is used while holding the grip. legmio offers two modes: a classic mode, with the grip, and a hands-free mode, where the support shifts to the elbow. In this mode, your forearm keeps its freedom to tilt relative to the crutch: you can reach into your pocket or lift an object without the crutch tipping over. legmio does not replace existing crutches; it adds a new type, so that everyone has a better chance of finding the one that suits them. Your physiotherapist or doctor remains best placed to advise you.", "Bei einer Arthritis-Gehstütze liegt der Unterarm in einer Auflage, und man hält dabei den Griff. legmio bietet zwei Modi: einen klassischen Modus mit Griff und einen Freihand-Modus, bei dem die Stütze zum Ellbogen wandert. In diesem Modus bleibt der Unterarm in seiner Neigung gegenüber der Krücke frei: Sie können in Ihre Tasche greifen oder einen Gegenstand anheben, ohne dass die Krücke kippt. legmio ersetzt die bestehenden Krücken nicht, sondern ergänzt sie um einen neuen Typ, damit jeder bessere Chancen hat, die passende zu finden. Physiotherapeuten und Ärzte beraten Sie dabei am besten."], liens: [{ vers: "/produit", texte: ["Voir les deux modes", "See both modes", "Beide Modi ansehen"] }] },
+      { q: ["Que se passe-t-il si je lâche la poignée ?", "What happens if I let go of the grip?", "Was passiert, wenn ich den Griff loslasse?"], a: ["legmio reste en place sur votre bras : elle ne tombe pas. Vous pouvez ouvrir une porte ou sortir vos clés sans avoir à la poser puis à la ramasser.", "legmio stays in place on your arm: it does not fall. You can open a door or take out your keys without having to put it down and pick it up again.", "legmio bleibt an Ihrem Arm und fällt nicht herunter. Sie können eine Tür öffnen oder Ihre Schlüssel herausholen, ohne die Krücke abstellen und wieder aufheben zu müssen."], liens: [{ vers: "/produit", texte: ["Voir les deux modes", "See both modes", "Beide Modi ansehen"] }] },
+      { q: ["Peut-on courir avec legmio ?", "Can you run with legmio?", "Kann man mit legmio laufen?"], a: ["Oui. Des utilisateurs ont déjà réalisé des courses entre 6 et 8 km/h sur des distances d'environ 5 km, sans difficulté.", "Yes. Users have already run at speeds between 6 and 8 km/h over distances of about 5 km, without difficulty.", "Ja. Nutzer haben bereits Läufe mit 6 bis 8 km/h über Distanzen von etwa 5 km problemlos absolviert."] },
+      { q: ["Peut-on utiliser legmio en extérieur / sur terrain irrégulier ?", "Can legmio be used outdoors / on uneven terrain?", "Kann legmio im Freien / auf unebenem Gelände verwendet werden?"], a: ["Oui. L'embout interchangeable permet d'adapter legmio à différents types de sols. Le Flexyfoot (compatible 18/19 mm) est particulièrement recommandé pour l'extérieur et les sols irréguliers.", "Yes. The interchangeable tip allows legmio to be adapted to different types of ground. The Flexyfoot (18/19 mm compatible) is particularly recommended for outdoor use and uneven ground.", "Ja. Der austauschbare Aufsatz ermöglicht die Anpassung von legmio an verschiedene Bodenarten. Der Flexyfoot (18/19 mm kompatibel) wird besonders für den Außenbereich und unebenes Gelände empfohlen."] },
+      { q: ["Peut-on monter des escaliers avec legmio ?", "Can you climb stairs with legmio?", "Kann man mit legmio Treppen steigen?"], a: ["Oui.", "Yes.", "Ja."] },
+      { q: ["legmio est-elle adaptée à un usage quotidien prolongé ?", "Is legmio suitable for prolonged daily use?", "Ist legmio für den dauerhaften täglichen Gebrauch geeignet?"], a: ["Oui. La mousse nitrile de la poignée et la structure aluminium légère (850g) sont conçues pour un confort sur la durée.", "Yes. The handle's nitrile foam and the lightweight aluminum structure (850g) are designed for lasting comfort.", "Ja. Der Nitrilschaum des Griffs und die leichte Aluminiumstruktur (850 g) sind auf dauerhaften Komfort ausgelegt."] },
+      { q: ["legmio est-elle utilisable en cas de faiblesse ou perte de force dans les mains ?", "Can legmio be used in case of weakness or loss of strength in the hands?", "Kann legmio bei Schwäche oder Kraftverlust in den Händen verwendet werden?"], a: ["Oui, dans une large mesure : un peu de force reste nécessaire, mais la poignée réduit nettement le besoin en force de préhension.", "Yes, to a large extent: some strength is still needed, but the grip clearly reduces the need for gripping strength.", "Ja, weitgehend: Etwas Kraft ist weiterhin nötig, aber der Griff verringert den Bedarf an Greifkraft deutlich."] },
+      { q: ["legmio est-elle utilisable en cas d'amputation d'un membre inférieur, avec ou sans prothèse ?", "Can legmio be used in the case of a lower limb amputation, with or without a prosthesis?", "Kann legmio bei einer Amputation eines Beines, mit oder ohne Prothese, verwendet werden?"], a: ["Oui dans les deux cas. legmio nécessite uniquement un appui podal partiel côté controlatéral. Avec prothèse : legmio se positionne côté valide pour décharger le côté prothétique. À valider avec votre médecin MPR ou votre prothésiste selon le niveau d'amputation. Sans prothèse : utilisable notamment en post-op ou hors appareillage, sous réserve d'un appui controlatéral suffisant.", "Yes in both cases. legmio only requires partial foot support on the contralateral side. With a prosthesis: legmio is positioned on the sound side to offload the prosthetic side. To be confirmed with your PRM physician or prosthetist depending on the level of amputation. Without a prosthesis: usable especially post-op or without fitting, provided there is sufficient contralateral support.", "In beiden Fällen ja. legmio erfordert lediglich eine teilweise Fußbelastung auf der gegenüberliegenden Seite. Mit Prothese: legmio wird auf der gesunden Seite positioniert, um die prothetische Seite zu entlasten. Je nach Amputationsgrad mit Ihrem PRM-Arzt oder Orthopädietechniker abzuklären. Ohne Prothese: insbesondere postoperativ oder ohne Versorgung nutzbar, sofern eine ausreichende Belastung der Gegenseite möglich ist."] },
+      { q: ["Pour quels types de pathologies legmio est-elle recommandée ?", "For which types of conditions is legmio recommended?", "Für welche Krankheitsbilder wird legmio empfohlen?"], a: ["legmio convient aux mêmes indications que les béquilles classiques : fractures, entorses, suites opératoires des membres inférieurs, pathologies chroniques réduisant l'appui podal, ou tout contexte nécessitant un soulagement partiel ou total d'un membre inférieur.", "legmio is suitable for the same indications as classic crutches: fractures, sprains, post-operative lower limb conditions, chronic conditions reducing foot support, or any context requiring partial or total relief of a lower limb.", "legmio eignet sich für dieselben Indikationen wie klassische Krücken: Frakturen, Verstauchungen, postoperative Zustände der unteren Extremitäten, chronische Erkrankungen mit reduzierter Fußbelastung oder jeden Kontext, der eine teilweise oder vollständige Entlastung eines Beines erfordert."] },
+      { q: ["Combien de temps faut-il pour s'adapter à legmio ?", "How long does it take to get used to legmio?", "Wie lange dauert es, sich an legmio zu gewöhnen?"], a: ["La prise en main est immédiate : legmio s'utilise comme une canne anglaise classique dès les premiers pas, sans rien réapprendre. Ce qui demande un peu d'habitude, c'est le mode mains libres — il devient un réflexe en quelques heures pour certains, plusieurs jours pour d'autres, comme avec toute nouvelle aide à la marche.", "You can use it right away: from the first steps, legmio works like an ordinary forearm crutch, with nothing to relearn. What takes a little habit is the hands-free mode — it becomes second nature within a few hours for some, several days for others, as with any new walking aid.", "Der Einstieg ist sofort möglich: Ab dem ersten Schritt funktioniert legmio wie eine gewöhnliche Unterarmgehstütze, ohne Umlernen. Etwas Gewöhnung braucht der Freihand-Modus — er wird bei manchen schon nach wenigen Stunden zur Selbstverständlichkeit, bei anderen nach mehreren Tagen, wie bei jeder neuen Gehhilfe."] },
+      { q: ["legmio est-elle compatible avec un plâtre ou une orthèse ?", "Is legmio compatible with a cast or an orthosis?", "Ist legmio mit einem Gips oder einer Orthese kompatibel?"], a: ["Oui, legmio est compatible avec le port d'un plâtre ou d'une orthèse.", "Yes, legmio is compatible with wearing a cast or an orthosis.", "Ja, legmio ist mit dem Tragen eines Gipses oder einer Orthese kompatibel."] },
+    ],
+  },
   {
     title: ["Morphologie utilisateur", "User morphology", "Nutzer-Morphologie"],
     items: [
@@ -71,49 +115,9 @@ const themes: Theme[] = [
     ],
   },
   {
-    title: ["Tester legmio", "Testing legmio", "legmio testen"],
-    items: [
-      { q: ["Peut-on tester legmio avant d'acheter ?", "Can legmio be tested before buying?", "Kann legmio vor dem Kauf getestet werden?"], a: ["Au lancement, chez nos revendeurs. D'ici là, en rejoignant la liste d'attente, vous pouvez indiquer que vous souhaitez tester legmio : nous vous contacterons en priorité lors des prochains essais.", "At launch, at our retailers. Until then, when you join the waiting list, you can let us know you would like to test legmio: we will contact you first for upcoming trials.", "Zum Marktstart bei unseren Händlern. Bis dahin können Sie bei der Anmeldung zur Warteliste angeben, dass Sie legmio testen möchten: Wir melden uns bei den nächsten Tests zuerst bei Ihnen."] },
-    ],
-  },
-  {
-    title: ["Usage & activité", "Use & activity", "Nutzung & Aktivität"],
-    items: [
-      { q: ["Quelle est la différence entre legmio et une béquille à appui antébrachial, dite « arthritique » ?", "What is the difference between legmio and a forearm platform crutch, often called an “arthritic” crutch?", "Was unterscheidet legmio von einer Arthritis-Gehstütze mit Unterarmauflage?"], a: ["Une béquille à appui antébrachial fait reposer l'avant-bras sur une gouttière et s'utilise en tenant la poignée. legmio propose deux modes : un mode classique, avec la poignée, et un mode mains libres, où l'appui passe sur le coude. Dans ce mode, l'avant-bras garde sa liberté d'inclinaison par rapport à la béquille : vous pouvez attraper quelque chose dans votre poche ou lever un objet sans que la béquille bascule. legmio ne remplace pas les béquilles existantes, elle ajoute un nouveau type, pour que chacun ait plus de chances de trouver celle qui lui convient. Votre kinésithérapeute ou votre médecin reste le mieux placé pour vous orienter.", "A platform crutch rests the forearm on a trough and is used while holding the grip. legmio offers two modes: a classic mode, with the grip, and a hands-free mode, where the support shifts to the elbow. In this mode, your forearm keeps its freedom to tilt relative to the crutch: you can reach into your pocket or lift an object without the crutch tipping over. legmio does not replace existing crutches; it adds a new type, so that everyone has a better chance of finding the one that suits them. Your physiotherapist or doctor remains best placed to advise you.", "Bei einer Arthritis-Gehstütze liegt der Unterarm in einer Auflage, und man hält dabei den Griff. legmio bietet zwei Modi: einen klassischen Modus mit Griff und einen Freihand-Modus, bei dem die Stütze zum Ellbogen wandert. In diesem Modus bleibt der Unterarm in seiner Neigung gegenüber der Krücke frei: Sie können in Ihre Tasche greifen oder einen Gegenstand anheben, ohne dass die Krücke kippt. legmio ersetzt die bestehenden Krücken nicht, sondern ergänzt sie um einen neuen Typ, damit jeder bessere Chancen hat, die passende zu finden. Physiotherapeuten und Ärzte beraten Sie dabei am besten."] },
-      { q: ["Que se passe-t-il si je lâche la poignée ?", "What happens if I let go of the grip?", "Was passiert, wenn ich den Griff loslasse?"], a: ["legmio reste en place sur votre bras : elle ne tombe pas. Vous pouvez ouvrir une porte ou sortir vos clés sans avoir à la poser puis à la ramasser.", "legmio stays in place on your arm: it does not fall. You can open a door or take out your keys without having to put it down and pick it up again.", "legmio bleibt an Ihrem Arm und fällt nicht herunter. Sie können eine Tür öffnen oder Ihre Schlüssel herausholen, ohne die Krücke abstellen und wieder aufheben zu müssen."] },
-      { q: ["Peut-on courir avec legmio ?", "Can you run with legmio?", "Kann man mit legmio laufen?"], a: ["Oui. Des utilisateurs ont déjà réalisé des courses entre 6 et 8 km/h sur des distances d'environ 5 km, sans difficulté.", "Yes. Users have already run at speeds between 6 and 8 km/h over distances of about 5 km, without difficulty.", "Ja. Nutzer haben bereits Läufe mit 6 bis 8 km/h über Distanzen von etwa 5 km problemlos absolviert."] },
-      { q: ["Peut-on utiliser legmio en extérieur / sur terrain irrégulier ?", "Can legmio be used outdoors / on uneven terrain?", "Kann legmio im Freien / auf unebenem Gelände verwendet werden?"], a: ["Oui. L'embout interchangeable permet d'adapter legmio à différents types de sols. Le Flexyfoot (compatible 18/19 mm) est particulièrement recommandé pour l'extérieur et les sols irréguliers.", "Yes. The interchangeable tip allows legmio to be adapted to different types of ground. The Flexyfoot (18/19 mm compatible) is particularly recommended for outdoor use and uneven ground.", "Ja. Der austauschbare Aufsatz ermöglicht die Anpassung von legmio an verschiedene Bodenarten. Der Flexyfoot (18/19 mm kompatibel) wird besonders für den Außenbereich und unebenes Gelände empfohlen."] },
-      { q: ["Peut-on monter des escaliers avec legmio ?", "Can you climb stairs with legmio?", "Kann man mit legmio Treppen steigen?"], a: ["Oui.", "Yes.", "Ja."] },
-      { q: ["legmio est-elle adaptée à un usage quotidien prolongé ?", "Is legmio suitable for prolonged daily use?", "Ist legmio für den dauerhaften täglichen Gebrauch geeignet?"], a: ["Oui. La mousse nitrile de la poignée et la structure aluminium légère (850g) sont conçues pour un confort sur la durée.", "Yes. The handle's nitrile foam and the lightweight aluminum structure (850g) are designed for lasting comfort.", "Ja. Der Nitrilschaum des Griffs und die leichte Aluminiumstruktur (850 g) sind auf dauerhaften Komfort ausgelegt."] },
-      { q: ["legmio est-elle utilisable en cas de faiblesse ou perte de force dans les mains ?", "Can legmio be used in case of weakness or loss of strength in the hands?", "Kann legmio bei Schwäche oder Kraftverlust in den Händen verwendet werden?"], a: ["Oui, dans une large mesure : un peu de force reste nécessaire, mais la poignée réduit nettement le besoin en force de préhension.", "Yes, to a large extent: some strength is still needed, but the grip clearly reduces the need for gripping strength.", "Ja, weitgehend: Etwas Kraft ist weiterhin nötig, aber der Griff verringert den Bedarf an Greifkraft deutlich."] },
-      { q: ["legmio est-elle utilisable en cas d'amputation d'un membre inférieur, avec ou sans prothèse ?", "Can legmio be used in the case of a lower limb amputation, with or without a prosthesis?", "Kann legmio bei einer Amputation eines Beines, mit oder ohne Prothese, verwendet werden?"], a: ["Oui dans les deux cas. legmio nécessite uniquement un appui podal partiel côté controlatéral. Avec prothèse : legmio se positionne côté valide pour décharger le côté prothétique. À valider avec votre médecin MPR ou votre prothésiste selon le niveau d'amputation. Sans prothèse : utilisable notamment en post-op ou hors appareillage, sous réserve d'un appui controlatéral suffisant.", "Yes in both cases. legmio only requires partial foot support on the contralateral side. With a prosthesis: legmio is positioned on the sound side to offload the prosthetic side. To be confirmed with your PRM physician or prosthetist depending on the level of amputation. Without a prosthesis: usable especially post-op or without fitting, provided there is sufficient contralateral support.", "In beiden Fällen ja. legmio erfordert lediglich eine teilweise Fußbelastung auf der gegenüberliegenden Seite. Mit Prothese: legmio wird auf der gesunden Seite positioniert, um die prothetische Seite zu entlasten. Je nach Amputationsgrad mit Ihrem PRM-Arzt oder Orthopädietechniker abzuklären. Ohne Prothese: insbesondere postoperativ oder ohne Versorgung nutzbar, sofern eine ausreichende Belastung der Gegenseite möglich ist."] },
-      { q: ["Pour quels types de pathologies legmio est-elle recommandée ?", "For which types of conditions is legmio recommended?", "Für welche Krankheitsbilder wird legmio empfohlen?"], a: ["legmio convient aux mêmes indications que les béquilles classiques : fractures, entorses, suites opératoires des membres inférieurs, pathologies chroniques réduisant l'appui podal, ou tout contexte nécessitant un soulagement partiel ou total d'un membre inférieur.", "legmio is suitable for the same indications as classic crutches: fractures, sprains, post-operative lower limb conditions, chronic conditions reducing foot support, or any context requiring partial or total relief of a lower limb.", "legmio eignet sich für dieselben Indikationen wie klassische Krücken: Frakturen, Verstauchungen, postoperative Zustände der unteren Extremitäten, chronische Erkrankungen mit reduzierter Fußbelastung oder jeden Kontext, der eine teilweise oder vollständige Entlastung eines Beines erfordert."] },
-      { q: ["Combien de temps faut-il pour s'adapter à legmio ?", "How long does it take to get used to legmio?", "Wie lange dauert es, sich an legmio zu gewöhnen?"], a: ["La prise en main est immédiate : legmio s'utilise comme une canne anglaise classique dès les premiers pas, sans rien réapprendre. Ce qui demande un peu d'habitude, c'est le mode mains libres — il devient un réflexe en quelques heures pour certains, plusieurs jours pour d'autres, comme avec toute nouvelle aide à la marche.", "You can use it right away: from the first steps, legmio works like an ordinary forearm crutch, with nothing to relearn. What takes a little habit is the hands-free mode — it becomes second nature within a few hours for some, several days for others, as with any new walking aid.", "Der Einstieg ist sofort möglich: Ab dem ersten Schritt funktioniert legmio wie eine gewöhnliche Unterarmgehstütze, ohne Umlernen. Etwas Gewöhnung braucht der Freihand-Modus — er wird bei manchen schon nach wenigen Stunden zur Selbstverständlichkeit, bei anderen nach mehreren Tagen, wie bei jeder neuen Gehhilfe."] },
-      { q: ["legmio est-elle compatible avec un plâtre ou une orthèse ?", "Is legmio compatible with a cast or an orthosis?", "Ist legmio mit einem Gips oder einer Orthese kompatibel?"], a: ["Oui, legmio est compatible avec le port d'un plâtre ou d'une orthèse.", "Yes, legmio is compatible with wearing a cast or an orthosis.", "Ja, legmio ist mit dem Tragen eines Gipses oder einer Orthese kompatibel."] },
-    ],
-  },
-  {
     title: ["Fabrication et origine", "Manufacturing and origin", "Herstellung und Herkunft"],
     items: [
       { q: ["Où est fabriquée et assemblée legmio ?", "Where is legmio manufactured and assembled?", "Wo wird legmio hergestellt und montiert?"], a: ["legmio est conçue et assemblée en France. Dans le détail : les pièces en plastique injecté sont produites par un plasturgiste français, la structure aluminium vient de Chine, et l'assemblage final est réalisé en France.", "legmio is designed and assembled in France. In detail: the injection-moulded parts are produced by a French plastics manufacturer, the aluminium structure comes from China, and final assembly takes place in France.", "legmio wird in Frankreich entwickelt und montiert. Im Detail: Die spritzgegossenen Kunststoffteile stammen von einem französischen Kunststoffverarbeiter, die Aluminiumstruktur kommt aus China, und die Endmontage erfolgt in Frankreich."] },
-    ],
-  },
-  {
-    title: ["Remboursement et prise en charge", "Reimbursement and coverage", "Erstattung und Kostenübernahme"],
-    items: [
-      { q: ["legmio est-elle remboursée par la Sécurité Sociale ?", "Is legmio reimbursed by Social Security?", "Wird legmio von der Sozialversicherung erstattet?"], a: ["Pas encore : legmio n'est pas commercialisée et sa certification est en cours. Ce que nous visons se fera en deux temps. D'abord une prise en charge partielle sur prescription médicale, au titre de la nomenclature béquille (LPP), dont le tarif de remboursement se situe aujourd'hui entre 12,20 € et 18,29 €. Ensuite, une ligne de remboursement propre à legmio, mieux ajustée à ce qu'elle apporte.", "Not yet: legmio is not on sale and its certification is under way. What we are aiming for will come in two stages. First, partial coverage on medical prescription under the French crutch nomenclature (LPP), whose reimbursement rate currently sits between €12.20 and €18.29. Then a reimbursement line of its own, better matched to what legmio brings.", "Noch nicht: legmio ist nicht im Handel und die Zertifizierung läuft. Unser Ziel besteht aus zwei Schritten. Zuerst eine teilweise Kostenübernahme auf ärztliche Verordnung im Rahmen der französischen Krücken-Nomenklatur (LPP), deren Erstattungssatz derzeit zwischen 12,20 € und 18,29 € liegt. Danach eine eigene Erstattungsposition für legmio."] },
-      { q: ["Ma mutuelle peut-elle compléter le remboursement ?", "Can my supplementary insurance top up the reimbursement?", "Kann meine Zusatzversicherung die Erstattung ergänzen?"], a: ["Oui, selon votre contrat de mutuelle ou d'assurance. Vous pouvez aussi vous rapprocher d'une équipe locale d'accompagnement aides techniques (EqLAAT) : elle réalise une évaluation et vous aide à monter un dossier PCH ou MDPH.", "Yes, depending on your supplementary health insurance policy. In France you can also contact a local assistive-technology support team (EqLAAT): it carries out an assessment and helps you build a PCH or MDPH application.", "Ja, je nach Vertrag Ihrer Zusatzversicherung. In Frankreich können Sie sich zudem an ein lokales Beratungsteam für Hilfsmittel (EqLAAT) wenden: Es führt eine Bewertung durch und hilft beim Antrag auf PCH oder MDPH."] },
-      { q: ["Existe-t-il une prise en charge dans le cadre professionnel ?", "Is there any coverage available in a professional context?", "Gibt es eine Kostenübernahme im beruflichen Kontext?"], a: ["C'est la voie que nous visons, et c'est de loin la plus favorable. En contexte professionnel, l'Agefiph (secteur privé, sous condition de RQTH) et le FIPHFP (fonction publique) financent les aides techniques jusqu'à 90 %, ce qui ramènerait le reste à charge à presque rien. Ces dispositifs existent déjà : il nous reste à y faire entrer legmio.", "This is the route we are aiming for, and by far the most favourable one. At work, France's Agefiph (private sector, with recognised disabled-worker status) and FIPHFP (public sector) fund assistive devices up to 90%, which would leave almost nothing to pay. These schemes already exist; what remains is to get legmio into them.", "Das ist der Weg, den wir anstreben, und der mit Abstand günstigste. Im Beruf fördern die französischen Einrichtungen Agefiph (Privatsektor, mit anerkanntem Behindertenstatus) und FIPHFP (öffentlicher Dienst) Hilfsmittel mit bis zu 90 %, sodass fast nichts zu zahlen bliebe. Diese Programme bestehen bereits; legmio muss noch aufgenommen werden."] },
-    ],
-  },
-  {
-    title: ["Commande et prix", "Order and price", "Bestellung und Preis"],
-    items: [
-      { q: ["Quel est le prix de legmio ?", "What is the price of legmio?", "Was kostet legmio?"], a: ["Le prix sera communiqué au lancement.", "The price will be announced at launch.", "Der Preis wird zum Marktstart bekannt gegeben."] },
-      { q: ["Où acheter legmio ?", "Where can I buy legmio?", "Wo kann man legmio kaufen?"], a: ["Directement sur legmio.com ou auprès de nos futurs revendeurs partenaires.", "Directly on legmio.com or from our future partner retailers.", "Direkt auf legmio.com oder bei unseren zukünftigen Partnerhändlern."] },
-      { q: ["Quels sont les délais de livraison ?", "What are the delivery times?", "Wie lange dauert die Lieferung?"], a: ["Nous visons une livraison standard en 3 à 5 jours ouvrés, avec une option express 24-48h.", "We are aiming for standard delivery within 3 to 5 business days, with an express 24-48h option.", "Wir streben eine Standardlieferung innerhalb von 3 bis 5 Werktagen an, mit einer Express-Option (24-48 Std.)."] },
-      { q: ["Quels sont les frais de livraison ?", "What are the shipping costs?", "Wie hoch sind die Versandkosten?"], a: ["La livraison sera a priori gratuite pour toute commande en France métropolitaine.", "Shipping will most likely be free for any order within mainland France.", "Der Versand wird voraussichtlich für alle Bestellungen innerhalb des französischen Mutterlandes kostenlos sein."] },
-      { q: ["Est-il possible de louer legmio ?", "Is it possible to rent legmio?", "Kann man legmio mieten?"], a: ["La location est en cours de réflexion avec nos revendeurs/distributeurs physiques.", "Rental is currently under consideration with our physical retailers/distributors.", "Die Vermietung wird derzeit gemeinsam mit unseren stationären Händlern/Vertriebspartnern geprüft."] },
     ],
   },
   {
@@ -126,9 +130,59 @@ const themes: Theme[] = [
   },
 ];
 
+/** Ancre stable d'un theme, tiree du titre francais : identique dans les trois langues. */
+function ancre(titreFr: string) {
+  return titreFr
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, "et")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 export function Faq() {
-  const { lang, tr } = useLanguage();
+  const { lang, tr, hubspotUrl, lien } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
+
+  // Sommaire : 45 questions dans 13 themes, sans rien pour s'y reperer.
+  // Une rangee de themes reste en haut de l'ecran et suit la lecture.
+  const [actif, setActif] = useState(ancre(themes[0].title[0]));
+  const barre = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entrees) => entrees.forEach((e) => e.isIntersecting && setActif(e.target.id)),
+      { rootMargin: "-35% 0px -60% 0px" }
+    );
+    themes.forEach((th) => {
+      const el = document.getElementById(ancre(th.title[0]));
+      if (el) io.observe(el);
+    });
+    return () => io.disconnect();
+  }, []);
+  useEffect(() => {
+    // Le theme en cours reste visible dans la rangee, centre si possible.
+    const b = barre.current;
+    const puce = b?.querySelector<HTMLElement>(`[data-theme="${actif}"]`);
+    if (!b || !puce) return;
+    const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    b.scrollTo({ left: puce.offsetLeft - (b.clientWidth - puce.offsetWidth) / 2, behavior: doux ? "smooth" : "auto" });
+  }, [actif]);
+  const allerAuTheme = (e: React.MouseEvent, id: string) => {
+    const cible = document.getElementById(id);
+    if (!cible) return;
+    e.preventDefault();
+    // Sur telephone l'en-tete se range quand on descend : la marge a laisser
+    // au-dessus du titre depend donc du sens du trajet.
+    const y = cible.getBoundingClientRect().top + window.scrollY;
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
+    const entete = mobile && y > window.scrollY ? 0 : 105;
+    const hautBarre = barre.current?.parentElement?.getBoundingClientRect().height ?? 0;
+    const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: y - entete - hautBarre - 8, behavior: doux ? "smooth" : "auto" });
+    history.replaceState(null, "", `#${id}`);
+    setActif(id);
+  };
   const idx = lang === "fr" ? 0 : lang === "de" ? 2 : 1;
                 // Donnees structurees FAQPage : possibles seulement parce que les reponses
   // sont desormais presentes dans le HTML servi. Google exige que le contenu
@@ -159,11 +213,36 @@ export function Faq() {
           {tr("Toutes les réponses en un seul endroit.", "All the answers in one place.", "Alle Antworten an einem Ort.")}
         </p>
       </section>
+      <nav
+        aria-label={tr("Thèmes de la FAQ", "FAQ topics", "FAQ-Themen")}
+        className="faq-themes sticky z-30 border-b"
+        style={{ backgroundColor: WHITE, borderColor: LINE }}
+      >
+        <div ref={barre} className="relative max-w-5xl mx-auto px-4 sm:px-6 py-3 flex gap-2 overflow-x-auto">
+          {themes.map((th) => {
+            const id = ancre(th.title[0]);
+            const on = actif === id;
+            return (
+              <a
+                key={id}
+                href={`#${id}`}
+                data-theme={id}
+                onClick={(e) => allerAuTheme(e, id)}
+                aria-current={on ? "true" : undefined}
+                className="shrink-0 inline-flex items-center min-h-11 px-4 rounded-full mention font-semibold whitespace-nowrap border"
+                style={{ backgroundColor: on ? INK : WHITE, color: on ? WHITE : INK, borderColor: on ? INK : LINE }}
+              >
+                {th.title[idx]}
+              </a>
+            );
+          })}
+        </div>
+      </nav>
       {themes.map((th, ti) => {
         const isCream = ti % 2 === 1;
         const bg = isCream ? SAND : WHITE;
         return (
-          <section key={ti} className="px-4 sm:px-6 py-16" style={{ backgroundColor: bg }}>
+          <section key={ti} id={ancre(th.title[0])} className="theme-faq px-4 sm:px-6 py-16" style={{ backgroundColor: bg }}>
             <div className="max-w-3xl mx-auto">
               <h2 className="text-xl mb-4 font-display font-bold" style={{ color: INK }}>{th.title[idx]}</h2>
               <div>
@@ -186,6 +265,30 @@ export function Faq() {
                       <div id={`reponse-${key}`} role="region" className={`repli ${isOpen ? "repli-ouvert" : ""}`}>
                         <div>
                           <div className="pb-4 legende" style={{ color: MUTED }}>{it.a[idx]}</div>
+                          {it.liens && (
+                            <div className="pb-4 -mt-2 flex flex-wrap gap-x-6">
+                              {it.liens.map((l, li) => {
+                                const externe = l.vers === "attente";
+                                const interne = l.vers.startsWith("#");
+                                return (
+                                  <a
+                                    key={li}
+                                    href={externe ? hubspotUrl : interne ? l.vers : lien(l.vers)}
+                                    target={externe ? "_blank" : undefined}
+                                    rel={externe ? "noreferrer" : undefined}
+                                    onClick={interne ? (e) => allerAuTheme(e, l.vers.slice(1)) : undefined}
+                                    // Repliee, la reponse est invisible : ses liens ne doivent pas
+                                    // recevoir le focus au clavier.
+                                    tabIndex={isOpen ? undefined : -1}
+                                    className="inline-block py-2 legende underline font-semibold"
+                                    style={{ color: INK }}
+                                  >
+                                    {l.texte[idx]} <span aria-hidden="true">→</span>
+                                  </a>
+                                );
+                              })}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -196,6 +299,17 @@ export function Faq() {
           </section>
         );
       })}
+      <section className="px-4 sm:px-6 py-16 text-center" style={{ backgroundColor: themes.length % 2 === 1 ? SAND : WHITE }}>
+        <div className="max-w-3xl mx-auto">
+          <h2 className="titre-appui font-display font-bold" style={{ color: INK }}>
+            {tr("Vous ne trouvez pas votre réponse ?", "Can't find your answer?", "Sie finden Ihre Antwort nicht?")}
+          </h2>
+          <p className="mt-3 legende" style={{ color: MUTED }}>
+            {tr("Écrivez-nous à ", "Write to us at ", "Schreiben Sie uns an ")}
+            <a href="mailto:contact@legmio.com" className="underline font-semibold" style={{ color: INK }}>contact@legmio.com</a>.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }

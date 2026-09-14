@@ -18,6 +18,7 @@ export function Image({
   className,
   style,
   loading = "lazy",
+  fetchPriority,
   onError,
 }: {
   src: string;
@@ -27,6 +28,8 @@ export function Image({
   className?: string;
   style?: CSSProperties;
   loading?: "lazy" | "eager";
+  /** "high" pour l'image qu'on voit en premier : le navigateur la demande avant les autres. */
+  fetchPriority?: "high" | "low" | "auto";
   onError?: ReactEventHandler<HTMLImageElement>;
 }) {
   const avif = src.replace(/\.(jpe?g|png)$/i, ".avif");
@@ -45,6 +48,7 @@ export function Image({
         className={className}
         style={style}
         loading={loading}
+        fetchPriority={fetchPriority}
         onError={onError}
       />
     </picture>
