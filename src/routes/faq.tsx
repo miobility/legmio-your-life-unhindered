@@ -184,10 +184,10 @@ export function Faq() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesFaq) }}
       />
       <section className="grain relative jonction-bas px-4 sm:px-6 py-20" style={{ backgroundColor: INK }}>
-        <h1 className="titre-page text-center" style={{ color: WHITE }}>
+        <h1 className="titre-page max-w-3xl mx-auto" style={{ color: WHITE }}>
           {tr("Tout ce que vous voulez savoir.", "Everything you want to know.", "Alles was Sie wissen möchten.")}
         </h1>
-        <p className="sous-titre mt-4 text-center" style={{ color: MUTED_INK }}>
+        <p className="sous-titre mt-4 max-w-3xl mx-auto" style={{ color: MUTED_INK }}>
           {tr("Toutes les réponses en un seul endroit.", "All the answers in one place.", "Alle Antworten an einem Ort.")}
         </p>
       </section>
@@ -196,7 +196,7 @@ export function Faq() {
         className="px-4 sm:px-6 pt-12 pb-4"
         style={{ backgroundColor: WHITE }}
       >
-        <ul className="max-w-4xl mx-auto flex flex-wrap justify-center gap-2">
+        <ul className="max-w-3xl mx-auto flex flex-wrap gap-2">
           {themes.map((th) => {
             const id = ancre(th.title[0]);
             return (
@@ -275,7 +275,7 @@ export function Faq() {
           </section>
         );
       })}
-      <section className="px-4 sm:px-6 py-16 text-center" style={{ backgroundColor: themes.length % 2 === 1 ? SAND : WHITE }}>
+      <section className="px-4 sm:px-6 py-16" style={{ backgroundColor: themes.length % 2 === 1 ? SAND : WHITE }}>
         <div className="max-w-3xl mx-auto">
           <h2 className="titre-appui font-display font-bold" style={{ color: INK }}>
             {tr("Vous ne trouvez pas votre réponse ?", "Can't find your answer?", "Sie finden Ihre Antwort nicht?")}

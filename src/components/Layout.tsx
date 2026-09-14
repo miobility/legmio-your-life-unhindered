@@ -160,8 +160,10 @@ export function Header() {
   const isBlog = page === "blog";
   const isPro = page === "pro";
   const linkStyle = (active: boolean) => ({ color: active ? CTA : WHITE });
-  const linkClass = (active: boolean) =>
-    `hover:opacity-80 transition ${active ? "font-bold" : ""}`;
+  // Ordinateur : les liens groupes dans une pilule translucide, la page en
+  // cours en pastille blanche. Cibles de 44 px, contrairement au modele.
+  const pilule = (active: boolean) =>
+    active ? { backgroundColor: WHITE, color: INK } : { color: WHITE };
   return (
     <>
     <header
@@ -171,13 +173,23 @@ export function Header() {
         <Link to={lien("/")} onClick={retourHaut} className="font-display font-bold text-2xl shrink-0" style={{ color: WHITE }}>
           <Image src={"/logo_legmio.svg"} alt="legmio" className="h-10 w-auto" width={160} height={40} />
         </Link>
-        <div className="flex-1" />
-        <nav className="hidden md:flex items-center gap-6 legende">
-          <Link to={lien("/produit")} className={linkClass(isProduct)} style={linkStyle(isProduct)}>{t("nav_product")}</Link>
-          <Link to={lien("/faq")} className={linkClass(isFaq)} style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
-          <Link to={lien("/blog")} className={linkClass(isBlog)} style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
-          <Link to={lien("/pro")} className={linkClass(isPro)} style={linkStyle(isPro)}>{t("nav_pro")}</Link>
+        <nav
+          className="hidden md:flex items-center gap-1 legende rounded-full p-1"
+          style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.14)" }}
+        >
+          {([["/produit", "nav_product", isProduct], ["/faq", "nav_faq", isFaq], ["/blog", "nav_blog", isBlog], ["/pro", "nav_pro", isPro]] as const).map(([chemin, cle, actif]) => (
+            <Link
+              key={chemin}
+              to={lien(chemin)}
+              aria-current={actif ? "page" : undefined}
+              className="inline-flex items-center min-h-11 px-4 rounded-full transition hover:opacity-80"
+              style={pilule(actif)}
+            >
+              {t(cle)}
+            </Link>
+          ))}
         </nav>
+        <div className="flex-1" />
         <div className="hidden sm:block"><LangSwitcher /></div>
         <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover hidden sm:inline-flex legende px-6 py-2 items-center gap-2">
           {t("cta_interested")} <span aria-hidden="true">→</span>
@@ -221,10 +233,32 @@ export function Header() {
 
 
 export function Footer() {
-  const { t, tr, lien } = useLanguage();
+  const { t, tr, lien, hubspotUrl } = useLanguage();
   const retourHaut = useRetourHaut();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  // La fiche bequille et l'espace pro se terminent deja par un appel :
+  // on n'en empile pas un second juste en dessous.
+  const avecAppel = !["produit", "pro"].includes(pageDeChemin(pathname));
   return (
     <footer style={{ backgroundColor: INK, color: WHITE }} className="pt-16 pb-8 px-4 sm:px-6">
+      {/* Direction Hyperice : l'inscription vit dans le pied de page, au lieu
+          d'une section de plus en fin d'accueil. */}
+      {avecAppel && (
+        <div id="waitlist" className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:items-end pb-12 mb-12 border-b" style={{ borderColor: LINE_INK }}>
+          <h2 className="titre-section" style={{ color: WHITE }}>
+            {tr("Suivez l'actualité de legmio.", "Follow legmio's news.", "Folgen Sie den Neuigkeiten von legmio.")}
+          </h2>
+          <div className="flex flex-col items-start md:items-end gap-4">
+            <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover">
+              {t("cta_interested")} <span aria-hidden="true">→</span>
+            </a>
+            <p className="legende" style={{ color: MUTED_INK }}>
+              {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?", "Gesundheitsfachkraft oder Händler?")}{" "}
+              <Link to={lien("/pro")} className="underline" style={{ color: WHITE }}>{tr("Espace pro", "Pro space", "Fachbereich")} <span aria-hidden="true">→</span></Link>
+            </p>
+          </div>
+        </div>
+      )}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="flex flex-col items-start">
           <Link to={lien("/")} onClick={retourHaut} aria-label="legmio — accueil">

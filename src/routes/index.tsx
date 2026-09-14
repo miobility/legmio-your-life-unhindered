@@ -2,9 +2,8 @@ import { metaDe } from "@/lib/meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
-import { SOCIAL } from "@/components/Layout";
 import {
-  IconArrowRight, IconInstagram, IconTiktok, IconLinkedin,
+  IconArrowRight,
 } from "@/components/Icons";
 import { Reveal } from "@/components/Reveal";
 import { Carousel } from "@/components/Carousel";
@@ -31,15 +30,6 @@ function CTADark({ block }: { block?: boolean }) {
   );
 }
 
-function CTALight({ block }: { block?: boolean }) {
-  // For WHITE/SAND sections: navy bg, white text
-  const { t, hubspotUrl } = useLanguage();
-  return (
-    <a href={hubspotUrl} target="_blank" rel="noreferrer" className={`btn-light btn-light-hover ${block ? "w-full" : ""}`}>
-      {t("cta_interested")} <IconArrowRight size={16} />
-    </a>
-  );
-}
 
 // ============= Icones des caracteristiques =============
 // Jeu homogene : viewBox 24, trait 1.6, extremites arrondies, dessin contenu entre 3 et 21
@@ -202,9 +192,8 @@ export function Landing() {
               </video>
             </div>
           </div>
-          {/* Centre sur mobile : la grille a deux colonnes disparait, et tout
-              le reste de la page est centre. A gauche, le bloc detonnait. */}
-          <div className="order-1 md:order-2 space-y-6 fade-up text-center md:text-left" style={{ color: WHITE }}>
+          {/* Aligne a gauche partout : le reste de la page l'est desormais. */}
+          <div className="order-1 md:order-2 space-y-6 fade-up text-left" style={{ color: WHITE }}>
             <div className="mention tracking-[0.2em] uppercase" style={{ color: MUTED_INK }}>
               {tr("LA BÉQUILLE NOUVELLE GÉNÉRATION", "THE NEXT GENERATION CRUTCH", "DIE KRÜCKE DER NEUEN GENERATION")}
             </div>
@@ -277,7 +266,7 @@ export function Landing() {
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="titre-section text-center max-w-3xl mx-auto" style={{ color: INK }}>
+            <h2 className="titre-section max-w-3xl" style={{ color: INK }}>
               {tr("Les béquilles classiques ont leurs limites.", "Classic crutches have their limits.", "Herkömmliche Krücken haben ihre Grenzen.")}
             </h2>
           </Reveal>
@@ -303,30 +292,67 @@ export function Landing() {
         </div>
       </section>
 
-      {/* 3 — FONCTIONNALITÉS (SAND) */}
-      <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-6xl mx-auto">
-          <Reveal>
-            <h2 className="titre-section text-center" style={{ color: INK }}>
-              {tr("legmio a tout repensé.", "legmio rethought everything.", "legmio hat alles neu gedacht.")}
-            </h2>
-          </Reveal>
-          <div className="mt-12">
-            <SpecsStrip />
-          </div>
-          <div className="mt-12 text-center">
-            <Link to={lien("/produit")} className="btn-light btn-light-hover">
-              {tr("Découvrir la béquille", "Discover the crutch", "Die Krücke entdecken")} <IconArrowRight size={16} />
+      {/* 3 — DEUX MODES (WHITE)
+          Direction Hyperice : deux panneaux photo, titre et pilule poses en
+          bas a gauche sur un voile encre. La grille d'icones reste sur la
+          fiche bequille. */}
+      <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 pb-20 md:pb-28">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <Reveal>
+              <h2 className="titre-section" style={{ color: INK }}>
+                {tr("Deux modes, une béquille.", "Two modes, one crutch.", "Zwei Modi, eine Krücke.")}
+              </h2>
+            </Reveal>
+            <Link to={lien("/produit")} className="legende underline underline-offset-4 py-2" style={{ color: INK }}>
+              {tr("Voir la béquille", "See the crutch", "Die Krücke ansehen")}
             </Link>
+          </div>
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              {
+                img: "/mode-bequille.jpg",
+                alt: tr("Nicolas marche sur une terrasse avec deux béquilles legmio, les mains sur les poignées.", "Nicolas walks on a terrace with two legmio crutches, hands on the grips.", "Nicolas geht auf einer Terrasse mit zwei legmio-Krücken, die Hände an den Griffen."),
+                t: tr("Mode classique", "Classic mode", "Klassischer Modus"),
+                p: tr("Les appuis sont répartis sur l'avant et l'arrière du bras.", "The load is spread across the front and the back of the arm.", "Die Last verteilt sich auf die Vorder- und Rückseite des Arms."),
+              },
+              {
+                img: "/mode-mains-libres.jpg",
+                alt: tr("Nicolas se sert un verre à deux mains, les béquilles tenues par les coudes.", "Nicolas pours a drink with both hands, the crutches held by his elbows.", "Nicolas schenkt sich mit beiden Händen ein, die Krücken an den Ellbogen."),
+                t: tr("Mode mains libres", "Hands-free mode", "Freihand-Modus"),
+                p: tr("L'appui passe sur le coude : les deux mains redeviennent disponibles.", "The support shifts to the elbow: both hands become available again.", "Die Stütze wandert zum Ellbogen: Beide Hände werden wieder frei."),
+              },
+            ].map((m) => (
+              <Link
+                key={m.img}
+                to={lien("/produit")}
+                className="group relative block overflow-hidden aspect-[4/5]"
+                style={{ backgroundColor: SAND, borderRadius: 4 }}
+              >
+                <Image src={m.img} alt={m.alt} className="absolute inset-0 w-full h-full object-cover object-[50%_30%] transition-transform duration-500 group-hover:scale-[1.02]" width={900} height={1600} />
+                {/* Voile encre sous le texte : le blanc doit rester lisible
+                    meme pose sur un pantalon clair. */}
+                <div aria-hidden="true" className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(16,38,58,0) 30%, rgba(16,38,58,0.6) 62%, rgba(16,38,58,0.9) 100%)" }} />
+                <div className="absolute left-6 right-6 bottom-6">
+                  <h3 className="titre-appui" style={{ color: WHITE }}>{m.t}</h3>
+                  <p className="mt-2 legende max-w-sm" style={{ color: WHITE }}>{m.p}</p>
+                  <span className="mt-4 inline-flex items-center min-h-11 px-5 rounded-full legende font-medium" style={{ backgroundColor: WHITE, color: INK }}>
+                    {tr("Découvrir", "Discover", "Entdecken")}
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 4 — USE CASES (WHITE) */}
-      <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 4 — USE CASES (WHITE)
+          Pas de marge haute : la section precedente est blanche aussi, et
+          deux marges empilees creusaient un vide. */}
+      <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 pb-20 md:pb-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="titre-section text-center max-w-3xl mx-auto" style={{ color: INK }}>
+            <h2 className="titre-section max-w-3xl" style={{ color: INK }}>
               <span className="hidden md:inline">{tr("À chaque fois que vous en avez besoin.", "Whenever you need it.", "Wann immer Sie sie brauchen.")}</span>
               <span className="md:hidden">{tr(<>À chaque fois<br />que vous en avez besoin.</>, <>Whenever<br />you need it.</>, <>Wann immer<br />Sie sie brauchen.</>)}</span>
             </h2>
@@ -373,7 +399,7 @@ export function Landing() {
       <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="titre-section text-center" style={{ color: INK }}>
+            <h2 className="titre-section" style={{ color: INK }}>
               {tr("Testée et approuvée.", "Tested and approved.", "Getestet und bewährt.")}
             </h2>
           </Reveal>
@@ -409,38 +435,12 @@ export function Landing() {
         <WallOfLove />
       </section>
 
-      {/* 6 — CRÉDIBILITÉ (WHITE) */}
+      {/* 7 — DES MILLIONS DE VUES (WHITE)
+          L'encre est reservee au haut de page et au pied de page. */}
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="titre-section text-center max-w-4xl mx-auto" style={{ color: INK }}>
-              {tr("Une innovation récompensée.", "An award-winning innovation.", "Eine ausgezeichnete Innovation.")}
-            </h2>
-          </Reveal>
-            {/* Ni cadre ni filet : le contenu tenait sur un tiers de sa carte,
-                et un filet aurait ete le seul de son espece sur le site. C'est
-                l'espacement qui groupe, comme partout ailleurs. */}
-          <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-8">
-            {[
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'Or", "Gold Medal", "Goldmedaille"), s: "Concours Lépine 2026" },
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award", "Impact-Preis"), s: "Le Média Positif 2026" },
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la recherche", "Backed by Research", "Unterstützt durch die Forschung"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
-            ].map((s, i) => (
-              <div key={i} className="fade-up flex flex-col items-center text-center gap-2 md:px-4" style={{ transitionDelay: `${i * 60}ms` }}>
-                <div style={{ color: INK }}>{s.icon}</div>
-                <div className="font-display font-bold text-lg leading-tight" style={{ color: INK }}>{s.t}</div>
-                <div className="legende" style={{ color: MUTED }}>{s.s}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 7 — DES MILLIONS DE VUES (INK) */}
-      <section style={{ backgroundColor: INK }} className="grain relative jonction-haut jonction-bas halo-or px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-7xl mx-auto">
-          <Reveal>
-            <h2 className="titre-section text-center" style={{ color: WHITE }}>
+            <h2 className="titre-section" style={{ color: INK }}>
               {tr("Des millions de vues.", "Millions of views.", "Millionen Aufrufe.")}
             </h2>
           </Reveal>
@@ -450,35 +450,36 @@ export function Landing() {
         </div>
       </section>
 
-      {/* 9 — ROADMAP (SAND) */}
-      <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-5xl mx-auto">
+      {/* 9 — ROADMAP (WHITE) */}
+      <section style={{ backgroundColor: WHITE, borderTop: `1px solid ${LINE}` }} className="px-4 sm:px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
           <Reveal>
-            <h2 className="titre-section text-center" style={{ color: INK }}>{tr("Où en sommes-nous ?", "Where are we?", "Wo stehen wir?")}</h2>
+            <h2 className="titre-section" style={{ color: INK }}>{tr("Où en sommes-nous ?", "Where are we?", "Wo stehen wir?")}</h2>
           </Reveal>
-          <Roadmap />
+          <div className="max-w-5xl mx-auto">
+            <Roadmap />
+          </div>
         </div>
       </section>
 
-      {/* 10 — ACTUALITÉ + CTA (WHITE) */}
-      <section id="waitlist" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 className="titre-section" style={{ color: INK }}>
-            {tr(<>Suivez l'actualité<br />de legmio.</>, <>Follow<br />legmio's news.</>, <>Folgen Sie den<br />Neuigkeiten von legmio.</>)}
-          </h2>
-          {/* 44 x 44 : les icones faisaient 28 px, sous la cible tactile minimale. */}
-            <div className="mt-8 flex items-center justify-center gap-2" style={{ color: INK }}>
-            <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="w-11 h-11 flex items-center justify-center opacity-80 hover:opacity-100"><IconInstagram size={28} /></a>
-            <a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" aria-label="TikTok" className="w-11 h-11 flex items-center justify-center opacity-80 hover:opacity-100"><IconTiktok size={28} /></a>
-            <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-11 h-11 flex items-center justify-center opacity-80 hover:opacity-100"><IconLinkedin size={28} /></a>
-          </div>
-          <div className="mt-10"><CTALight /></div>
-          <p className="mt-10 text-base" style={{ color: MUTED }}>
-            {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?", "Gesundheitsfachkraft oder Händler?")}
-            <br className="sm:hidden" />{" "}
-            <a href={lien("/pro")} className="underline" style={{ color: INK }}>{tr("Espace pro", "Pro space", "Fachbereich")} →</a>
-          </p>
-        </div>
+      {/* 10 — GARANTIES (SAND)
+          Direction Hyperice : une rangee sobre plutot qu'une section titree.
+          « Suivez l'actualite » a rejoint le pied de page. */}
+      <section aria-label={tr("Distinctions et garanties", "Awards and credentials", "Auszeichnungen und Nachweise")} style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-12 md:py-14">
+        <ul className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8">
+          {[
+            { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L6 22l6-3 6 3-2.5-8" /></svg>, t: tr("Médaille d'Or", "Gold Medal", "Goldmedaille"), s: "Concours Lépine 2026" },
+            { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>, t: tr("Prix de l'Impact", "Impact Award", "Impact-Preis"), s: "Le Média Positif 2026" },
+            { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 3v6l-4 8a4 4 0 004 4h6a4 4 0 004-4l-4-8V3" /><path d="M9 3h6" /></svg>, t: tr("Soutenu par la recherche", "Backed by Research", "Unterstützt durch die Forschung"), s: "CNRS · Sorbonne · SATT Lutech · BPI" },
+            { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 21h18" /><path d="M5 21V9l5 3V9l5 3V5h4v16" /></svg>, t: tr("Conçue et assemblée en France", "Designed and assembled in France", "In Frankreich entwickelt und montiert"), s: tr("Assemblage final en France", "Final assembly in France", "Endmontage in Frankreich") },
+          ].map((g, i) => (
+            <li key={i} className="flex flex-col items-start gap-2" style={{ color: INK }}>
+              {g.icon}
+              <div className="legende font-semibold leading-snug">{g.t}</div>
+              <div className="mention" style={{ color: MUTED }}>{g.s}</div>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );
@@ -651,8 +652,8 @@ function InstaCards() {
 function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: number | null; decimales: number; titre: string | null } }) {
   const { tr } = useLanguage();
   return (
-    <div className="fade-up rounded-xl overflow-hidden flex flex-col h-full card-soft w-full max-w-[350px] mx-auto">
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: INK_SOFT }}>
+    <div className="fade-up rounded-xl overflow-hidden flex flex-col h-full card-white w-full max-w-[350px] mx-auto">
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/5", backgroundColor: SAND }}>
         <Image src={r.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.03]" loading="lazy" width={400} height={500} onError={(e) => (e.currentTarget.style.display = 'none')} />
       </div>
       <div className="p-6 flex flex-col gap-4 flex-1">
@@ -662,8 +663,8 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
           <div
             /* Meme calibre pour les trois : la carte France TV etait d'un cran
                plus petite, ce qui la faisait lire comme une anomalie. */
-            className="font-display font-bold leading-none text-4xl"
-            style={{ color: CTA }}
+            className="font-display font-semibold leading-none text-4xl"
+            style={{ color: INK }}
           >
             {r.vues !== null ? (
               <Compteur valeur={r.vues} suffixe="M" decimales={r.decimales} />
@@ -671,9 +672,9 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
               r.titre
             )}
           </div>
-          <div className="mt-2 legende" style={{ color: MUTED_INK }}>{r.label}</div>
+          <div className="mt-2 legende" style={{ color: MUTED }}>{r.label}</div>
         </div>
-        <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex legende mt-auto self-start">
+        <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-light inline-flex legende mt-auto self-start">
           {tr("Voir sur Instagram", "View on Instagram", "Auf Instagram ansehen")} <IconArrowRight size={14} />
         </a>
       </div>

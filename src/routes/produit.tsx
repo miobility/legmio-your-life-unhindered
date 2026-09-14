@@ -193,10 +193,10 @@ export function Produit() {
       <section style={{ backgroundColor: INK }} className="grain relative jonction-haut jonction-bas px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="titre-section text-center" style={{ color: WHITE }}>
+            <h2 className="titre-section" style={{ color: WHITE }}>
               {tr("Deux modes d'utilisation.", "Two modes of use.", "Zwei Nutzungsmodi.")}
             </h2>
-            <p className="mt-6 text-base max-w-xl mx-auto text-center" style={{ color: MUTED_INK }}>
+            <p className="mt-6 text-base max-w-xl" style={{ color: MUTED_INK }}>
               {tr(
                 "Vous marchez normalement, et vous libérez les mains lorsque nécessaire.",
                 "You walk normally, and free your hands when needed.",
@@ -256,7 +256,7 @@ export function Produit() {
       <section id="features" style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <h2 className="titre-section text-center" style={{ color: INK }}>{tr("Fonctionnalités", "Features", "Funktionen")}</h2>
+            <h2 className="titre-section" style={{ color: INK }}>{tr("Fonctionnalités", "Features", "Funktionen")}</h2>
           </Reveal>
           <div className="mt-10">
             <ProductFeatureGrid />
@@ -267,7 +267,7 @@ export function Produit() {
       {/* SECTION 4 — TÉMOIGNAGES (SAND) */}
       <section id="reviews" style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
-          <h2 className="titre-section text-center" style={{ color: INK }}>{tr("Témoignages", "Testimonials", "Erfahrungsberichte")}</h2>
+          <h2 className="titre-section" style={{ color: INK }}>{tr("Témoignages", "Testimonials", "Erfahrungsberichte")}</h2>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {reviews.map((r, i) => (
@@ -291,7 +291,7 @@ export function Produit() {
           </div>
           {/* La fiche ne menait qu'a la FAQ. L'histoire de Nicolas est ce qui
               donne du sens aux temoignages : elle se lit juste apres. */}
-          <div className="mt-10 text-center">
+          <div className="mt-10">
             <a href={lien("/blog")} className="inline-block py-2 legende underline" style={{ color: INK }}>
               {tr("Lire l'histoire de legmio", "Read the legmio story", "Die Geschichte von legmio lesen")} <span aria-hidden="true">→</span>
             </a>
@@ -303,7 +303,7 @@ export function Produit() {
       {/* SECTION 5 — FAQ PRODUIT (WHITE) */}
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-6xl mx-auto">
-          <div className="max-w-3xl mx-auto mb-8 text-center">
+          <div className="max-w-3xl mx-auto mb-8">
             <h2 className="titre-section" style={{ color: INK }}>{tr("Questions fréquentes", "Frequently asked questions", "Häufig gestellte Fragen")}</h2>
             <a href={lien("/faq")} className="mt-4 inline-block legende underline" style={{ color: INK }}>{tr("Voir toutes les questions", "See all questions", "Alle Fragen ansehen")}</a>
           </div>
@@ -325,7 +325,7 @@ export function Produit() {
 
       {/* SECTION 6 — CTA FINAL (INK) */}
       <section style={{ backgroundColor: INK }} className="grain relative px-4 sm:px-6 py-20 md:py-28">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto">
           <h2 className="titre-section" style={{ color: WHITE }}>
             {tr(<>Prêt à retrouver<br />vos mains libres ?</>, <>Ready to get<br />your hands back?</>, <>Bereit, Ihre<br />Hände zurückzubekommen?</>)}
           </h2>

@@ -195,9 +195,9 @@ export function Blog() {
   return (
     <div style={{ backgroundColor: WHITE }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesBlog) }} />
-      <section style={{ backgroundColor: INK }} className="grain relative jonction-bas px-4 sm:px-6 py-20 md:py-28 text-center">
-        <h1 className="titre-page" style={{ color: WHITE }}>{tr("L'histoire de legmio", "The legmio story", "Die Geschichte von legmio")}</h1>
-        <p className="sous-titre mt-4" style={{ color: MUTED_INK }}>{tr("Pourquoi cette béquille existe.", "Why this crutch exists.", "Warum es diese Krücke gibt.")}</p>
+      <section style={{ backgroundColor: INK }} className="grain relative jonction-bas px-4 sm:px-6 py-20 md:py-28">
+        <h1 className="titre-page max-w-6xl mx-auto" style={{ color: WHITE }}>{tr("L'histoire de legmio", "The legmio story", "Die Geschichte von legmio")}</h1>
+        <p className="sous-titre mt-4 max-w-6xl mx-auto" style={{ color: MUTED_INK }}>{tr("Pourquoi cette béquille existe.", "Why this crutch exists.", "Warum es diese Krücke gibt.")}</p>
       </section>
 
       <section className="px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: WHITE }}>
