@@ -107,11 +107,12 @@ function ArticleCard({ a }: { a: Article }) {
   return (
     <article className="card-white overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2">
-        {/* Photo en portrait. Sur ordinateur elle garde ses proportions et
-            reste a l'ecran pendant la lecture : etiree sur toute la hauteur
-            de l'article ouvert, elle aurait ete agrandie et floue. Sur
-            telephone, un carre cadre du visage aux genoux. */}
-        <div className="aspect-square md:aspect-[9/16] md:sticky md:top-32 md:self-start overflow-hidden" style={{ backgroundColor: SAND }}>
+        {/* Photo en portrait. Sur ordinateur elle garde ses proportions, calee
+            en haut de la carte : etiree sur toute la hauteur de l'article
+            ouvert, elle aurait ete agrandie et floue. Pas de position collante,
+            qui la faisait descendre sous le haut de la carte. Sur telephone,
+            un carre cadre du visage aux genoux. */}
+        <div className="aspect-square md:aspect-[9/16] md:self-start overflow-hidden" style={{ backgroundColor: SAND }}>
           <Image src={a.cover} alt={tr(a.coverAlt[0], a.coverAlt[1], a.coverAlt[2])} className="w-full h-full object-cover object-[50%_30%]" loading="eager" fetchPriority="high" width={900} height={1600} onError={(e) => (e.currentTarget.src = "/usecase-quotidien.jpg")} />
         </div>
         <div className="p-8">
