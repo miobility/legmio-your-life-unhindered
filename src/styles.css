@@ -268,7 +268,7 @@
   html { scroll-behavior: auto; }
   .marquee-left, .marquee-right { animation: none; }
   .reveal, .fade-up { opacity: 1; transform: none; transition: none; }
-  .bandeau, .entete, .faq-themes { transition: none; }
+  .bandeau, .entete { transition: none; }
   .etape-active::after { animation: none; }
 }
 
@@ -356,14 +356,8 @@
   .repli { transition: none; }
 }
 
-/* Sommaire de la FAQ : colle sous l'en-tete, et remonte avec lui quand
-   il se range sur telephone. */
-.faq-themes { top: var(--haut-entete); transition: top 0.3s ease; }
-.theme-faq { scroll-margin-top: calc(var(--haut-entete) + 76px); }
-@media (max-width: 767px) {
-  .faq-themes > div { scrollbar-width: none; }
-  .faq-themes > div::-webkit-scrollbar { display: none; }
-}
+/* Ancres des themes de la FAQ, sous l'en-tete. */
+.theme-faq { scroll-margin-top: calc(var(--haut-entete) + 16px); }
 
 /* Lien d'evitement : hors ecran jusqu'a ce que le clavier l'atteigne. */
 .evitement {
