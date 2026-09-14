@@ -55,6 +55,7 @@ And f*ck cancer.`;
 type Article = {
   id: string;
   cover: string;
+  coverAlt: [string, string, string];
   tag: string;
   tagEn: string;
   tagDe: string;
@@ -71,7 +72,14 @@ type Article = {
 const articles: Article[] = [
   {
     id: "genese",
-    cover: "/usecase-quotidien.jpg",
+    // Photo de la fiche bequille : 900 x 1600, nette. L'ancienne etait une
+    // capture de video, floue une fois agrandie.
+    cover: "/mode-bequille.jpg",
+    coverAlt: [
+      "Nicolas marche sur une terrasse avec deux béquilles legmio, les mains sur les poignées.",
+      "Nicolas walks on a terrace with two legmio crutches, hands on the grips.",
+      "Nicolas geht auf einer Terrasse mit zwei legmio-Krücken, die Hände an den Griffen.",
+    ],
     tag: "Genèse",
     tagEn: "Origin",
     tagDe: "Geschichte",
@@ -99,8 +107,13 @@ function ArticleCard({ a }: { a: Article }) {
   return (
     <article className="card-white overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="aspect-video md:aspect-auto md:h-full overflow-hidden" style={{ backgroundColor: SAND }}>
-          <Image src={a.cover} alt={title} className="w-full h-full object-cover" loading="lazy" width={600} height={400} onError={(e) => (e.currentTarget.src = "/usecase-quotidien.jpg")} />
+        {/* Photo en portrait. Sur ordinateur elle garde ses proportions, calee
+            en haut de la carte : etiree sur toute la hauteur de l'article
+            ouvert, elle aurait ete agrandie et floue. Pas de position collante,
+            qui la faisait descendre sous le haut de la carte. Sur telephone,
+            un carre cadre du visage aux genoux. */}
+        <div className="aspect-square md:aspect-[9/16] md:self-start overflow-hidden" style={{ backgroundColor: SAND }}>
+          <Image src={a.cover} alt={tr(a.coverAlt[0], a.coverAlt[1], a.coverAlt[2])} className="w-full h-full object-cover object-[50%_30%]" loading="eager" fetchPriority="high" width={900} height={1600} onError={(e) => (e.currentTarget.src = "/usecase-quotidien.jpg")} />
         </div>
         <div className="p-8">
           <span className="inline-block px-4 py-2 rounded-full mention font-bold" style={{ backgroundColor: CTA, color: INK }}>{tag}</span>
