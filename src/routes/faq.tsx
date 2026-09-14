@@ -1,6 +1,6 @@
 import { metaDe } from "@/lib/meta";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { IconChevron } from "@/components/Icons";
 import { useLanguage } from "@/lib/i18n";
 import { INK, LINE, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
@@ -145,29 +145,9 @@ export function Faq() {
   const { lang, tr, hubspotUrl, lien } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
 
-  // Sommaire : 45 questions dans 13 themes, sans rien pour s'y reperer.
-  // Une rangee de themes reste en haut de l'ecran et suit la lecture.
-  const [actif, setActif] = useState(ancre(themes[0].title[0]));
-  const barre = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      (entrees) => entrees.forEach((e) => e.isIntersecting && setActif(e.target.id)),
-      { rootMargin: "-35% 0px -60% 0px" }
-    );
-    themes.forEach((th) => {
-      const el = document.getElementById(ancre(th.title[0]));
-      if (el) io.observe(el);
-    });
-    return () => io.disconnect();
-  }, []);
-  useEffect(() => {
-    // Le theme en cours reste visible dans la rangee, centre si possible.
-    const b = barre.current;
-    const puce = b?.querySelector<HTMLElement>(`[data-theme="${actif}"]`);
-    if (!b || !puce) return;
-    const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    b.scrollTo({ left: puce.offsetLeft - (b.clientWidth - puce.offsetWidth) / 2, behavior: doux ? "smooth" : "auto" });
-  }, [actif]);
+  // Sommaire : 45 questions dans 13 themes. Tous les themes sont visibles
+  // d'un coup sous le titre, sur plusieurs lignes : pas de rangee collante
+  // qui defile de gauche a droite. Le bouton « remonter » y ramene.
   const allerAuTheme = (e: React.MouseEvent, id: string) => {
     const cible = document.getElementById(id);
     if (!cible) return;
@@ -177,11 +157,9 @@ export function Faq() {
     const y = cible.getBoundingClientRect().top + window.scrollY;
     const mobile = window.matchMedia("(max-width: 767px)").matches;
     const entete = mobile && y > window.scrollY ? 0 : 105;
-    const hautBarre = barre.current?.parentElement?.getBoundingClientRect().height ?? 0;
     const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({ top: y - entete - hautBarre - 8, behavior: doux ? "smooth" : "auto" });
+    window.scrollTo({ top: y - entete - 16, behavior: doux ? "smooth" : "auto" });
     history.replaceState(null, "", `#${id}`);
-    setActif(id);
   };
   const idx = lang === "fr" ? 0 : lang === "de" ? 2 : 1;
                 // Donnees structurees FAQPage : possibles seulement parce que les reponses
@@ -215,28 +193,26 @@ export function Faq() {
       </section>
       <nav
         aria-label={tr("Thèmes de la FAQ", "FAQ topics", "FAQ-Themen")}
-        className="faq-themes sticky z-30 border-b"
-        style={{ backgroundColor: WHITE, borderColor: LINE }}
+        className="px-4 sm:px-6 pt-12 pb-4"
+        style={{ backgroundColor: WHITE }}
       >
-        <div ref={barre} className="relative max-w-5xl mx-auto px-4 sm:px-6 py-3 flex gap-2 overflow-x-auto">
+        <ul className="max-w-4xl mx-auto flex flex-wrap justify-center gap-2">
           {themes.map((th) => {
             const id = ancre(th.title[0]);
-            const on = actif === id;
             return (
-              <a
-                key={id}
-                href={`#${id}`}
-                data-theme={id}
-                onClick={(e) => allerAuTheme(e, id)}
-                aria-current={on ? "true" : undefined}
-                className="shrink-0 inline-flex items-center min-h-11 px-4 rounded-full mention font-semibold whitespace-nowrap border"
-                style={{ backgroundColor: on ? INK : WHITE, color: on ? WHITE : INK, borderColor: on ? INK : LINE }}
-              >
-                {th.title[idx]}
-              </a>
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  onClick={(e) => allerAuTheme(e, id)}
+                  className="inline-flex items-center min-h-11 px-4 rounded-full mention font-semibold border hover:opacity-80 transition"
+                  style={{ backgroundColor: WHITE, color: INK, borderColor: LINE }}
+                >
+                  {th.title[idx]}
+                </a>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </nav>
       {themes.map((th, ti) => {
         const isCream = ti % 2 === 1;
