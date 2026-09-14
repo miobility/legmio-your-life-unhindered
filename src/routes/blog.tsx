@@ -87,7 +87,7 @@ const articles: Article[] = [
 ];
 
 function ArticleCard({ a }: { a: Article }) {
-  const { tr, lang } = useLanguage();
+  const { t, tr, lang, lien, hubspotUrl } = useLanguage();
   // Un accordeon n'a d'interet que pour une liste. Avec un seul article,
   // il ajoutait un clic devant le contenu le plus persuasif du site.
   // Des qu'il y en aura deux, ils se replieront d'eux-memes.
@@ -124,6 +124,16 @@ function ArticleCard({ a }: { a: Article }) {
                 <div className="pt-4 border-t" style={{ borderColor: LINE }}>
                   <div className="font-bold" style={{ color: INK }}>Nicolas Perrin-Gilbert</div>
                   <div style={{ color: MUTED }}>{tr("Co-fondateur & CEO · Chercheur CNRS, ISIR Sorbonne Université", "Co-founder & CEO · CNRS researcher, ISIR Sorbonne Université", "Mitgründer & CEO · CNRS-Forscher, ISIR Sorbonne Université")}</div>
+                  {/* L'article se terminait sans suite : on referme l'histoire
+                      sur la bequille, et sur la liste d'attente. */}
+                  <div className="flex flex-wrap gap-x-6 mt-4">
+                    <a href={lien("/produit")} className="inline-block py-2 underline font-bold" style={{ color: INK }}>
+                      {tr("Découvrir la béquille", "Discover the crutch", "Die Krücke entdecken")} <span aria-hidden="true">→</span>
+                    </a>
+                    <a href={hubspotUrl} target="_blank" rel="noreferrer" className="inline-block py-2 underline font-bold" style={{ color: INK }}>
+                      {t("banner_a")} <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
                 </div>
               )}
             </div>

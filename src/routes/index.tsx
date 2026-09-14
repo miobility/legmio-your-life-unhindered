@@ -11,7 +11,7 @@ import { Carousel } from "@/components/Carousel";
 import { Marquee } from "@/components/Marquee";
 import { Compteur } from "@/components/Compteur";
 import { MARGE_TEMPS_FORT, SEUIL } from "@/lib/apparition";
-import { AWARD, CTA, INK, INK_SOFT, LINE, LINE_INK, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
+import { AWARD, CTA, INK, INK_SOFT, LINE, MUTED, MUTED_INK, SAND, WHITE } from "@/lib/couleurs";
 import { Image } from "@/components/Image";
 
 export const Route = createFileRoute("/")({
@@ -187,6 +187,11 @@ export function Landing() {
                 width={1080}
                 height={1920}
               >
+                {/* 15 Mo auparavant, lus d'office sur telephone. Reencodee en
+                    720p sans piste son (la video est muette, sans bouton son) :
+                    HEVC 5 Mo pour les navigateurs qui le lisent, H.264 6,6 Mo
+                    pour les autres. Le navigateur prend la premiere qu'il sait lire. */}
+                <source src="/hero-video-hevc.mp4" type={'video/mp4; codecs="hvc1"'} />
                 <source src="/hero-video.mp4" type="video/mp4" />
                 {/* Aucune piste ne portait `default` : le navigateur choisissait,
                     et un visiteur allemand pouvait ne rien voir du tout. */}
@@ -229,6 +234,44 @@ export function Landing() {
         </div>
       </section>
 
+
+      {/* 1 bis — PRESSE (WHITE)
+          Les logos presse arrivaient en 7e section, la ou beaucoup de
+          visiteurs mobiles ont deja quitte la page. C'est le signal de
+          confiance le plus rapide a lire : il passe juste sous la video. */}
+      <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 pt-10 pb-6 md:pt-14 md:pb-8">
+        <div className="max-w-7xl mx-auto">
+          <p className="mention text-center uppercase tracking-[0.14em] font-semibold" style={{ color: MUTED }}>
+            {tr("Vu dans", "As seen in", "Bekannt aus")}
+          </p>
+          <div className="mt-6">
+            <Marquee
+              label={tr("Médias qui parlent de legmio", "Media covering legmio", "Medien über legmio")}
+              seconds={30}
+              tone="dark"
+              rows={[[
+                // `h` : hauteur propre a chaque logo. A hauteur egale, un logo
+                // empile (CNRS Innovation) parait deux fois plus petit qu'un
+                // logo en bandeau (Hacavie).
+                { src: "/logoparisien.png", alt: "Le Parisien", h: 46 },
+                { src: "/logoTF1.png", alt: "TF1", h: 52 },
+                { src: "/logofranceTV2.jpg", alt: "France Télévisions", h: 52 },
+                { src: "/mediapositif.png", alt: "Le Média Positif", h: 52 },
+                { src: "/logohospimedia.png", alt: "Hospimedia", h: 40 },
+                { src: "/logoautonomia.png", alt: "Autonomia", h: 46 },
+                { src: "/logoAPF.jpg", alt: "APF France handicap", h: 62 },
+                { src: "/logofaireface.jpg", alt: "Faire Face", h: 46 },
+                { src: "/logohacavie.png", alt: "Hacavie", h: 44 },
+                { src: "/logocnrsinnovation.png", alt: "CNRS Innovation", h: 70 },
+              ].map(({ src, alt, h }) => (
+                <div key={alt} className="rounded-xl px-6 py-4 flex items-center justify-center" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}`, minWidth: 170, height: 88 }}>
+                  <Image src={src} alt={alt} className="object-contain" style={{ maxHeight: h, maxWidth: 150 }} loading="lazy" width={150} height={h} />
+                </div>
+              ))]}
+            />
+          </div>
+        </div>
+      </section>
 
       {/* 2 — PROBLÈME (WHITE) */}
       <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
@@ -324,8 +367,10 @@ export function Landing() {
 
 
 
-      {/* 5 — TÉMOIGNAGES (SAND) */}
-      <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 5 — TÉMOIGNAGES + MUR D'AVIS (SAND)
+          Le mur d'avis avait sa propre section : deux blocs de preuve
+          sociale a la suite. Il complete desormais les temoignages. */}
+      <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="titre-section text-center" style={{ color: INK }}>
@@ -361,6 +406,7 @@ export function Landing() {
             </Carousel>
           </div>
         </div>
+        <WallOfLove />
       </section>
 
       {/* 6 — CRÉDIBILITÉ (WHITE) */}
@@ -399,46 +445,9 @@ export function Landing() {
             </h2>
           </Reveal>
 
-          <div className="mt-12">
-            <Marquee
-              label={tr("Médias qui parlent de legmio", "Media covering legmio", "Medien über legmio")}
-              seconds={30}
-              tone="light"
-              rows={[[
-                // `h` : hauteur propre a chaque logo. A hauteur egale, un logo
-                // empile (CNRS Innovation) parait deux fois plus petit qu'un
-                // logo en bandeau (Hacavie).
-                { src: "/logoparisien.png", alt: "Le Parisien", h: 46 },
-                { src: "/logoTF1.png", alt: "TF1", h: 52 },
-                { src: "/logofranceTV2.jpg", alt: "France Télévisions", h: 52 },
-                { src: "/mediapositif.png", alt: "Le Média Positif", h: 52 },
-                { src: "/logohospimedia.png", alt: "Hospimedia", h: 40 },
-                { src: "/logoautonomia.png", alt: "Autonomia", h: 46 },
-                { src: "/logoAPF.jpg", alt: "APF France handicap", h: 62 },
-                { src: "/logofaireface.jpg", alt: "Faire Face", h: 46 },
-                { src: "/logohacavie.png", alt: "Hacavie", h: 44 },
-                { src: "/logocnrsinnovation.png", alt: "CNRS Innovation", h: 70 },
-              ].map(({ src, alt, h }) => (
-                <div key={alt} className="rounded-xl px-6 py-4 flex items-center justify-center" style={{ backgroundColor: WHITE, border: `1px solid ${LINE_INK}`, minWidth: 170, height: 88 }}>
-                  <Image src={src} alt={alt} className="object-contain" style={{ maxHeight: h, maxWidth: 150 }} loading="lazy" width={150} height={h} />
-                </div>
-              ))]}
-            />
-          </div>
-
           <InstaCards />
 
         </div>
-      </section>
-
-      {/* 8 — WALL OF LOVE (WHITE) */}
-      <section style={{ backgroundColor: WHITE }} className="py-20 md:py-28 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <h2 className="titre-section text-center" style={{ color: INK }}>
-            {tr("Bientôt disponible.", "Coming soon.", "Bald verfügbar.")}
-          </h2>
-        </div>
-        <WallOfLove />
       </section>
 
       {/* 9 — ROADMAP (SAND) */}
@@ -508,7 +517,7 @@ function WallOfLove() {
   const row1 = tr(row1Fr, row1En);
   const row2 = tr(row2Fr, row2En);
   const Card = ({ q }: { q: string }) => (
-    <div className="rounded-xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: SAND, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 1px 2px rgba(16,38,58,0.06)" }}>
+    <div className="rounded-xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 1px 2px rgba(16,38,58,0.06)" }}>
       <p className="italic legende">"{q}"</p>
     </div>
   );

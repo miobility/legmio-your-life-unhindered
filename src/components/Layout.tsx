@@ -14,21 +14,20 @@ const SOCIAL = {
 
 export function StickyBanner() {
   const { t, hubspotUrl } = useLanguage();
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setIdx((v) => (v + 1) % 2), 3000);
-    return () => clearInterval(id);
-  }, []);
-  const msg = idx === 0 ? t("banner_a") : t("banner_b");
+  // Un seul texte. Il alternait toutes les 3 secondes : l'oeil y revenait
+  // sans cesse, et un lecteur d'ecran le voyait changer sous lui. Sur
+  // telephone la date ne tient pas a cote de l'appel, seul l'appel reste.
   return (
     <a
       href={hubspotUrl}
       target="_blank"
       rel="noreferrer"
-      className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center mention font-medium px-4 hover:opacity-90 overflow-hidden"
+      className="bandeau fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center mention font-medium px-4 hover:opacity-90 overflow-hidden"
       style={{ backgroundColor: CTA, color: INK }}
     >
-      <span key={idx} className="truncate fade-up">{msg}</span>
+      <span className="truncate">
+        <span className="hidden sm:inline">{t("banner_b")} · </span>{t("banner_a")} <span aria-hidden="true">→</span>
+      </span>
     </a>
   );
 }
@@ -105,19 +104,52 @@ function useRetourHaut() {
 }
 
 export function Header() {
-  const { t, hubspotUrl, lien } = useLanguage();
+  const { t, tr, hubspotUrl, lien } = useLanguage();
   const retourHaut = useRetourHaut();
   const [open, setOpen] = useState(false);
   // En haut de page, l'en-tete se fond dans le hero navy : ni bordure ni
   // ombre. Des qu'on defile, il se materialise sur fond translucide et
   // laisse voir le contenu passer derriere, adouci.
   const [defile, setDefile] = useState(false);
+  // Au-dela de deux ecrans, un bouton propose de remonter.
+  const [loin, setLoin] = useState(false);
+  const ouvert = useRef(false);
+  ouvert.current = open;
   useEffect(() => {
-    const surDefilement = () => setDefile(window.scrollY > 24);
+    const racine = document.documentElement;
+    let dernier = window.scrollY;
+    const surDefilement = () => {
+      const y = window.scrollY;
+      setDefile(y > 24);
+      setLoin(y > window.innerHeight * 2);
+      // Sur telephone, bandeau et en-tete se rangent quand on descend et
+      // reviennent des qu'on remonte (la regle CSS ne s'applique qu'en
+      // dessous de 768 px). Jamais en haut de page, ni menu ouvert.
+      if (y < 160 || ouvert.current) {
+        racine.classList.remove("entete-masquee");
+        dernier = y;
+        return;
+      }
+      if (Math.abs(y - dernier) < 8) return;
+      racine.classList.toggle("entete-masquee", y > dernier);
+      dernier = y;
+    };
+    // Au clavier, un element de l'en-tete qui recoit le focus le fait revenir.
+    const surFocus = (e: FocusEvent) => {
+      if ((e.target as Element | null)?.closest?.(".entete, .bandeau")) racine.classList.remove("entete-masquee");
+    };
     surDefilement();
     window.addEventListener("scroll", surDefilement, { passive: true });
-    return () => window.removeEventListener("scroll", surDefilement);
+    document.addEventListener("focusin", surFocus);
+    return () => {
+      window.removeEventListener("scroll", surDefilement);
+      document.removeEventListener("focusin", surFocus);
+      racine.classList.remove("entete-masquee");
+    };
   }, []);
+  useEffect(() => {
+    if (open) document.documentElement.classList.remove("entete-masquee");
+  }, [open]);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   // Comparaison sur segment complet : "/produit" commencait par "/pro",
   // ce qui allumait l'onglet Espace pro en meme temps que Bequille.
@@ -131,6 +163,7 @@ export function Header() {
   const linkClass = (active: boolean) =>
     `hover:opacity-80 transition ${active ? "font-bold" : ""}`;
   return (
+    <>
     <header
       className={`entete fixed left-0 right-0 z-40 ${defile || open ? "entete-pose" : ""}`}
       style={{ top: 40 }}>
@@ -155,10 +188,10 @@ export function Header() {
       </div>
       {open && (
         <div id="menu-mobile" className="md:hidden border-t px-4 py-4 flex flex-col" style={{ backgroundColor: INK_SOFT, borderColor: LINE_INK }}>
-          <Link to={lien("/produit")} onClick={() => setOpen(false)} className="text-[15px] py-2" style={linkStyle(isProduct)}>{t("nav_product")}</Link>
-          <Link to={lien("/faq")} onClick={() => setOpen(false)} className="text-[15px] py-2" style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
-          <Link to={lien("/blog")} onClick={() => setOpen(false)} className="text-[15px] py-2" style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
-          <Link to={lien("/pro")} onClick={() => setOpen(false)} className="text-[15px] py-2" style={linkStyle(isPro)}>{t("nav_pro")}</Link>
+          <Link to={lien("/produit")} onClick={() => setOpen(false)} className="text-[15px] py-3" style={linkStyle(isProduct)}>{t("nav_product")}</Link>
+          <Link to={lien("/faq")} onClick={() => setOpen(false)} className="text-[15px] py-3" style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
+          <Link to={lien("/blog")} onClick={() => setOpen(false)} className="text-[15px] py-3" style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
+          <Link to={lien("/pro")} onClick={() => setOpen(false)} className="text-[15px] py-3" style={linkStyle(isPro)}>{t("nav_pro")}</Link>
           <a href={hubspotUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover legende px-6 py-2 mt-4 self-start inline-flex items-center gap-2">
             {t("cta_interested")} <span aria-hidden="true">→</span>
           </a>
@@ -166,6 +199,23 @@ export function Header() {
         </div>
       )}
     </header>
+    {/* Hors de <header> : l'en-tete se range en glissant, et un element fixe
+        place dedans glisserait avec lui. */}
+    {loin && (
+      <button
+        type="button"
+        onClick={() => {
+          const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          window.scrollTo({ top: 0, behavior: doux ? "smooth" : "auto" });
+        }}
+        aria-label={tr("Remonter en haut de page", "Back to top", "Nach oben")}
+        className="fixed bottom-4 right-4 z-40 w-11 h-11 rounded-full flex items-center justify-center hover:opacity-90"
+        style={{ backgroundColor: INK, color: WHITE, border: `1px solid ${LINE_INK}` }}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6" /></svg>
+      </button>
+    )}
+    </>
   );
 }
 

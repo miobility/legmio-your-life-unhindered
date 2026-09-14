@@ -18,7 +18,6 @@ const SITE_URL = "https://legmio.com";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LanguageProvider, langDeChemin, type Lang } from "@/lib/i18n";
 import { INK, MUTED_INK, WHITE } from "@/lib/couleurs";
-import { MARGE_CARTES, SEUIL } from "@/lib/apparition";
 import { Header, StickyBanner, Footer } from "@/components/Layout";
 
 function textesErreur(pathname: string) {
@@ -96,9 +95,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       // PNG 48px : format que le robot a favicons de Google privilegie.
       { rel: "icon", href: "/icon-48.png", type: "image/png", sizes: "48x48" },
       { rel: "apple-touch-icon", href: "/icon-180.png", sizes: "180x180" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" },
+      // Polices servies par le site (voir styles.css). On precharge le jeu
+      // latin, le seul dont une page francaise, anglaise ou allemande a
+      // besoin a l'ouverture.
+      { rel: "preload", href: "/fonts/inter-latin.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+      { rel: "preload", href: "/fonts/syne-latin.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
     ],
   }),
   shellComponent: RootShell,
@@ -182,25 +183,9 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("animate-in");
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: SEUIL, rootMargin: MARGE_CARTES }
-    );
-    const scan = () => document.querySelectorAll(".fade-up:not(.animate-in)").forEach((el) => io.observe(el));
-    scan();
-    const mo = new MutationObserver(scan);
-    mo.observe(document.body, { childList: true, subtree: true });
-    return () => { io.disconnect(); mo.disconnect(); };
-  }, []);
+  // Plus d'observateur global : les cartes .fade-up ne sont plus masquees en
+  // attendant d'apparaitre (voir styles.css). Il surveillait aussi chaque
+  // modification du document, pour rien.
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>

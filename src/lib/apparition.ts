@@ -11,8 +11,9 @@
  * dans l'ecran avant de declencher.
  */
 
-/** Cartes : elles doivent apparaitre juste avant d'etre lues. */
-export const MARGE_CARTES = "0px 0px -12% 0px";
+/** Titres : l'entree demarre un peu avant que le titre arrive a l'ecran,
+ *  pour qu'il soit deja en place quand on le lit. */
+export const MARGE_CARTES = "0px 0px 10% 0px";
 
 /** Chiffres et frises : on veut les voir bouger, donc plus haut dans l'ecran. */
 export const MARGE_TEMPS_FORT = "0px 0px -30% 0px";
