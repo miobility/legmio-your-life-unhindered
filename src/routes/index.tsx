@@ -135,7 +135,7 @@ export function ProductFeatureGrid() {
   const items = [
     ...base,
     { icon: <IconRest />, kFr: "Position de repos", kEn: "Rest position", kDe: "Ruheposition", sFr: "Vous pouvez vous appuyer sur legmio pour récupérer", sEn: "You can lean on legmio to rest", sDe: "Sie können sich zum Ausruhen auf legmio stützen" },
-    { icon: <IconWall />, kFr: "Tient seule", kEn: "Stands alone", kDe: "Steht allein", sFr: "legmio tient debout contre un mur sans tomber", sEn: "legmio stands against a wall without falling", sDe: "legmio steht gegen eine Wand ohne umzufallen" },
+    { icon: <IconWall />, kFr: "Ne tombe pas", kEn: "Won't fall", kDe: "Fällt nicht herunter", sFr: "Reste au bras quand vous lâchez la poignée, et tient debout contre un mur", sEn: "Stays on your arm when you let go of the grip, and stands against a wall", sDe: "Bleibt am Arm, wenn Sie den Griff loslassen, und steht allein an der Wand" },
   ];
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
