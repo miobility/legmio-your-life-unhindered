@@ -17,7 +17,7 @@ export function ProPage() {
   return (
     <div style={{ backgroundColor: SAND }}>
       <section className="grain relative jonction-bas px-4 sm:px-6 py-20 md:py-28" style={{ backgroundColor: INK }}>
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto">
           <h1 className="titre-page leading-tight" style={{ color: WHITE }}>
             {tr(
               "Vous êtes professionnel de santé ou distributeur\u00a0?",
@@ -40,7 +40,7 @@ export function ProPage() {
           <div className="rounded-xl overflow-hidden" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}` }}>
             <MeetingsEmbed url={MEETING_URL} />
           </div>
-          <p className="text-center mt-6 legende" style={{ color: MUTED }}>
+          <p className="mt-6 legende" style={{ color: MUTED }}>
             {tr("Une question ?", "Any question?", "Eine Frage?")} <a href="mailto:contact@legmio.com" style={{ color: INK }} className="underline">contact@legmio.com</a>
           </p>
         </div>
