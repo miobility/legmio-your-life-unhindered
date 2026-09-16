@@ -393,10 +393,9 @@ export function Landing() {
 
 
 
-      {/* 5 — TÉMOIGNAGES + MUR D'AVIS (SAND)
-          Le mur d'avis avait sa propre section : deux blocs de preuve
-          sociale a la suite. Il complete desormais les temoignages. */}
-      <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28 overflow-hidden">
+      {/* 5 — TÉMOIGNAGES (SAND)
+          Seulement les personnes qui ont utilise legmio. */}
+      <section style={{ backgroundColor: SAND }} className="px-4 sm:px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="titre-section" style={{ color: INK }}>
@@ -432,22 +431,24 @@ export function Landing() {
             </Carousel>
           </div>
         </div>
-        <WallOfLove />
       </section>
 
-      {/* 7 — DES MILLIONS DE VUES (WHITE)
-          L'encre est reservee au haut de page et au pied de page. */}
-      <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28">
+      {/* 7 — ILS L'ATTENDENT DEJA (WHITE)
+          Les videos vues par des millions de personnes, puis les messages de
+          celles qui attendent legmio. Les temoignages d'utilisateurs restent
+          plus haut, a part. */}
+      <section style={{ backgroundColor: WHITE }} className="px-4 sm:px-6 py-20 md:py-28 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="titre-section" style={{ color: INK }}>
-              {tr("Des millions de vues.", "Millions of views.", "Millionen Aufrufe.")}
+              {tr("Ils l'attendent déjà.", "They're already waiting for it.", "Sie warten schon darauf.")}
             </h2>
           </Reveal>
 
           <InstaCards />
 
         </div>
+        <WallOfLove />
       </section>
 
       {/* 9 — ROADMAP (WHITE) */}
@@ -518,7 +519,7 @@ function WallOfLove() {
   const row1 = tr(row1Fr, row1En);
   const row2 = tr(row2Fr, row2En);
   const Card = ({ q }: { q: string }) => (
-    <div className="rounded-xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: WHITE, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 1px 2px rgba(16,38,58,0.06)" }}>
+    <div className="rounded-xl px-6 py-4 shrink-0 max-w-xs" style={{ backgroundColor: SAND, border: `1px solid ${LINE}`, color: INK, boxShadow: "0 1px 2px rgba(16,38,58,0.06)" }}>
       <p className="italic legende">"{q}"</p>
     </div>
   );
