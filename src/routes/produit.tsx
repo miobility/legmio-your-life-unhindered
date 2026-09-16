@@ -194,7 +194,7 @@ export function Produit() {
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <h2 className="titre-section text-center" style={{ color: WHITE }}>
-              {tr("Deux modes d'utilisation.", "Two modes of use.", "Zwei Nutzungsmodi.")}
+              {tr("Deux modes d'utilisation", "Two modes of use", "Zwei Nutzungsmodi")}
             </h2>
             <p className="mt-6 text-base max-w-xl mx-auto text-center" style={{ color: MUTED_INK }}>
               {tr(
