@@ -638,9 +638,9 @@ function InstaCards() {
     // Pas de chiffre ici : c'est la chaine qui fait la preuve, l'emission tient
     // la place de la legende. Meme structure que les deux autres cartes.
     { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.jpg", vues: null, decimales: 0, titre: "France TV", label: "Le Mag de la Santé" },
-    // Reportage publie en septembre 2026. Lien sortant vers YouTube : pas de
-    // lecteur integre, qui deposerait des cookies et alourdirait la page.
-    { url: "https://youtube.com/shorts/znWJQQKU8_U", img: "/mediapositif-short.jpg", vues: null, decimales: 0, titre: "Le Média Positif", label: tr("Septembre 2026", "September 2026", "September 2026"), bouton: tr("Voir sur YouTube", "Watch on YouTube", "Auf YouTube ansehen") },
+    // Reportage publie en septembre 2026. Le reel plutot que le Short YouTube :
+    // meme video, mais la vignette porte les compteurs, comme les trois autres.
+    { url: "https://www.instagram.com/reel/Ddemr8xSXi1/", img: "/mediapositif-reel.jpg", vues: null, decimales: 0, titre: "Le Média Positif", label: tr("Septembre 2026", "September 2026", "September 2026") },
   ];
   // Meme mecanique que les autres carrousels de contenu du site.
   return (
