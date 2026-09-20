@@ -638,6 +638,9 @@ function InstaCards() {
     // Pas de chiffre ici : c'est la chaine qui fait la preuve, l'emission tient
     // la place de la legende. Meme structure que les deux autres cartes.
     { url: "https://www.instagram.com/reel/DYhaBkRov_C/", img: "/insta2.jpg", vues: null, decimales: 0, titre: "France TV", label: "Le Mag de la Santé" },
+    // Reportage publie en septembre 2026. Le reel plutot que le Short YouTube :
+    // meme video, mais la vignette porte les compteurs, comme les trois autres.
+    { url: "https://www.instagram.com/reel/Ddemr8xSXi1/", img: "/mediapositif-reel.jpg", vues: null, decimales: 0, titre: "Le Média Positif", label: tr("Septembre 2026", "September 2026", "September 2026") },
   ];
   // Meme mecanique que les autres carrousels de contenu du site.
   return (
@@ -651,7 +654,7 @@ function InstaCards() {
   );
 }
 
-function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: number | null; decimales: number; titre: string | null } }) {
+function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: number | null; decimales: number; titre: string | null; bouton?: string } }) {
   const { tr } = useLanguage();
   return (
     <div className="fade-up rounded-xl overflow-hidden flex flex-col h-full card-soft w-full max-w-[350px] mx-auto">
@@ -677,7 +680,7 @@ function InstaCard({ r }: { r: { url: string; img: string; label: string; vues: 
           <div className="mt-2 legende" style={{ color: MUTED_INK }}>{r.label}</div>
         </div>
         <a href={r.url} target="_blank" rel="noreferrer" className="btn-outline-dark inline-flex legende mt-auto self-start">
-          {tr("Voir sur Instagram", "View on Instagram", "Auf Instagram ansehen")} <IconArrowRight size={14} />
+          {r.bouton ?? tr("Voir sur Instagram", "View on Instagram", "Auf Instagram ansehen")} <IconArrowRight size={14} />
         </a>
       </div>
     </div>
