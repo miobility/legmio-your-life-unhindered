@@ -373,7 +373,7 @@ export function Landing() {
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <h2 className="titre-section text-center" style={{ color: INK }}>
-              {tr("Testée et approuvée.", "Tested and approved.", "Getestet und bewährt.")}
+              {tr("Ce qu'ils en disent", "What they say about it", "Was sie darüber sagen")}
             </h2>
           </Reveal>
           <div className="mt-16">
