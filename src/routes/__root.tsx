@@ -101,6 +101,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preload", href: "/fonts/inter-latin.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
       { rel: "preload", href: "/fonts/syne-latin.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
     ],
+    // Mesure d'audience Vercel, servie par legmio.com : pas de cookie, pas
+    // d'identifiant individuel, donc pas de banniere de consentement. C'est
+    // ce que la politique de confidentialite annonce deja. Le script n'existe
+    // que si l'option est activee sur le projet Vercel ; sinon il repond 404,
+    // sans consequence pour la page.
+    scripts: [{ src: "/_vercel/insights/script.js", defer: true }],
   }),
   shellComponent: RootShell,
   component: RootComponent,

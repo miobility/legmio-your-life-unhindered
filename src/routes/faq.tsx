@@ -142,7 +142,7 @@ function ancre(titreFr: string) {
 }
 
 export function Faq() {
-  const { lang, tr, hubspotUrl, lien } = useLanguage();
+  const { lang, tr, attente, lien } = useLanguage();
   const [open, setOpen] = useState<string | null>(null);
 
   // Sommaire : 45 questions dans 13 themes. Tous les themes sont visibles
@@ -249,7 +249,7 @@ export function Faq() {
                                 return (
                                   <a
                                     key={li}
-                                    href={externe ? hubspotUrl : interne ? l.vers : lien(l.vers)}
+                                    href={externe ? attente("faq") : interne ? l.vers : lien(l.vers)}
                                     target={externe ? "_blank" : undefined}
                                     rel={externe ? "noreferrer" : undefined}
                                     onClick={interne ? (e) => allerAuTheme(e, l.vers.slice(1)) : undefined}

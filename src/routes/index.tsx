@@ -21,21 +21,21 @@ export const Route = createFileRoute("/")({
 
 // Palette
 
-function CTADark({ block }: { block?: boolean }) {
+function CTADark({ block, emplacement }: { block?: boolean; emplacement: string }) {
   // For INK sections: gold bg, navy text
-  const { t, hubspotUrl } = useLanguage();
+  const { t, attente } = useLanguage();
   return (
-    <a href={hubspotUrl} target="_blank" rel="noreferrer" className={`btn-dark btn-dark-hover ${block ? "w-full" : ""}`}>
+    <a href={attente(emplacement)} target="_blank" rel="noreferrer" className={`btn-dark btn-dark-hover ${block ? "w-full" : ""}`}>
       {t("cta_interested")} <IconArrowRight size={16} />
     </a>
   );
 }
 
-function CTALight({ block }: { block?: boolean }) {
+function CTALight({ block, emplacement }: { block?: boolean; emplacement: string }) {
   // For WHITE/SAND sections: navy bg, white text
-  const { t, hubspotUrl } = useLanguage();
+  const { t, attente } = useLanguage();
   return (
-    <a href={hubspotUrl} target="_blank" rel="noreferrer" className={`btn-light btn-light-hover ${block ? "w-full" : ""}`}>
+    <a href={attente(emplacement)} target="_blank" rel="noreferrer" className={`btn-light btn-light-hover ${block ? "w-full" : ""}`}>
       {t("cta_interested")} <IconArrowRight size={16} />
     </a>
   );
@@ -215,7 +215,7 @@ export function Landing() {
                 <>Freie Hände<br />und neu gewonnene<br />Selbstständigkeit.</>
               )}
             </h1>
-            <div className="pt-2"><CTADark /></div>
+            <div className="pt-2"><CTADark emplacement="hero" /></div>
               {/* La medaille compte, mais le Concours Lepine ne voyage pas :
                   hors de France, le nom seul ne dit rien, d'ou la glose. */}
               <p className="pt-2 text-base" style={{ color: MUTED_INK }}>
@@ -474,7 +474,7 @@ export function Landing() {
             <a href={SOCIAL.tiktok} target="_blank" rel="noreferrer" aria-label="TikTok" className="w-11 h-11 flex items-center justify-center opacity-80 hover:opacity-100"><IconTiktok size={28} /></a>
             <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-11 h-11 flex items-center justify-center opacity-80 hover:opacity-100"><IconLinkedin size={28} /></a>
           </div>
-          <div className="mt-10"><CTALight /></div>
+          <div className="mt-10"><CTALight emplacement="bas-accueil" /></div>
           <p className="mt-10 text-base" style={{ color: MUTED }}>
             {tr("Professionnel de santé ou distributeur ?", "Healthcare professional or distributor?", "Gesundheitsfachkraft oder Händler?")}
             <br className="sm:hidden" />{" "}

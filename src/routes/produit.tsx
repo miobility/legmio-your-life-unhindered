@@ -44,7 +44,7 @@ function Accordion({ title, children, defaultOpen = false }: { title: string; ch
 type Review = { title: string; quote: string; name: string; profile: string; date: string; img?: string };
 
 export function Produit() {
-  const { tr, hubspotUrl, lien, lang } = useLanguage();
+  const { tr, attente, lien, lang } = useLanguage();
   const gallery = [
     { src: "/bequille.png", alt: tr("La béquille legmio vue de profil.", "The legmio crutch seen from the side.", "Die legmio-Krücke von der Seite.") },
     { src: "/mode-bequille.jpg", alt: tr("Un utilisateur marche avec deux béquilles legmio, les mains posées sur les poignées.", "A user walks with two legmio crutches, hands resting on the grips.", "Ein Nutzer geht mit zwei legmio-Krücken, die Hände auf den Griffen.") },
@@ -181,7 +181,7 @@ export function Produit() {
                 </ul>
               </Accordion>
 
-              <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-light btn-light-hover w-full mt-8">
+              <a href={attente("fiche-haut")} target="_blank" rel="noreferrer" className="btn-light btn-light-hover w-full mt-8">
                 {tr("Je suis intéressé(e)", "I'm interested", "Ich bin interessiert")} <IconArrowRight size={16} />
               </a>
             </div>
@@ -330,7 +330,7 @@ export function Produit() {
             {tr(<>Prêt à retrouver<br />vos mains libres ?</>, <>Ready to get<br />your hands back?</>, <>Bereit, Ihre<br />Hände zurückzubekommen?</>)}
           </h2>
           <div className="mt-8">
-            <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover inline-flex">
+            <a href={attente("fiche-bas")} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover inline-flex">
               {tr("Je suis intéressé(e)", "I'm interested", "Ich bin interessiert")} <IconArrowRight size={16} />
             </a>
           </div>

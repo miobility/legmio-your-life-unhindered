@@ -63,6 +63,8 @@ type Ctx = {
   t: (k: string) => string;
   tr: <T>(f: T, e: T, d?: T) => T;
   hubspotUrl: string;
+  /** Lien vers la liste d'attente, marque de l'endroit d'ou l'on a clique. */
+  attente: (emplacement: string) => string;
   /** Prefixe un chemin interne de la langue courante. */
   lien: (chemin: string) => string;
 };
@@ -72,6 +74,7 @@ const LangCtx = createContext<Ctx>({
   t: (k) => k,
   tr: (f) => f,
   hubspotUrl: HUBSPOT_FR,
+  attente: () => HUBSPOT_FR,
   lien: (c) => c,
 });
 
@@ -152,12 +155,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const t = (k: string) => dicts[lang][k] ?? dicts.fr[k] ?? k;
   const tr = <T,>(f: T, e: T, d?: T): T => (lang === "de" ? (d !== undefined ? d : e) : lang === "en" ? e : f);
   const hubspotUrl = lang === "fr" ? HUBSPOT_FR : HUBSPOT_EN;
+  // Le formulaire est heberge chez HubSpot : sans marqueur, impossible de
+  // savoir quel bouton a amene une inscription. Les parametres partent dans
+  // l'adresse et se retrouvent dans la soumission.
+  const attente = (emplacement: string) =>
+    `${hubspotUrl}?utm_source=legmio.com&utm_medium=site&utm_campaign=liste-attente&utm_content=${emplacement}&utm_term=${lang}`;
   // Les composants ecrivent le chemin francais ; on le traduit ici.
   const lien = (cheminFr: string) => {
     const page = PAGES.find((k) => CHEMINS.fr[k] === cheminFr);
     return page ? cheminDe(lang, page) : cheminFr;
   };
-  return <LangCtx.Provider value={{ lang, setLang, t, tr, hubspotUrl, lien }}>{children}</LangCtx.Provider>;
+  return <LangCtx.Provider value={{ lang, setLang, t, tr, hubspotUrl, attente, lien }}>{children}</LangCtx.Provider>;
 }
 
 export function useLanguage() {
