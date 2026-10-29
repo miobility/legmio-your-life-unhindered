@@ -69,9 +69,9 @@ export function Produit() {
     url: `${SITE_URL}${cheminDe(lang, "produit")}`,
     image: `${SITE_URL}/bequille.png`,
     description: tr(
-      "La premiere bequille ergonomique avec un mode mains libres : l'appui passe au coude, les deux mains redeviennent disponibles.",
-      "The first ergonomic crutch with a hands-free mode: the load shifts to the elbow and both hands become available again.",
-      "Die erste ergonomische Kruecke mit Freihand-Modus: Die Stuetze wandert zum Ellbogen, beide Haende werden wieder frei."
+      "La premiere bequille ergonomique avec un mode mains libres : l'appui passe au coude, une main se libere en marchant, les deux a l'arret.",
+      "The first ergonomic crutch with a hands-free mode: the load shifts to the elbow, one hand is free while walking, both when you stop.",
+      "Die erste ergonomische Kruecke mit Freihand-Modus: Die Stuetze wandert zum Ellbogen, eine Hand wird beim Gehen frei, beide im Stand."
     ),
     brand: { "@type": "Brand", name: "legmio" },
     manufacturer: { "@type": "Organization", name: "miobility", "@id": `${SITE_URL}/#organization` },
@@ -133,9 +133,9 @@ export function Produit() {
               )}
               <br />
               {tr(
-                "Plus confortable, elle libère les mains lorsque nécessaire.",
-                "More comfortable, it frees your hands when needed.",
-                "Komfortabler befreit sie die Hände wenn nötig."
+                "Plus confortable, elle libère une main en marchant.",
+                "More comfortable, it frees one hand while walking.",
+                "Komfortabler, und sie macht beim Gehen eine Hand frei."
               )}
             </p>
             <div className="mt-4 inline-block px-4 py-2 rounded-full mention" style={{ backgroundColor: WHITE, color: INK, border: `1px solid ${LINE}` }}>
@@ -198,9 +198,9 @@ export function Produit() {
             </h2>
             <p className="mt-6 text-base max-w-xl mx-auto text-center" style={{ color: MUTED_INK }}>
               {tr(
-                "Vous marchez normalement, et vous libérez les mains lorsque nécessaire.",
-                "You walk normally, and free your hands when needed.",
-                "Du gehst normal und machst die Hände frei, wenn nötig."
+                "Vous marchez normalement, et vous libérez une main lorsque nécessaire.",
+                "You walk normally, and free one hand when needed.",
+                "Sie gehen normal und machen eine Hand frei, wenn nötig."
               )}
             </p>
           </Reveal>
@@ -231,9 +231,9 @@ export function Produit() {
                 ),
                 t: tr("Mode mains libres", "Hands-free mode", "Freihand-Modus"),
                 p: tr(
-                  "L'appui passe sur le coude : les deux mains redeviennent disponibles.",
-                  "The support shifts to the elbow: both hands become available again.",
-                  "Die Stütze wandert zum Ellbogen: Beide Hände werden wieder frei."
+                  "L'appui passe sur le coude : une main se libère en marchant, les deux à l'arrêt.",
+                  "The support shifts to the elbow: one hand is free while walking, both when you stop.",
+                  "Die Stütze wandert zum Ellbogen: Eine Hand wird beim Gehen frei, beide im Stand."
                 ),
               },
             ].map((m, i) => (
