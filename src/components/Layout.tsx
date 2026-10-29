@@ -13,13 +13,13 @@ const SOCIAL = {
 
 
 export function StickyBanner() {
-  const { t, hubspotUrl } = useLanguage();
+  const { t, attente } = useLanguage();
   // Un seul texte. Il alternait toutes les 3 secondes : l'oeil y revenait
   // sans cesse, et un lecteur d'ecran le voyait changer sous lui. Sur
   // telephone la date ne tient pas a cote de l'appel, seul l'appel reste.
   return (
     <a
-      href={hubspotUrl}
+      href={attente("bandeau")}
       target="_blank"
       rel="noreferrer"
       className="bandeau fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-center text-center mention font-medium px-4 hover:opacity-90 overflow-hidden"
@@ -104,7 +104,7 @@ function useRetourHaut() {
 }
 
 export function Header() {
-  const { t, tr, hubspotUrl, lien } = useLanguage();
+  const { t, tr, attente, lien } = useLanguage();
   const retourHaut = useRetourHaut();
   const [open, setOpen] = useState(false);
   // En haut de page, l'en-tete se fond dans le hero navy : ni bordure ni
@@ -179,7 +179,7 @@ export function Header() {
           <Link to={lien("/pro")} className={linkClass(isPro)} style={linkStyle(isPro)}>{t("nav_pro")}</Link>
         </nav>
         <div className="hidden sm:block"><LangSwitcher /></div>
-        <a href={hubspotUrl} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover hidden sm:inline-flex legende px-6 py-2 items-center gap-2">
+        <a href={attente("entete")} target="_blank" rel="noreferrer" className="btn-dark btn-dark-hover hidden sm:inline-flex legende px-6 py-2 items-center gap-2">
           {t("cta_interested")} <span aria-hidden="true">→</span>
         </a>
         <button className="md:hidden w-11 h-11 flex items-center justify-center" style={{ color: WHITE }} onClick={() => setOpen(!open)} aria-label={t("nav_menu")} aria-expanded={open} aria-controls="menu-mobile">
@@ -192,7 +192,7 @@ export function Header() {
           <Link to={lien("/faq")} onClick={() => setOpen(false)} className="text-[15px] py-3" style={linkStyle(isFaq)}>{t("nav_faq")}</Link>
           <Link to={lien("/blog")} onClick={() => setOpen(false)} className="text-[15px] py-3" style={linkStyle(isBlog)}>{t("nav_blog")}</Link>
           <Link to={lien("/pro")} onClick={() => setOpen(false)} className="text-[15px] py-3" style={linkStyle(isPro)}>{t("nav_pro")}</Link>
-          <a href={hubspotUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover legende px-6 py-2 mt-4 self-start inline-flex items-center gap-2">
+          <a href={attente("menu-mobile")} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="btn-dark btn-dark-hover legende px-6 py-2 mt-4 self-start inline-flex items-center gap-2">
             {t("cta_interested")} <span aria-hidden="true">→</span>
           </a>
           <div className="mt-4 pt-4 border-t" style={{ borderColor: LINE_INK }}><LangSwitcher onPick={() => setOpen(false)} /></div>

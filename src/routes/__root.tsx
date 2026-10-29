@@ -175,6 +175,12 @@ function RootShell({ children }: { children: ReactNode }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesStructurees(lang)) }}
         />
+        {/* Mesure d'audience Vercel, servie par legmio.com : pas de cookie,
+            pas d'identifiant individuel, donc pas de banniere de consentement.
+            C'est ce que la politique de confidentialite annonce deja. Le
+            fichier n'existe que si l'option est activee sur le projet Vercel ;
+            sinon il repond 404, sans consequence pour la page. */}
+        <script defer src="/_vercel/insights/script.js" />
       </head>
       <body>{children}<Scripts /></body>
     </html>
